@@ -8,7 +8,7 @@ public class DatabaseContract {
 	public static final String REFRESH_PARAM = "refresh";
 
 	interface ClassificationColumns {
-		String CLASSIFFICATION_ID = "ClassificationId";
+		String CLASSIFICATION_ID = "ClassificationId";
 		String NAME = "Name";
 	}
 
@@ -18,7 +18,7 @@ public class DatabaseContract {
 	}
 
 	interface ContactTypeColumns {
-		String POSITION_ID = "ContactTypeId";
+		String CONTACT_TYPE_ID = "ContactTypeId";
 		String NAME = "Name";
 	}
 
@@ -52,7 +52,7 @@ public class DatabaseContract {
 		/**
 		 * Default sorting for this entity
 		 * */
-		public static final String DEFAULT_SORT = ClassificationColumns.CLASSIFFICATION_ID + " ASC";
+		public static final String DEFAULT_SORT = ClassificationColumns.CLASSIFICATION_ID + " ASC";
 
 		public static Uri buildUri(String classificationId) {
 			return CONTENT_URI.buildUpon().appendPath(classificationId).build();
@@ -92,7 +92,7 @@ public class DatabaseContract {
 		/**
 		 * Default sorting for this entity
 		 * */
-		public static final String DEFAULT_SORT = ContactTypeColumns.POSITION_ID + " ASC";
+		public static final String DEFAULT_SORT = ContactTypeColumns.CONTACT_TYPE_ID + " ASC";
 
 		public static Uri buildUri(String contactTypeId) {
 			return CONTENT_URI.buildUpon().appendPath(contactTypeId).build();
