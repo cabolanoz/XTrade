@@ -31,7 +31,7 @@ public class DatabaseContract {
 
 	public static abstract class BaseTable implements BaseColumns {
 
-		public String getId(Uri uri) {
+		public static String getId(Uri uri) {
 
 			if (uri.getPathSegments().size() >= 2)
 				return uri.getPathSegments().get(1);
