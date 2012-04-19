@@ -841,6 +841,7 @@ containing a value of this type.
         public static final int abs__max_action_buttons=0x7f080000;
     }
     public static final class layout {
+<<<<<<< HEAD
         public static final int abs__action_bar_home=0x7f030000;
         public static final int abs__action_bar_tab=0x7f030001;
         public static final int abs__action_bar_tab_bar_view=0x7f030002;
@@ -865,6 +866,13 @@ containing a value of this type.
         public static final int main=0x7f030015;
         public static final int sherlock_spinner_dropdown_item=0x7f030016;
         public static final int sherlock_spinner_item=0x7f030017;
+=======
+        public static final int about=0x7f030000;
+        public static final int client_item=0x7f030001;
+        public static final int client_list=0x7f030002;
+        public static final int login=0x7f030003;
+        public static final int main=0x7f030004;
+>>>>>>> 2b2f8184e4c0e5426e7779da0eb64b0366d24978
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
