@@ -30,7 +30,6 @@ public class XTradeProvider extends ContentProvider {
 		matcher.addURI(CONTENT_AUTHORITY, "position/*", POSITION_ID);
 
 		return matcher;
-
 	}
 
 	@Override
@@ -39,20 +38,17 @@ public class XTradeProvider extends ContentProvider {
 		String finalWhere = null;
 		String table = null;
 		switch (uriMatcher.match(uri)) {
-
 		case POSITION:
 			table = DatabaseHelper.Tables.POSITION;
 			break;
 		case POSITION_ID:
 			table = DatabaseHelper.Tables.POSITION;
 			finalWhere = BaseColumns._ID + " = " + Position.getId(uri);
-			if (selection != null) {
+			if (selection != null)
 				finalWhere = finalWhere + " AND " + selection;
-			}
 			break;
 		default:
 			throw new UnsupportedOperationException("Unknown uri: " + uri);
-
 		}
 
 		int count = db.delete(table, finalWhere, selectionArgs);
@@ -85,7 +81,6 @@ public class XTradeProvider extends ContentProvider {
 			db.insertOrThrow(DatabaseHelper.Tables.POSITION, null, values);
 			getContext().getContentResolver().notifyChange(uri, null);
 			return Position.buildUri(values.getAsString(BaseColumns._ID));
-
 		default:
 			throw new UnsupportedOperationException("Unknown uri: " + uri);
 		}
@@ -99,7 +94,6 @@ public class XTradeProvider extends ContentProvider {
 
 	@Override
 	public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-
 		final int match = uriMatcher.match(uri);
 
 		final SQLiteDatabase db = databaseHelper.getWritableDatabase();
@@ -133,7 +127,6 @@ public class XTradeProvider extends ContentProvider {
 
 	@Override
 	public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-
 		SQLiteDatabase db = databaseHelper.getWritableDatabase();
 		int count;
 

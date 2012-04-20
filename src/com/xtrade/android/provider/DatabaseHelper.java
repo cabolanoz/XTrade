@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 
 import com.xtrade.android.provider.DatabaseContract.ClassificationColumns;
+import com.xtrade.android.provider.DatabaseContract.ClientColumns;
 import com.xtrade.android.provider.DatabaseContract.ContactTypeColumns;
 import com.xtrade.android.provider.DatabaseContract.PositionColumns;
 
@@ -22,6 +23,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		String CONTACT_TYPE = "ContactType";
 		String POSITION = "Position";
 		String CLASSIFICATION = "Classification";
+		String CLIENT = "Client";
 	}
 
 	public DatabaseHelper(Context context) {
@@ -30,18 +32,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
+		// Client table
+		db.execSQL("CREATE TABLE " + Tables.CLIENT + " (" + BaseColumns._ID
+				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + ClientColumns.CLIENT_ID + " TEXT, "
+				+ ClientColumns.NAME + " TEXT, "
+				+ ClientColumns.ADDRESS + " TEXT, "
+				+ ClientColumns.PHONE + " TEXT)");
 		
+		// Classification table
 		db.execSQL("CREATE TABLE " + Tables.CLASSIFICATION + " (" + BaseColumns._ID
-				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + ClassificationColumns.CLASSIFICATION_ID + " TEXT , "
-				+ ClassificationColumns.NAME + " TEXT )");
+				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + ClassificationColumns.CLASSIFICATION_ID + " TEXT, "
+				+ ClassificationColumns.NAME + " TEXT)");
 	
+		// Position table (Even though I don't know what is this for)
 		db.execSQL("CREATE TABLE " + Tables.POSITION + " (" + BaseColumns._ID
-				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + PositionColumns.POSITION_ID + " TEXT , "
-				+ PositionColumns.NAME + " TEXT )");
+				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + PositionColumns.POSITION_ID + " TEXT, "
+				+ PositionColumns.NAME + " TEXT)");
 		
+		// Contact table
 		db.execSQL("CREATE TABLE " + Tables.CONTACT_TYPE + " (" + BaseColumns._ID
-				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + ContactTypeColumns.CONTACT_TYPE_ID + " TEXT , "
-				+ ClassificationColumns.NAME + " TEXT )");
+				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + ContactTypeColumns.CONTACT_TYPE_ID + " TEXT, "
+				+ ContactTypeColumns.NAME + " TEXT)");
 
 	}
 

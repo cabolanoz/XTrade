@@ -3,5 +3,7 @@
 
     <string name="hello">Hello World, XTradeActivity!</string>
     <string name="app_name">XTrade</string>
+    <color name="white">#FFFFFF</color>
+    <color name="search_text_grey">#999999</color>
 
 </resources>
