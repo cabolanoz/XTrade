@@ -11,13 +11,32 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.Sherlock" >
         <activity
-            android:name=".XTradeActivity"
+            android:name=".LoginActivity"
             android:label="@string/app_name" >
+            
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+              	<category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter> 
+            <intent-filter>
+            	<action android:name="com.xtrade.android.LOGIN_ACTION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter> 
         </activity>
+        
+         <activity android:name=".ClientListActivity">
+             <intent-filter>
+             <action android:name="com.xtrade.android.CLIENT_LIST_ACTION" />
+             <category android:name="android.intent.category.DEFAULT" />
+             </intent-filter>
+         </activity>
+         
+         <activity android:name=".AboutActivity">
+             <intent-filter>
+               <action android:name="com.xtrade.android.ABOUT_XTRADE" />
+               <category android:name="android.intent.category.DEFAULT" />
+               </intent-filter>
+         </activity>
     </application>
 
 </manifest>
