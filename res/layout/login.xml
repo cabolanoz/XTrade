@@ -4,9 +4,39 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <TextView
-        android:layout_width="fill_parent"
+      <ImageView
+          android:id="@+id/imageView1"
+          android:layout_width="match_parent"
+          android:layout_height="150dip"
+          android:src="@drawable/ic_launcher" />
+    
+    <EditText
+        android:id="@+id/textUsername"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello" />
+        android:layout_margin="5dip"
+        android:ems="10"
+        
+        android:hint="@string/username" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dip"
+        android:ems="10"
+        android:hint="@string/password"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/buttonLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/login" />
+
+  
 
 </LinearLayout>
