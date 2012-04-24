@@ -1,6 +1,9 @@
 package com.xtrade.android;
 
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
 public class LoginActivity extends BaseActivity {
 	
@@ -8,6 +11,15 @@ public class LoginActivity extends BaseActivity {
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
+		
+		Button btnLogin = (Button)findViewById(R.id.buttonLogin);
+		btnLogin.setOnClickListener(new OnClickListener(){
+			public void onClick(View view){
+				//TODO: do the login mockup login here
+				
+			}
+		});
+		
 	}
 	
 }
