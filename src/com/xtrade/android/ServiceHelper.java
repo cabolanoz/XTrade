@@ -1,20 +1,25 @@
 package com.xtrade.android;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 
 public class ServiceHelper {
 
+	//TODO: do the serviceMap to avoid recall of service when is already on background
 	private Map<String, Intent> serviceMap=new HashMap<String,Intent>(); 
-	private Context context;
-	private ServiceHelper instance;
+	public Context context;
+	private static ServiceHelper instance;
 	
-	public ServiceHelper getInstance(Context context){
+	public static ServiceHelper getInstance(Context context){
 		if(instance == null){
 			instance = new ServiceHelper(context);
 		}
-		if(this.context!=context)
+		if(instance.context!=context)
+			instance.context=context;
+		
 		return instance;
 	}
 	
