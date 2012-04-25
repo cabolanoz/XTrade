@@ -37,6 +37,17 @@
                <category android:name="android.intent.category.DEFAULT" />
                </intent-filter>
          </activity>
+         
+         
+         <!--  Services Declaration -->
+         
+         <service android:name=".service.XTradeBaseService" android:exported="false" >
+              <intent-filter>
+            	<action android:name="com.xtrade.android.LOGIN_ACTION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter> 
+         </service>
+         
     </application>
 
 </manifest>

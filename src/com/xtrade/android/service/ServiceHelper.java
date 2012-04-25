@@ -1,7 +1,9 @@
-package com.xtrade.android;
+package com.xtrade.android.service;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import com.xtrade.android.util.Debug;
 
 import android.content.Context;
 import android.content.Intent;
@@ -29,6 +31,7 @@ public class ServiceHelper {
 	
 	
 	public void invokeService(Intent serviceIntent){
+		Debug.info(this, "Service is being invoke!");
 		context.startService(serviceIntent);
 	}
 	

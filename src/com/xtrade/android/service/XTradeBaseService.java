@@ -1,4 +1,4 @@
-package com.xtrade.android;
+package com.xtrade.android.service;
 
 import android.app.IntentService;
 import android.content.Intent;
@@ -11,7 +11,7 @@ import com.xtrade.android.util.Settings;
 public class XTradeBaseService extends IntentService{
 
 	
-	public XTradeBaseService(String name) {
+	public XTradeBaseService() {
 		super(XTradeBaseService.class.getSimpleName());
 	}
 
