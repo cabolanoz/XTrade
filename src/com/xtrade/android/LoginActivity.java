@@ -65,7 +65,7 @@ public class LoginActivity extends BaseActivity {
 		super.onPause();
 	}
 
-	public  class LoginBroadcastReceiver extends BroadcastReceiver {
+	public class LoginBroadcastReceiver extends BroadcastReceiver {
 
 		@Override
 		public void onReceive(Context context, Intent intent) {

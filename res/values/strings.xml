@@ -9,5 +9,7 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="remember_me">Remember me</string>
+    <string name="new_client">New Client</string>
+    <string name="delete_client">Delete Client</string>
 
 </resources>

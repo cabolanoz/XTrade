@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item android:id="@+id/mniNewClient" 
+        android:icon="@drawable/save_16x16"
+        android:title="@string/new_client" />
+    <item android:id="@+id/mniDeleteClient"
+        android:icon="@drawable/delete_16x16"
+        android:title="@string/delete_client" />    
+
+</menu>
