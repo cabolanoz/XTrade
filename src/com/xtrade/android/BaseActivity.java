@@ -1,12 +1,12 @@
 package com.xtrade.android;
 
-import com.xtrade.android.service.ServiceHelper;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 
-public class BaseActivity extends FragmentActivity {
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.xtrade.android.service.ServiceHelper;
+
+public class BaseActivity extends SherlockFragmentActivity {
 	
 	protected ServiceHelper serviceHelper;
 	

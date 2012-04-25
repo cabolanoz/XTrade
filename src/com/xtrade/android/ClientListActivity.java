@@ -1,10 +1,11 @@
 package com.xtrade.android;
 
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 
-public class ClientListActivity extends BaseActivity {
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+
+public class ClientListActivity extends BaseActivity  {
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState){
@@ -14,7 +15,7 @@ public class ClientListActivity extends BaseActivity {
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
+		MenuInflater inflater = getSupportMenuInflater();
 		inflater.inflate(R.menu.client_menu, menu);
 		return true;
 	}
