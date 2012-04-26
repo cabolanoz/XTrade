@@ -24,6 +24,7 @@ public class LoginActivity extends BaseActivity {
 	private LoginBroadcastReceiver receiver;
 	private EditText textUsername;
 	private EditText textPassword;
+	private CheckBox checkRememberMe;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class LoginActivity extends BaseActivity {
 
 		textUsername=((EditText)findViewById(R.id.textUsername));
 		textPassword=((EditText)findViewById(R.id.textPassword));
+		checkRememberMe=((CheckBox)findViewById(R.id.checkRememberMe));
 		
 		Button btnLogin = (Button) findViewById(R.id.buttonLogin);
 		//TODO: check there is internetAccess
@@ -40,7 +42,7 @@ public class LoginActivity extends BaseActivity {
 			public void onClick(View view) {
 				String username= textUsername.getText().toString();
 				String password= textPassword.getText().toString();
-				boolean rememberMe=((CheckBox)findViewById(R.id.checkRememberMe)).isChecked();
+				boolean rememberMe=checkRememberMe.isChecked();
 				//TODO: handle the 
 				if(!StringUtils.isEmpty(username) && !StringUtils.isEmpty(password)){
 					Intent loginIntent=new Intent(ActionConstant.LOGIN);
@@ -66,8 +68,7 @@ public class LoginActivity extends BaseActivity {
 	private void loadSavedValues(){
 		textUsername.setText(getAppSharedPreference().getString(LoginParameter.USERNAME, null));
 		textPassword.setText(getAppSharedPreference().getString(LoginParameter.PASSWORD, null));
-		
-		
+		checkRememberMe.setChecked(true);
 	}
 
 	@Override
