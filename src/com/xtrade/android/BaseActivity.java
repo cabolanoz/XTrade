@@ -1,10 +1,12 @@
 package com.xtrade.android;
 
-import com.xtrade.android.service.ServiceHelper;
-
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+
+import com.xtrade.android.service.ServiceHelper;
+import com.xtrade.android.util.Settings;
 
 public class BaseActivity extends FragmentActivity {
 	
@@ -23,6 +25,16 @@ public class BaseActivity extends FragmentActivity {
 	 * */
 	protected void startActivity(String action){
 		startActivity(new Intent(action));
+	}
+	
+	/**
+	 * SharedPreferences object
+	 * 
+	 * */
+	protected SharedPreferences getAppSharedPreference(){
+		SharedPreferences xTradeSettings = getSharedPreferences(Settings.SHARED_PREFERENCES, MODE_PRIVATE);  
+		
+		return xTradeSettings;
 	}
 	
 }

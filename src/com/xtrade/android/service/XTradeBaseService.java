@@ -31,8 +31,6 @@ public class XTradeBaseService extends IntentService{
 				success=true;
 			}
 			
-			intent.removeExtra(LoginParameter.USERNAME);
-			intent.removeExtra(LoginParameter.PASSWORD);
 			intent.putExtra(LoginParameter.SUCCESS, success);
 			
 			sendBroadcast(intent);
