@@ -18,6 +18,7 @@ public class XTradeProvider extends ContentProvider {
 
 	private final static int LIMIT_CALLS = 10;
 
+
 	private DatabaseHelper databaseHelper;
 
 	private static final UriMatcher uriMatcher = buildMatcher();
