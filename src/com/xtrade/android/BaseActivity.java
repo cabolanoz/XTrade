@@ -7,6 +7,8 @@ import com.xtrade.android.service.ServiceHelper;
 import com.xtrade.android.util.Settings;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.xtrade.android.service.ServiceHelper;
+import com.xtrade.android.service.ServiceHelper;
+import com.xtrade.android.util.Settings;
 
 public class BaseActivity extends SherlockFragmentActivity {
 
