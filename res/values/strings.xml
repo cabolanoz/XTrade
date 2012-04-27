@@ -11,5 +11,8 @@
     <string name="remember_me">Remember me</string>
     <string name="new_client">New Client</string>
     <string name="delete_client">Delete Client</string>
+    <string name="clientname">Client Name</string>
+    <string name="clientaddress">Client Address</string>
+    <string name="clientphone">Client Phone</string>
 
 </resources>
