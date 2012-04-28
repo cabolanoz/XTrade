@@ -36,8 +36,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL("CREATE TABLE " + Tables.CLIENT + " (" + BaseColumns._ID
 				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + ClientColumns.CLIENT_ID + " TEXT, "
 				+ ClientColumns.NAME + " TEXT, "
-				+ ClientColumns.ADDRESS + " TEXT, "
-				+ ClientColumns.PHONE + " TEXT)");
+				+ ClientColumns.PHONE + " TEXT, "
+				+ ClientColumns.ADDRESS + " TEXT)");
 		
 		// Classification table
 		db.execSQL("CREATE TABLE " + Tables.CLASSIFICATION + " (" + BaseColumns._ID

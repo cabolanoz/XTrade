@@ -14,5 +14,6 @@
     <string name="clientname">Client Name</string>
     <string name="clientaddress">Client Address</string>
     <string name="clientphone">Client Phone</string>
+    <string name="add">Add</string>
 
 </resources>

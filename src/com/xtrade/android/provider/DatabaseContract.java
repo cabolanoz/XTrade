@@ -7,11 +7,11 @@ public class DatabaseContract {
 
 	public static final String REFRESH_PARAM = "refresh";
 
-	interface ClientColumns {
+	public interface ClientColumns {
 		String CLIENT_ID = "ClientId";
 		String NAME = "Name";
-		String ADDRESS = "Address";
 		String PHONE = "Phone";
+		String ADDRESS = "Address";
 	}
 	
 	interface ClassificationColumns {
@@ -32,10 +32,10 @@ public class DatabaseContract {
 	public static final String CONTENT_AUTHORITY = "com.xtrade.android";
 	public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
-	private static final String PATH_CLIENT = "client";
-	private static final String PATH_CLASSIFICATION = "classification";
-	private static final String PATH_POSITION = "position";
-	private static final String PATH_CONTACT_TYPE = "contact_type";
+	public static final String PATH_CLIENT = "client";
+	public static final String PATH_CLASSIFICATION = "classification";
+	public static final String PATH_POSITION = "position";
+	public static final String PATH_CONTACT_TYPE = "contact_type";
 
 	public static abstract class BaseTable implements BaseColumns {
 
