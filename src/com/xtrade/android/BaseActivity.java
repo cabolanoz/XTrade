@@ -1,12 +1,17 @@
 package com.xtrade.android;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-
+import com.xtrade.android.service.ServiceHelper;
+import com.xtrade.android.util.Settings;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.xtrade.android.service.ServiceHelper;
+import com.xtrade.android.service.ServiceHelper;
+import com.xtrade.android.util.Settings;
 
 public class BaseActivity extends SherlockFragmentActivity {
+
 	
 	protected ServiceHelper serviceHelper;
 	
@@ -23,6 +28,16 @@ public class BaseActivity extends SherlockFragmentActivity {
 	 * */
 	protected void startActivity(String action){
 		startActivity(new Intent(action));
+	}
+	
+	/**
+	 * SharedPreferences object
+	 * 
+	 * */
+	protected SharedPreferences getAppSharedPreference(){
+		SharedPreferences xTradeSettings = getSharedPreferences(Settings.SHARED_PREFERENCES, MODE_PRIVATE);  
+		
+		return xTradeSettings;
 	}
 	
 }
