@@ -4,10 +4,6 @@
     <item android:id="@+id/mniNewClient" 
         android:icon="@drawable/save_16x16"
         android:title="@string/new_client"
-        android:showAsAction="always" />
-    <item android:id="@+id/mniDeleteClient"
-        android:icon="@drawable/delete_16x16"
-        android:title="@string/delete_client"
         android:showAsAction="always" />    
 
 </menu>

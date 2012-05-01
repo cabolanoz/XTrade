@@ -68,6 +68,10 @@ public class XTradeProvider extends ContentProvider {
 		final int match = uriMatcher.match(uri);
 
 		switch (match) {
+		case CLIENT:
+			return Client.CONTENT_TYPE;
+		case CLIENT_ID:
+			return Client.CONTENT_ITEM_TYPE;
 		case POSITION:
 			return Position.CONTENT_TYPE;
 		case POSITION_ID:
@@ -102,15 +106,13 @@ public class XTradeProvider extends ContentProvider {
 	}
 
 	@Override
-	public Cursor query(Uri uri, String[] projection, String selection,
-			String[] selectionArgs, String sortOrder) {
+	public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
 		final int match = uriMatcher.match(uri);
 
 		final SQLiteDatabase db = databaseHelper.getWritableDatabase();
 
 		SQLiteQueryBuilder builder = buildExpandedSelection(uri, match);
-		Cursor c = builder.query(db, projection, selection, selectionArgs,
-				null, null, sortOrder);
+		Cursor c = builder.query(db, projection, selection, selectionArgs, null, null, sortOrder);
 
 		return c;
 	}
@@ -137,8 +139,7 @@ public class XTradeProvider extends ContentProvider {
 	}
 
 	@Override
-	public int update(Uri uri, ContentValues values, String selection,
-			String[] selectionArgs) {
+	public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
 		SQLiteDatabase db = databaseHelper.getWritableDatabase();
 		int count;
 
@@ -148,8 +149,7 @@ public class XTradeProvider extends ContentProvider {
 		int match = uriMatcher.match(uri);
 		switch (match) {
 		case POSITION:
-			count = db.update(DatabaseHelper.Tables.POSITION, values,
-					selection, selectionArgs);
+			count = db.update(DatabaseHelper.Tables.POSITION, values, selection, selectionArgs);
 			break;
 		case POSITION_ID:
 			id = Position.getId(uri);
@@ -157,8 +157,7 @@ public class XTradeProvider extends ContentProvider {
 			if (selection != null)
 				finalWhere = finalWhere + " AND " + selection;
 
-			count = db.update(DatabaseHelper.Tables.POSITION, values,
-					finalWhere, selectionArgs);
+			count = db.update(DatabaseHelper.Tables.POSITION, values, finalWhere, selectionArgs);
 			break;
 		default:
 			throw new IllegalArgumentException("Unknown URI " + uri);

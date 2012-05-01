@@ -14,11 +14,6 @@ import com.xtrade.android.provider.DatabaseContract;
 import com.xtrade.android.provider.DatabaseContract.ClientColumns;
 import com.xtrade.android.util.Debug;
 
-/**
- * 
- * @author <a href="mailto:cesar20904@gmail.com">César Bolaños</a>
- *
- */
 public class ClientActivity extends BaseActivity {
 
 	@Override
@@ -41,7 +36,6 @@ public class ClientActivity extends BaseActivity {
 					contentValues.put(ClientColumns.ADDRESS, clientAddress);
 					
 					Uri clientUri = getContentResolver().insert(DatabaseContract.Client.CONTENT_URI, contentValues);
-					Debug.info(this, clientUri.getQuery());							
 				}
 			}
 		});
