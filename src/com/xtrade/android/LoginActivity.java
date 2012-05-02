@@ -121,6 +121,7 @@ public class LoginActivity extends BaseActivity {
 				}
 
 				startActivity(ActionConstant.CLIENT_LIST);
+//				startActivity(ActionConstant.ABOUT);
 			} else {
 				Debug.info(this, "Authentication failed!!!");
 				// TODO: handle the authentication failed and why?

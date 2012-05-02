@@ -3,9 +3,9 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-
+
     <WebView
-        android:id="@+id/webViewContainer"
+        android:id="@+id/wvwAbout"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
