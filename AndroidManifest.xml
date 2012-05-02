@@ -45,6 +45,13 @@
                </intent-filter>
          </activity>
          
+          <activity android:name=".ClientMapActivity">
+             <intent-filter>
+               <action android:name="com.xtrade.android.CLIENT_MAP_ACTION" />
+               <category android:name="android.intent.category.DEFAULT" />
+               </intent-filter>
+         </activity>
+         
          
          <!--  Services Declaration -->
          
