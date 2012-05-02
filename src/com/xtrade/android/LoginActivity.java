@@ -16,23 +16,34 @@ import com.xtrade.android.util.ActionConstant;
 import com.xtrade.android.util.Debug;
 import com.xtrade.android.util.LoginParameter;
 import com.xtrade.android.util.Parameter;
+import com.xtrade.android.util.Settings;
 
 public class LoginActivity extends BaseActivity {
 
 	private LoginBroadcastReceiver receiver;
+	private EditText textUsername;
+	private EditText textPassword;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
 		receiver = new LoginBroadcastReceiver();
+		
+		textUsername=((EditText)findViewById(R.id.textUsername));
+		textPassword=((EditText)findViewById(R.id.textPassword));
+		//if we are on developement
+		if(Settings.DEBUG){
+			textUsername.setText(Settings.DEFAULT_USERNAME);
+			textPassword.setText(Settings.DEFAULT_PASSWORD);
+		}
 
 		Button btnLogin = (Button) findViewById(R.id.buttonLogin);
 		//TODO: check there is internetAccess
 		btnLogin.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
-				String username= ((EditText)findViewById(R.id.textUsername)).getText().toString();
-				String password= ((EditText)findViewById(R.id.textPassword)).getText().toString();
+				String username= textUsername.getText().toString();
+				String password= textPassword.getText().toString();
 				//TODO: handle the 
 				if(!StringUtils.isEmpty(username) && !StringUtils.isEmpty(password)){
 					Intent loginIntent=new Intent(ActionConstant.LOGIN);

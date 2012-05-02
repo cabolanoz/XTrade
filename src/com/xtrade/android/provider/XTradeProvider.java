@@ -129,6 +129,9 @@ public class XTradeProvider extends ContentProvider {
 			builder.setTables(DatabaseHelper.Tables.POSITION);
 			builder.appendWhere(BaseColumns._ID + "=" + id);
 			break;
+		case CLIENT:
+			builder.setTables(DatabaseHelper.Tables.CLIENT);
+			break;
 		default:
 			// If the URI doesn't match any of the known patterns, throw an
 			// exception.

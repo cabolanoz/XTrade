@@ -3,6 +3,7 @@ package com.xtrade.android;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -12,6 +13,7 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.xtrade.android.adapter.ClientAdapter;
 import com.xtrade.android.object.Client;
+import com.xtrade.android.provider.ClientTranslator;
 import com.xtrade.android.util.ActionConstant;
 
 public class ClientListActivity extends BaseActivity  {
@@ -24,12 +26,10 @@ public class ClientListActivity extends BaseActivity  {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.client_list);
 		
-		for (int i = 0; i < 4; i++) {
-			Client client  = new Client("Cliente " + i, "Dirección " + i, "8888888" + i);
-			clientList.add(client);
-		}
+		//load data from database
+		Cursor cursor=getContentResolver().query(com.xtrade.android.provider.DatabaseContract.Client.CONTENT_URI, null, null, null, null);
 		
-		adapter = new ClientAdapter(this, clientList);
+		adapter = new ClientAdapter(this, new ClientTranslator().translate(cursor));
 		
 		ListView listView = (ListView) findViewById(R.id.lvwClient);
 		listView.setAdapter(adapter);
