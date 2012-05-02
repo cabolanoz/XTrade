@@ -1,12 +1,11 @@
 package com.xtrade.android;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
@@ -14,25 +13,42 @@ import com.actionbarsherlock.view.MenuItem;
 import com.xtrade.android.adapter.ClientAdapter;
 import com.xtrade.android.object.Client;
 import com.xtrade.android.provider.ClientTranslator;
-import com.xtrade.android.util.ActionConstant;
+import com.xtrade.android.util.Debug;
 
-public class ClientListActivity extends BaseActivity  {
-	
+public class ClientListActivity extends BaseActivity {
+
 	private ArrayAdapter<Client> adapter;
-	private List<Client> clientList = new ArrayList<Client>();
-	
+	private final int CREATE_REQUEST_CODE = 100;
+	private final int UPDATE_REQUEST_CODE = 101;
+
 	@Override
-	public void onCreate(Bundle savedInstanceState){
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.client_list);
-		
-		//load data from database
-		Cursor cursor=getContentResolver().query(com.xtrade.android.provider.DatabaseContract.Client.CONTENT_URI, null, null, null, null);
-		
+
+		// load data from database
+		Cursor cursor = getContentResolver().query(com.xtrade.android.provider.DatabaseContract.Client.CONTENT_URI, null, null, null, null);
+
 		adapter = new ClientAdapter(this, new ClientTranslator().translate(cursor));
-		
+
 		ListView listView = (ListView) findViewById(R.id.lvwClient);
 		listView.setAdapter(adapter);
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		if (resultCode == RESULT_CANCELED) {
+			Toast.makeText(this, "The operation didn't finish properly", Toast.LENGTH_LONG).show();
+			return;
+		}
+		
+		if (requestCode == CREATE_REQUEST_CODE && resultCode == RESULT_OK) {
+			Debug.info(this, "Insertion was made successfully!!!");
+		} else if (requestCode == UPDATE_REQUEST_CODE && resultCode == RESULT_OK) {
+			Debug.info(this, "Update was made successfully!!!");
+		}
 	}
 	
 	@Override
@@ -41,18 +57,18 @@ public class ClientListActivity extends BaseActivity  {
 		inflater.inflate(R.menu.client_list_menu, menu);
 		return true;
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem menuItem) {
 		switch (menuItem.getItemId()) {
 		case R.id.mniNewClient:
-			startActivity(ActionConstant.CLIENT);
-			return true;
-		case R.id.mniDeleteClient:
+			Intent intent = new Intent(this, ClientActivity.class);
+			intent.putExtra("ACTION_TYPE", CREATE_REQUEST_CODE);
+			startActivityForResult(intent, CREATE_REQUEST_CODE);
 			return true;
 		default:
 			return super.onOptionsItemSelected(menuItem);
 		}
 	}
-	
+
 }

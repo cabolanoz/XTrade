@@ -3,6 +3,7 @@ package com.xtrade.android;
 import org.apache.commons.lang.StringUtils;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -13,16 +14,16 @@ import android.widget.EditText;
 import com.xtrade.android.provider.DatabaseContract;
 import com.xtrade.android.provider.DatabaseContract.ClientColumns;
 
-
-//TODO: implementn the edit in this class too
 public class ClientActivity extends BaseActivity {
 
+	private final int CREATE_REQUEST_CODE = 100;
+	private final int UPDATE_REQUEST_CODE = 101;
+	
 	@Override
 	public void onCreate(Bundle savedIntanceState) {
 		super.onCreate(savedIntanceState);
 		setContentView(R.layout.client);
 		//TODO: handle the lifecycle when orientation changed to save the values
-		//TODO: implement to go back when the add was successfull
 		Button btnAddClient = (Button) findViewById(R.id.btnAddClient);
 		btnAddClient.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
@@ -37,7 +38,23 @@ public class ClientActivity extends BaseActivity {
 					contentValues.put(ClientColumns.PHONE, clientPhone);
 					contentValues.put(ClientColumns.ADDRESS, clientAddress);
 					
-					Uri clientUri = getContentResolver().insert(DatabaseContract.Client.CONTENT_URI, contentValues);
+					Intent intent = getIntent();
+					int extra = intent.getIntExtra("ACTION_TYPE", -1);
+					if (extra == -1)
+						setResult(RESULT_CANCELED);
+					
+					Uri clientUri = null;
+					if (extra == CREATE_REQUEST_CODE)
+						clientUri = getContentResolver().insert(DatabaseContract.Client.CONTENT_URI, contentValues);
+					else if (extra == UPDATE_REQUEST_CODE)
+						clientUri = null;
+					
+					if (clientUri != null)
+						setResult(RESULT_OK);
+					else
+						setResult(RESULT_CANCELED);
+					
+					finish();	
 				}
 			}
 		});

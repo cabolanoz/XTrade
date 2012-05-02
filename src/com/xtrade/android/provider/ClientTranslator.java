@@ -19,10 +19,9 @@ public class ClientTranslator {
 					cursor.getString(cursor.getColumnIndex(Client.PHONE)));
 
 			clients.add(client);
-
 		}
-		
-		//So this guy will not cause trouble
+
+		// So this guy will not cause trouble
 		cursor.close();
 		return clients;
 	}
