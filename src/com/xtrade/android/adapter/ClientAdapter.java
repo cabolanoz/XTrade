@@ -17,6 +17,7 @@ import com.xtrade.android.ClientActivity;
 import com.xtrade.android.R;
 import com.xtrade.android.object.Client;
 import com.xtrade.android.provider.DatabaseContract;
+import com.xtrade.android.util.Debug;
 
 public class ClientAdapter extends ArrayAdapter<Client> {
 
@@ -35,7 +36,7 @@ public class ClientAdapter extends ArrayAdapter<Client> {
 			convertView = inflater.inflate(R.layout.client_item, null);
 		}
 
-		Client client = getClientList().get(position);
+		Client client = getItem(position);
 		
 		TextView tvwClientName = (TextView) convertView.findViewById(R.id.tvwClientName);
 		tvwClientName.setText(client.getName());
@@ -67,8 +68,8 @@ public class ClientAdapter extends ArrayAdapter<Client> {
 	}
 
 	public void setClientList(List<Client> clientList) {
-		this.clientList = clientList;
-		notifyDataSetChanged();
+		clear();
+		addAll(clientList);
 	}
 
 }

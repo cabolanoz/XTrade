@@ -13,6 +13,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.xtrade.android.adapter.ClientAdapter;
 import com.xtrade.android.object.Client;
 import com.xtrade.android.provider.ClientTranslator;
+import com.xtrade.android.util.Debug;
 
 public class ClientListActivity extends BaseActivity {
 
