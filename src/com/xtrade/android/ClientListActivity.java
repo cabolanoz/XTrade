@@ -13,7 +13,6 @@ import com.actionbarsherlock.view.MenuItem;
 import com.xtrade.android.adapter.ClientAdapter;
 import com.xtrade.android.object.Client;
 import com.xtrade.android.provider.ClientTranslator;
-import com.xtrade.android.util.Debug;
 
 public class ClientListActivity extends BaseActivity {
 
@@ -45,10 +44,9 @@ public class ClientListActivity extends BaseActivity {
 		}
 		
 		// TODO: Should refresh the list with the inserted or updated values
-		if (requestCode == CREATE_REQUEST_CODE && resultCode == RESULT_OK) {
-			Debug.info(this, "Insertion was made successfully!!!");
-		} else if (requestCode == UPDATE_REQUEST_CODE && resultCode == RESULT_OK) {
-			Debug.info(this, "Update was made successfully!!!");
+		if (resultCode == RESULT_OK && (requestCode == CREATE_REQUEST_CODE || requestCode == UPDATE_REQUEST_CODE)) {
+			Cursor cursor = getContentResolver().query(com.xtrade.android.provider.DatabaseContract.Client.CONTENT_URI, null, null, null, null);
+			((ClientAdapter) adapter).setClientList(new ClientTranslator().translate(cursor));
 		}
 	}
 	
@@ -71,12 +69,5 @@ public class ClientListActivity extends BaseActivity {
 			return super.onOptionsItemSelected(menuItem);
 		}
 	}
-
-//	private void setClientList() {
-//		Cursor cursor = getContentResolver().query(com.xtrade.android.provider.DatabaseContract.Client.CONTENT_URI, null, null, null, null);
-//		ClientTranslator clientTranslator = new ClientTranslator();
-//		clientTranslator.translate(cursor);
-//		adapter.notifyDataSetChanged();
-//	}
 	
 }

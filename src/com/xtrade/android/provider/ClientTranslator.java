@@ -10,7 +10,6 @@ import com.xtrade.android.provider.DatabaseContract.Client;
 public class ClientTranslator {
 
 	public List<com.xtrade.android.object.Client> translate(Cursor cursor) {
-
 		List<com.xtrade.android.object.Client> clients = new ArrayList<com.xtrade.android.object.Client>();
 		while (cursor.moveToNext()) {
 			com.xtrade.android.object.Client client = new com.xtrade.android.object.Client(

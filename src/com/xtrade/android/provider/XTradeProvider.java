@@ -130,7 +130,7 @@ public class XTradeProvider extends ContentProvider {
 		case POSITION_ID:
 			id = Position.getId(uri);
 			builder.setTables(DatabaseHelper.Tables.POSITION);
-			builder.appendWhere(BaseColumns._ID + "=" + id);
+			builder.appendWhere(BaseColumns._ID + " = " + id);
 			break;
 		default:
 			// If the URI doesn't match any of the known patterns, throw an
