@@ -23,6 +23,16 @@ public class ClientActivity extends BaseActivity {
 	public void onCreate(Bundle savedIntanceState) {
 		super.onCreate(savedIntanceState);
 		setContentView(R.layout.client);
+		
+		Intent intent = getIntent();
+		final int extra = intent.getIntExtra("ACTION_TYPE", -1);
+		if (extra == UPDATE_REQUEST_CODE)
+			if (extra != -1 && intent.getLongExtra(DatabaseContract.ClientColumns.CLIENT_ID, -1) >= 0) {
+				((EditText) findViewById(R.id.txtClientName)).setText(intent.getStringExtra(DatabaseContract.ClientColumns.NAME));
+				((EditText) findViewById(R.id.txtClientPhone)).setText(intent.getStringExtra(DatabaseContract.ClientColumns.PHONE));
+				((EditText) findViewById(R.id.txtClientAddress)).setText(intent.getStringExtra(DatabaseContract.ClientColumns.ADDRESS));
+			}
+		
 		//TODO: handle the lifecycle when orientation changed to save the values
 		Button btnAddClient = (Button) findViewById(R.id.btnAddClient);
 		btnAddClient.setOnClickListener(new OnClickListener() {
@@ -38,8 +48,6 @@ public class ClientActivity extends BaseActivity {
 					contentValues.put(ClientColumns.PHONE, clientPhone);
 					contentValues.put(ClientColumns.ADDRESS, clientAddress);
 					
-					Intent intent = getIntent();
-					int extra = intent.getIntExtra("ACTION_TYPE", -1);
 					if (extra == -1)
 						setResult(RESULT_CANCELED);
 					
@@ -48,6 +56,8 @@ public class ClientActivity extends BaseActivity {
 						clientUri = getContentResolver().insert(DatabaseContract.Client.CONTENT_URI, contentValues);
 					else if (extra == UPDATE_REQUEST_CODE)
 						clientUri = null;
+					// Just don't know what the where and selectionArgs parameter mean
+//						clientUri = getContentResolver().update(DatabaseContract.Client.CONTENT_URI, contentValues, where, selectionArgs);
 					
 					if (clientUri != null)
 						setResult(RESULT_OK);

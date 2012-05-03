@@ -41,5 +41,14 @@
         android:layout_toRightOf="@+id/imageView1"
         android:text="Medium Text"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/btnEditClient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tvwClientAddress"
+        android:layout_toLeftOf="@+id/tvwClientPhone"
+        android:background="@drawable/modify_24x24" />
 
 </RelativeLayout>

@@ -151,6 +151,17 @@ public class XTradeProvider extends ContentProvider {
 
 		int match = uriMatcher.match(uri);
 		switch (match) {
+		case CLIENT:
+			count = db.update(DatabaseHelper.Tables.CLIENT, values, selection, selectionArgs);
+			break;
+		case CLIENT_ID:
+			id = Client.getId(uri);
+			finalWhere = BaseColumns._ID + " = " + id;
+			if (selection != null)
+				finalWhere = finalWhere + " AND " + selection;
+			
+			count = db.update(DatabaseHelper.Tables.CLIENT, values, finalWhere, selectionArgs);
+			break;
 		case POSITION:
 			count = db.update(DatabaseHelper.Tables.POSITION, values, selection, selectionArgs);
 			break;

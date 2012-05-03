@@ -44,6 +44,7 @@ public class ClientListActivity extends BaseActivity {
 			return;
 		}
 		
+		// TODO: Should refresh the list with the inserted or updated values
 		if (requestCode == CREATE_REQUEST_CODE && resultCode == RESULT_OK) {
 			Debug.info(this, "Insertion was made successfully!!!");
 		} else if (requestCode == UPDATE_REQUEST_CODE && resultCode == RESULT_OK) {
@@ -71,4 +72,11 @@ public class ClientListActivity extends BaseActivity {
 		}
 	}
 
+//	private void setClientList() {
+//		Cursor cursor = getContentResolver().query(com.xtrade.android.provider.DatabaseContract.Client.CONTENT_URI, null, null, null, null);
+//		ClientTranslator clientTranslator = new ClientTranslator();
+//		clientTranslator.translate(cursor);
+//		adapter.notifyDataSetChanged();
+//	}
+	
 }
