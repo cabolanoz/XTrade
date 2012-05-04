@@ -3,7 +3,9 @@ package com.xtrade.android;
 import org.apache.commons.lang.StringUtils;
 
 import android.content.ContentValues;
+import android.content.CursorLoader;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -28,12 +30,19 @@ public class ClientActivity extends BaseActivity {
 		final int extra = intent.getIntExtra("ACTION_TYPE", -1);
 		if (extra == UPDATE_REQUEST_CODE)
 			if (extra != -1 && intent.getLongExtra(DatabaseContract.ClientColumns.CLIENT_ID, -1) >= 0) {
-				((EditText) findViewById(R.id.txtClientName)).setText(intent.getStringExtra(DatabaseContract.ClientColumns.NAME));
-				((EditText) findViewById(R.id.txtClientPhone)).setText(intent.getStringExtra(DatabaseContract.ClientColumns.PHONE));
-				((EditText) findViewById(R.id.txtClientAddress)).setText(intent.getStringExtra(DatabaseContract.ClientColumns.ADDRESS));
+				long clientId = intent.getLongExtra(DatabaseContract.ClientColumns.CLIENT_ID, -1);
+				
+				CursorLoader cursorLoader = new CursorLoader(getBaseContext(), DatabaseContract.Client.buildUri(String.valueOf(clientId)), null, null, null, null);
+				Cursor cursor = cursorLoader.loadInBackground();
+				if (cursor != null)
+					if (cursor.moveToNext()) {
+						((EditText) findViewById(R.id.txtClientName)).setText(cursor.getColumnIndexOrThrow(DatabaseContract.ClientColumns.NAME));
+						((EditText) findViewById(R.id.txtClientPhone)).setText(cursor.getColumnIndexOrThrow(DatabaseContract.ClientColumns.PHONE));
+						((EditText) findViewById(R.id.txtClientAddress)).setText(cursor.getColumnIndexOrThrow(DatabaseContract.ClientColumns.ADDRESS));
+					}
 			}
 		
-		//TODO: handle the lifecycle when orientation changed to save the values
+		//TODO: handle the lifecycle when orientation changes to save the values
 		Button btnAddClient = (Button) findViewById(R.id.btnAddClient);
 		btnAddClient.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
