@@ -41,8 +41,7 @@ public class ClientListActivity extends BaseActivity {
 			Toast.makeText(this, "The operation didn't finish properly", Toast.LENGTH_LONG).show();
 			return;
 		}
-		
-		// TODO: Should refresh the list with the inserted or updated values
+
 		if (resultCode == RESULT_OK && (requestCode == CREATE_REQUEST_CODE || requestCode == UPDATE_REQUEST_CODE)) {
 			Cursor cursor = getContentResolver().query(com.xtrade.android.provider.DatabaseContract.Client.CONTENT_URI, null, null, null, null);
 			((ClientAdapter) adapter).setClientList(new ClientTranslator().translate(cursor));

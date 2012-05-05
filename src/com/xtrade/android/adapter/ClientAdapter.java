@@ -17,17 +17,16 @@ import com.xtrade.android.ClientActivity;
 import com.xtrade.android.R;
 import com.xtrade.android.object.Client;
 import com.xtrade.android.provider.DatabaseContract;
-import com.xtrade.android.util.Debug;
 
 public class ClientAdapter extends BaseAdapter {
 
+	private Context context;
 	private List<Client> clientList;
 	private final int UPDATE_REQUEST_CODE = 101;
-	private Context context;
 
-	public ClientAdapter(Context context, List<Client> _clientList) {
+	public ClientAdapter(Context _context, List<Client> _clientList) {
+		this.context = _context;
 		this.clientList = _clientList;
-		this.context=context;
 	}
 
 	@Override
@@ -37,7 +36,7 @@ public class ClientAdapter extends BaseAdapter {
 			convertView = inflater.inflate(R.layout.client_item, null);
 		}
 
-		Client client = getClientList().get(position);
+		final Client client = getClientList().get(position);
 		
 		TextView tvwClientName = (TextView) convertView.findViewById(R.id.tvwClientName);
 		tvwClientName.setText(client.getName());
@@ -51,11 +50,9 @@ public class ClientAdapter extends BaseAdapter {
 		Button btnEditClient = (Button) convertView.findViewById(R.id.btnEditClient);
 		btnEditClient.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
-				long id = getItemId(position);
-				Debug.info(this, "El id del registro es: " + id);
 				Intent intent = new Intent(context, ClientActivity.class);
 				intent.putExtra("ACTION_TYPE", UPDATE_REQUEST_CODE);
-				intent.putExtra(DatabaseContract.ClientColumns.CLIENT_ID, getItemId(position));
+				intent.putExtra(DatabaseContract.ClientColumns.CLIENT_ID, client.getId());
 				((BaseActivity) context).startActivityForResult(intent, UPDATE_REQUEST_CODE);
 			}
 		});
@@ -68,7 +65,7 @@ public class ClientAdapter extends BaseAdapter {
 	}
 
 	public void setClientList(List<Client> clientList) {
-		this.clientList=clientList;
+		this.clientList = clientList;
 		notifyDataSetChanged();
 	}
 
