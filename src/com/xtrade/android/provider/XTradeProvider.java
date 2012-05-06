@@ -11,6 +11,7 @@ import android.provider.BaseColumns;
 
 import com.xtrade.android.provider.DatabaseContract.Client;
 import com.xtrade.android.provider.DatabaseContract.Position;
+import com.xtrade.android.util.Debug;
 
 public class XTradeProvider extends ContentProvider {
 
@@ -30,9 +31,12 @@ public class XTradeProvider extends ContentProvider {
 		final String CONTENT_AUTHORITY = DatabaseContract.CONTENT_AUTHORITY;
 
 		matcher.addURI(CONTENT_AUTHORITY, DatabaseContract.PATH_CLIENT, CLIENT);
-		matcher.addURI(CONTENT_AUTHORITY, DatabaseContract.PATH_CLIENT + "/*", CLIENT_ID);
-		matcher.addURI(CONTENT_AUTHORITY, DatabaseContract.PATH_POSITION, POSITION);
-		matcher.addURI(CONTENT_AUTHORITY, DatabaseContract.PATH_POSITION + "/*", POSITION_ID);
+		matcher.addURI(CONTENT_AUTHORITY, DatabaseContract.PATH_CLIENT + "/*",
+				CLIENT_ID);
+		matcher.addURI(CONTENT_AUTHORITY, DatabaseContract.PATH_POSITION,
+				POSITION);
+		matcher.addURI(CONTENT_AUTHORITY,
+				DatabaseContract.PATH_POSITION + "/*", POSITION_ID);
 
 		return matcher;
 	}
@@ -106,23 +110,47 @@ public class XTradeProvider extends ContentProvider {
 	}
 
 	@Override
-	public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+	public Cursor query(Uri uri, String[] projection, String selection,
+			String[] selectionArgs, String sortOrder) {
 		final int match = uriMatcher.match(uri);
-
 		final SQLiteDatabase db = databaseHelper.getWritableDatabase();
 
 		SQLiteQueryBuilder builder = buildExpandedSelection(uri, match);
-		Cursor c = builder.query(db, projection, selection, selectionArgs, null, null, sortOrder);
+
+		sortOrder=buildSortOrder(match, sortOrder);
+		
+		Cursor c = builder.query(db, projection, selection, selectionArgs,
+				null, null, sortOrder);
 
 		return c;
+	}
+
+	private String buildSortOrder(int match, String sortOrder) {
+
+		if (sortOrder == null) {
+			Debug.info(this, "Defaulting sort");
+			if (match == CLIENT || match == CLIENT_ID)
+				sortOrder = Client.DEFAULT_SORT;
+			else if (match == POSITION || match == POSITION_ID)
+				sortOrder = Position.DEFAULT_SORT;
+		}
+
+		return sortOrder;
 	}
 
 	private SQLiteQueryBuilder buildExpandedSelection(Uri uri, int match) {
 		SQLiteQueryBuilder builder = new SQLiteQueryBuilder();
 		String id = null;
+
 		switch (match) {
 		case CLIENT:
 			builder.setTables(DatabaseHelper.Tables.CLIENT);
+
+			break;
+		case CLIENT_ID:
+			id = Position.getId(uri);
+			builder.setTables(DatabaseHelper.Tables.CLIENT);
+			builder.appendWhere(BaseColumns._ID + " = " + id);
 			break;
 		case POSITION:
 			builder.setTables(DatabaseHelper.Tables.POSITION);
@@ -135,14 +163,17 @@ public class XTradeProvider extends ContentProvider {
 		default:
 			// If the URI doesn't match any of the known patterns, throw an
 			// exception.
-			throw new IllegalArgumentException("Unknown URI " + uri);
+			throw new IllegalArgumentException(
+					"Unknown URI on XTradeProvider sure it is implemented?"
+							+ uri);
 		}
 
 		return builder;
 	}
 
 	@Override
-	public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+	public int update(Uri uri, ContentValues values, String selection,
+			String[] selectionArgs) {
 		SQLiteDatabase db = databaseHelper.getWritableDatabase();
 		int count;
 
@@ -152,18 +183,21 @@ public class XTradeProvider extends ContentProvider {
 		int match = uriMatcher.match(uri);
 		switch (match) {
 		case CLIENT:
-			count = db.update(DatabaseHelper.Tables.CLIENT, values, selection, selectionArgs);
+			count = db.update(DatabaseHelper.Tables.CLIENT, values, selection,
+					selectionArgs);
 			break;
 		case CLIENT_ID:
 			id = Client.getId(uri);
 			finalWhere = BaseColumns._ID + " = " + id;
 			if (selection != null)
 				finalWhere = finalWhere + " AND " + selection;
-			
-			count = db.update(DatabaseHelper.Tables.CLIENT, values, finalWhere, selectionArgs);
+
+			count = db.update(DatabaseHelper.Tables.CLIENT, values, finalWhere,
+					selectionArgs);
 			break;
 		case POSITION:
-			count = db.update(DatabaseHelper.Tables.POSITION, values, selection, selectionArgs);
+			count = db.update(DatabaseHelper.Tables.POSITION, values,
+					selection, selectionArgs);
 			break;
 		case POSITION_ID:
 			id = Position.getId(uri);
@@ -171,7 +205,8 @@ public class XTradeProvider extends ContentProvider {
 			if (selection != null)
 				finalWhere = finalWhere + " AND " + selection;
 
-			count = db.update(DatabaseHelper.Tables.POSITION, values, finalWhere, selectionArgs);
+			count = db.update(DatabaseHelper.Tables.POSITION, values,
+					finalWhere, selectionArgs);
 			break;
 		default:
 			throw new IllegalArgumentException("Unknown URI " + uri);

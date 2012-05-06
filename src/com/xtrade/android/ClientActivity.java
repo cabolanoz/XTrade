@@ -3,17 +3,18 @@ package com.xtrade.android;
 import org.apache.commons.lang.StringUtils;
 
 import android.content.ContentValues;
-import android.content.CursorLoader;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.content.CursorLoader;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.xtrade.android.provider.DatabaseContract;
+import com.xtrade.android.provider.DatabaseContract.Client;
 import com.xtrade.android.provider.DatabaseContract.ClientColumns;
 import com.xtrade.android.util.Settings;
 
@@ -22,6 +23,7 @@ public class ClientActivity extends BaseActivity {
 	private final int CREATE_REQUEST_CODE = 100;
 	private final int UPDATE_REQUEST_CODE = 101;
 	
+	private long clientId;
 	private EditText txtClientName;
 	private EditText txtClientPhone;
 	private EditText txtClientAddress;
@@ -45,7 +47,7 @@ public class ClientActivity extends BaseActivity {
 		final int extra = intent.getIntExtra("ACTION_TYPE", -1);
 		if (extra == UPDATE_REQUEST_CODE)
 			if (extra != -1 && intent.getLongExtra(DatabaseContract.ClientColumns.CLIENT_ID, -1) >= 0) {
-				long clientId = intent.getLongExtra(DatabaseContract.ClientColumns.CLIENT_ID, -1);
+				clientId = intent.getLongExtra(DatabaseContract.ClientColumns.CLIENT_ID, -1);
 				
 				CursorLoader cursorLoader = new CursorLoader(getBaseContext(), DatabaseContract.Client.buildUri(String.valueOf(clientId)), null, null, null, null);
 				Cursor cursor = cursorLoader.loadInBackground();
@@ -61,9 +63,9 @@ public class ClientActivity extends BaseActivity {
 		Button btnAddClient = (Button) findViewById(R.id.btnAddClient);
 		btnAddClient.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
-				String clientName = ((EditText) findViewById(R.id.txtClientName)).getText().toString();
-				String clientPhone = ((EditText) findViewById(R.id.txtClientPhone)).getText().toString();
-				String clientAddress = ((EditText) findViewById(R.id.txtClientAddress)).getText().toString();
+				String clientName = txtClientName.getText().toString();
+				String clientPhone = txtClientPhone.getText().toString();
+				String clientAddress = txtClientAddress.getText().toString();
 				
 				if (!StringUtils.isEmpty(clientName) && !StringUtils.isEmpty(clientPhone) && !StringUtils.isEmpty(clientAddress)) {
 					ContentValues contentValues = new ContentValues();
@@ -72,22 +74,21 @@ public class ClientActivity extends BaseActivity {
 					contentValues.put(ClientColumns.PHONE, clientPhone);
 					contentValues.put(ClientColumns.ADDRESS, clientAddress);
 					
-					if (extra == -1)
-						setResult(RESULT_CANCELED);
-					
 					Uri clientUri = null;
-					if (extra == CREATE_REQUEST_CODE)
+					
+					int result=RESULT_CANCELED;
+					
+					if (extra == CREATE_REQUEST_CODE){
 						clientUri = getContentResolver().insert(DatabaseContract.Client.CONTENT_URI, contentValues);
-					else if (extra == UPDATE_REQUEST_CODE)
-						clientUri = null;
-					// Just don't know what the where and selectionArgs parameter mean
-//						clientUri = getContentResolver().update(DatabaseContract.Client.CONTENT_URI, contentValues, where, selectionArgs);
+						result=clientUri==null?RESULT_CANCELED:RESULT_OK;
+					}else if (extra == UPDATE_REQUEST_CODE){
+						
+						clientUri = Client.buildUri(String.valueOf(clientId));
+						result=getContentResolver().update(clientUri, contentValues, null, null)==0?RESULT_CANCELED:RESULT_OK;
+					    
+					}
 					
-					if (clientUri != null)
-						setResult(RESULT_OK);
-					else
-						setResult(RESULT_CANCELED);
-					
+					setResult(result);
 					finish();	
 				}
 			}

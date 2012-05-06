@@ -37,16 +37,6 @@ public class DatabaseContract {
 	public static final String PATH_POSITION = "position";
 	public static final String PATH_CONTACT_TYPE = "contact_type";
 
-	public static abstract class BaseTable implements BaseColumns {
-
-		public static String getId(Uri uri) {
-			if (uri.getPathSegments().size() >= 2)
-				return uri.getPathSegments().get(1);
-			return null;
-		}
-
-	}
-
 	public static class Client extends BaseTable implements ClientColumns {
 		public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH_CLIENT).build();
 		
