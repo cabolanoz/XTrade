@@ -37,14 +37,17 @@ public class ClientActivity extends BaseActivity {
 		txtClientPhone=((EditText) findViewById(R.id.txtClientPhone));
 		txtClientAddress=(EditText) findViewById(R.id.txtClientAddress);
 		
-		if(Settings.DEBUG){
+		
+		Intent intent = getIntent();
+		final int extra = intent.getIntExtra("ACTION_TYPE", -1);
+		
+		if(Settings.DEBUG && extra==CREATE_REQUEST_CODE ){
 			txtClientName.setText("Loren ipsum");
 			txtClientPhone.setText("222222");
 			txtClientAddress.setText("Aenean lacinia bibendum nulla sed consectetur.");
 		}
 		
-		Intent intent = getIntent();
-		final int extra = intent.getIntExtra("ACTION_TYPE", -1);
+		
 		if (extra == UPDATE_REQUEST_CODE)
 			if (extra != -1 && intent.getLongExtra(DatabaseContract.ClientColumns.CLIENT_ID, -1) >= 0) {
 				clientId = intent.getLongExtra(DatabaseContract.ClientColumns.CLIENT_ID, -1);
@@ -53,10 +56,11 @@ public class ClientActivity extends BaseActivity {
 				Cursor cursor = cursorLoader.loadInBackground();
 				if (cursor != null)
 					if (cursor.moveToNext()) {
-						txtClientName.setText(cursor.getColumnIndexOrThrow(DatabaseContract.ClientColumns.NAME));
-						txtClientPhone.setText(cursor.getColumnIndexOrThrow(DatabaseContract.ClientColumns.PHONE));
-						txtClientAddress.setText(cursor.getColumnIndexOrThrow(DatabaseContract.ClientColumns.ADDRESS));
+						txtClientName.setText(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.ClientColumns.NAME)));
+						txtClientPhone.setText(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.ClientColumns.PHONE)));
+						txtClientAddress.setText(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.ClientColumns.ADDRESS)));
 					}
+				cursor.close();
 			}
 		
 		//TODO: handle the lifecycle when orientation changes to save the values
