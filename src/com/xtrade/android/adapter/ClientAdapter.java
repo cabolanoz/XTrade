@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -19,21 +19,21 @@ import com.xtrade.android.object.Client;
 import com.xtrade.android.provider.DatabaseContract;
 import com.xtrade.android.util.Debug;
 
-public class ClientAdapter extends ArrayAdapter<Client> {
+public class ClientAdapter extends BaseAdapter {
 
 	private List<Client> clientList;
 	private final int UPDATE_REQUEST_CODE = 101;
+	private Context context;
 
 	public ClientAdapter(Context context, List<Client> _clientList) {
-		super(context, R.layout.client_item, _clientList);
 		this.clientList = _clientList;
-		setNotifyOnChange(true);
+		this.context=context;
 	}
 
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
-			LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = inflater.inflate(R.layout.client_item, null);
 		}
 
@@ -52,11 +52,11 @@ public class ClientAdapter extends ArrayAdapter<Client> {
 		btnEditClient.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
 				long id = getItemId(position);
-				Debug.info(getContext(), "El id del registro es: " + id);
-				Intent intent = new Intent(getContext(), ClientActivity.class);
+				Debug.info(this, "El id del registro es: " + id);
+				Intent intent = new Intent(context, ClientActivity.class);
 				intent.putExtra("ACTION_TYPE", UPDATE_REQUEST_CODE);
 				intent.putExtra(DatabaseContract.ClientColumns.CLIENT_ID, getItemId(position));
-				((BaseActivity) getContext()).startActivityForResult(intent, UPDATE_REQUEST_CODE);
+				((BaseActivity) context).startActivityForResult(intent, UPDATE_REQUEST_CODE);
 			}
 		});
 
@@ -68,8 +68,23 @@ public class ClientAdapter extends ArrayAdapter<Client> {
 	}
 
 	public void setClientList(List<Client> clientList) {
-		this.clientList = clientList;
+		this.clientList=clientList;
 		notifyDataSetChanged();
+	}
+
+	@Override
+	public int getCount() {
+		return clientList.size();
+	}
+
+	@Override
+	public Object getItem(int position) {
+		return clientList.get(position);
+	}
+
+	@Override
+	public long getItemId(int position) {
+		return position;
 	}
 
 }

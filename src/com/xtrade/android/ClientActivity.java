@@ -15,16 +15,31 @@ import android.widget.EditText;
 
 import com.xtrade.android.provider.DatabaseContract;
 import com.xtrade.android.provider.DatabaseContract.ClientColumns;
+import com.xtrade.android.util.Settings;
 
 public class ClientActivity extends BaseActivity {
 
 	private final int CREATE_REQUEST_CODE = 100;
 	private final int UPDATE_REQUEST_CODE = 101;
 	
+	private EditText txtClientName;
+	private EditText txtClientPhone;
+	private EditText txtClientAddress;
+	
 	@Override
 	public void onCreate(Bundle savedIntanceState) {
 		super.onCreate(savedIntanceState);
 		setContentView(R.layout.client);
+		
+		txtClientName=(EditText) findViewById(R.id.txtClientName);
+		txtClientPhone=((EditText) findViewById(R.id.txtClientPhone));
+		txtClientAddress=(EditText) findViewById(R.id.txtClientAddress);
+		
+		if(Settings.DEBUG){
+			txtClientName.setText("Loren ipsum");
+			txtClientPhone.setText("222222");
+			txtClientAddress.setText("Aenean lacinia bibendum nulla sed consectetur.");
+		}
 		
 		Intent intent = getIntent();
 		final int extra = intent.getIntExtra("ACTION_TYPE", -1);
@@ -36,9 +51,9 @@ public class ClientActivity extends BaseActivity {
 				Cursor cursor = cursorLoader.loadInBackground();
 				if (cursor != null)
 					if (cursor.moveToNext()) {
-						((EditText) findViewById(R.id.txtClientName)).setText(cursor.getColumnIndexOrThrow(DatabaseContract.ClientColumns.NAME));
-						((EditText) findViewById(R.id.txtClientPhone)).setText(cursor.getColumnIndexOrThrow(DatabaseContract.ClientColumns.PHONE));
-						((EditText) findViewById(R.id.txtClientAddress)).setText(cursor.getColumnIndexOrThrow(DatabaseContract.ClientColumns.ADDRESS));
+						txtClientName.setText(cursor.getColumnIndexOrThrow(DatabaseContract.ClientColumns.NAME));
+						txtClientPhone.setText(cursor.getColumnIndexOrThrow(DatabaseContract.ClientColumns.PHONE));
+						txtClientAddress.setText(cursor.getColumnIndexOrThrow(DatabaseContract.ClientColumns.ADDRESS));
 					}
 			}
 		

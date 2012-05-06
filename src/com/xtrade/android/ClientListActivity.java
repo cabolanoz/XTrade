@@ -3,7 +3,7 @@ package com.xtrade.android;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -11,12 +11,11 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.xtrade.android.adapter.ClientAdapter;
-import com.xtrade.android.object.Client;
 import com.xtrade.android.provider.ClientTranslator;
 
 public class ClientListActivity extends BaseActivity {
 
-	private ArrayAdapter<Client> adapter;
+	private BaseAdapter adapter;
 	private final int CREATE_REQUEST_CODE = 100;
 	private final int UPDATE_REQUEST_CODE = 101;
 
