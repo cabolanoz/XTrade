@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-
-    <item android:id="@+id/mniNewClient" 
-        android:icon="@drawable/save_16x16"
-        android:title="@string/new_client"
+    
+    <item android:id="@+id/mniSaveClient" 
+        android:icon="@drawable/save_24x24"
+        android:title="@string/save"
+        android:titleCondensed="@string/save"
         android:showAsAction="always" />    
 
 </menu>

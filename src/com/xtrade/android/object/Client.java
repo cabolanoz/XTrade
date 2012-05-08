@@ -7,7 +7,8 @@ public class Client {
 	private String address;
 	private String phone;
 
-	public Client(String name, String address, String phone) {
+	public Client(String id, String name, String address, String phone) {
+		this.id = id;
 		this.name = name;
 		this.address = address;
 		this.phone = phone;
