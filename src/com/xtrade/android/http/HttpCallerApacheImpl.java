@@ -2,7 +2,7 @@ package com.xtrade.android.http;
 
 import java.net.URL;
 
-public class HttpCallerApacheImpl implements HttpCaller {
+public class HttpCallerApacheImpl extends AbstractHttpCaller{
 
 	@Override
 	public boolean call(URL urlResource) {
