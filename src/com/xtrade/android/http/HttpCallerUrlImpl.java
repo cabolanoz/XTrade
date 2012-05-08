@@ -10,7 +10,7 @@ import java.net.URL;
  * since it will be supported and optimize for the next platform
  * 
  * */
-public class HttpCallerUrlImpl implements HttpCaller{
+public class HttpCallerUrlImpl extends AbstractHttpCaller{
 
 	@Override
 	public boolean call(URL urlResource) {
