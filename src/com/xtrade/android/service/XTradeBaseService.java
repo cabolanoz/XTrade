@@ -1,5 +1,8 @@
 package com.xtrade.android.service;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import android.app.IntentService;
 import android.content.Intent;
 
@@ -32,7 +35,12 @@ public class XTradeBaseService extends IntentService{
 				success=true;
 			}else if(intent.getAction().equals(ActionConstant.CLIENT_LIST)){
 				HttpCaller caller= HttpCallerFactory.getInstance().createCaller();
-				caller.call(new URL("file:///android_asset/client.mock"));
+				try {
+					caller.call(new URL("file:///android_asset/client.mock"));
+				} catch (MalformedURLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			
 			intent.putExtra(LoginParameter.SUCCESS, success);
