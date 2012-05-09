@@ -3,9 +3,10 @@ package com.xtrade.android.service;
 import android.app.IntentService;
 import android.content.Intent;
 
+import com.xtrade.android.http.HttpCaller;
+import com.xtrade.android.http.HttpCallerFactory;
 import com.xtrade.android.util.ActionConstant;
 import com.xtrade.android.util.LoginParameter;
-import com.xtrade.android.util.Parameter;
 import com.xtrade.android.util.Settings;
 
 public class XTradeBaseService extends IntentService{
@@ -29,11 +30,16 @@ public class XTradeBaseService extends IntentService{
 				
 				//we resend the login intent with extra parameters
 				success=true;
+			}else if(intent.getAction().equals(ActionConstant.CLIENT_LIST)){
+				HttpCaller caller= HttpCallerFactory.getInstance().createCaller();
+				caller.call(new URL("file:///android_asset/client.mock"));
 			}
 			
 			intent.putExtra(LoginParameter.SUCCESS, success);
 			
 			sendBroadcast(intent);
+		}else if(intent.getAction().equals(ActionConstant.CLIENT_LIST)){
+			
 		}
 		
 		
