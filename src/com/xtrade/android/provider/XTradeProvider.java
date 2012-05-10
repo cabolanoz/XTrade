@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
+import com.xtrade.android.provider.DatabaseContract.Classification;
 import com.xtrade.android.provider.DatabaseContract.Client;
 import com.xtrade.android.provider.DatabaseContract.Position;
 import com.xtrade.android.util.Debug;
@@ -17,8 +18,10 @@ public class XTradeProvider extends ContentProvider {
 
 	public static final int CLIENT = 1000;
 	public static final int CLIENT_ID = 1001;
-	public static final int POSITION = 1002;
-	public static final int POSITION_ID = 1003;
+	public static final int CLASSIFICATION = 1002;
+	public static final int CLASSIFICATION_ID = 1003;
+	public static final int POSITION = 1004;
+	public static final int POSITION_ID = 1005;
 
 	private final static int LIMIT_CALLS = 10;
 
@@ -32,6 +35,8 @@ public class XTradeProvider extends ContentProvider {
 
 		matcher.addURI(CONTENT_AUTHORITY, DatabaseContract.PATH_CLIENT, CLIENT);
 		matcher.addURI(CONTENT_AUTHORITY, DatabaseContract.PATH_CLIENT + "/*", CLIENT_ID);
+		matcher.addURI(CONTENT_AUTHORITY, DatabaseContract.PATH_CLASSIFICATION, CLASSIFICATION);
+		matcher.addURI(CONTENT_AUTHORITY, DatabaseContract.PATH_CLASSIFICATION + "/*", CLASSIFICATION_ID);
 		matcher.addURI(CONTENT_AUTHORITY, DatabaseContract.PATH_POSITION, POSITION);
 		matcher.addURI(CONTENT_AUTHORITY, DatabaseContract.PATH_POSITION + "/*", POSITION_ID);
 
@@ -73,6 +78,10 @@ public class XTradeProvider extends ContentProvider {
 			return Client.CONTENT_TYPE;
 		case CLIENT_ID:
 			return Client.CONTENT_ITEM_TYPE;
+		case CLASSIFICATION:
+			return Classification.CONTENT_TYPE;
+		case CLASSIFICATION_ID:
+			return Classification.CONTENT_ITEM_TYPE;
 		case POSITION:
 			return Position.CONTENT_TYPE;
 		case POSITION_ID:
@@ -91,6 +100,10 @@ public class XTradeProvider extends ContentProvider {
 			db.insertOrThrow(DatabaseHelper.Tables.CLIENT, null, values);
 			getContext().getContentResolver().notifyChange(uri, null);
 			return Client.buildUri(values.getAsString(BaseColumns._ID));
+		case CLASSIFICATION:
+			db.insertOrThrow(DatabaseHelper.Tables.CLASSIFICATION, null, values);
+			getContext().getContentResolver().notifyChange(uri, null);
+			return Classification.buildUri(values.getAsString(BaseColumns._ID));
 		case POSITION:
 			db.insertOrThrow(DatabaseHelper.Tables.POSITION, null, values);
 			getContext().getContentResolver().notifyChange(uri, null);
@@ -124,6 +137,8 @@ public class XTradeProvider extends ContentProvider {
 		if (sortOrder == null) {
 			if (match == CLIENT || match == CLIENT_ID)
 				sortOrder = Client.DEFAULT_SORT;
+			else if (match == CLASSIFICATION || match == CLASSIFICATION_ID)
+				sortOrder = Classification.DEFAULT_SORT;
 			else if (match == POSITION || match == POSITION_ID)
 				sortOrder = Position.DEFAULT_SORT;
 		}
@@ -140,8 +155,16 @@ public class XTradeProvider extends ContentProvider {
 			builder.setTables(DatabaseHelper.Tables.CLIENT);
 			break;
 		case CLIENT_ID:
-			id = Position.getId(uri);
+			id = Client.getId(uri);
 			builder.setTables(DatabaseHelper.Tables.CLIENT);
+			builder.appendWhere(BaseColumns._ID + " = " + id);
+			break;
+		case CLASSIFICATION:
+			builder.setTables(DatabaseHelper.Tables.CLASSIFICATION);
+			break;
+		case CLASSIFICATION_ID:
+			id = Classification.getId(uri);
+			builder.setTables(DatabaseHelper.Tables.CLASSIFICATION);
 			builder.appendWhere(BaseColumns._ID + " = " + id);
 			break;
 		case POSITION:
@@ -181,6 +204,17 @@ public class XTradeProvider extends ContentProvider {
 				finalWhere = finalWhere + " AND " + selection;
 
 			count = db.update(DatabaseHelper.Tables.CLIENT, values, finalWhere, selectionArgs);
+			break;
+		case CLASSIFICATION:
+			count = db.update(DatabaseHelper.Tables.CLASSIFICATION, values, selection, selectionArgs);
+			break;
+		case CLASSIFICATION_ID:
+			id = Classification.getId(uri);
+			finalWhere = BaseColumns._ID + " = " + id;
+			if (selection != null)
+				finalWhere = finalWhere + " AND " + selection;
+			
+			count = db.update(DatabaseHelper.Tables.CLASSIFICATION, values, finalWhere, selectionArgs);
 			break;
 		case POSITION:
 			count = db.update(DatabaseHelper.Tables.POSITION, values, selection, selectionArgs);

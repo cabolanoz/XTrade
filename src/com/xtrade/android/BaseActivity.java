@@ -19,13 +19,13 @@ public class BaseActivity extends SherlockFragmentActivity {
 	}
 
 	/**
-	 * Parent method for activites call through actions on the application
+	 * Parent method for activities call through actions on the application
 	 * 
 	*/
 	protected void startActivity(String action) {
 		startActivity(new Intent(action));
 	}
-
+	
 	/**
 	 * SharedPreferences object
 	 * 
