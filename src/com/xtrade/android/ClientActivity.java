@@ -1,7 +1,9 @@
 package com.xtrade.android;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
 import com.actionbarsherlock.app.ActionBar;
@@ -18,7 +20,7 @@ public class ClientActivity extends BaseActivity {
 	@Override
 	public void onCreate(Bundle savedIntanceState) {
 		super.onCreate(savedIntanceState);
-		setContentView(R.layout.client_tab);
+		
 
 		// Getting the Intent which called this activity
 		intent = getIntent();
@@ -32,14 +34,14 @@ public class ClientActivity extends BaseActivity {
 		Tab generalTab = actionBar.newTab();
 		generalTab.setIcon(R.drawable.clientgeneral_24x24);
 		generalTab.setTag("general");
-		generalTab.setTabListener(new ClientTabListener(new ClientGeneralFragment(intent)));
+		generalTab.setTabListener(new ClientTabListener( "General",ClientGeneralFragment.class ) );
 		actionBar.addTab(generalTab);
 
 		// Detail client tab
 		Tab detailTab = actionBar.newTab();
 		detailTab.setIcon(R.drawable.clientdetail_24x24);
 		detailTab.setTag("detail");
-		detailTab.setTabListener(new ClientTabListener(new ClientDetailFragment(intent)));
+		detailTab.setTabListener(new ClientTabListener( "Detail", ClientDetailFragment.class) );
 		actionBar.addTab(detailTab);
 
 		// TODO: handle the lifecycle when orientation changes to save the values
@@ -90,23 +92,36 @@ public class ClientActivity extends BaseActivity {
 		}
 	}
 
-	class ClientTabListener implements ActionBar.TabListener {
+	class ClientTabListener<T extends Fragment> implements ActionBar.TabListener {
 
-		private SherlockFragment mFragment;
+		private Fragment fragment;
+	    private final String tag;
+	    private final Class<T> mClass;
 
-		public ClientTabListener(SherlockFragment _mFragment) {
-			this.mFragment = _mFragment;
+		public ClientTabListener(String tag,Class<T> mClass) {
+			this.tag=tag;
+			this.mClass=mClass;
 		}
 
 		@Override
 		public void onTabSelected(Tab tab, FragmentTransaction ft) {
-			ft.add(mFragment, mFragment.getTag());
+			 // Check if the fragment is already initialized
+	        if (fragment == null) {
+	            // If not, instantiate and add it to the activity
+	            fragment = Fragment.instantiate(ClientActivity.this, mClass.getName());
+	            ft.add(android.R.id.content, fragment, tag);
+	        } else {
+	            // If it exists, simply attach it in order to show it
+	            ft.attach(fragment);
+	        }
 		}
 
 		@Override
 		public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-			if (mFragment != null)
-				ft.detach(mFragment);
+			 if (fragment != null) {
+		            // Detach the fragment, because another one is being attached
+		            ft.detach(fragment);
+		        }	
 		}
 
 		@Override

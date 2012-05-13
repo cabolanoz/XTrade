@@ -17,15 +17,12 @@ import com.xtrade.android.util.Debug;
 
 public class ClientDetailFragment extends SherlockFragment {
 
-	private Intent intent;
-	
-	public ClientDetailFragment(Intent _intent) {
-		this.intent = _intent;
-	}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.client_tab_detail, container, false);
+		
+		Intent intent=getActivity().getIntent();
 		
 		Cursor cursor = getActivity().getContentResolver().query(com.xtrade.android.provider.DatabaseContract.Classification.CONTENT_URI, null, null, null, null);
 		

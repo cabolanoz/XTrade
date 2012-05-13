@@ -18,18 +18,17 @@ public class ClientGeneralFragment extends SherlockFragment {
 	private final int CREATE_REQUEST_CODE = 100;
 	private final int UPDATE_REQUEST_CODE = 101;
 	
-	private Intent intent;
+	
 	private EditText txtClientName;
 	private EditText txtClientPhone;
 	private EditText txtClientAddress;
 	
-	public ClientGeneralFragment(Intent _intent) {
-		this.intent = _intent;
-	}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View fragmentView = inflater.inflate(R.layout.client_tab_general, container, false);
+		
+		Intent intent=getActivity().getIntent();
 		
 		// We get the ACTION_TYPE extra which tells us what operation we must perform (Save or Update)
 		int extra = intent.getIntExtra("ACTION_TYPE", -1);
