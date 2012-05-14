@@ -3,11 +3,16 @@ package com.xtrade.android;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.CursorLoader;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.xtrade.android.provider.DatabaseContract;
@@ -18,6 +23,7 @@ public class ClientGeneralFragment extends SherlockFragment {
 	private final int CREATE_REQUEST_CODE = 100;
 	private final int UPDATE_REQUEST_CODE = 101;
 	
+	private ImageButton txtClientPhoto;
 	private EditText txtClientName;
 	private EditText txtClientPhone;
 	private EditText txtClientAddress;
@@ -30,6 +36,21 @@ public class ClientGeneralFragment extends SherlockFragment {
 		
 		// We get the ACTION_TYPE extra which tells us what operation we must perform (Save or Update)
 		int extra = intent.getIntExtra("ACTION_TYPE", -1);
+		
+		txtClientPhoto = (ImageButton) fragmentView.findViewById(R.id.txtClientPhoto);
+		txtClientPhoto.setClickable(true);
+		txtClientPhoto.setOnClickListener(new OnClickListener() {
+			public void onClick(View view) {
+				FragmentTransaction ft = getFragmentManager().beginTransaction();
+				Fragment f = getFragmentManager().findFragmentByTag("picture_dialog");
+				if (f != null)
+					ft.remove(f);
+				ft.addToBackStack(null);
+				
+				DialogFragment dialogFragment = PictureDialog.newInstance();
+				dialogFragment.show(ft, "picture_dialog");
+			}
+		});
 		
 		txtClientName = (EditText) fragmentView.findViewById(R.id.txtClientName);
 		txtClientPhone = (EditText) fragmentView.findViewById(R.id.txtClientPhone);

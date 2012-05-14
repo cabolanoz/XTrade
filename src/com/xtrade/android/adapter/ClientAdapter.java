@@ -59,7 +59,7 @@ public class ClientAdapter extends BaseAdapter {
 
 		return convertView;
 	}
-
+	
 	public List<Client> getClientList() {
 		return clientList;
 	}

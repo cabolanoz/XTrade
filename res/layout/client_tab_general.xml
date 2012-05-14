@@ -3,6 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
+
+    <ImageButton
+        android:id="@+id/txtClientPhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/alert_light_frame" />
 
     <EditText
         android:id="@+id/txtClientName"

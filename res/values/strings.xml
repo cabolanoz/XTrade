@@ -23,5 +23,7 @@
     <string name="events">Events</string>
     <string name="performance">Performance</string>
     <string name="today">Today</string>
+    <string name="from_gallery">From Gallery</string>
+    <string name="from_camera">From Camera</string>
 
 </resources>

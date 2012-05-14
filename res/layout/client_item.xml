@@ -1,54 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-     >
+    android:layout_height="fill_parent" >
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/ivwClientPhoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:src="@drawable/ic_launcher" />
-
+
     <TextView
         android:id="@+id/tvwClientName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/imageView1"
+        android:layout_toRightOf="@+id/btnEditClient"
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
+
+    <TextView
+        android:id="@+id/tvwClientPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvwClientName"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tvwClientName"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
     <TextView
         android:id="@+id/tvwClientAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/imageView1"
+        android:layout_below="@+id/ivwClientPhoto"
         android:text="Small Text"
         android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <TextView
-        android:id="@+id/tvwClientPhone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/tvwClientName"
-        android:layout_toRightOf="@+id/imageView1"
-        android:text="Medium Text"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
+
     <Button
         android:id="@+id/btnEditClient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/tvwClientAddress"
-        android:layout_toLeftOf="@+id/tvwClientPhone"
         android:background="@drawable/modify_24x24" />
 
 </RelativeLayout>
