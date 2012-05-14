@@ -9,7 +9,9 @@ public class XTradeActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
+		setContentView(R.layout.dashboard);
+		
+		//TODO: add dashboard events
 	}
 	
 }

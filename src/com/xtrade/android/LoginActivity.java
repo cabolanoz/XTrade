@@ -123,7 +123,7 @@ public class LoginActivity extends BaseActivity {
 					editor.commit();
 				}
 
-				startActivity(ActionConstant.CLIENT_LIST);
+				startActivity(ActionConstant.MAIN_XTRADE);
 
 			} else {
 				Debug.info(this, "Authentication failed!!!");

@@ -34,5 +34,8 @@ public class BaseActivity extends SherlockFragmentActivity {
 		SharedPreferences xTradeSettings = getSharedPreferences(Settings.SHARED_PREFERENCES, MODE_PRIVATE);
 		return xTradeSettings;
 	}
+	
+	
+	
 
 }
