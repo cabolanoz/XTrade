@@ -36,10 +36,8 @@ public class DashboardLayout extends ViewGroup {
 
         // Measure once to find the maximum child size.
 
-        int childWidthMeasureSpec = MeasureSpec.makeMeasureSpec(
-                MeasureSpec.getSize(widthMeasureSpec), MeasureSpec.AT_MOST);
-        int childHeightMeasureSpec = MeasureSpec.makeMeasureSpec(
-                MeasureSpec.getSize(widthMeasureSpec), MeasureSpec.AT_MOST);
+        int childWidthMeasureSpec = MeasureSpec.makeMeasureSpec(MeasureSpec.getSize(widthMeasureSpec), MeasureSpec.AT_MOST);
+        int childHeightMeasureSpec = MeasureSpec.makeMeasureSpec(MeasureSpec.getSize(widthMeasureSpec), MeasureSpec.AT_MOST);
 
         final int count = getChildCount();
         for (int i = 0; i < count; i++) {
@@ -55,11 +53,8 @@ public class DashboardLayout extends ViewGroup {
         }
 
         // Measure again for each child to be exactly the same size.
-
-        childWidthMeasureSpec = MeasureSpec.makeMeasureSpec(
-                mMaxChildWidth, MeasureSpec.EXACTLY);
-        childHeightMeasureSpec = MeasureSpec.makeMeasureSpec(
-                mMaxChildHeight, MeasureSpec.EXACTLY);
+        childWidthMeasureSpec = MeasureSpec.makeMeasureSpec(mMaxChildWidth, MeasureSpec.EXACTLY);
+        childHeightMeasureSpec = MeasureSpec.makeMeasureSpec(mMaxChildHeight, MeasureSpec.EXACTLY);
 
         for (int i = 0; i < count; i++) {
             final View child = getChildAt(i);
@@ -70,9 +65,7 @@ public class DashboardLayout extends ViewGroup {
             child.measure(childWidthMeasureSpec, childHeightMeasureSpec);
         }
 
-        setMeasuredDimension(
-                resolveSize(mMaxChildWidth, widthMeasureSpec),
-                resolveSize(mMaxChildHeight, heightMeasureSpec));
+        setMeasuredDimension(resolveSize(mMaxChildWidth, widthMeasureSpec), resolveSize(mMaxChildHeight, heightMeasureSpec));
     }
 
     @Override
@@ -165,9 +158,7 @@ public class DashboardLayout extends ViewGroup {
             left = hSpace * (col + 1) + width * col;
             top = vSpace * (row + 1) + height * row;
 
-            child.layout(left, top,
-                    (hSpace == 0 && col == cols - 1) ? r : (left + width),
-                    (vSpace == 0 && row == rows - 1) ? b : (top + height));
+            child.layout(left, top, (hSpace == 0 && col == cols - 1) ? r : (left + width), (vSpace == 0 && row == rows - 1) ? b : (top + height));
             ++visibleIndex;
         }
     }

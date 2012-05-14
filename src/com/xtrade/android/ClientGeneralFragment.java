@@ -18,11 +18,9 @@ public class ClientGeneralFragment extends SherlockFragment {
 	private final int CREATE_REQUEST_CODE = 100;
 	private final int UPDATE_REQUEST_CODE = 101;
 	
-	
 	private EditText txtClientName;
 	private EditText txtClientPhone;
 	private EditText txtClientAddress;
-	
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
