@@ -7,5 +7,6 @@ public class Settings {
 	public static final String DEFAULT_USERNAME = "xtrade";
 	public static final String DEFAULT_PASSWORD = "xtrade";
 	public static final String SHARED_PREFERENCES = "XTrade_Prefs";
+	public static final String TEMPFILE_PATH = "/sdcard/tmp";
 
 }

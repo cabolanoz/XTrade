@@ -2,9 +2,11 @@ package com.xtrade.android;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.CursorLoader;
 import android.view.LayoutInflater;
@@ -16,12 +18,15 @@ import android.widget.ImageButton;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.xtrade.android.provider.DatabaseContract;
+import com.xtrade.android.util.Debug;
 import com.xtrade.android.util.Settings;
 
 public class ClientGeneralFragment extends SherlockFragment {
 
-	private final int CREATE_REQUEST_CODE = 100;
-	private final int UPDATE_REQUEST_CODE = 101;
+	private static final int CREATE_REQUEST_CODE = 100;
+	private static final int UPDATE_REQUEST_CODE = 101;
+	public static final int GALLERY_REQUEST = 102;
+	public static final int CAMERA_REQUEST = 103;
 	
 	private ImageButton txtClientPhoto;
 	private EditText txtClientName;
@@ -47,7 +52,7 @@ public class ClientGeneralFragment extends SherlockFragment {
 					ft.remove(f);
 				ft.addToBackStack(null);
 				
-				DialogFragment dialogFragment = PictureDialog.newInstance();
+				DialogFragment dialogFragment = PictureDialog.newInstance(ClientGeneralFragment.this);
 				dialogFragment.show(ft, "picture_dialog");
 			}
 		});
@@ -82,5 +87,24 @@ public class ClientGeneralFragment extends SherlockFragment {
 		
 		return fragmentView;
 	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		
+		if (resultCode == FragmentActivity.RESULT_OK){
+			if (txtClientPhoto != null){
+				
+				if (requestCode == GALLERY_REQUEST)
+					txtClientPhoto.setImageURI(data.getData());
+				else if (requestCode == CAMERA_REQUEST){
+					Debug.info(this, "Ok this dialog "+data.getExtras());	
+					//txtClientPhoto.setImageBitmap((Bitmap) data.getExtras().get("data"));
+				}
+			}
+			
+		}
+	}
+	 
+
 	
 }
