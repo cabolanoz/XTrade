@@ -2,6 +2,6 @@ package com.xtrade.android.util;
 
 public interface Parameter {
 
-	String SUCCESS="success";
+	String SUCCESS = "success";
 	
 }

@@ -17,12 +17,12 @@ import com.xtrade.android.ClientActivity;
 import com.xtrade.android.R;
 import com.xtrade.android.object.Client;
 import com.xtrade.android.provider.DatabaseContract;
+import com.xtrade.android.util.EventConstant;
 
-public class ClientAdapter extends BaseAdapter {
+public class ClientAdapter extends BaseAdapter implements EventConstant {
 
 	private Context context;
 	private List<Client> clientList;
-	private final int UPDATE_REQUEST_CODE = 101;
 
 	public ClientAdapter(Context _context, List<Client> _clientList) {
 		this.context = _context;
@@ -51,9 +51,9 @@ public class ClientAdapter extends BaseAdapter {
 		btnEditClient.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
 				Intent intent = new Intent(context, ClientActivity.class);
-				intent.putExtra("ACTION_TYPE", UPDATE_REQUEST_CODE);
+				intent.putExtra("ACTION_TYPE", CLIENT_UPDATE_REQUEST_CODE);
 				intent.putExtra(DatabaseContract.ClientColumns.CLIENT_ID, client.getId());
-				((BaseActivity) context).startActivityForResult(intent, UPDATE_REQUEST_CODE);
+				((BaseActivity) context).startActivityForResult(intent, CLIENT_UPDATE_REQUEST_CODE);
 			}
 		});
 

@@ -18,13 +18,11 @@ import com.actionbarsherlock.view.MenuItem;
 import com.xtrade.android.provider.DatabaseContract;
 import com.xtrade.android.provider.DatabaseContract.Client;
 import com.xtrade.android.provider.DatabaseContract.ClientColumns;
+import com.xtrade.android.util.EventConstant;
 
-public class ClientActivity extends BaseActivity {
+public class ClientActivity extends BaseActivity implements EventConstant {
 
 	private Intent intent;
-	
-	private final int CREATE_REQUEST_CODE = 100;
-	private final int UPDATE_REQUEST_CODE = 101;
 	
 	@Override
 	public void onCreate(Bundle savedIntanceState) {
@@ -64,6 +62,8 @@ public class ClientActivity extends BaseActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem menuItem) {
+		super.onOptionsItemSelected(menuItem);
+		
 		switch(menuItem.getItemId()) {
 		case R.id.mniSaveClient:
 			// We get the ACTION_TYPE extra which tells us what operation we must perform (Save or Update)
@@ -90,10 +90,10 @@ public class ClientActivity extends BaseActivity {
 				// We build a result variable which will be set on default value for canceled
 				int result = RESULT_CANCELED;
 
-				if (extra == CREATE_REQUEST_CODE) {
+				if (extra == CLIENT_CREATE_REQUEST_CODE) {
 					clientUri = getContentResolver().insert(DatabaseContract.Client.CONTENT_URI, contentValues);
 					result = clientUri == null ? RESULT_CANCELED : RESULT_OK;
-				} else if (extra == UPDATE_REQUEST_CODE) {
+				} else if (extra == CLIENT_UPDATE_REQUEST_CODE) {
 					String clientId = intent.getStringExtra(DatabaseContract.ClientColumns.CLIENT_ID);
 					clientUri = Client.buildUri(clientId);
 					result = getContentResolver().update(clientUri, contentValues, null, null) == 0 ? RESULT_CANCELED : RESULT_OK;
@@ -115,8 +115,8 @@ public class ClientActivity extends BaseActivity {
 	    private final Class<T> mClass;
 
 		public ClientTabListener(String tag,Class<T> mClass) {
-			this.tag=tag;
-			this.mClass=mClass;
+			this.tag = tag;
+			this.mClass = mClass;
 		}
 
 		@Override

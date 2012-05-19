@@ -16,12 +16,11 @@ import com.actionbarsherlock.view.MenuItem;
 import com.xtrade.android.adapter.ClientAdapter;
 import com.xtrade.android.provider.ClientTranslator;
 import com.xtrade.android.util.Debug;
+import com.xtrade.android.util.EventConstant;
 
-public class ClientListActivity extends BaseActivity {
+public class ClientListActivity extends BaseActivity implements EventConstant {
 
 	private BaseAdapter adapter;
-	private final int CREATE_REQUEST_CODE = 100;
-	private final int UPDATE_REQUEST_CODE = 101;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -51,7 +50,7 @@ public class ClientListActivity extends BaseActivity {
 			return;
 		}
 
-		if (resultCode == RESULT_OK && (requestCode == CREATE_REQUEST_CODE || requestCode == UPDATE_REQUEST_CODE)) {
+		if (resultCode == RESULT_OK && (requestCode == CLIENT_CREATE_REQUEST_CODE || requestCode == CLIENT_UPDATE_REQUEST_CODE)) {
 			Cursor cursor = getContentResolver().query(com.xtrade.android.provider.DatabaseContract.Client.CONTENT_URI, null, null, null, null);
 			((ClientAdapter) adapter).setClientList(new ClientTranslator().translate(cursor));
 		}
@@ -66,11 +65,13 @@ public class ClientListActivity extends BaseActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem menuItem) {
+		super.onOptionsItemSelected(menuItem);
+		
 		switch (menuItem.getItemId()) {
 		case R.id.mniNewClient:
 			Intent intent = new Intent(this, ClientActivity.class);
-			intent.putExtra("ACTION_TYPE", CREATE_REQUEST_CODE);
-			startActivityForResult(intent, CREATE_REQUEST_CODE);
+			intent.putExtra("ACTION_TYPE", CLIENT_CREATE_REQUEST_CODE);
+			startActivityForResult(intent, CLIENT_CREATE_REQUEST_CODE);
 			return true;
 		default:
 			return super.onOptionsItemSelected(menuItem);

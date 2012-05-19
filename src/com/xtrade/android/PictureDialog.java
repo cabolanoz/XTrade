@@ -13,9 +13,10 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.xtrade.android.util.EventConstant;
 import com.xtrade.android.util.Settings;
 
-public class PictureDialog extends DialogFragment {
+public class PictureDialog extends DialogFragment implements EventConstant {
 
 	private static PictureDialog instance;
 	private Fragment fragment;
@@ -35,8 +36,7 @@ public class PictureDialog extends DialogFragment {
 		super.onCreate(savedInstanceState);
 	}
 
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
 		View view = inflater.inflate(R.layout.client_photo, container, false);
 
@@ -45,8 +45,7 @@ public class PictureDialog extends DialogFragment {
 			public void onClick(View view) {
 				Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 				intent.setType("image/*");
-				fragment.startActivityForResult(intent,
-						ClientGeneralFragment.GALLERY_REQUEST);
+				fragment.startActivityForResult(intent, CLIENT_PHOTO_GALLERY_REQUEST);
 
 				// Disposing the current dialog
 				dismiss();
@@ -57,12 +56,9 @@ public class PictureDialog extends DialogFragment {
 		btnFromCamera.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
 				//TODO: solve bug http://code.google.com/p/android/issues/detail?id=1480 high resolution image in some devices failes
-				Intent intent = new Intent(
-						android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-				intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT,
-						Uri.fromFile(new File(Settings.TEMPFILE_PATH)));
-				startActivityForResult(intent,
-						ClientGeneralFragment.CAMERA_REQUEST);
+				Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+				intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Settings.TEMPFILE_PATH)));
+				startActivityForResult(intent, CLIENT_PHOTO_CAMERA_REQUEST);
 
 				// Disposing the current dialog
 				dismiss();

@@ -25,5 +25,6 @@
     <string name="today">Today</string>
     <string name="from_gallery">From Gallery</string>
     <string name="from_camera">From Camera</string>
+    <string name="classficationname">Classification Name</string>
 
 </resources>
