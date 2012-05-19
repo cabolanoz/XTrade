@@ -10,24 +10,24 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:src="@drawable/ic_launcher" />
-
+
     <TextView
         android:id="@+id/tvwClientName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvwClientPhone"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/btnEditClient"
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
+
     <TextView
         android:id="@+id/tvwClientPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvwClientName"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/tvwClientName"
+        android:layout_toRightOf="@+id/ivwClientPhoto"
         android:text="Medium Text"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -47,6 +47,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/tvwClientAddress"
-        android:background="@drawable/modify_24x24" />
+        android:background="@drawable/modify" />
 
 </RelativeLayout>

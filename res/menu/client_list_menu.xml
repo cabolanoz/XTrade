@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item android:id="@+id/mniNewClient" 
-        android:icon="@drawable/clientplus_24x24"
+        android:icon="@drawable/clientplus"
         android:title="@string/new_client"
         android:titleCondensed="@string/new_client"
         android:showAsAction="always" />    

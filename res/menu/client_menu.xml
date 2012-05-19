@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     
     <item android:id="@+id/mniSaveClient" 
-        android:icon="@drawable/save_24x24"
+        android:icon="@drawable/save"
         android:title="@string/save"
         android:titleCondensed="@string/save"
         android:showAsAction="always" />    

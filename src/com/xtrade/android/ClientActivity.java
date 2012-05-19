@@ -40,14 +40,14 @@ public class ClientActivity extends BaseActivity {
 
 		// General client tab
 		Tab generalTab = actionBar.newTab();
-		generalTab.setIcon(R.drawable.clientgeneral_24x24);
+		generalTab.setIcon(R.drawable.clientgeneral);
 		generalTab.setTag("general");
 		generalTab.setTabListener(new ClientTabListener<ClientGeneralFragment>("General", ClientGeneralFragment.class));
 		actionBar.addTab(generalTab);
 
 		// Detail client tab
 		Tab detailTab = actionBar.newTab();
-		detailTab.setIcon(R.drawable.clientdetail_24x24);
+		detailTab.setIcon(R.drawable.clientdetail);
 		detailTab.setTag("detail");
 		detailTab.setTabListener(new ClientTabListener<ClientDetailFragment>("Detail", ClientDetailFragment.class));
 		actionBar.addTab(detailTab);

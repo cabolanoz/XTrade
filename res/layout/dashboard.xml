@@ -6,21 +6,28 @@
     <Button
         android:id="@+id/buttonClient"
         style="@style/DashboardButton"
+        android:drawableTop="@drawable/ic_client"
         android:text="@string/client" />
 
     <Button
         android:id="@+id/buttonEvent"
         style="@style/DashboardButton"
+        android:drawableTop="@drawable/ic_client"
         android:text="@string/events" />
 
     <Button
         android:id="@+id/buttonPerformance"
         style="@style/DashboardButton"
+        android:drawableTop="@drawable/ic_client"
         android:text="@string/performance" />
 
     <Button
         android:id="@+id/buttonToday"
         style="@style/DashboardButton"
+        android:drawableTop="@drawable/ic_client"
         android:text="@string/today" />
+    
+    
+    
 
 </com.xtrade.android.widget.DashboardLayout>
