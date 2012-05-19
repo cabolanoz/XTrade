@@ -1,15 +1,15 @@
 package com.xtrade.android;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+import com.actionbarsherlock.view.Menu;
 import com.xtrade.android.util.ActionConstant;
 
-public class XTradeActivity extends Activity {
+public class XTradeActivity extends BaseActivity {
 
 	/** Called when the activity is first created. */
 	@Override
@@ -23,6 +23,14 @@ public class XTradeActivity extends Activity {
 				startActivity(new Intent(ActionConstant.CLIENT_LIST));
 			}
 		});
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu){
+		getSupportMenuInflater().inflate(R.menu.main, menu);
+		
+		return super.onCreateOptionsMenu(menu);
+		
 	}
 	
 }
