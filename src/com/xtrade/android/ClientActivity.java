@@ -69,21 +69,24 @@ public class ClientActivity extends BaseActivity implements EventConstant {
 			// We get the ACTION_TYPE extra which tells us what operation we must perform (Save or Update)
 			int extra = intent.getIntExtra("ACTION_TYPE", -1);
 			
-			EditText txtClientName = (EditText) findViewById(R.id.txtClientName);
-			EditText txtClientPhone = (EditText) findViewById(R.id.txtClientPhone);
-			EditText txtClientAddress = (EditText) findViewById(R.id.txtClientAddress);
+			EditText txtTraderDescription = (EditText) findViewById(R.id.etxTraderDescription);
+			EditText txtTraderWebsite = (EditText) findViewById(R.id.etxTraderWebsite);
+			EditText txtTraderLocation = (EditText) findViewById(R.id.etxTraderLocation);
+			EditText txtTraderNote = (EditText) findViewById(R.id.etxTraderNote);
 			
-			String clientName = txtClientName.getText().toString();
-			String clientPhone = txtClientPhone.getText().toString();
-			String clientAddress = txtClientAddress.getText().toString();
+			String traderDescription = txtTraderDescription.getText().toString();
+			String traderWebsite = txtTraderWebsite.getText().toString();
+			String traderLocation = txtTraderLocation.getText().toString();
+			String traderNote = txtTraderNote.getText().toString();
 
 			// Evaluate if the EditText's content is empty or not
-			if (!StringUtils.isEmpty(clientName) && !StringUtils.isEmpty(clientPhone) && !StringUtils.isEmpty(clientAddress)) {
+			if (!StringUtils.isEmpty(traderDescription) && !StringUtils.isEmpty(traderWebsite) && !StringUtils.isEmpty(traderLocation) && !StringUtils.isEmpty(traderNote)) {
 				ContentValues contentValues = new ContentValues();
 
-				contentValues.put(ClientColumns.NAME, clientName);
-				contentValues.put(ClientColumns.PHONE, clientPhone);
-				contentValues.put(ClientColumns.ADDRESS, clientAddress);
+				contentValues.put(ClientColumns.DESCRIPTION, traderDescription);
+				contentValues.put(ClientColumns.WEBSITE, traderWebsite);
+				contentValues.put(ClientColumns.LOCATION, traderLocation);
+				contentValues.put(ClientColumns.NOTE, traderNote);
 
 				Uri clientUri = null;
 
@@ -94,7 +97,7 @@ public class ClientActivity extends BaseActivity implements EventConstant {
 					clientUri = getContentResolver().insert(DatabaseContract.Client.CONTENT_URI, contentValues);
 					result = clientUri == null ? RESULT_CANCELED : RESULT_OK;
 				} else if (extra == CLIENT_UPDATE_REQUEST_CODE) {
-					String clientId = intent.getStringExtra(DatabaseContract.ClientColumns.CLIENT_ID);
+					String clientId = intent.getStringExtra(DatabaseContract.ClientColumns.TRADER_ID);
 					clientUri = Client.buildUri(clientId);
 					result = getContentResolver().update(clientUri, contentValues, null, null) == 0 ? RESULT_CANCELED : RESULT_OK;
 				}

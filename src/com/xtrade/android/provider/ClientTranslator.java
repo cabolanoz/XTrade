@@ -16,9 +16,10 @@ public class ClientTranslator {
 		while (cursor.moveToNext()) {
 			com.xtrade.android.object.Client client = new com.xtrade.android.object.Client(
 					cursor.getString(cursor.getColumnIndex(BaseColumns._ID)),
-					cursor.getString(cursor.getColumnIndex(Client.NAME)),
-					cursor.getString(cursor.getColumnIndex(Client.ADDRESS)),
-					cursor.getString(cursor.getColumnIndex(Client.PHONE)));
+					cursor.getString(cursor.getColumnIndex(Client.DESCRIPTION)),
+					cursor.getString(cursor.getColumnIndex(Client.WEBSITE)),
+					cursor.getString(cursor.getColumnIndex(Client.LOCATION)),
+					cursor.getString(cursor.getColumnIndex(Client.NOTE)));
 
 			clients.add(client);
 		}

@@ -1,38 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<LinearLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-
+    android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android">
+
     <ImageButton
-        android:id="@+id/txtClientPhoto"
+        android:id="@+id/ivwTraderPhoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@android:drawable/alert_light_frame" />
-
+
     <EditText
-        android:id="@+id/txtClientName"
+        android:id="@+id/etxTraderDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/clientname"
+        android:hint="@string/traderdescription"
         android:inputType="textPersonName" >
 
         <requestFocus />
     </EditText>
-
+
     <EditText
-        android:id="@+id/txtClientPhone"
+        android:id="@+id/etxTraderWebsite"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/clientphone"
-        android:inputType="phone" />
-
+        android:ems="10"
+        android:hint="@string/traderwebsite" />
+
     <EditText
-        android:id="@+id/txtClientAddress"
+        android:id="@+id/etxTraderLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/clientaddress"
-        android:inputType="textPostalAddress"
-        android:layout_weight="1" />
+        android:ems="10"
+        android:hint="@string/traderlocation" />
+
+    <EditText
+        android:id="@+id/etxTraderNote"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:ems="10"
+        android:hint="@string/tradernote"
+        android:inputType="textMultiLine" />
 
 </LinearLayout>

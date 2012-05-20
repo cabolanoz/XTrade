@@ -3,15 +3,17 @@ package com.xtrade.android.object;
 public class Client {
 
 	private String id;
-	private String name;
-	private String address;
-	private String phone;
+	private String description;
+	private String website;
+	private String location;
+	private String note;
 
-	public Client(String id, String name, String address, String phone) {
+	public Client(String id, String description, String website, String location, String note) {
 		this.id = id;
-		this.name = name;
-		this.address = address;
-		this.phone = phone;
+		this.description = description;
+		this.website = website;
+		this.location = location;
+		this.note = note;
 	}
 
 	public String getId() {
@@ -22,28 +24,36 @@ public class Client {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getWebsite() {
+		return website;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setWebsite(String website) {
+		this.website = website;
 	}
 
-	public String getPhone() {
-		return phone;
+	public String getLocation() {
+		return location;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getNote() {
+		return note;
+	}
+
+	public void setNote(String note) {
+		this.note = note;
 	}
 
 }

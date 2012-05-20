@@ -34,10 +34,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		// Client table
 		db.execSQL("CREATE TABLE " + Tables.CLIENT + " (" + BaseColumns._ID
-				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + ClientColumns.CLIENT_ID + " TEXT, "
-				+ ClientColumns.NAME + " TEXT, "
-				+ ClientColumns.PHONE + " TEXT, "
-				+ ClientColumns.ADDRESS + " TEXT)");
+				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + ClientColumns.TRADER_ID + " TEXT, "
+				+ ClientColumns.DESCRIPTION + " TEXT, "
+				+ ClientColumns.WEBSITE + " TEXT, "
+				+ ClientColumns.LOCATION + " TEXT, "
+				+ ClientColumns.NOTE + " TEXT)");
 		
 		// Classification table
 		db.execSQL("CREATE TABLE " + Tables.CLASSIFICATION + " (" + BaseColumns._ID

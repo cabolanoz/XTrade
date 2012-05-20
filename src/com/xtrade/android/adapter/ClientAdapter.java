@@ -38,21 +38,18 @@ public class ClientAdapter extends BaseAdapter implements EventConstant {
 
 		final Client client = getClientList().get(position);
 		
-		TextView tvwClientName = (TextView) convertView.findViewById(R.id.tvwClientName);
-		tvwClientName.setText(client.getName());
+		TextView tvwTraderDescription = (TextView) convertView.findViewById(R.id.tvwTraderDescription);
+		tvwTraderDescription.setText(client.getDescription());
 
-		TextView tvwClientPhone = (TextView) convertView.findViewById(R.id.tvwClientPhone);
-		tvwClientPhone.setText(client.getPhone());
-
-		TextView tvwClientAddress = (TextView) convertView.findViewById(R.id.tvwClientAddress);
-		tvwClientAddress.setText(client.getAddress());
+		TextView tvwTraderWebsite = (TextView) convertView.findViewById(R.id.tvwTraderWebsite);
+		tvwTraderWebsite.setText(client.getWebsite());
 
 		Button btnEditClient = (Button) convertView.findViewById(R.id.btnEditClient);
 		btnEditClient.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
 				Intent intent = new Intent(context, ClientActivity.class);
 				intent.putExtra("ACTION_TYPE", CLIENT_UPDATE_REQUEST_CODE);
-				intent.putExtra(DatabaseContract.ClientColumns.CLIENT_ID, client.getId());
+				intent.putExtra(DatabaseContract.ClientColumns.TRADER_ID, client.getId());
 				((BaseActivity) context).startActivityForResult(intent, CLIENT_UPDATE_REQUEST_CODE);
 			}
 		});

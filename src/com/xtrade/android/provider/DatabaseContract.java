@@ -8,10 +8,11 @@ public class DatabaseContract {
 	public static final String REFRESH_PARAM = "refresh";
 
 	public interface ClientColumns {
-		String CLIENT_ID = "ClientId";
-		String NAME = "Name";
-		String PHONE = "Phone";
-		String ADDRESS = "Address";
+		String TRADER_ID = "TraderId";
+		String DESCRIPTION = "Description";
+		String WEBSITE = "Website";
+		String LOCATION = "Location";
+		String NOTE = "Note";
 	}
 	
 	interface ClassificationColumns {
@@ -49,7 +50,7 @@ public class DatabaseContract {
 		/**
 		 * Default sorting for this entity
 		 * */
-		public static final String DEFAULT_SORT = CLIENT_ID + " ASC";
+		public static final String DEFAULT_SORT = TRADER_ID + " ASC";
 		
 		public static Uri buildUri(String clientId) {
 			return CONTENT_URI.buildUpon().appendPath(clientId).build();
