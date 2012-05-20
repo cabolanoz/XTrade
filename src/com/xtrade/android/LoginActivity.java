@@ -107,8 +107,6 @@ public class LoginActivity extends BaseActivity {
 		
 	}
 	
-	
-	
 	public class LoginBroadcastReceiver extends BroadcastReceiver {
 
 		@Override

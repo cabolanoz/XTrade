@@ -30,7 +30,6 @@ public class XTradeActivity extends BaseActivity {
 		getSupportMenuInflater().inflate(R.menu.main, menu);
 		
 		return super.onCreateOptionsMenu(menu);
-		
 	}
 	
 }

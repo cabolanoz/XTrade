@@ -2,7 +2,6 @@ package com.xtrade.android;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -19,14 +18,10 @@ import android.widget.ImageButton;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.xtrade.android.provider.DatabaseContract;
 import com.xtrade.android.util.Debug;
+import com.xtrade.android.util.EventConstant;
 import com.xtrade.android.util.Settings;
 
-public class ClientGeneralFragment extends SherlockFragment {
-
-	private static final int CREATE_REQUEST_CODE = 100;
-	private static final int UPDATE_REQUEST_CODE = 101;
-	public static final int GALLERY_REQUEST = 102;
-	public static final int CAMERA_REQUEST = 103;
+public class ClientGeneralFragment extends SherlockFragment implements EventConstant {
 	
 	private ImageButton txtClientPhoto;
 	private EditText txtClientName;
@@ -37,7 +32,8 @@ public class ClientGeneralFragment extends SherlockFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View fragmentView = inflater.inflate(R.layout.client_tab_general, container, false);
 		
-		Intent intent=getActivity().getIntent();
+		// We obtain the intent which calls the activity
+		Intent intent = getActivity().getIntent();
 		
 		// We get the ACTION_TYPE extra which tells us what operation we must perform (Save or Update)
 		int extra = intent.getIntExtra("ACTION_TYPE", -1);
@@ -62,14 +58,14 @@ public class ClientGeneralFragment extends SherlockFragment {
 		txtClientAddress = (EditText) fragmentView.findViewById(R.id.txtClientAddress);
 
 		// Setting default values while we're on developer mode
-		if (Settings.DEBUG && extra == CREATE_REQUEST_CODE) {
+		if (Settings.DEBUG && extra == CLIENT_CREATE_REQUEST_CODE) {
 			txtClientName.setText("Loren ipsum");
 			txtClientPhone.setText("222222");
 			txtClientAddress.setText("Aenean lacinia bibendum nulla sed consectetur.");
 		}
 
 		// If the ACTION_TYPE extra is for Updating the client info, we get the client date from database, then we set it on corresponding EditTexts
-		if (extra == UPDATE_REQUEST_CODE)
+		if (extra == CLIENT_UPDATE_REQUEST_CODE)
 			if (extra != -1 && intent.getStringExtra(DatabaseContract.ClientColumns.CLIENT_ID) != null && !"".equals(intent.getStringExtra(DatabaseContract.ClientColumns.CLIENT_ID))) {
 				String clientId = intent.getStringExtra(DatabaseContract.ClientColumns.CLIENT_ID);
 
@@ -90,21 +86,18 @@ public class ClientGeneralFragment extends SherlockFragment {
 	
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
 		
-		if (resultCode == FragmentActivity.RESULT_OK){
-			if (txtClientPhoto != null){
-				
-				if (requestCode == GALLERY_REQUEST)
+		if (resultCode == FragmentActivity.RESULT_OK) {
+			if (txtClientPhoto != null) {
+				if (requestCode == CLIENT_PHOTO_GALLERY_REQUEST)
 					txtClientPhoto.setImageURI(data.getData());
-				else if (requestCode == CAMERA_REQUEST){
-					Debug.info(this, "Ok this dialog "+data.getExtras());	
+				else if (requestCode == CLIENT_PHOTO_CAMERA_REQUEST) {
+					Debug.info(this, "Ok this dialog " + data.getExtras());	
 					//txtClientPhoto.setImageBitmap((Bitmap) data.getExtras().get("data"));
 				}
 			}
-			
 		}
 	}
-	 
-
 	
 }
