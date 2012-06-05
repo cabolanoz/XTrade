@@ -6,7 +6,7 @@ public class ClientDetailActivity extends BaseActivity {
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.client_detail);
+		setContentView(R.layout.trader_detail);
 	}
 
 }

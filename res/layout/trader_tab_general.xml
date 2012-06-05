@@ -2,42 +2,41 @@
 <LinearLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android">
-
+
     <ImageButton
         android:id="@+id/ivwTraderPhoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@android:drawable/alert_light_frame" />
-
+        android:src="@android:drawable/alert_light_frame" />
     <EditText
-        android:id="@+id/etxTraderDescription"
+        android:id="@+id/etxTraderName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/traderdescription"
+        android:hint="@string/tradername"
         android:inputType="textPersonName" >
-
         <requestFocus />
-    </EditText>
-
+    </EditText>
     <EditText
-        android:id="@+id/etxTraderWebsite"
+        android:id="@+id/etxTraderAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/traderwebsite" />
-
+        android:hint="@string/traderaddress"
+        android:inputType="textMultiLine" />
     <EditText
-        android:id="@+id/etxTraderLocation"
+        android:id="@+id/etxTraderLocationX"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/traderlocation" />
-
+        android:hint="@string/traderposx" />
+    <EditText
+        android:id="@+id/etxTraderLocationY"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/traderposy" />
+    
     <EditText
         android:id="@+id/etxTraderNote"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:ems="10"
         android:hint="@string/tradernote"
         android:inputType="textMultiLine" />
 

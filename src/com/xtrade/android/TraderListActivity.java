@@ -13,26 +13,26 @@ import android.widget.Toast;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.xtrade.android.adapter.ClientAdapter;
-import com.xtrade.android.provider.ClientTranslator;
+import com.xtrade.android.adapter.TraderAdapter;
+import com.xtrade.android.provider.TraderTranslator;
 import com.xtrade.android.util.Debug;
 import com.xtrade.android.util.EventConstant;
 
-public class ClientListActivity extends BaseActivity implements EventConstant {
+public class TraderListActivity extends BaseActivity implements EventConstant {
 
 	private BaseAdapter adapter;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.client_list);
+		setContentView(R.layout.trader_list);
 		
 		// load data from database
-		Cursor cursor = getContentResolver().query(com.xtrade.android.provider.DatabaseContract.Client.CONTENT_URI, null, null, null, null);
+		Cursor cursor = getContentResolver().query(com.xtrade.android.provider.DatabaseContract.Trader.CONTENT_URI, null, null, null, null);
 
-		adapter = new ClientAdapter(this, new ClientTranslator().translate(cursor));
+		adapter = new TraderAdapter(this, new TraderTranslator().translate(cursor));
 
-		ListView listView = (ListView) findViewById(R.id.lvwClient);
+		ListView listView = (ListView) findViewById(R.id.lvwTrader);
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -50,16 +50,16 @@ public class ClientListActivity extends BaseActivity implements EventConstant {
 			return;
 		}
 
-		if (resultCode == RESULT_OK && (requestCode == CLIENT_CREATE_REQUEST_CODE || requestCode == CLIENT_UPDATE_REQUEST_CODE)) {
-			Cursor cursor = getContentResolver().query(com.xtrade.android.provider.DatabaseContract.Client.CONTENT_URI, null, null, null, null);
-			((ClientAdapter) adapter).setClientList(new ClientTranslator().translate(cursor));
+		if (resultCode == RESULT_OK && (requestCode == TRADER_CREATE_REQUEST_CODE || requestCode == TRADER_UPDATE_REQUEST_CODE)) {
+			Cursor cursor = getContentResolver().query(com.xtrade.android.provider.DatabaseContract.Trader.CONTENT_URI, null, null, null, null);
+			((TraderAdapter) adapter).setTraderList(new TraderTranslator().translate(cursor));
 		}
 	}
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
-		inflater.inflate(R.menu.client_list_menu, menu);
+		inflater.inflate(R.menu.trader_list_menu, menu);
 		return true;
 	}
 
@@ -68,10 +68,10 @@ public class ClientListActivity extends BaseActivity implements EventConstant {
 		super.onOptionsItemSelected(menuItem);
 		
 		switch (menuItem.getItemId()) {
-		case R.id.mniNewClient:
-			Intent intent = new Intent(this, ClientActivity.class);
-			intent.putExtra("ACTION_TYPE", CLIENT_CREATE_REQUEST_CODE);
-			startActivityForResult(intent, CLIENT_CREATE_REQUEST_CODE);
+		case R.id.mniNewTrader:
+			Intent intent = new Intent(this, TraderActivity.class);
+			intent.putExtra("ACTION_TYPE", TRADER_CREATE_REQUEST_CODE);
+			startActivityForResult(intent, TRADER_CREATE_REQUEST_CODE);
 			return true;
 		default:
 			return super.onOptionsItemSelected(menuItem);

@@ -21,17 +21,18 @@ import com.xtrade.android.util.Debug;
 import com.xtrade.android.util.EventConstant;
 import com.xtrade.android.util.Settings;
 
-public class ClientGeneralFragment extends SherlockFragment implements EventConstant {
+public class TraderGeneralFragment extends SherlockFragment implements EventConstant {
 	
 	private ImageButton txtTraderPhoto;
-	private EditText txtTraderDescription;
-	private EditText txtTraderWebsite;
-	private EditText txtTraderLocation;
+	private EditText txtTraderName;
+	private EditText txtTraderAddress;
+	private EditText txtTraderLocationX;
+	private EditText txtTraderLocationY;
 	private EditText txtTraderNote;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View fragmentView = inflater.inflate(R.layout.client_tab_general, container, false);
+		View fragmentView = inflater.inflate(R.layout.trader_tab_general, container, false);
 		
 		// We obtain the intent which calls the activity
 		Intent intent = getActivity().getIntent();
@@ -49,37 +50,40 @@ public class ClientGeneralFragment extends SherlockFragment implements EventCons
 					ft.remove(f);
 				ft.addToBackStack(null);
 				
-				DialogFragment dialogFragment = PictureDialog.newInstance(ClientGeneralFragment.this);
+				DialogFragment dialogFragment = PictureDialog.newInstance(TraderGeneralFragment.this);
 				dialogFragment.show(ft, "picture_dialog");
 			}
-		});
+		});	
 		
-		txtTraderDescription = (EditText) fragmentView.findViewById(R.id.etxTraderDescription);
-		txtTraderWebsite = (EditText) fragmentView.findViewById(R.id.etxTraderWebsite);
-		txtTraderLocation = (EditText) fragmentView.findViewById(R.id.etxTraderLocation);
-		txtTraderNote = (EditText) fragmentView.findViewById(R.id.etxTraderNote);		
+		txtTraderName = (EditText) fragmentView.findViewById(R.id.etxTraderName);
+		txtTraderAddress = (EditText) fragmentView.findViewById(R.id.etxTraderAddress);
+		txtTraderLocationX = (EditText) fragmentView.findViewById(R.id.etxTraderLocationX);
+		txtTraderLocationY = (EditText) fragmentView.findViewById(R.id.etxTraderLocationY);
+		txtTraderNote = (EditText) fragmentView.findViewById(R.id.etxTraderNote);
 
 		// Setting default values while we're on developer mode
-		if (Settings.DEBUG && extra == CLIENT_CREATE_REQUEST_CODE) {
-			txtTraderDescription.setText("Loren ipsum");
-			txtTraderWebsite.setText("www.xtrade.com");
-			txtTraderLocation.setText("42, 26");
-			txtTraderNote.setText("Aenean lacinia bibendum nulla sed consectetur.");
+		if (Settings.DEBUG && extra == TRADER_CREATE_REQUEST_CODE) {
+			txtTraderName.setText("Coca-Cola");
+			txtTraderAddress.setText("Aenean lacinia bibendum nulla sed consectetur");
+			txtTraderLocationX.setText("42");
+			txtTraderLocationY.setText("26");
+			txtTraderNote.setText("Aenean lacinia bibendum nulla sed consectetur");
 		}
 
 		// If the ACTION_TYPE extra is for Updating the client info, we get the client date from database, then we set it on corresponding EditTexts
-		if (extra == CLIENT_UPDATE_REQUEST_CODE)
-			if (extra != -1 && intent.getStringExtra(DatabaseContract.ClientColumns.TRADER_ID) != null && !"".equals(intent.getStringExtra(DatabaseContract.ClientColumns.TRADER_ID))) {
-				String clientId = intent.getStringExtra(DatabaseContract.ClientColumns.TRADER_ID);
+		if (extra == TRADER_UPDATE_REQUEST_CODE)
+			if (extra != -1 && intent.getStringExtra(DatabaseContract.TraderColumns.TRADER_ID) != null && !"".equals(intent.getStringExtra(DatabaseContract.TraderColumns.TRADER_ID))) {
+				String traderId = intent.getStringExtra(DatabaseContract.TraderColumns.TRADER_ID);
 
-				CursorLoader cursorLoader = new CursorLoader(getActivity().getBaseContext(), DatabaseContract.Client.buildUri(clientId), null, null, null, null);
+				CursorLoader cursorLoader = new CursorLoader(getActivity().getBaseContext(), DatabaseContract.Trader.buildUri(traderId), null, null, null, null);
 				Cursor cursor = cursorLoader.loadInBackground();
 				if (cursor != null) {
 					if (cursor.moveToNext()) {
-						txtTraderDescription.setText(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.ClientColumns.DESCRIPTION)));
-						txtTraderWebsite.setText(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.ClientColumns.WEBSITE)));
-						txtTraderLocation.setText(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.ClientColumns.LOCATION)));
-						txtTraderNote.setText(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.ClientColumns.NOTE)));
+						txtTraderName.setText(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.TraderColumns.NAME)));
+						txtTraderAddress.setText(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.TraderColumns.ADDRESS)));
+						txtTraderLocationX.setText(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.TraderColumns.POSX)));
+						txtTraderLocationY.setText(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.TraderColumns.POSY)));
+						txtTraderNote.setText(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.TraderColumns.NOTE)));
 					}
 					cursor.close();
 				}
@@ -94,9 +98,9 @@ public class ClientGeneralFragment extends SherlockFragment implements EventCons
 		
 		if (resultCode == FragmentActivity.RESULT_OK) {
 			if (txtTraderPhoto != null) {
-				if (requestCode == CLIENT_PHOTO_GALLERY_REQUEST)
+				if (requestCode == TRADER_PHOTO_GALLERY_REQUEST)
 					txtTraderPhoto.setImageURI(data.getData());
-				else if (requestCode == CLIENT_PHOTO_CAMERA_REQUEST) {
+				else if (requestCode == TRADER_PHOTO_CAMERA_REQUEST) {
 					Debug.info(this, "Ok this dialog " + data.getExtras());	
 					//txtClientPhoto.setImageBitmap((Bitmap) data.getExtras().get("data"));
 				}

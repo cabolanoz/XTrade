@@ -38,14 +38,14 @@ public class PictureDialog extends DialogFragment implements EventConstant {
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
-		View view = inflater.inflate(R.layout.client_photo, container, false);
+		View view = inflater.inflate(R.layout.trader_photo, container, false);
 
 		Button btnFromGallery = (Button) view.findViewById(R.id.btnFromGallery);
 		btnFromGallery.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
 				Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 				intent.setType("image/*");
-				fragment.startActivityForResult(intent, CLIENT_PHOTO_GALLERY_REQUEST);
+				fragment.startActivityForResult(intent, TRADER_PHOTO_GALLERY_REQUEST);
 
 				// Disposing the current dialog
 				dismiss();
@@ -58,7 +58,7 @@ public class PictureDialog extends DialogFragment implements EventConstant {
 				//TODO: solve bug http://code.google.com/p/android/issues/detail?id=1480 high resolution image in some devices failes
 				Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 				intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Settings.TEMPFILE_PATH)));
-				startActivityForResult(intent, CLIENT_PHOTO_CAMERA_REQUEST);
+				startActivityForResult(intent, TRADER_PHOTO_CAMERA_REQUEST);
 
 				// Disposing the current dialog
 				dismiss();

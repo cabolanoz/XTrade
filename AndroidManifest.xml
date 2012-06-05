@@ -33,14 +33,14 @@
              </intent-filter>
          </activity>
         
-         <activity android:name=".ClientListActivity">
+         <activity android:name=".TraderListActivity">
              <intent-filter>
              <action android:name="com.xtrade.android.CLIENT_LIST_ACTION" />
              <category android:name="android.intent.category.DEFAULT" />
              </intent-filter>
          </activity>
          
-         <activity android:name=".ClientActivity">
+         <activity android:name=".TraderActivity">
              <intent-filter>
                  <action android:name="com.xtrade.android.CLIENT_ACTION" />
                  <category android:name="android.intent.category.DEFAULT" />

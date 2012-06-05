@@ -4,10 +4,10 @@
     android:layout_height="fill_parent" >
 
     <Button
-        android:id="@+id/buttonClient"
+        android:id="@+id/buttonTrader"
         style="@style/DashboardButton"
         android:drawableTop="@drawable/main_client"
-        android:text="@string/client" />
+        android:text="@string/trader" />
 
     <Button
         android:id="@+id/buttonEvent"

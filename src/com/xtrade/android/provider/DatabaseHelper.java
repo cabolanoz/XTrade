@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 
 import com.xtrade.android.provider.DatabaseContract.ClassificationColumns;
-import com.xtrade.android.provider.DatabaseContract.ClientColumns;
+import com.xtrade.android.provider.DatabaseContract.TraderColumns;
 import com.xtrade.android.provider.DatabaseContract.ContactTypeColumns;
 import com.xtrade.android.provider.DatabaseContract.PositionColumns;
 
@@ -20,10 +20,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	 * 
 	 * */
 	interface Tables {
+		String TRADER = "Trader";
 		String CONTACT_TYPE = "ContactType";
 		String POSITION = "Position";
 		String CLASSIFICATION = "Classification";
-		String CLIENT = "Client";
 	}
 
 	public DatabaseHelper(Context context) {
@@ -33,12 +33,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// Client table
-		db.execSQL("CREATE TABLE " + Tables.CLIENT + " (" + BaseColumns._ID
-				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + ClientColumns.TRADER_ID + " TEXT, "
-				+ ClientColumns.DESCRIPTION + " TEXT, "
-				+ ClientColumns.WEBSITE + " TEXT, "
-				+ ClientColumns.LOCATION + " TEXT, "
-				+ ClientColumns.NOTE + " TEXT)");
+		db.execSQL("CREATE TABLE " + Tables.TRADER + " (" + BaseColumns._ID
+				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + TraderColumns.TRADER_ID + " TEXT, "
+				+ TraderColumns.NAME + " TEXT, "
+				+ TraderColumns.ADDRESS + " TEXT, "
+				+ TraderColumns.POSX + " TEXT, "
+				+ TraderColumns.POSY + " TEXT, "
+				+ TraderColumns.NOTE + " TEXT)");
 		
 		// Classification table
 		db.execSQL("CREATE TABLE " + Tables.CLASSIFICATION + " (" + BaseColumns._ID

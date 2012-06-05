@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <item android:id="@+id/mniNewClient" 
+    <item android:id="@+id/mniNewTrader" 
         android:icon="@drawable/clientplus"
-        android:title="@string/new_client"
-        android:titleCondensed="@string/new_client"
+        android:title="@string/new_trader"
+        android:titleCondensed="@string/new_trader"
         android:showAsAction="always" />    
 
 </menu>

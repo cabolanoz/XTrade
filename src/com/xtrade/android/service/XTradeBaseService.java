@@ -33,7 +33,7 @@ public class XTradeBaseService extends IntentService{
 				
 				//we resend the login intent with extra parameters
 				success=true;
-			}else if(intent.getAction().equals(ActionConstant.CLIENT_LIST)){
+			}else if(intent.getAction().equals(ActionConstant.TRADER_LIST)){
 				HttpCaller caller= HttpCallerFactory.getInstance().createCaller();
 				try {
 					caller.call(new URL("file:///android_asset/client.mock"));
@@ -46,7 +46,7 @@ public class XTradeBaseService extends IntentService{
 			intent.putExtra(LoginParameter.SUCCESS, success);
 			
 			sendBroadcast(intent);
-		}else if(intent.getAction().equals(ActionConstant.CLIENT_LIST)){
+		}else if(intent.getAction().equals(ActionConstant.TRADER_LIST)){
 			
 		}
 		

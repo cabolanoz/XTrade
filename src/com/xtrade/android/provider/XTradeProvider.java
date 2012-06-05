@@ -10,20 +10,19 @@ import android.net.Uri;
 import android.provider.BaseColumns;
 
 import com.xtrade.android.provider.DatabaseContract.Classification;
-import com.xtrade.android.provider.DatabaseContract.Client;
 import com.xtrade.android.provider.DatabaseContract.Position;
-import com.xtrade.android.util.Debug;
+import com.xtrade.android.provider.DatabaseContract.Trader;
 
 public class XTradeProvider extends ContentProvider {
 
-	public static final int CLIENT = 1000;
-	public static final int CLIENT_ID = 1001;
+	public static final int TRADER = 1000;
+	public static final int TRADER_ID = 1001;
 	public static final int CLASSIFICATION = 1002;
 	public static final int CLASSIFICATION_ID = 1003;
 	public static final int POSITION = 1004;
 	public static final int POSITION_ID = 1005;
 
-	private final static int LIMIT_CALLS = 10;
+//	private final static int LIMIT_CALLS = 10;
 
 	private DatabaseHelper databaseHelper;
 
@@ -33,8 +32,8 @@ public class XTradeProvider extends ContentProvider {
 		final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
 		final String CONTENT_AUTHORITY = DatabaseContract.CONTENT_AUTHORITY;
 
-		matcher.addURI(CONTENT_AUTHORITY, DatabaseContract.PATH_CLIENT, CLIENT);
-		matcher.addURI(CONTENT_AUTHORITY, DatabaseContract.PATH_CLIENT + "/*", CLIENT_ID);
+		matcher.addURI(CONTENT_AUTHORITY, DatabaseContract.PATH_TRADER, TRADER);
+		matcher.addURI(CONTENT_AUTHORITY, DatabaseContract.PATH_TRADER + "/*", TRADER_ID);
 		matcher.addURI(CONTENT_AUTHORITY, DatabaseContract.PATH_CLASSIFICATION, CLASSIFICATION);
 		matcher.addURI(CONTENT_AUTHORITY, DatabaseContract.PATH_CLASSIFICATION + "/*", CLASSIFICATION_ID);
 		matcher.addURI(CONTENT_AUTHORITY, DatabaseContract.PATH_POSITION, POSITION);
@@ -74,10 +73,10 @@ public class XTradeProvider extends ContentProvider {
 		final int match = uriMatcher.match(uri);
 
 		switch (match) {
-		case CLIENT:
-			return Client.CONTENT_TYPE;
-		case CLIENT_ID:
-			return Client.CONTENT_ITEM_TYPE;
+		case TRADER:
+			return Trader.CONTENT_TYPE;
+		case TRADER_ID:
+			return Trader.CONTENT_ITEM_TYPE;
 		case CLASSIFICATION:
 			return Classification.CONTENT_TYPE;
 		case CLASSIFICATION_ID:
@@ -96,10 +95,10 @@ public class XTradeProvider extends ContentProvider {
 		final SQLiteDatabase db = databaseHelper.getWritableDatabase();
 		final int match = uriMatcher.match(uri);
 		switch (match) {
-		case CLIENT:
-			db.insertOrThrow(DatabaseHelper.Tables.CLIENT, null, values);
+		case TRADER:
+			db.insertOrThrow(DatabaseHelper.Tables.TRADER, null, values);
 			getContext().getContentResolver().notifyChange(uri, null);
-			return Client.buildUri(values.getAsString(BaseColumns._ID));
+			return Trader.buildUri(values.getAsString(BaseColumns._ID));
 		case CLASSIFICATION:
 			db.insertOrThrow(DatabaseHelper.Tables.CLASSIFICATION, null, values);
 			getContext().getContentResolver().notifyChange(uri, null);
@@ -135,8 +134,8 @@ public class XTradeProvider extends ContentProvider {
 
 	private String buildSortOrder(int match, String sortOrder) {
 		if (sortOrder == null) {
-			if (match == CLIENT || match == CLIENT_ID)
-				sortOrder = Client.DEFAULT_SORT;
+			if (match == TRADER || match == TRADER_ID)
+				sortOrder = Trader.DEFAULT_SORT;
 			else if (match == CLASSIFICATION || match == CLASSIFICATION_ID)
 				sortOrder = Classification.DEFAULT_SORT;
 			else if (match == POSITION || match == POSITION_ID)
@@ -151,12 +150,12 @@ public class XTradeProvider extends ContentProvider {
 		String id = null;
 
 		switch (match) {
-		case CLIENT:
-			builder.setTables(DatabaseHelper.Tables.CLIENT);
+		case TRADER:
+			builder.setTables(DatabaseHelper.Tables.TRADER);
 			break;
-		case CLIENT_ID:
-			id = Client.getId(uri);
-			builder.setTables(DatabaseHelper.Tables.CLIENT);
+		case TRADER_ID:
+			id = Trader.getId(uri);
+			builder.setTables(DatabaseHelper.Tables.TRADER);
 			builder.appendWhere(BaseColumns._ID + " = " + id);
 			break;
 		case CLASSIFICATION:
@@ -194,16 +193,16 @@ public class XTradeProvider extends ContentProvider {
 
 		int match = uriMatcher.match(uri);
 		switch (match) {
-		case CLIENT:
-			count = db.update(DatabaseHelper.Tables.CLIENT, values, selection, selectionArgs);
+		case TRADER:
+			count = db.update(DatabaseHelper.Tables.TRADER, values, selection, selectionArgs);
 			break;
-		case CLIENT_ID:
-			id = Client.getId(uri);
+		case TRADER_ID:
+			id = Trader.getId(uri);
 			finalWhere = BaseColumns._ID + " = " + id;
 			if (selection != null)
 				finalWhere = finalWhere + " AND " + selection;
 
-			count = db.update(DatabaseHelper.Tables.CLIENT, values, finalWhere, selectionArgs);
+			count = db.update(DatabaseHelper.Tables.TRADER, values, finalWhere, selectionArgs);
 			break;
 		case CLASSIFICATION:
 			count = db.update(DatabaseHelper.Tables.CLASSIFICATION, values, selection, selectionArgs);

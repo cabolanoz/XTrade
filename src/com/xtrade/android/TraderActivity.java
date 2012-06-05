@@ -16,11 +16,11 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.xtrade.android.provider.DatabaseContract;
-import com.xtrade.android.provider.DatabaseContract.Client;
-import com.xtrade.android.provider.DatabaseContract.ClientColumns;
+import com.xtrade.android.provider.DatabaseContract.Trader;
+import com.xtrade.android.provider.DatabaseContract.TraderColumns;
 import com.xtrade.android.util.EventConstant;
 
-public class ClientActivity extends BaseActivity implements EventConstant {
+public class TraderActivity extends BaseActivity implements EventConstant {
 
 	private Intent intent;
 	
@@ -40,14 +40,14 @@ public class ClientActivity extends BaseActivity implements EventConstant {
 		Tab generalTab = actionBar.newTab();
 		generalTab.setIcon(R.drawable.clientgeneral);
 		generalTab.setTag("general");
-		generalTab.setTabListener(new ClientTabListener<ClientGeneralFragment>("General", ClientGeneralFragment.class));
+		generalTab.setTabListener(new TraderTabListener<TraderGeneralFragment>("General", TraderGeneralFragment.class));
 		actionBar.addTab(generalTab);
 
 		// Detail client tab
 		Tab detailTab = actionBar.newTab();
 		detailTab.setIcon(R.drawable.clientdetail);
 		detailTab.setTag("detail");
-		detailTab.setTabListener(new ClientTabListener<ClientDetailFragment>("Detail", ClientDetailFragment.class));
+		detailTab.setTabListener(new TraderTabListener<TraderDetailFragment>("Detail", TraderDetailFragment.class));
 		actionBar.addTab(detailTab);
 
 		// TODO: handle the lifecycle when orientation changes to save the values
@@ -56,7 +56,7 @@ public class ClientActivity extends BaseActivity implements EventConstant {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
-		inflater.inflate(R.menu.client_menu, menu);
+		inflater.inflate(R.menu.trader_menu, menu);
 		return true;
 	}
 
@@ -65,40 +65,43 @@ public class ClientActivity extends BaseActivity implements EventConstant {
 		super.onOptionsItemSelected(menuItem);
 		
 		switch(menuItem.getItemId()) {
-		case R.id.mniSaveClient:
+		case R.id.mniSaveTrader:
 			// We get the ACTION_TYPE extra which tells us what operation we must perform (Save or Update)
 			int extra = intent.getIntExtra("ACTION_TYPE", -1);
 			
-			EditText txtTraderDescription = (EditText) findViewById(R.id.etxTraderDescription);
-			EditText txtTraderWebsite = (EditText) findViewById(R.id.etxTraderWebsite);
-			EditText txtTraderLocation = (EditText) findViewById(R.id.etxTraderLocation);
+			EditText txtTraderName = (EditText) findViewById(R.id.etxTraderName);
+			EditText txtTraderAddress = (EditText) findViewById(R.id.etxTraderAddress);
+			EditText txtTraderLocationX = (EditText) findViewById(R.id.etxTraderLocationX);
+			EditText txtTraderLocationY = (EditText) findViewById(R.id.etxTraderLocationY);
 			EditText txtTraderNote = (EditText) findViewById(R.id.etxTraderNote);
 			
-			String traderDescription = txtTraderDescription.getText().toString();
-			String traderWebsite = txtTraderWebsite.getText().toString();
-			String traderLocation = txtTraderLocation.getText().toString();
+			String traderName = txtTraderName.getText().toString();
+			String traderAddress = txtTraderAddress.getText().toString();
+			String traderLocationX = txtTraderLocationX.getText().toString();
+			String traderLocationY = txtTraderLocationY.getText().toString();
 			String traderNote = txtTraderNote.getText().toString();
 
 			// Evaluate if the EditText's content is empty or not
-			if (!StringUtils.isEmpty(traderDescription) && !StringUtils.isEmpty(traderWebsite) && !StringUtils.isEmpty(traderLocation) && !StringUtils.isEmpty(traderNote)) {
+			if (!StringUtils.isEmpty(traderName) && !StringUtils.isEmpty(traderAddress) && !StringUtils.isEmpty(traderLocationX) && !StringUtils.isEmpty(traderLocationY) && !StringUtils.isEmpty(traderNote)) {
 				ContentValues contentValues = new ContentValues();
 
-				contentValues.put(ClientColumns.DESCRIPTION, traderDescription);
-				contentValues.put(ClientColumns.WEBSITE, traderWebsite);
-				contentValues.put(ClientColumns.LOCATION, traderLocation);
-				contentValues.put(ClientColumns.NOTE, traderNote);
+				contentValues.put(TraderColumns.NAME, traderName);
+				contentValues.put(TraderColumns.ADDRESS, traderAddress);
+				contentValues.put(TraderColumns.POSX, traderLocationX);
+				contentValues.put(TraderColumns.POSY, traderLocationY);
+				contentValues.put(TraderColumns.NOTE, traderNote);
 
 				Uri clientUri = null;
 
 				// We build a result variable which will be set on default value for canceled
 				int result = RESULT_CANCELED;
 
-				if (extra == CLIENT_CREATE_REQUEST_CODE) {
-					clientUri = getContentResolver().insert(DatabaseContract.Client.CONTENT_URI, contentValues);
+				if (extra == TRADER_CREATE_REQUEST_CODE) {
+					clientUri = getContentResolver().insert(DatabaseContract.Trader.CONTENT_URI, contentValues);
 					result = clientUri == null ? RESULT_CANCELED : RESULT_OK;
-				} else if (extra == CLIENT_UPDATE_REQUEST_CODE) {
-					String clientId = intent.getStringExtra(DatabaseContract.ClientColumns.TRADER_ID);
-					clientUri = Client.buildUri(clientId);
+				} else if (extra == TRADER_UPDATE_REQUEST_CODE) {
+					String clientId = intent.getStringExtra(DatabaseContract.TraderColumns.TRADER_ID);
+					clientUri = Trader.buildUri(clientId);
 					result = getContentResolver().update(clientUri, contentValues, null, null) == 0 ? RESULT_CANCELED : RESULT_OK;
 				}
 
@@ -111,13 +114,13 @@ public class ClientActivity extends BaseActivity implements EventConstant {
 		}
 	}
 
-	class ClientTabListener<T extends Fragment> implements ActionBar.TabListener {
+	class TraderTabListener<T extends Fragment> implements ActionBar.TabListener {
 
 		private Fragment fragment;
 	    private final String tag;
 	    private final Class<T> mClass;
 
-		public ClientTabListener(String tag,Class<T> mClass) {
+		public TraderTabListener(String tag, Class<T> mClass) {
 			this.tag = tag;
 			this.mClass = mClass;
 		}
@@ -127,7 +130,7 @@ public class ClientActivity extends BaseActivity implements EventConstant {
 			 // Check if the fragment is already initialized
 	        if (fragment == null) {
 	            // If not, instantiate and add it to the activity
-	            fragment = Fragment.instantiate(ClientActivity.this, mClass.getName());
+	            fragment = Fragment.instantiate(TraderActivity.this, mClass.getName());
 	            ft.add(android.R.id.content, fragment, tag);
 	        } else {
 	            // If it exists, simply attach it in order to show it

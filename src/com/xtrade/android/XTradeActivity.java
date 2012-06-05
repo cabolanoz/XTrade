@@ -17,10 +17,10 @@ public class XTradeActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.dashboard);
 		
-		Button buttonClient = (Button) findViewById(R.id.buttonClient);
+		Button buttonClient = (Button) findViewById(R.id.buttonTrader);
 		buttonClient.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
-				startActivity(new Intent(ActionConstant.CLIENT_LIST));
+				startActivity(new Intent(ActionConstant.TRADER_LIST));
 			}
 		});
 	}

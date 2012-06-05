@@ -1,17 +1,17 @@
 package com.xtrade.android.provider;
 
 import android.net.Uri;
-import android.provider.BaseColumns;
 
 public class DatabaseContract {
 
 	public static final String REFRESH_PARAM = "refresh";
 
-	public interface ClientColumns {
+	public interface TraderColumns {
 		String TRADER_ID = "TraderId";
-		String DESCRIPTION = "Description";
-		String WEBSITE = "Website";
-		String LOCATION = "Location";
+		String NAME = "Name";
+		String ADDRESS = "Address";
+		String POSX = "PosX";
+		String POSY = "PosY";
 		String NOTE = "Note";
 	}
 	
@@ -33,27 +33,27 @@ public class DatabaseContract {
 	public static final String CONTENT_AUTHORITY = "com.xtrade.android";
 	public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
-	public static final String PATH_CLIENT = "client";
+	public static final String PATH_TRADER = "trader";
 	public static final String PATH_CLASSIFICATION = "classification";
 	public static final String PATH_POSITION = "position";
 	public static final String PATH_CONTACT_TYPE = "contact_type";
 
-	public static class Client extends BaseTable implements ClientColumns {
-		public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH_CLIENT).build();
+	public static class Trader extends BaseTable implements TraderColumns {
+		public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH_TRADER).build();
 		
 		/**
 		 * Specify the content for the record and for this entity
 		 * */
-		public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.xtrade.android.client";
-		public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd.xtrade.android.client";
+		public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.xtrade.android.trader";
+		public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd.xtrade.android.trader";
 		
 		/**
 		 * Default sorting for this entity
 		 * */
 		public static final String DEFAULT_SORT = TRADER_ID + " ASC";
 		
-		public static Uri buildUri(String clientId) {
-			return CONTENT_URI.buildUpon().appendPath(clientId).build();
+		public static Uri buildUri(String traderId) {
+			return CONTENT_URI.buildUpon().appendPath(traderId).build();
 		}
 	}
 	
