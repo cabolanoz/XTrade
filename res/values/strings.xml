@@ -28,5 +28,6 @@
     <string name="from_gallery">From Gallery</string>
     <string name="from_camera">From Camera</string>
     <string name="classficationname">Classification Name</string>
+    <color name="black">#000000</color>
 
 </resources>
