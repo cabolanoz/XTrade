@@ -36,10 +36,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL("CREATE TABLE " + Tables.TRADER + " (" + BaseColumns._ID
 				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + TraderColumns.TRADER_ID + " TEXT, "
 				+ TraderColumns.NAME + " TEXT, "
+				+ TraderColumns.WEBSITE + " TEXT, "
 				+ TraderColumns.ADDRESS + " TEXT, "
 				+ TraderColumns.POSX + " TEXT, "
-				+ TraderColumns.POSY + " TEXT, "
-				+ TraderColumns.NOTE + " TEXT)");
+				+ TraderColumns.POSY + " TEXT)");
 		
 		// Classification table
 		db.execSQL("CREATE TABLE " + Tables.CLASSIFICATION + " (" + BaseColumns._ID

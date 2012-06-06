@@ -9,10 +9,10 @@ public class DatabaseContract {
 	public interface TraderColumns {
 		String TRADER_ID = "TraderId";
 		String NAME = "Name";
+		String WEBSITE = "Website";
 		String ADDRESS = "Address";
 		String POSX = "PosX";
 		String POSY = "PosY";
-		String NOTE = "Note";
 	}
 	
 	interface ClassificationColumns {

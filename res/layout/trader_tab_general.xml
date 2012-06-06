@@ -1,43 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <EditText
+        android:id="@+id/etxTraderName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/ivwTraderPhoto"
+        android:hint="@string/tradername"
+        android:inputType="textPersonName" />
 
     <ImageButton
         android:id="@+id/ivwTraderPhoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@android:drawable/alert_light_frame" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/main_client" />
+
     <EditText
-        android:id="@+id/etxTraderName"
-        android:layout_width="match_parent"
+        android:id="@+id/etxTraderWebsite"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/tradername"
-        android:inputType="textPersonName" >
-        <requestFocus />
-    </EditText>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/ivwTraderPhoto"
+        android:ems="10"
+        android:hint="@string/traderwebsite"
+        android:inputType="textEmailAddress" />
+
     <EditText
         android:id="@+id/etxTraderAddress"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/etxTraderWebsite"
+        android:ems="10"
         android:hint="@string/traderaddress"
-        android:inputType="textMultiLine" />
-    <EditText
-        android:id="@+id/etxTraderLocationX"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/traderposx" />
-    <EditText
-        android:id="@+id/etxTraderLocationY"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/traderposy" />
-    
-    <EditText
-        android:id="@+id/etxTraderNote"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:hint="@string/tradernote"
         android:inputType="textMultiLine" />
 
-</LinearLayout>
+</RelativeLayout>

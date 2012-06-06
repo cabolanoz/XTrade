@@ -17,10 +17,10 @@ public class TraderTranslator {
 			com.xtrade.android.object.Trader trader = new com.xtrade.android.object.Trader(
 					cursor.getString(cursor.getColumnIndex(BaseColumns._ID)),
 					cursor.getString(cursor.getColumnIndex(Trader.NAME)),
+					cursor.getString(cursor.getColumnIndex(Trader.WEBSITE)),
 					cursor.getString(cursor.getColumnIndex(Trader.ADDRESS)),
 					cursor.getString(cursor.getColumnIndex(Trader.POSX)),
-					cursor.getString(cursor.getColumnIndex(Trader.POSY)),
-					cursor.getString(cursor.getColumnIndex(Trader.NOTE)));
+					cursor.getString(cursor.getColumnIndex(Trader.POSY)));
 
 			traders.add(trader);
 		}

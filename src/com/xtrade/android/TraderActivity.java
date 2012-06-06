@@ -70,26 +70,20 @@ public class TraderActivity extends BaseActivity implements EventConstant {
 			int extra = intent.getIntExtra("ACTION_TYPE", -1);
 			
 			EditText txtTraderName = (EditText) findViewById(R.id.etxTraderName);
+			EditText txtTraderWebsite = (EditText) findViewById(R.id.etxTraderWebsite);
 			EditText txtTraderAddress = (EditText) findViewById(R.id.etxTraderAddress);
-			EditText txtTraderLocationX = (EditText) findViewById(R.id.etxTraderLocationX);
-			EditText txtTraderLocationY = (EditText) findViewById(R.id.etxTraderLocationY);
-			EditText txtTraderNote = (EditText) findViewById(R.id.etxTraderNote);
 			
 			String traderName = txtTraderName.getText().toString();
+			String traderWebsite = txtTraderWebsite.getText().toString();
 			String traderAddress = txtTraderAddress.getText().toString();
-			String traderLocationX = txtTraderLocationX.getText().toString();
-			String traderLocationY = txtTraderLocationY.getText().toString();
-			String traderNote = txtTraderNote.getText().toString();
 
 			// Evaluate if the EditText's content is empty or not
-			if (!StringUtils.isEmpty(traderName) && !StringUtils.isEmpty(traderAddress) && !StringUtils.isEmpty(traderLocationX) && !StringUtils.isEmpty(traderLocationY) && !StringUtils.isEmpty(traderNote)) {
+			if (!StringUtils.isEmpty(traderName) && !StringUtils.isEmpty(traderWebsite) && !StringUtils.isEmpty(traderAddress)) {
 				ContentValues contentValues = new ContentValues();
 
 				contentValues.put(TraderColumns.NAME, traderName);
+				contentValues.put(TraderColumns.WEBSITE, traderWebsite);
 				contentValues.put(TraderColumns.ADDRESS, traderAddress);
-				contentValues.put(TraderColumns.POSX, traderLocationX);
-				contentValues.put(TraderColumns.POSY, traderLocationY);
-				contentValues.put(TraderColumns.NOTE, traderNote);
 
 				Uri clientUri = null;
 

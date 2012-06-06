@@ -26,9 +26,7 @@ public class TraderGeneralFragment extends SherlockFragment implements EventCons
 	private ImageButton txtTraderPhoto;
 	private EditText txtTraderName;
 	private EditText txtTraderAddress;
-	private EditText txtTraderLocationX;
-	private EditText txtTraderLocationY;
-	private EditText txtTraderNote;
+	private EditText txtTraderWebsite;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,18 +54,14 @@ public class TraderGeneralFragment extends SherlockFragment implements EventCons
 		});	
 		
 		txtTraderName = (EditText) fragmentView.findViewById(R.id.etxTraderName);
+		txtTraderWebsite = (EditText) fragmentView.findViewById(R.id.etxTraderWebsite);
 		txtTraderAddress = (EditText) fragmentView.findViewById(R.id.etxTraderAddress);
-		txtTraderLocationX = (EditText) fragmentView.findViewById(R.id.etxTraderLocationX);
-		txtTraderLocationY = (EditText) fragmentView.findViewById(R.id.etxTraderLocationY);
-		txtTraderNote = (EditText) fragmentView.findViewById(R.id.etxTraderNote);
 
 		// Setting default values while we're on developer mode
 		if (Settings.DEBUG && extra == TRADER_CREATE_REQUEST_CODE) {
 			txtTraderName.setText("Coca-Cola");
+			txtTraderWebsite.setText("www.coca-cola.com");
 			txtTraderAddress.setText("Aenean lacinia bibendum nulla sed consectetur");
-			txtTraderLocationX.setText("42");
-			txtTraderLocationY.setText("26");
-			txtTraderNote.setText("Aenean lacinia bibendum nulla sed consectetur");
 		}
 
 		// If the ACTION_TYPE extra is for Updating the client info, we get the client date from database, then we set it on corresponding EditTexts
@@ -80,10 +74,8 @@ public class TraderGeneralFragment extends SherlockFragment implements EventCons
 				if (cursor != null) {
 					if (cursor.moveToNext()) {
 						txtTraderName.setText(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.TraderColumns.NAME)));
+						txtTraderWebsite.setText(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.TraderColumns.WEBSITE)));
 						txtTraderAddress.setText(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.TraderColumns.ADDRESS)));
-						txtTraderLocationX.setText(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.TraderColumns.POSX)));
-						txtTraderLocationY.setText(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.TraderColumns.POSY)));
-						txtTraderNote.setText(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.TraderColumns.NOTE)));
 					}
 					cursor.close();
 				}

@@ -23,7 +23,7 @@
         android:textColor="@color/black" />
 
     <TextView
-        android:id="@+id/tvwTraderAddress"
+        android:id="@+id/tvwTraderWebsite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

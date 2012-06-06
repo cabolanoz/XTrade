@@ -13,10 +13,10 @@
     <string name="about">About</string>
     <string name="delete_client">Delete Client</string>
     <string name="tradername">Trader Name</string>
+    <string name="traderwebsite">Trader Website</string>
     <string name="traderaddress">Trader Address</string>
     <string name="traderposx">Trader Location X</string>
    	<string name="traderposy">Trader Location Y</string>
-    <string name="tradernote">Trader Note</string>
     <string name="add">Add</string>
     <string name="register">Register</string>
     <string name="save">Save</string>

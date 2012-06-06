@@ -41,7 +41,7 @@ public class TraderAdapter extends BaseAdapter implements EventConstant {
 		TextView tvwTraderName = (TextView) convertView.findViewById(R.id.tvwTraderName);
 		tvwTraderName.setText(trader.getName());
 
-		TextView tvwTraderAddress = (TextView) convertView.findViewById(R.id.tvwTraderAddress);
+		TextView tvwTraderAddress = (TextView) convertView.findViewById(R.id.tvwTraderWebsite);
 		tvwTraderAddress.setText(trader.getAddress());
 
 		Button btnEditClient = (Button) convertView.findViewById(R.id.btnEditTrader);
