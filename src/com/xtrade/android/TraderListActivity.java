@@ -4,13 +4,14 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnLongClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.actionbarsherlock.internal.widget.IcsAdapterView;
 import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
@@ -45,19 +46,23 @@ public class TraderListActivity extends BaseActivity implements EventConstant {
 			}
 		});
 		
-		listView.setOnLongClickListener(new OnLongClickListener(){
+		listView.setOnItemLongClickListener(new OnItemLongClickListener(){
 
 			@Override
-			public boolean onLongClick(View view) {
-				 if (mActionMode != null) {
-			            return false;
-			        }
+			public boolean onItemLongClick(AdapterView<?> adapter, View view,
+					int position, long id) {
+				if (mActionMode != null) {
+		            return false;
+		        }
 
-			        // Start the CAB using the ActionMode.Callback defined above
-			        mActionMode = startActionMode(mActionModeCallback);
-			        view.setSelected(true);
-			        return true;
-			}});
+		        // Start the CAB using the ActionMode.Callback defined above
+		        mActionMode = startActionMode(mActionModeCallback);
+		        view.setSelected(true);
+		        return true;
+			}
+
+
+			});
 		
 		
 	}
@@ -80,7 +85,7 @@ public class TraderListActivity extends BaseActivity implements EventConstant {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
-		//inflater.inflate(R.menu.trader_list_menu, menu);
+		inflater.inflate(R.menu.trader_list_menu, menu);
 		return true;
 	}
 	
@@ -122,7 +127,7 @@ public class TraderListActivity extends BaseActivity implements EventConstant {
 	    // may be called multiple times if the mode is invalidated.
 	    @Override
 	    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-	        return false; // Return false if nothing is done
+	        return false;
 	    }
 
 	    // Called when the user selects a contextual menu item
