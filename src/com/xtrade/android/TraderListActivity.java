@@ -15,6 +15,7 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.xtrade.android.adapter.TraderAdapter;
 import com.xtrade.android.provider.TraderTranslator;
+import com.xtrade.android.util.ActionConstant;
 import com.xtrade.android.util.Debug;
 import com.xtrade.android.util.EventConstant;
 
@@ -62,6 +63,7 @@ public class TraderListActivity extends BaseActivity implements EventConstant {
 		inflater.inflate(R.menu.trader_list_menu, menu);
 		return true;
 	}
+	
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem menuItem) {
@@ -69,13 +71,20 @@ public class TraderListActivity extends BaseActivity implements EventConstant {
 		
 		switch (menuItem.getItemId()) {
 		case R.id.mniNewTrader:
-			Intent intent = new Intent(this, TraderActivity.class);
+			Intent intent = new Intent(ActionConstant.TRADER_LIST);
 			intent.putExtra("ACTION_TYPE", TRADER_CREATE_REQUEST_CODE);
 			startActivityForResult(intent, TRADER_CREATE_REQUEST_CODE);
-			return true;
-		default:
-			return super.onOptionsItemSelected(menuItem);
+			break;
+		case R.id.mniAbout:
+			
+			startActivity(new Intent(ActionConstant.ABOUT));
+			
+			break;
+		
+		
+			
 		}
+		return super.onOptionsItemSelected(menuItem);
 	}
 	
 }
