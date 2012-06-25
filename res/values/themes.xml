@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+
     <style name="Theme.XTrade" parent="@style/Theme.Sherlock.Light">
         <item name="android:textAppearance">@style/TextAppearance.XTrade</item>
         <item name="android:editTextStyle">@style/Widget.XTrade.EditText</item>
         <item name="actionBarStyle">@style/Widget.XTrade.ActionBar</item>
-    	<item name="android:actionBarStyle">@style/Widget.XTrade.ActionBar</item>
-    	<item name="absForceOverflow">true</item>
-    	<!-- <item name="android:background">@android:color/white</item> -->
+        <item name="android:actionBarStyle">@style/Widget.XTrade.ActionBar</item>
+        <item name="absForceOverflow">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <!-- <item name="android:background">@android:color/white</item> -->
     </style>
-    
+
+    <style name="Theme.XTrade.NoActionbar">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
 </resources>

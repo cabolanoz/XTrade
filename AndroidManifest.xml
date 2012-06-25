@@ -18,7 +18,8 @@
         android:theme="@style/Theme.XTrade" >
         <activity
             android:name=".LoginActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:theme="@style/Theme.XTrade.NoActionbar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
