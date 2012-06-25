@@ -20,8 +20,8 @@
     </style>
 
     <style name="Widget.XTrade.ActionBar" parent="Widget.Sherlock.Light.ActionBar.Solid.Inverse">
-        <item name="background">@android:color/white</item>
-        <item name="android:background">@android:color/white</item>
+        <item name="background">@drawable/ab_background</item>
+        <item name="android:background">@drawable/ab_background</item>
         
     </style>
 
