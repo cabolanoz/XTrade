@@ -44,15 +44,15 @@ public class TraderAdapter extends BaseAdapter implements EventConstant {
 		TextView tvwTraderAddress = (TextView) convertView.findViewById(R.id.tvwTraderWebsite);
 		tvwTraderAddress.setText(trader.getAddress());
 
-		Button btnEditClient = (Button) convertView.findViewById(R.id.btnEditTrader);
-		btnEditClient.setOnClickListener(new OnClickListener() {
-			public void onClick(View view) {
-				Intent intent = new Intent(context, TraderActivity.class);
-				intent.putExtra("ACTION_TYPE", TRADER_UPDATE_REQUEST_CODE);
-				intent.putExtra(DatabaseContract.TraderColumns.TRADER_ID, trader.getId());
-				((BaseActivity) context).startActivityForResult(intent, TRADER_UPDATE_REQUEST_CODE);
-			}
-		});
+//		Button btnEditClient = (Button) convertView.findViewById(R.id.btnEditTrader);
+//		btnEditClient.setOnClickListener(new OnClickListener() {
+//			public void onClick(View view) {
+//				Intent intent = new Intent(context, TraderActivity.class);
+//				intent.putExtra("ACTION_TYPE", TRADER_UPDATE_REQUEST_CODE);
+//				intent.putExtra(DatabaseContract.TraderColumns.TRADER_ID, trader.getId());
+//				((BaseActivity) context).startActivityForResult(intent, TRADER_UPDATE_REQUEST_CODE);
+//			}
+//		});
 
 		return convertView;
 	}
