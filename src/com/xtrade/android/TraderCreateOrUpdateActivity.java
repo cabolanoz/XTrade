@@ -36,15 +36,15 @@ public class TraderCreateOrUpdateActivity extends BaseActivity implements EventC
 
 		// General client tab
 		Tab generalTab = actionBar.newTab();
-		generalTab.setIcon(R.drawable.clientgeneral);
 		generalTab.setTag("general");
+		generalTab.setText("Gen. Info.");
 		generalTab.setTabListener(new TraderTabListener<TraderGeneralFragment>(this, "General", TraderGeneralFragment.class));
 		actionBar.addTab(generalTab);
 
 		// Detail client tab
 		Tab detailTab = actionBar.newTab();
-		detailTab.setIcon(R.drawable.clientdetail);
 		detailTab.setTag("detail");
+		detailTab.setText("Map");
 		detailTab.setTabListener(new TraderTabListener<TraderDetailFragment>(this, "Detail", TraderDetailFragment.class));
 		actionBar.addTab(detailTab);
 

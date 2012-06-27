@@ -37,7 +37,7 @@ public class TraderActivity extends BaseActivity implements EventConstant {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
-		inflater.inflate(R.menu.trader_list_menu, menu);
+		inflater.inflate(R.menu.trader_tab_list_menu, menu);
 		return true;
 	}
 	
