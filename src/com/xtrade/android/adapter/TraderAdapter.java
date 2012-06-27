@@ -28,7 +28,7 @@ public class TraderAdapter extends BaseAdapter implements EventConstant {
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
 			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			convertView = inflater.inflate(R.layout.trader_item, null);
+			convertView = inflater.inflate(R.layout.trader_tab_list_item, null);
 		}
 
 		final Trader trader = getTraderList().get(position);

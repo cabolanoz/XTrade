@@ -31,7 +31,7 @@ public class TraderListActivity extends SherlockFragment implements EventConstan
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		final View fragmentView = inflater.inflate(R.layout.trader_list, container, false);
+		final View fragmentView = inflater.inflate(R.layout.trader_tab_list, container, false);
 		
 		// load data from database
 		Cursor cursor = getActivity().getContentResolver().query(com.xtrade.android.provider.DatabaseContract.Trader.CONTENT_URI, null, null, null, null);
