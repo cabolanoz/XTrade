@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.xtrade.android.service.ServiceHelper;
 import com.xtrade.android.util.Settings;
@@ -16,6 +17,11 @@ public class BaseActivity extends SherlockFragmentActivity {
 	public void onCreate(Bundle savedIntanceState) {
 		super.onCreate(savedIntanceState);
 		serviceHelper = ServiceHelper.getInstance(this);
+		
+		// Getting the action bar
+		ActionBar actionBar = getSupportActionBar();
+		if (actionBar != null)
+			actionBar.setDisplayShowTitleEnabled(false);
 	}
 
 	/**

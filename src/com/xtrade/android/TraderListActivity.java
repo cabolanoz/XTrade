@@ -3,7 +3,10 @@ package com.xtrade.android;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -11,33 +14,31 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.xtrade.android.adapter.TraderAdapter;
 import com.xtrade.android.provider.TraderTranslator;
-import com.xtrade.android.util.ActionConstant;
 import com.xtrade.android.util.Debug;
 import com.xtrade.android.util.EventConstant;
 
-public class TraderListActivity extends BaseActivity implements EventConstant {
+public class TraderListActivity extends SherlockFragment implements EventConstant {
 
 	private BaseAdapter adapter;
 	private ActionMode mActionMode;
-	
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.trader_list);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		final View fragmentView = inflater.inflate(R.layout.trader_list, container, false);
 		
 		// load data from database
-		Cursor cursor = getContentResolver().query(com.xtrade.android.provider.DatabaseContract.Trader.CONTENT_URI, null, null, null, null);
+		Cursor cursor = getActivity().getContentResolver().query(com.xtrade.android.provider.DatabaseContract.Trader.CONTENT_URI, null, null, null, null);
 
-		adapter = new TraderAdapter(this, new TraderTranslator().translate(cursor));
+		adapter = new TraderAdapter(getActivity(), new TraderTranslator().translate(cursor));
 
-		ListView listView = (ListView) findViewById(R.id.lvwTrader);
+		ListView listView = (ListView) fragmentView.findViewById(R.id.lvwTrader);
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -45,74 +46,38 @@ public class TraderListActivity extends BaseActivity implements EventConstant {
 			}
 		});
 		
-		listView.setOnItemLongClickListener(new OnItemLongClickListener(){
-
+		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
 			@Override
-			public boolean onItemLongClick(AdapterView<?> adapter, View view,
-					int position, long id) {
-				if (mActionMode != null) {
+			public boolean onItemLongClick(AdapterView<?> adapter, View view, int position, long id) {
+				if (mActionMode != null)
 		            return false;
-		        }
 
 		        // Start the CAB using the ActionMode.Callback defined above
-		        mActionMode = startActionMode(mActionModeCallback);
+//		        mActionMode = startActionMode(mActionModeCallback);
 		        view.setSelected(true);
 		        return true;
 			}
-
-
-			});
+		});
 		
-		
+		return fragmentView;
 	}
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		
-		if (resultCode == RESULT_CANCELED) {
-			Toast.makeText(this, "The operation didn't finish properly", Toast.LENGTH_LONG).show();
+		if (resultCode == FragmentActivity.RESULT_CANCELED) {
+			Toast.makeText(getActivity(), "The operation didn't finish properly", Toast.LENGTH_LONG).show();
 			return;
 		}
 
-		if (resultCode == RESULT_OK && (requestCode == TRADER_CREATE_REQUEST_CODE || requestCode == TRADER_UPDATE_REQUEST_CODE)) {
-			Cursor cursor = getContentResolver().query(com.xtrade.android.provider.DatabaseContract.Trader.CONTENT_URI, null, null, null, null);
+		if (resultCode == FragmentActivity.RESULT_OK && (requestCode == TRADER_CREATE_REQUEST_CODE || requestCode == TRADER_UPDATE_REQUEST_CODE)) {
+			Cursor cursor = getActivity().getContentResolver().query(com.xtrade.android.provider.DatabaseContract.Trader.CONTENT_URI, null, null, null, null);
 			((TraderAdapter) adapter).setTraderList(new TraderTranslator().translate(cursor));
 		}
 	}
 	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getSupportMenuInflater();
-		inflater.inflate(R.menu.trader_list_menu, menu);
-		return true;
-	}
-	
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem menuItem) {
-		super.onOptionsItemSelected(menuItem);
-		
-		switch (menuItem.getItemId()) {
-		case R.id.mniNewTrader:
-			Intent intent = new Intent(ActionConstant.TRADER);
-			intent.putExtra("ACTION_TYPE", TRADER_CREATE_REQUEST_CODE);
-			startActivityForResult(intent, TRADER_CREATE_REQUEST_CODE);
-			break;
-		case R.id.mniAbout:
-			
-			startActivity(new Intent(ActionConstant.ABOUT));
-			
-			break;
-		
-		
-			
-		}
-		return super.onOptionsItemSelected(menuItem);
-	}
-	
 	private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
-
 	    // Called when the action mode is created; startActionMode() was called
 	    @Override
 	    public boolean onCreateActionMode(ActionMode mode, Menu menu) {

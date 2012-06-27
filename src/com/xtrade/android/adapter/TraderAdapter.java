@@ -3,6 +3,7 @@ package com.xtrade.android.adapter;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,6 @@ import android.widget.TextView;
 
 import com.xtrade.android.R;
 import com.xtrade.android.object.Trader;
-import com.xtrade.android.util.Debug;
 import com.xtrade.android.util.EventConstant;
 
 public class TraderAdapter extends BaseAdapter implements EventConstant {
@@ -34,7 +34,7 @@ public class TraderAdapter extends BaseAdapter implements EventConstant {
 		final Trader trader = getTraderList().get(position);
 		
 		if (position % 2 == 0)
-			Debug.info(this, "Gotta put the color to line " + position);
+			convertView.setBackgroundColor(Color.BLACK);
 		
 		TextView tvwTraderName = (TextView) convertView.findViewById(R.id.tvwTraderName);
 		tvwTraderName.setText(trader.getName());
