@@ -4,7 +4,7 @@
     <string name="hello">Hello World, XTradeActivity!</string>
     <string name="app_name">XTrade</string>
     <color name="white">#FFFFFF</color>
-    <color name="search_text_grey">#999999</color>
+    <color name="grey">#999999</color>
     <string name="login">Login</string>
     <string name="username">Username</string>
     <string name="password">Password</string>

@@ -22,42 +22,37 @@
             android:theme="@style/Theme.XTrade.NoActionbar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            
             <intent-filter>
                 <action android:name="com.xtrade.android.LOGIN_ACTION" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         
-        <activity android:name=".TraderListActivity" >
+        <activity android:name=".TraderActivity" >
             <intent-filter>
                 <action android:name="com.xtrade.android.MAIN_XTRADE" />
-                <action android:name="com.xtrade.android.TRADER_LIST_ACTION" />
-
+                <action android:name="com.xtrade.android.TRADER_ACTION" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".TraderActivity" >
+        <activity android:name=".TraderCreateOrUpdateActivity" >
             <intent-filter>
-                <action android:name="com.xtrade.android.TRADER_ACTION" />
-
+                <action android:name="com.xtrade.android.TRADER_CREATE_UPDATE_ACTION" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name=".AboutActivity" >
             <intent-filter>
                 <action android:name="com.xtrade.android.ABOUT" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name=".ClientMapActivity" >
             <intent-filter>
                 <action android:name="com.xtrade.android.CLIENT_MAP_ACTION" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -69,7 +64,6 @@
             android:exported="false" >
             <intent-filter>
                 <action android:name="com.xtrade.android.LOGIN_ACTION" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>

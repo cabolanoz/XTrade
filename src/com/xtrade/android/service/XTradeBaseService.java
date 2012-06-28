@@ -29,12 +29,11 @@ public class XTradeBaseService extends IntentService{
 			String password= intent.getStringExtra(LoginParameter.PASSWORD);
 			
 			boolean success=false;
-			if(username.equals(Settings.DEFAULT_USERNAME) && password.equals(Settings.DEFAULT_PASSWORD) ){
-				
+			if (username.equals(Settings.DEFAULT_USERNAME) && password.equals(Settings.DEFAULT_PASSWORD) ) {
 				//we resend the login intent with extra parameters
-				success=true;
-			}else if(intent.getAction().equals(ActionConstant.TRADER_LIST)){
-				HttpCaller caller= HttpCallerFactory.getInstance().createCaller();
+				success = true;
+			} else if (intent.getAction().equals(ActionConstant.TRADER)){
+				HttpCaller caller = HttpCallerFactory.getInstance().createCaller();
 				try {
 					caller.call(new URL("file:///android_asset/client.mock"));
 				} catch (MalformedURLException e) {
@@ -46,13 +45,8 @@ public class XTradeBaseService extends IntentService{
 			intent.putExtra(LoginParameter.SUCCESS, success);
 			
 			sendBroadcast(intent);
-		}else if(intent.getAction().equals(ActionConstant.TRADER_LIST)){
-			
+		} else if (intent.getAction().equals(ActionConstant.TRADER)) {
 		}
-		
-		
 	}
 	
-	
-
 }
