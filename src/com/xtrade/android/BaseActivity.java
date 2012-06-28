@@ -20,8 +20,10 @@ public class BaseActivity extends SherlockFragmentActivity {
 		
 		// Getting the action bar
 		ActionBar actionBar = getSupportActionBar();
-		if (actionBar != null)
+		if (actionBar != null) {
 			actionBar.setDisplayShowTitleEnabled(false);
+			actionBar.setIcon(getResources().getDrawable(R.drawable.ic_logo_text));
+		}
 	}
 
 	/**
