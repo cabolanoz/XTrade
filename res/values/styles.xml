@@ -22,7 +22,18 @@
     <style name="Widget.XTrade.ActionBar" parent="Widget.Sherlock.Light.ActionBar.Solid.Inverse">
         <item name="background">@drawable/ab_background</item>
         <item name="android:background">@drawable/ab_background</item>
-        
     </style>
+    
+    <style name="Widget.XTrade.ActionBar.TabText" parent="Widget.Sherlock.ActionBar.TabText">
+        <item name="android:textAllCaps">false</item>
+    </style>
+    
+    <style name="Widget.XTrade.ActionBar.TabView" parent="Widget.Sherlock.ActionBar.TabView">
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:background">@drawable/tab_selector</item>
+        <item name="android:paddingLeft">16dip</item>
+        <item name="android:paddingRight">16dip</item>
+    </style>
+    
 
 </resources>

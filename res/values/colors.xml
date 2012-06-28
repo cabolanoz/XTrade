@@ -2,5 +2,7 @@
 <resources>
     <color name="base_green">#537c00</color>
     <color name="base_green_light">#669900</color>
+    <color name="trader_list_color">#e5e5e5</color>
+    <color name="primary_text_color">#FFFFFF</color>
     
 </resources>

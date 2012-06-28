@@ -8,6 +8,10 @@
         <item name="android:actionBarStyle">@style/Widget.XTrade.ActionBar</item>
         <item name="absForceOverflow">true</item>
         <item name="android:windowContentOverlay">@null</item>
+        <item name="actionBarTabTextStyle">@style/Widget.XTrade.ActionBar.TabText</item>
+        <item name="textColorPrimary">@color/primary_text_color</item>
+        <item name="actionBarTabStyle">@style/Widget.XTrade.ActionBar.TabView</item>
+        
         <!-- <item name="android:background">@android:color/white</item> -->
     </style>
 

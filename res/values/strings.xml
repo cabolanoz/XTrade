@@ -26,6 +26,7 @@
     <string name="save">Save</string>
     <string name="classification">Classification</string>
     <string name="trader">Trader</string>
+    <string name="traders">Traders</string>
     <string name="events">Events</string>
     <string name="performance">Performance</string>
     <string name="today">Today</string>
