@@ -34,13 +34,13 @@ public class TraderAdapter extends BaseAdapter implements EventConstant {
 		final Trader trader = getTraderList().get(position);
 		
 		if (position % 2 == 0)
-			convertView.setBackgroundColor(context.getResources().getColor(R.color.trader_list_color));
+			convertView.setBackgroundResource(R.drawable.list_bg_odd);
 		
 		TextView tvwTraderName = (TextView) convertView.findViewById(R.id.tvwTraderName);
 		tvwTraderName.setText(trader.getName());
 
 		TextView tvwTraderAddress = (TextView) convertView.findViewById(R.id.tvwTraderWebsite);
-		tvwTraderAddress.setText(trader.getAddress());
+		tvwTraderAddress.setText(trader.getWebsite());
 
 		return convertView;
 	}
