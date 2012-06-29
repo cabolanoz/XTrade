@@ -1,14 +1,18 @@
 package com.xtrade.android;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.widget.ListView;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.xtrade.android.adapter.TraderAdapter;
 import com.xtrade.android.listener.TraderTabListener;
+import com.xtrade.android.provider.TraderTranslator;
 import com.xtrade.android.util.ActionConstant;
 import com.xtrade.android.util.EventConstant;
 
@@ -36,6 +40,22 @@ public class TraderActivity extends BaseActivity implements EventConstant {
 		actionBar.addTab(traderTodayTab);
 	}
 
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		if (resultCode == RESULT_CANCELED)
+			return;
+		
+		if (resultCode == RESULT_OK && (requestCode == TRADER_CREATE_REQUEST_CODE || requestCode == TRADER_UPDATE_REQUEST_CODE)) {
+			ListView listView = (ListView) findViewById(R.id.lvwTrader);
+			if (listView != null) {
+				Cursor cursor = this.getContentResolver().query(com.xtrade.android.provider.DatabaseContract.Trader.CONTENT_URI, null, null, null, null);
+				((TraderAdapter) listView.getAdapter()).setTraderList(new TraderTranslator().translate(cursor));
+			}
+		}
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();

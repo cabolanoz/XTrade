@@ -1,18 +1,14 @@
 package com.xtrade.android;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.ActionMode;
@@ -40,11 +36,6 @@ public class TraderListActivity extends SherlockFragment implements EventConstan
 
 		ListView listView = (ListView) fragmentView.findViewById(R.id.lvwTrader);
 		listView.setAdapter(adapter);
-		listView.setOnItemClickListener(new OnItemClickListener() {
-			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-				Debug.info(this, "Id selected is: " + id);
-			}
-		});
 		
 		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
 			@Override
@@ -60,21 +51,6 @@ public class TraderListActivity extends SherlockFragment implements EventConstan
 		});
 		
 		return fragmentView;
-	}
-
-	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		
-		if (resultCode == FragmentActivity.RESULT_CANCELED) {
-			Toast.makeText(getActivity(), "The operation didn't finish properly", Toast.LENGTH_LONG).show();
-			return;
-		}
-
-		if (resultCode == FragmentActivity.RESULT_OK && (requestCode == TRADER_CREATE_REQUEST_CODE || requestCode == TRADER_UPDATE_REQUEST_CODE)) {
-			Cursor cursor = getActivity().getContentResolver().query(com.xtrade.android.provider.DatabaseContract.Trader.CONTENT_URI, null, null, null, null);
-			((TraderAdapter) adapter).setTraderList(new TraderTranslator().translate(cursor));
-		}
 	}
 	
 	private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
