@@ -34,6 +34,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/ivwTraderPhoto"
         android:layout_marginLeft="18dp"
+        android:gravity="center_vertical"
         android:layout_toRightOf="@+id/ivwTraderPhoto"
         android:text="Nullam quis risus eget urna mollis ornare vel eu leo. Integer posuere erat a ante venenatis dapibus posuere velit aliquet."
         android:textColor="@color/black" />
@@ -61,7 +62,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:text="Medium Text" />
+            style="@style/ItemList"
+            android:text="5 Contacts" />
 
     </LinearLayout>
 
@@ -87,7 +89,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:text="Medium Text" />
+            style="@style/ItemList"
+            android:text="3 Events" />
 
     </LinearLayout>
 

@@ -19,6 +19,12 @@
         <item name="android:textSize">@dimen/list_header_size</item>
     </style>
 
+    <style name="ItemList">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/list_item_size</item>
+    </style>
+
     <!--
     <style name="Widget.XTrade.ListView" parent="Widget.Holo.ListView">
         <item name="android:divider">?android:attr/listDivider</item>
