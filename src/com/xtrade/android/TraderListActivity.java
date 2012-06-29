@@ -53,7 +53,7 @@ public class TraderListActivity extends SherlockFragment implements EventConstan
 		            return false;
 
 		        // Start the CAB using the ActionMode.Callback defined above
-//		        mActionMode = startActionMode(mActionModeCallback);
+				mActionMode =  ((BaseActivity)getActivity()).startActionMode(mActionModeCallback);
 		        view.setSelected(true);
 		        return true;
 			}

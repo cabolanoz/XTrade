@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
-
+    android:layout_height="fill_parent"
+    android:background="@drawable/list_bg"
+    android:descendantFocusability="blocksDescendants"
+    android:padding="@dimen/list_default_padding" >
+
     <TextView
         android:id="@+id/tvwTraderName"
+        style="@style/ListHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_alignLeft="@+id/ivwTraderPhoto"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:text="Large Text"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/black" />
+        android:padding="@dimen/list_default_padding"
+        android:text="Adipiscing Parturient Justo Lorem"
+         />
 
     <ImageView
         android:id="@+id/ivwTraderPhoto"
@@ -21,36 +25,73 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/tvwTraderName"
         android:src="@drawable/ic_launcher" />
-
+
     <TextView
         android:id="@+id/tvwTraderWebsite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ivwTraderPhoto"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/ivwTraderPhoto"
         android:layout_marginLeft="18dp"
+        android:gravity="center_vertical"
         android:layout_toRightOf="@+id/ivwTraderPhoto"
-        android:text="Medium Text"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Nullam quis risus eget urna mollis ornare vel eu leo. Integer posuere erat a ante venenatis dapibus posuere velit aliquet."
         android:textColor="@color/black" />
 
-    <Button
-        android:id="@+id/btnContact"
-        style="?android:attr/buttonStyleSmall"
-        android:background="@drawable/ic_contact"
+    <LinearLayout
+        android:id="@+id/linearLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvwTraderWebsite"
-        android:layout_below="@+id/ivwTraderPhoto" />
+        android:layout_below="@+id/ivwTraderPhoto"
+        android:layout_toRightOf="@+id/ivwTraderPhoto"
+        android:paddingRight="@dimen/list_default_padding"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/btnEvent"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:focusable="false"
+            android:src="@drawable/ic_event" />
 
-    <Button
-        android:id="@+id/btnEvent"
-        style="?android:attr/buttonStyleSmall"
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            style="@style/ItemList"
+            android:text="5 Contacts" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/btnContact"
-        android:layout_marginLeft="45dp"
-        android:layout_toRightOf="@+id/btnContact"
-        android:background="@drawable/ic_event" />
+        android:layout_below="@+id/ivwTraderPhoto"
+        android:layout_toRightOf="@+id/linearLayout1"
+        android:paddingLeft="@dimen/list_default_padding"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/btnContact"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:focusable="false"
+            android:src="@drawable/ic_contact" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            style="@style/ItemList"
+            android:text="3 Events" />
+
+    </LinearLayout>
 
 </RelativeLayout>
