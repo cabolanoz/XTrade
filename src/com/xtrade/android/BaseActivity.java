@@ -15,16 +15,17 @@ public class BaseActivity extends SherlockFragmentActivity {
 
 	@Override
 	public void onCreate(Bundle savedIntanceState) {
+		super.onCreate(savedIntanceState);
+		
 		// Getting the action bar
 		ActionBar actionBar = getSupportActionBar();
 		if (actionBar != null) {
 			actionBar.setDisplayShowTitleEnabled(false);
 			actionBar.setDisplayUseLogoEnabled(true);
+			actionBar.setIcon(getResources().getDrawable(R.drawable.ic_logo_text));
 		}
-
-		super.onCreate(savedIntanceState);
+		
 		serviceHelper = ServiceHelper.getInstance(this);
-
 	}
 
 	/**
@@ -40,8 +41,7 @@ public class BaseActivity extends SherlockFragmentActivity {
 	 * 
 	 * */
 	protected SharedPreferences getAppSharedPreference() {
-		SharedPreferences xTradeSettings = getSharedPreferences(
-				Settings.SHARED_PREFERENCES, MODE_PRIVATE);
+		SharedPreferences xTradeSettings = getSharedPreferences(Settings.SHARED_PREFERENCES, MODE_PRIVATE);
 		return xTradeSettings;
 	}
 
