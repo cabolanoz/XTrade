@@ -2,29 +2,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@drawable/ab_background"
     android:orientation="vertical" >
 
-      <EditText
+    <EditText
         android:id="@+id/textUsername"
+        style="@style/Widget.XTrade.EditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dip"
-        android:hint="@string/username"
-        style="@style/Widget.XTrade.EditText"
-         >
+        android:hint="@string/username" >
 
         <requestFocus />
     </EditText>
 
     <EditText
         android:id="@+id/textPassword"
+        style="@style/Widget.XTrade.EditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dip"
         android:ems="10"
         android:hint="@string/password"
         android:imeOptions="actionDone"
-        style="@style/Widget.XTrade.EditText"
         android:inputType="textPassword" />
 
     <CheckBox
