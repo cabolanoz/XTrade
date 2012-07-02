@@ -5,16 +5,18 @@
     android:layout_height="fill_parent"
     tools:ignore="ContentDescription" >
 	<ImageView
+	    android:background="@drawable/ic_login"
 	    android:id="@+id/ivwXTrade"
 	    android:layout_width="match_parent"
 	    android:layout_height="fill_parent"
-	    android:src="@drawable/ic_login" />
+	    android:paddingRight="5dp" />
 
 	<LinearLayout
+	    android:background="@android:color/transparent"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:background="@drawable/ab_background"
-	    android:orientation="vertical" >
+	    android:orientation="vertical"
+	    android:paddingTop="150dp" >
 
 	    <EditText
 	        android:id="@+id/textUsername"
@@ -30,7 +32,6 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_margin="5dip"
-	        android:ems="10"
 	        android:hint="@string/password"
 	        android:imeOptions="actionDone"
 	        android:inputType="textPassword" />
@@ -39,13 +40,16 @@
 	        android:id="@+id/checkRememberMe"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
+	        android:layout_margin="5dip"
 	        android:text="@string/remember_me" />
 
 	    <Button
 	        android:id="@+id/buttonLogin"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
+	        android:layout_margin="5dip"
 	        android:text="@string/login" />
+
 	</LinearLayout>
 
 </FrameLayout>

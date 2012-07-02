@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
-
+    android:layout_height="fill_parent"
+    tools:ignore="ContentDescription" >
     <EditText
         android:id="@+id/etxTraderName"
         android:layout_width="match_parent"
@@ -17,8 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/main_client" />
-
+        android:src="@drawable/main_client" />
     <EditText
         android:id="@+id/etxTraderWebsite"
         android:layout_width="wrap_content"
@@ -27,8 +27,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/ivwTraderPhoto"
         android:hint="@string/traderwebsite"
-        android:inputType="textEmailAddress" />
-
+        android:inputType="textEmailAddress" />
     <EditText
         android:id="@+id/etxTraderAddress"
         android:layout_width="wrap_content"

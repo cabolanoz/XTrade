@@ -3,7 +3,6 @@ package com.xtrade.android.adapter;
 import java.util.List;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,8 +38,8 @@ public class TraderAdapter extends BaseAdapter implements EventConstant {
 		TextView tvwTraderName = (TextView) convertView.findViewById(R.id.tvwTraderName);
 		tvwTraderName.setText(trader.getName());
 
-		TextView tvwTraderAddress = (TextView) convertView.findViewById(R.id.tvwTraderWebsite);
-		tvwTraderAddress.setText(trader.getAddress());
+		TextView tvwTraderWebsite = (TextView) convertView.findViewById(R.id.tvwTraderWebsite);
+		tvwTraderWebsite.setText(trader.getWebsite());
 
 		return convertView;
 	}

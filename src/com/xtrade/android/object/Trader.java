@@ -9,13 +9,13 @@ public class Trader {
 	private String posX;
 	private String posY;
 
-	public Trader(String id, String _name, String _address, String _posX, String _posY, String _website) {
+	public Trader(String id, String _name, String _website, String _address, String _posX, String _posY) {
 		this.id = id;
 		this.name = _name;
+		this.website = _website;
 		this.address = _address;
 		this.posX = _posX;
 		this.posY = _posY;
-		this.website = _website;
 	}
 
 	public String getId() {
