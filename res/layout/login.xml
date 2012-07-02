@@ -8,12 +8,13 @@
 	    android:id="@+id/ivwXTrade"
 	    android:layout_width="match_parent"
 	    android:layout_height="fill_parent"
-	    android:src="@drawable/ic_login" />
+	    android:background="@drawable/ic_login" />
 
 	<LinearLayout
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:background="@color/base_green"
+	    android:paddingTop="150dp"
+	    android:background="@android:color/transparent"
 	    android:orientation="vertical" >
 
 	    <EditText
