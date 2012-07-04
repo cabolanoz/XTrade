@@ -7,11 +7,10 @@ import android.support.v4.content.CursorLoader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
-import com.xtrade.android.provider.DatabaseContract.Trader;
+import com.xtrade.android.provider.DatabaseContract;
 import com.xtrade.android.provider.DatabaseContract.TraderColumns;
 import com.xtrade.android.util.EventConstant;
 
@@ -24,18 +23,21 @@ public class TraderAboutFragment extends SherlockFragment implements EventConsta
 		// Getting the activity intent
 		Intent intent = getActivity().getIntent();
 		if (intent != null) {
-			long traderId = intent.getLongExtra(Trader.TRADER_ID, -1);
-			if (traderId != -1) {
-				CursorLoader cursorLoader = new CursorLoader(getActivity().getBaseContext(), Trader.buildUri(String.valueOf(traderId)), null, null, null, null);
+			String traderId = intent.getStringExtra(TraderColumns.TRADER_ID);
+			if (traderId != null && !"".equals(traderId)) {
+				CursorLoader cursorLoader = new CursorLoader(getActivity().getBaseContext(), DatabaseContract.Trader.buildUri(traderId), null, null, null, null);
 				Cursor cursor = cursorLoader.loadInBackground();
 				if (cursor != null) {
-					TextView tvwTraderName = (TextView) fragmentView.findViewById(R.id.tvwTraderName);
-					TextView tvwTraderWebsite = (TextView) fragmentView.findViewById(R.id.tvwTraderWebsite);
-					EditText etxTraderAddress = (EditText) fragmentView.findViewById(R.id.etxTraderAddress);
-					
-					tvwTraderName.setText(cursor.getString(cursor.getColumnIndexOrThrow(TraderColumns.NAME)));
-					tvwTraderWebsite.setText(cursor.getString(cursor.getColumnIndex(TraderColumns.WEBSITE)));
-					etxTraderAddress.setText(cursor.getString(cursor.getColumnIndexOrThrow(TraderColumns.ADDRESS)));
+					if (cursor.moveToNext()) {
+						TextView tvwTraderName = (TextView) fragmentView.findViewById(R.id.tvwTraderName);
+						TextView tvwTraderWebsite = (TextView) fragmentView.findViewById(R.id.tvwTraderWebsite);
+						TextView tvwTraderAddress = (TextView) fragmentView.findViewById(R.id.tvwTraderAddress);
+						
+						tvwTraderName.setText(cursor.getString(cursor.getColumnIndexOrThrow(TraderColumns.NAME)));
+						tvwTraderWebsite.setText(cursor.getString(cursor.getColumnIndex(TraderColumns.WEBSITE)));
+						tvwTraderAddress.setText(cursor.getString(cursor.getColumnIndexOrThrow(TraderColumns.ADDRESS)));
+					}
+					cursor.close();
 				}
 			}
 		}

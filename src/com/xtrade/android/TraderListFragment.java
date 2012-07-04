@@ -18,7 +18,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.xtrade.android.adapter.TraderAdapter;
-import com.xtrade.android.provider.DatabaseContract.Trader;
+import com.xtrade.android.provider.DatabaseContract.TraderColumns;
 import com.xtrade.android.provider.TraderTranslator;
 import com.xtrade.android.util.ActionConstant;
 import com.xtrade.android.util.Debug;
@@ -44,7 +44,7 @@ public class TraderListFragment extends SherlockFragment implements EventConstan
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 				Intent intent = new Intent(ActionConstant.TRADER_DETAIL);
-				intent.putExtra(Trader.TRADER_ID, id);
+				intent.putExtra(TraderColumns.TRADER_ID, ((com.xtrade.android.object.Trader) adapter.getItem(position)).getId());
 				startActivity(intent);
 			}
 		});
@@ -56,7 +56,7 @@ public class TraderListFragment extends SherlockFragment implements EventConstan
 		            return false;
 
 		        // Start the CAB using the ActionMode.Callback defined above
-				mActionMode =  ((BaseActivity)getActivity()).startActionMode(mActionModeCallback);
+				mActionMode =  ((BaseActivity) getActivity()).startActionMode(mActionModeCallback);
 		        view.setSelected(true);
 		        return true;
 			}

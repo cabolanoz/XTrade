@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-
+    android:layout_height="match_parent" >
     <ImageView
         android:id="@+id/ivwTraderPhoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/ic_launcher" />
-
+        android:src="@drawable/ic_launcher" />
     <TextView
         android:id="@+id/tvwTraderName"
         android:layout_width="wrap_content"
@@ -20,8 +18,7 @@
         android:layout_marginLeft="18dp"
         android:layout_toRightOf="@+id/ivwTraderPhoto"
         android:text="Large Text"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
+        android:textAppearance="?android:attr/textAppearanceLarge" />
     <TextView
         android:id="@+id/tvwTraderWebsite"
         android:layout_width="wrap_content"
@@ -30,8 +27,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/tvwTraderName"
         android:text="Medium Text"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
+        android:textAppearance="?android:attr/textAppearanceMedium" />
     <TextView
         android:id="@+id/tvwTraderAddress"
         android:layout_width="wrap_content"
@@ -42,18 +38,5 @@
         android:layout_marginTop="28dp"
         android:text="Medium Text"
         android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <EditText
-        android:id="@+id/etxTraderAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/tvwTraderAddress"
-        android:ems="10"
-        android:inputType="textMultiLine" >
-
-        <requestFocus />
-    </EditText>
 
 </RelativeLayout>
