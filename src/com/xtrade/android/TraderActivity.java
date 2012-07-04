@@ -29,14 +29,14 @@ public class TraderActivity extends BaseActivity implements EventConstant {
 		Tab traderListTab = actionBar.newTab();
 		traderListTab.setTag("list");
 		traderListTab.setText(R.string.traders);
-		traderListTab.setTabListener(new TraderTabListener<TraderListActivity>(this, "Trader", TraderListActivity.class));
+		traderListTab.setTabListener(new TraderTabListener<TraderListFragment>(this, "Trader", TraderListFragment.class));
 		actionBar.addTab(traderListTab);
 		
 		// Trader today tab
 		Tab traderTodayTab = actionBar.newTab();
 		traderTodayTab.setTag("today");
 		traderTodayTab.setText(R.string.today);
-		traderTodayTab.setTabListener(new TraderTabListener<TraderTodayActivity>(this, "Today", TraderTodayActivity.class));
+		traderTodayTab.setTabListener(new TraderTabListener<TraderTodayFragment>(this, "Today", TraderTodayFragment.class));
 		actionBar.addTab(traderTodayTab);
 	}
 

@@ -35,26 +35,36 @@
             </intent-filter>
         </activity>
         
-        <activity android:name=".TraderActivity" android:screenOrientation="portrait" >
+        <activity android:name=".TraderActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.xtrade.android.MAIN_XTRADE" />
                 <action android:name="com.xtrade.android.TRADER_ACTION" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".TraderCreateOrUpdateActivity" android:screenOrientation="portrait" >
+        
+        <activity android:name=".TraderCreateOrUpdateActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.xtrade.android.TRADER_CREATE_UPDATE_ACTION" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".AboutActivity" android:screenOrientation="portrait" >
+        
+        <activity android:name=".TraderDetailActivity" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.xtrade.android.TRADER_DETAIL_ACTION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        <activity android:name=".AboutActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.xtrade.android.ABOUT" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".ClientMapActivity" android:screenOrientation="portrait" >
+        
+        <activity android:name=".ClientMapActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.xtrade.android.CLIENT_MAP_ACTION" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -64,17 +74,14 @@
         <!-- Services Declaration -->
 
         <service
-            android:name=".service.XTradeBaseService" android:screenOrientation="portrait"
-            android:exported="false" >
+            android:name=".service.XTradeBaseService" android:screenOrientation="portrait" android:exported="false">
             <intent-filter>
                 <action android:name="com.xtrade.android.LOGIN_ACTION" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>
 
-        <provider
-            android:name=".provider.XTradeProvider"
-            android:authorities="com.xtrade.android" >
+        <provider android:name=".provider.XTradeProvider" android:authorities="com.xtrade.android" >
         </provider>
     </application>
 

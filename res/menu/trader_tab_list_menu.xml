@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/mniNewTrader"
-        android:icon="@drawable/ic_new"
+        android:icon="@drawable/ic_new_trader"
         android:showAsAction="always"
         android:title="@string/new_trader"
         />

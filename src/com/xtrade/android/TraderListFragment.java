@@ -1,11 +1,13 @@
 package com.xtrade.android;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
@@ -16,11 +18,13 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.xtrade.android.adapter.TraderAdapter;
+import com.xtrade.android.provider.DatabaseContract.Trader;
 import com.xtrade.android.provider.TraderTranslator;
+import com.xtrade.android.util.ActionConstant;
 import com.xtrade.android.util.Debug;
 import com.xtrade.android.util.EventConstant;
 
-public class TraderListActivity extends SherlockFragment implements EventConstant {
+public class TraderListFragment extends SherlockFragment implements EventConstant {
 
 	private BaseAdapter adapter;
 	private ActionMode mActionMode;
@@ -36,6 +40,14 @@ public class TraderListActivity extends SherlockFragment implements EventConstan
 
 		ListView listView = (ListView) fragmentView.findViewById(R.id.lvwTrader);
 		listView.setAdapter(adapter);
+		
+		listView.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+				Intent intent = new Intent(ActionConstant.TRADER_DETAIL);
+				intent.putExtra(Trader.TRADER_ID, id);
+				startActivity(intent);
+			}
+		});
 		
 		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
 			@Override
