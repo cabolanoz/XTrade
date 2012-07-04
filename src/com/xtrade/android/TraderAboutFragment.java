@@ -19,7 +19,7 @@ public class TraderAboutFragment extends SherlockFragment implements EventConsta
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View fragmentView = inflater.inflate(R.layout.trader_tab_about, container, false);
-		
+
 		// Getting the activity intent
 		Intent intent = getActivity().getIntent();
 		if (intent != null) {
