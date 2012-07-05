@@ -17,9 +17,8 @@
         android:icon="@drawable/ic_launcher"
         android:logo="@drawable/ic_logo_text"
         android:label="@string/app_name"
-        android:theme="@style/Theme.XTrade"
+        android:theme="@style/Theme.XTrade">
         
-         >
         <activity
             android:name=".LoginActivity"
             android:screenOrientation="portrait"
