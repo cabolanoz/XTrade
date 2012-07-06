@@ -5,7 +5,9 @@
     <string name="app_name">XTrade</string>
     <color name="white">#FFFFFF</color>
     <color name="grey">#999999</color>
-    <string name="login">Login</string>
+    <string name="login">Sign In</string>
+    <string name="sign_up"><u>Sign Up</u></string>
+    <string name="forgot_password"><u>Forgot your password?</u></string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="remember_me">Remember me</string>
@@ -21,6 +23,8 @@
     <string name="traderposx">Trader Location X</string>
    	<string name="traderposy">Trader Location Y</string>
     <string name="add">Add</string>
+    <string name="address">Address</string>
+    <string name="where">Where</string>
     <string name="register">Register</string>
     <string name="save">Save</string>
     <string name="classification">Classification</string>

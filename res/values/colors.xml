@@ -3,6 +3,8 @@
     <color name="base_green">#537c00</color>
     <color name="base_green_light">#669900</color>
     <color name="trader_list_color">#e5e5e5</color>
+    <color name="base_button_light">#e5e5e5</color>
+    <color name="base_button">#a9a8a5</color>
     <color name="primary_text_color">#FFFFFF</color>
     <color name="selected_list">#c3e5ff</color>    
     <color name="list_header">#0351f1</color>

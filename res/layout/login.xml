@@ -4,52 +4,77 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     tools:ignore="ContentDescription" >
-	<ImageView
-	    android:background="@drawable/ic_login"
-	    android:id="@+id/ivwXTrade"
-	    android:layout_width="match_parent"
-	    android:layout_height="fill_parent"
-	    android:paddingRight="5dp" />
 
-	<LinearLayout
-	    android:background="@android:color/transparent"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:orientation="vertical"
-	    android:paddingTop="150dp" >
+    <ImageView
+        android:id="@+id/ivwXTrade"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/ic_login"
+        android:paddingRight="5dp" />
 
-	    <EditText
-	        android:id="@+id/textUsername"
-	        style="@style/Widget.XTrade.EditText"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_margin="5dip"
-	        android:hint="@string/username" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:orientation="vertical"
+        android:paddingTop="150dp" >
 
-	    <EditText
-	        android:id="@+id/textPassword"
-	        style="@style/Widget.XTrade.EditText"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_margin="5dip"
-	        android:hint="@string/password"
-	        android:imeOptions="actionDone"
-	        android:inputType="textPassword" />
+        <EditText
+            android:id="@+id/textUsername"
+            style="@style/Widget.XTrade.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:hint="@string/username" />
 
-	    <CheckBox
-	        android:id="@+id/checkRememberMe"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_margin="5dip"
-	        android:text="@string/remember_me" />
+        <EditText
+            android:id="@+id/textPassword"
+            style="@style/Widget.XTrade.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:hint="@string/password"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword" />
 
-	    <Button
-	        android:id="@+id/buttonLogin"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_margin="5dip"
-	        android:text="@string/login" />
+        <CheckBox
+            android:id="@+id/checkRememberMe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:text="@string/remember_me" />
 
-	</LinearLayout>
+        <Button
+            android:id="@+id/buttonLogin"
+            style="@style/TradeButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:text="@string/login" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/default_padding" >
+
+            <TextView
+                android:id="@+id/textSignIn"
+                style="@style/LinkItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:text="@string/sign_up" />
+
+            <TextView
+                android:id="@+id/textForgotPassword"
+                style="@style/LinkItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="@string/forgot_password" />
+        </LinearLayout>
+    </LinearLayout>
 
 </FrameLayout>

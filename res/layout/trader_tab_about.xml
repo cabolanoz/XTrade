@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:padding="@dimen/list_default_padding" >
     <ImageView
         android:id="@+id/ivwTraderPhoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:paddingBottom="20dp"
         android:src="@drawable/ic_launcher" />
     <TextView
         android:id="@+id/tvwTraderName"
@@ -18,7 +20,7 @@
         android:layout_marginLeft="18dp"
         android:layout_toRightOf="@+id/ivwTraderPhoto"
         android:text="Large Text"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+         />
     <TextView
         android:id="@+id/tvwTraderWebsite"
         android:layout_width="wrap_content"
@@ -27,16 +29,51 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/tvwTraderName"
         android:text="Medium Text"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        
+         />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignLeft="@+id/ivwTraderPhoto"
+        android:layout_below="@+id/ivwTraderPhoto"
+        android:background="@color/black"
+         />
+
     <TextView
-        android:id="@+id/tvwTraderAddress"
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/ivwTraderPhoto"
-        android:layout_marginTop="28dp"
-        android:text="Medium Text"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:text="@string/address"
+        />
+
+    <TextView
+        android:id="@+id/tvwTraderAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textView1"
+        android:text="Medium Text" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/map" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="@string/where" />
 
 </RelativeLayout>
