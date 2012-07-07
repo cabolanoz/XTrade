@@ -40,5 +40,9 @@
     <string name="general">General</string>
     <string name="detail">Detail</string>
     <string name="contacts">Contacts</string>
+    <string name="contactname">Contact Name</string>
+    <string name="contacttype">Contact Type</string>
+    <string name="contactemail">Contact Email</string>
+    <string name="contactphone">Contact Phone</string>
 
 </resources>

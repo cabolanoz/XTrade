@@ -19,14 +19,14 @@ public class TraderContactFragment extends SherlockFragment implements EventCons
 	private BaseAdapter adapter;
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View fragmentView = inflater.inflate(R.layout.trader_tab_contact, container, false);
+		View fragmentView = inflater.inflate(R.layout.trader_tab_list_contact, container, false);
 		
-		Cursor cursor = getActivity().getContentResolver().query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
-		
-		adapter = new ContactAdapter(getActivity(), new ContactTranslator().translate(cursor));
-		
-		ListView listView = (ListView) fragmentView.findViewById(R.id.lvwContact);
-		listView.setAdapter(adapter);
+//		Cursor cursor = getActivity().getContentResolver().query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
+//		
+//		adapter = new ContactAdapter(getActivity(), new ContactTranslator().translate(cursor));
+//		
+//		ListView listView = (ListView) fragmentView.findViewById(R.id.lvwContact);
+//		listView.setAdapter(adapter);
 		
 		return fragmentView;
 	}

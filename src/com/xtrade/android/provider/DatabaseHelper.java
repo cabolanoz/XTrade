@@ -6,9 +6,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 
 import com.xtrade.android.provider.DatabaseContract.ClassificationColumns;
-import com.xtrade.android.provider.DatabaseContract.TraderColumns;
+import com.xtrade.android.provider.DatabaseContract.ContactColumns;
 import com.xtrade.android.provider.DatabaseContract.ContactTypeColumns;
 import com.xtrade.android.provider.DatabaseContract.PositionColumns;
+import com.xtrade.android.provider.DatabaseContract.TraderColumns;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -21,6 +22,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	 * */
 	interface Tables {
 		String TRADER = "Trader";
+		String CONTACT = "Contact";
 		String CONTACT_TYPE = "ContactType";
 		String POSITION = "Position";
 		String CLASSIFICATION = "Classification";
@@ -41,6 +43,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				+ TraderColumns.POSX + " TEXT, "
 				+ TraderColumns.POSY + " TEXT)");
 		
+		// Contact table
+		db.execSQL("CREATE TABLE " + Tables.CONTACT + " (" + BaseColumns._ID
+				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + ContactColumns.CONTACT_ID + " TEXT, "
+				+ ContactColumns.NAME + " TEXT, "
+				+ ContactColumns.TYPE + " TEXT, "
+				+ ContactColumns.EMAIL + " TEXT, "
+				+ ContactColumns.PHONE + " TEXT)");
+		
+		// Contact type table
+		db.execSQL("CREATE TABLE " + Tables.CONTACT_TYPE + " (" + BaseColumns._ID
+				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + ContactTypeColumns.CONTACT_TYPE_ID + " TEXT, "
+				+ ContactTypeColumns.NAME + " TEXT)");
+		
 		// Classification table
 		db.execSQL("CREATE TABLE " + Tables.CLASSIFICATION + " (" + BaseColumns._ID
 				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + ClassificationColumns.CLASSIFICATION_ID + " TEXT, "
@@ -50,12 +65,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL("CREATE TABLE " + Tables.POSITION + " (" + BaseColumns._ID
 				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + PositionColumns.POSITION_ID + " TEXT, "
 				+ PositionColumns.NAME + " TEXT)");
-		
-		// Contact table
-		db.execSQL("CREATE TABLE " + Tables.CONTACT_TYPE + " (" + BaseColumns._ID
-				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + ContactTypeColumns.CONTACT_TYPE_ID + " TEXT, "
-				+ ContactTypeColumns.NAME + " TEXT)");
-
 	}
 
 	@Override

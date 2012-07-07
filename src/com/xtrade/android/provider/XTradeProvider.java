@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.provider.BaseColumns;
 
 import com.xtrade.android.provider.DatabaseContract.Classification;
+import com.xtrade.android.provider.DatabaseContract.Contact;
 import com.xtrade.android.provider.DatabaseContract.Position;
 import com.xtrade.android.provider.DatabaseContract.Trader;
 
@@ -17,10 +18,12 @@ public class XTradeProvider extends ContentProvider {
 
 	public static final int TRADER = 1000;
 	public static final int TRADER_ID = 1001;
-	public static final int CLASSIFICATION = 1002;
-	public static final int CLASSIFICATION_ID = 1003;
-	public static final int POSITION = 1004;
-	public static final int POSITION_ID = 1005;
+	public static final int CONTACT = 1002;
+	public static final int CONTACT_ID = 1003;
+	public static final int CLASSIFICATION = 1004;
+	public static final int CLASSIFICATION_ID = 1005;
+	public static final int POSITION = 1006;
+	public static final int POSITION_ID = 1007;
 
 //	private final static int LIMIT_CALLS = 10;
 
@@ -34,6 +37,8 @@ public class XTradeProvider extends ContentProvider {
 
 		matcher.addURI(CONTENT_AUTHORITY, DatabaseContract.PATH_TRADER, TRADER);
 		matcher.addURI(CONTENT_AUTHORITY, DatabaseContract.PATH_TRADER + "/*", TRADER_ID);
+		matcher.addURI(CONTENT_AUTHORITY, DatabaseContract.PATH_CONTACT, CONTACT);
+		matcher.addURI(CONTENT_AUTHORITY, DatabaseContract.PATH_CONTACT + "/*", CONTACT_ID);
 		matcher.addURI(CONTENT_AUTHORITY, DatabaseContract.PATH_CLASSIFICATION, CLASSIFICATION);
 		matcher.addURI(CONTENT_AUTHORITY, DatabaseContract.PATH_CLASSIFICATION + "/*", CLASSIFICATION_ID);
 		matcher.addURI(CONTENT_AUTHORITY, DatabaseContract.PATH_POSITION, POSITION);
@@ -77,6 +82,10 @@ public class XTradeProvider extends ContentProvider {
 			return Trader.CONTENT_TYPE;
 		case TRADER_ID:
 			return Trader.CONTENT_ITEM_TYPE;
+		case CONTACT:
+			return Contact.CONTENT_TYPE;
+		case CONTACT_ID:
+			return Contact.CONTENT_ITEM_TYPE;
 		case CLASSIFICATION:
 			return Classification.CONTENT_TYPE;
 		case CLASSIFICATION_ID:
@@ -99,6 +108,10 @@ public class XTradeProvider extends ContentProvider {
 			db.insertOrThrow(DatabaseHelper.Tables.TRADER, null, values);
 			getContext().getContentResolver().notifyChange(uri, null);
 			return Trader.buildUri(values.getAsString(BaseColumns._ID));
+		case CONTACT:
+			db.insertOrThrow(DatabaseHelper.Tables.CONTACT, null, values);
+			getContext().getContentResolver().notifyChange(uri, null);
+			return Contact.buildUri(values.getAsString(BaseColumns._ID));
 		case CLASSIFICATION:
 			db.insertOrThrow(DatabaseHelper.Tables.CLASSIFICATION, null, values);
 			getContext().getContentResolver().notifyChange(uri, null);
@@ -136,6 +149,8 @@ public class XTradeProvider extends ContentProvider {
 		if (sortOrder == null) {
 			if (match == TRADER || match == TRADER_ID)
 				sortOrder = Trader.DEFAULT_SORT;
+			if (match == CONTACT || match == CONTACT_ID)
+				sortOrder = Contact.DEFAULT_SORT;
 			else if (match == CLASSIFICATION || match == CLASSIFICATION_ID)
 				sortOrder = Classification.DEFAULT_SORT;
 			else if (match == POSITION || match == POSITION_ID)
@@ -156,6 +171,14 @@ public class XTradeProvider extends ContentProvider {
 		case TRADER_ID:
 			id = Trader.getId(uri);
 			builder.setTables(DatabaseHelper.Tables.TRADER);
+			builder.appendWhere(BaseColumns._ID + " = " + id);
+			break;
+		case CONTACT:
+			builder.setTables(DatabaseHelper.Tables.CONTACT);
+			break;
+		case CONTACT_ID:
+			id = Contact.getId(uri);
+			builder.setTables(DatabaseHelper.Tables.CONTACT);
 			builder.appendWhere(BaseColumns._ID + " = " + id);
 			break;
 		case CLASSIFICATION:
@@ -203,6 +226,17 @@ public class XTradeProvider extends ContentProvider {
 				finalWhere = finalWhere + " AND " + selection;
 
 			count = db.update(DatabaseHelper.Tables.TRADER, values, finalWhere, selectionArgs);
+			break;
+		case CONTACT:
+			count = db.update(DatabaseHelper.Tables.CONTACT, values, selection, selectionArgs);
+			break;
+		case CONTACT_ID:
+			id = Contact.getId(uri);
+			finalWhere = BaseColumns._ID + " = " + id;
+			if (selection != null)
+				finalWhere = finalWhere + " AND " + selection;
+
+			count = db.update(DatabaseHelper.Tables.CONTACT, values, finalWhere, selectionArgs);
 			break;
 		case CLASSIFICATION:
 			count = db.update(DatabaseHelper.Tables.CLASSIFICATION, values, selection, selectionArgs);

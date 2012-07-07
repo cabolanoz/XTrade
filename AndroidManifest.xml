@@ -57,6 +57,13 @@
             </intent-filter>
         </activity>
         
+        <activity android:name=".ContactCreateOrUpdateActivity" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.xtrade.android.CONTACT_CREATE_UPDATE_ACTION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
         <activity android:name=".AboutActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.xtrade.android.ABOUT" />

@@ -1,10 +1,15 @@
 package com.xtrade.android;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 import com.xtrade.android.listener.TraderTabListener;
+import com.xtrade.android.util.ActionConstant;
 import com.xtrade.android.util.EventConstant;
 
 public class TraderDetailActivity extends BaseActivity implements EventConstant {
@@ -29,6 +34,22 @@ public class TraderDetailActivity extends BaseActivity implements EventConstant 
 		traderContactTab.setText(R.string.contacts);
 		traderContactTab.setTabListener(new TraderTabListener<TraderContactFragment>(this, "contacts", TraderContactFragment.class));
 		actionBar.addTab(traderContactTab);
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu _menu) {
+		MenuInflater menuInflater = getSupportMenuInflater();
+		menuInflater.inflate(R.menu.trader_tab_contact_menu, _menu);
+		return true;
+	}
+	
+	public boolean onOptionsItemSelected(MenuItem _menuItem) {
+		switch (_menuItem.getItemId()) {
+		case R.id.mniNewContact:
+			startActivity(new Intent(ActionConstant.CONTACT_CREATE_UPDATE));
+			break;
+		}
+		return super.onOptionsItemSelected(_menuItem);
 	}
 	
 }

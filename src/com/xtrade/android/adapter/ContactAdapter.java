@@ -51,7 +51,7 @@ public class ContactAdapter extends BaseAdapter implements EventConstant {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
 			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			convertView = inflater.inflate(R.layout.trader_tab_contact_item, null);
+			convertView = inflater.inflate(R.layout.trader_tab_list_contact_item, null);
 		}
 		
 		Contact contact = getContactList().get(position);
