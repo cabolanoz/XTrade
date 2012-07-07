@@ -23,18 +23,8 @@ public class DatabaseContract {
 		String PHONE = "Phone";
 	}
 	
-	interface ContactTypeColumns {
+	public interface ContactTypeColumns {
 		String CONTACT_TYPE_ID = "ContactTypeId";
-		String NAME = "Name";
-	}
-	
-	interface ClassificationColumns {
-		String CLASSIFICATION_ID = "ClassificationId";
-		String NAME = "Name";
-	}
-
-	interface PositionColumns {
-		String POSITION_ID = "PositionId";
 		String NAME = "Name";
 	}
 
@@ -44,9 +34,6 @@ public class DatabaseContract {
 	public static final String PATH_TRADER = "trader";
 	public static final String PATH_CONTACT = "contact";
 	public static final String PATH_CONTACT_TYPE = "contact_type";
-	public static final String PATH_CLASSIFICATION = "classification";
-	public static final String PATH_POSITION = "position";
-	
 
 	public static class Trader extends BaseTable implements TraderColumns {
 		public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH_TRADER).build();
@@ -102,44 +89,6 @@ public class DatabaseContract {
 
 		public static Uri buildUri(String contactTypeId) {
 			return CONTENT_URI.buildUpon().appendPath(contactTypeId).build();
-		}
-	}
-	
-	public static class Classification extends BaseTable implements ClassificationColumns {
-		public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH_CLASSIFICATION).build();
-
-		/**
-		 * Specify the content for the record and for this entity
-		 */
-		public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.xtrade.android.classification";
-		public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd.xtrade.android.classification";
-
-		/**
-		 * Default sorting for this entity
-		 */
-		public static final String DEFAULT_SORT = CLASSIFICATION_ID + " ASC";
-
-		public static Uri buildUri(String classificationId) {
-			return CONTENT_URI.buildUpon().appendPath(classificationId).build();
-		}
-	}
-	
-	public static class Position extends BaseTable implements PositionColumns {
-		public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH_POSITION).build();
-
-		/**
-		 * Specify the content for the record and for this entity
-		 */
-		public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.xtrade.android.position";
-		public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd.xtrade.android.position";
-
-		/**
-		 * Default sorting for this entity
-		 */
-		public static final String DEFAULT_SORT = POSITION_ID + " ASC";
-
-		public static Uri buildUri(String positionId) {
-			return CONTENT_URI.buildUpon().appendPath(positionId).build();
 		}
 	}
 

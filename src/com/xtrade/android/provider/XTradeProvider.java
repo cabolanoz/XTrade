@@ -9,9 +9,8 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-import com.xtrade.android.provider.DatabaseContract.Classification;
 import com.xtrade.android.provider.DatabaseContract.Contact;
-import com.xtrade.android.provider.DatabaseContract.Position;
+import com.xtrade.android.provider.DatabaseContract.ContactType;
 import com.xtrade.android.provider.DatabaseContract.Trader;
 
 public class XTradeProvider extends ContentProvider {
@@ -20,10 +19,8 @@ public class XTradeProvider extends ContentProvider {
 	public static final int TRADER_ID = 1001;
 	public static final int CONTACT = 1002;
 	public static final int CONTACT_ID = 1003;
-	public static final int CLASSIFICATION = 1004;
-	public static final int CLASSIFICATION_ID = 1005;
-	public static final int POSITION = 1006;
-	public static final int POSITION_ID = 1007;
+	public static final int CONTACT_TYPE = 1004;
+	public static final int CONTACT_TYPE_ID = 1005;
 
 //	private final static int LIMIT_CALLS = 10;
 
@@ -39,10 +36,8 @@ public class XTradeProvider extends ContentProvider {
 		matcher.addURI(CONTENT_AUTHORITY, DatabaseContract.PATH_TRADER + "/*", TRADER_ID);
 		matcher.addURI(CONTENT_AUTHORITY, DatabaseContract.PATH_CONTACT, CONTACT);
 		matcher.addURI(CONTENT_AUTHORITY, DatabaseContract.PATH_CONTACT + "/*", CONTACT_ID);
-		matcher.addURI(CONTENT_AUTHORITY, DatabaseContract.PATH_CLASSIFICATION, CLASSIFICATION);
-		matcher.addURI(CONTENT_AUTHORITY, DatabaseContract.PATH_CLASSIFICATION + "/*", CLASSIFICATION_ID);
-		matcher.addURI(CONTENT_AUTHORITY, DatabaseContract.PATH_POSITION, POSITION);
-		matcher.addURI(CONTENT_AUTHORITY, DatabaseContract.PATH_POSITION + "/*", POSITION_ID);
+		matcher.addURI(CONTENT_AUTHORITY, DatabaseContract.PATH_CONTACT_TYPE, CONTACT_TYPE);
+		matcher.addURI(CONTENT_AUTHORITY, DatabaseContract.PATH_CONTACT_TYPE + "/*", CONTACT_TYPE_ID);
 
 		return matcher;
 	}
@@ -53,12 +48,21 @@ public class XTradeProvider extends ContentProvider {
 		String finalWhere = null;
 		String table = null;
 		switch (uriMatcher.match(uri)) {
-		case POSITION:
-			table = DatabaseHelper.Tables.POSITION;
+		case TRADER:
+			table = DatabaseHelper.Tables.TRADER;
 			break;
-		case POSITION_ID:
-			table = DatabaseHelper.Tables.POSITION;
-			finalWhere = BaseColumns._ID + " = " + Position.getId(uri);
+		case TRADER_ID:
+			table = DatabaseHelper.Tables.TRADER;
+			finalWhere = BaseColumns._ID + " = " + Trader.getId(uri);
+			if (selection != null)
+				finalWhere = finalWhere + " AND " + selection;
+			break;
+		case CONTACT:
+			table = DatabaseHelper.Tables.CONTACT;
+			break;
+		case CONTACT_ID:
+			table = DatabaseHelper.Tables.CONTACT;
+			finalWhere = BaseColumns._ID + " = " + Contact.getId(uri);
 			if (selection != null)
 				finalWhere = finalWhere + " AND " + selection;
 			break;
@@ -86,14 +90,10 @@ public class XTradeProvider extends ContentProvider {
 			return Contact.CONTENT_TYPE;
 		case CONTACT_ID:
 			return Contact.CONTENT_ITEM_TYPE;
-		case CLASSIFICATION:
-			return Classification.CONTENT_TYPE;
-		case CLASSIFICATION_ID:
-			return Classification.CONTENT_ITEM_TYPE;
-		case POSITION:
-			return Position.CONTENT_TYPE;
-		case POSITION_ID:
-			return Position.CONTENT_ITEM_TYPE;
+		case CONTACT_TYPE:
+			return ContactType.CONTENT_TYPE;
+		case CONTACT_TYPE_ID:
+			return ContactType.CONTENT_ITEM_TYPE;
 		default:
 			throw new UnsupportedOperationException("Unknown uri: " + uri);
 		}
@@ -112,14 +112,10 @@ public class XTradeProvider extends ContentProvider {
 			db.insertOrThrow(DatabaseHelper.Tables.CONTACT, null, values);
 			getContext().getContentResolver().notifyChange(uri, null);
 			return Contact.buildUri(values.getAsString(BaseColumns._ID));
-		case CLASSIFICATION:
-			db.insertOrThrow(DatabaseHelper.Tables.CLASSIFICATION, null, values);
+		case CONTACT_TYPE:
+			db.insertOrThrow(DatabaseHelper.Tables.CONTACT_TYPE, null, values);
 			getContext().getContentResolver().notifyChange(uri, null);
-			return Classification.buildUri(values.getAsString(BaseColumns._ID));
-		case POSITION:
-			db.insertOrThrow(DatabaseHelper.Tables.POSITION, null, values);
-			getContext().getContentResolver().notifyChange(uri, null);
-			return Position.buildUri(values.getAsString(BaseColumns._ID));
+			return ContactType.buildUri(values.getAsString(BaseColumns._ID));
 		default:
 			throw new UnsupportedOperationException("Unknown uri: " + uri);
 		}
@@ -151,10 +147,8 @@ public class XTradeProvider extends ContentProvider {
 				sortOrder = Trader.DEFAULT_SORT;
 			if (match == CONTACT || match == CONTACT_ID)
 				sortOrder = Contact.DEFAULT_SORT;
-			else if (match == CLASSIFICATION || match == CLASSIFICATION_ID)
-				sortOrder = Classification.DEFAULT_SORT;
-			else if (match == POSITION || match == POSITION_ID)
-				sortOrder = Position.DEFAULT_SORT;
+			if (match == CONTACT_TYPE || match == CONTACT_TYPE_ID)
+				sortOrder = ContactType.DEFAULT_SORT;
 		}
 
 		return sortOrder;
@@ -181,20 +175,12 @@ public class XTradeProvider extends ContentProvider {
 			builder.setTables(DatabaseHelper.Tables.CONTACT);
 			builder.appendWhere(BaseColumns._ID + " = " + id);
 			break;
-		case CLASSIFICATION:
-			builder.setTables(DatabaseHelper.Tables.CLASSIFICATION);
+		case CONTACT_TYPE:
+			builder.setTables(DatabaseHelper.Tables.CONTACT_TYPE);
 			break;
-		case CLASSIFICATION_ID:
-			id = Classification.getId(uri);
-			builder.setTables(DatabaseHelper.Tables.CLASSIFICATION);
-			builder.appendWhere(BaseColumns._ID + " = " + id);
-			break;
-		case POSITION:
-			builder.setTables(DatabaseHelper.Tables.POSITION);
-			break;
-		case POSITION_ID:
-			id = Position.getId(uri);
-			builder.setTables(DatabaseHelper.Tables.POSITION);
+		case CONTACT_TYPE_ID:
+			id = ContactType.getId(uri);
+			builder.setTables(DatabaseHelper.Tables.CONTACT_TYPE);
 			builder.appendWhere(BaseColumns._ID + " = " + id);
 			break;
 		default:
@@ -238,27 +224,16 @@ public class XTradeProvider extends ContentProvider {
 
 			count = db.update(DatabaseHelper.Tables.CONTACT, values, finalWhere, selectionArgs);
 			break;
-		case CLASSIFICATION:
-			count = db.update(DatabaseHelper.Tables.CLASSIFICATION, values, selection, selectionArgs);
+		case CONTACT_TYPE:
+			count = db.update(DatabaseHelper.Tables.CONTACT_TYPE, values, selection, selectionArgs);
 			break;
-		case CLASSIFICATION_ID:
-			id = Classification.getId(uri);
-			finalWhere = BaseColumns._ID + " = " + id;
-			if (selection != null)
-				finalWhere = finalWhere + " AND " + selection;
-			
-			count = db.update(DatabaseHelper.Tables.CLASSIFICATION, values, finalWhere, selectionArgs);
-			break;
-		case POSITION:
-			count = db.update(DatabaseHelper.Tables.POSITION, values, selection, selectionArgs);
-			break;
-		case POSITION_ID:
-			id = Position.getId(uri);
+		case CONTACT_TYPE_ID:
+			id = ContactType.getId(uri);
 			finalWhere = BaseColumns._ID + " = " + id;
 			if (selection != null)
 				finalWhere = finalWhere + " AND " + selection;
 
-			count = db.update(DatabaseHelper.Tables.POSITION, values, finalWhere, selectionArgs);
+			count = db.update(DatabaseHelper.Tables.CONTACT_TYPE, values, finalWhere, selectionArgs);
 			break;
 		default:
 			throw new IllegalArgumentException("Unknown URI " + uri);

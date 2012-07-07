@@ -5,10 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 
-import com.xtrade.android.provider.DatabaseContract.ClassificationColumns;
 import com.xtrade.android.provider.DatabaseContract.ContactColumns;
 import com.xtrade.android.provider.DatabaseContract.ContactTypeColumns;
-import com.xtrade.android.provider.DatabaseContract.PositionColumns;
 import com.xtrade.android.provider.DatabaseContract.TraderColumns;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -24,8 +22,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		String TRADER = "Trader";
 		String CONTACT = "Contact";
 		String CONTACT_TYPE = "ContactType";
-		String POSITION = "Position";
-		String CLASSIFICATION = "Classification";
 	}
 
 	public DatabaseHelper(Context context) {
@@ -56,15 +52,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + ContactTypeColumns.CONTACT_TYPE_ID + " TEXT, "
 				+ ContactTypeColumns.NAME + " TEXT)");
 		
-		// Classification table
-		db.execSQL("CREATE TABLE " + Tables.CLASSIFICATION + " (" + BaseColumns._ID
-				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + ClassificationColumns.CLASSIFICATION_ID + " TEXT, "
-				+ ClassificationColumns.NAME + " TEXT)");
-	
-		// Position table (Even though I don't know what is this for)
-		db.execSQL("CREATE TABLE " + Tables.POSITION + " (" + BaseColumns._ID
-				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + PositionColumns.POSITION_ID + " TEXT, "
-				+ PositionColumns.NAME + " TEXT)");
+		// TODO: We must call this data from web
+		String sql1 = "INSERT INTO ContactType (ContactTypeId, Name) VALUES ('1', 'Manager')";
+		db.execSQL(sql1);
 	}
 
 	@Override

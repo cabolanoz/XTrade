@@ -54,7 +54,7 @@ public class TraderCreateOrUpdateActivity extends BaseActivity implements EventC
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
-		inflater.inflate(R.menu.trader_menu, menu);
+		inflater.inflate(R.menu.trader_tab_general_menu, menu);
 		return true;
 	}
 
