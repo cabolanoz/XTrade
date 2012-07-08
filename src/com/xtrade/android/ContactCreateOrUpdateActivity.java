@@ -11,7 +11,6 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.xtrade.android.provider.DatabaseContract;
 import com.xtrade.android.provider.DatabaseContract.ContactTypeColumns;
-import com.xtrade.android.util.Debug;
 import com.xtrade.android.util.EventConstant;
 
 public class ContactCreateOrUpdateActivity extends BaseActivity implements EventConstant {
@@ -27,10 +26,8 @@ public class ContactCreateOrUpdateActivity extends BaseActivity implements Event
 				null, 
 				null,
 				null);
-
-		Debug.info(this, "Valores " + cursor.getCount());
 		
-		adapter = new SimpleCursorAdapter(this, R.layout.contact_type, cursor, new String[] {ContactTypeColumns.NAME}, new int[] {R.id.tvwContactTypeName}, 0);
+		adapter = new SimpleCursorAdapter(this, android.R.layout.simple_spinner_item, cursor, new String[] {ContactTypeColumns.NAME}, new int[] {android.R.id.text1}, 0);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 		Spinner spnContactType = (Spinner) findViewById(R.id.spnContactType);
