@@ -3,13 +3,15 @@ package com.xtrade.android.object;
 public class Contact {
 
 	private String name;
+	private String type;
 	private String email;
 	private String phone;
 	
-	public Contact(String name, String email, String phone) {
-		this.name = name;
-		this.email = email;
-		this.phone = phone;
+	public Contact(String _name, String _type, String _email, String _phone) {
+		this.name = _name;
+		this.type = _type;
+		this.email = _email;
+		this.phone = _phone;
 	}
 
 	public String getName() {
@@ -18,6 +20,14 @@ public class Contact {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public String getEmail() {

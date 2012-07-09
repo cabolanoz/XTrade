@@ -9,8 +9,8 @@ public class Trader {
 	private String posX;
 	private String posY;
 
-	public Trader(String id, String _name, String _website, String _address, String _posX, String _posY) {
-		this.id = id;
+	public Trader(String _id, String _name, String _website, String _address, String _posX, String _posY) {
+		this.id = _id;
 		this.name = _name;
 		this.website = _website;
 		this.address = _address;

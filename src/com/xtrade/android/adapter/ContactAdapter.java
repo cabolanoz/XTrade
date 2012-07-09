@@ -56,8 +56,14 @@ public class ContactAdapter extends BaseAdapter implements EventConstant {
 		
 		Contact contact = getContactList().get(position);
 		
+		if (position % 2 == 0)
+			convertView.setBackgroundResource(R.drawable.list_bg_odd);
+		
 		TextView tvwContactName = (TextView) convertView.findViewById(R.id.tvwContactName);
 		tvwContactName.setText(contact.getName());
+		
+		TextView tvwContactType = (TextView) convertView.findViewById(R.id.tvwContactType);
+		tvwContactType.setText(contact.getType());
 		
 		TextView tvwContactEmail = (TextView) convertView.findViewById(R.id.tvwContactEmail);
 		tvwContactEmail.setText(contact.getEmail());

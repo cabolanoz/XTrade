@@ -50,7 +50,6 @@ public class TraderListFragment extends SherlockFragment implements EventConstan
 		});
 		
 		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
-			@Override
 			public boolean onItemLongClick(AdapterView<?> adapter, View view, int position, long id) {
 				if (mActionMode != null)
 		            return false;
@@ -67,7 +66,6 @@ public class TraderListFragment extends SherlockFragment implements EventConstan
 	
 	private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
 	    // Called when the action mode is created; startActionMode() was called
-	    @Override
 	    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 	        // Inflate a menu resource providing context menu items
 	        MenuInflater inflater = mode.getMenuInflater();
@@ -77,20 +75,17 @@ public class TraderListFragment extends SherlockFragment implements EventConstan
 
 	    // Called each time the action mode is shown. Always called after onCreateActionMode, but
 	    // may be called multiple times if the mode is invalidated.
-	    @Override
 	    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
 	        return false;
 	    }
 
 	    // Called when the user selects a contextual menu item
-	    @Override
 	    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 	        Debug.info(this, "Actionbar is being clicked");
 			return false;
 	    }
 
 	    // Called when the user exits the action mode
-	    @Override
 	    public void onDestroyActionMode(ActionMode mode) {
 	        mActionMode = null;
 	    }

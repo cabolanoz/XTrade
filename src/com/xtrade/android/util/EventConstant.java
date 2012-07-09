@@ -8,5 +8,7 @@ public interface EventConstant {
 	final int TRADER_UPDATE_REQUEST_CODE = OFFSET + 2;
 	final int TRADER_PHOTO_GALLERY_REQUEST = OFFSET + 3;
 	final int TRADER_PHOTO_CAMERA_REQUEST = OFFSET + 4;
+	final int CONTACT_CREATE_REQUEST_CODE = OFFSET + 5;
+	final int CONTACT_UPDATE_REQUEST_CODE = OFFSET + 6;
 	
 }
