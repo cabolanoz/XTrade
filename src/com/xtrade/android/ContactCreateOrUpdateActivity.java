@@ -5,6 +5,7 @@ import org.apache.commons.lang.StringUtils;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.CursorWrapper;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.BaseColumns;
@@ -80,9 +81,10 @@ public class ContactCreateOrUpdateActivity extends BaseActivity implements Event
 			// We get the ACTION_TYPE extra which tells us what operation we should perform (Save or Update)
 			int extra = intent.getIntExtra("ACTION_TYPE", -1);
 
+			CursorWrapper cursorWrapper = (CursorWrapper) spnContactType.getSelectedItem();
+			
 			String contactName = etxContactName.getText().toString();
-			// TODO: Don't know how to get the value from the spinner
-			String contactType = "Manager";
+			String contactType = cursorWrapper.getString(cursorWrapper.getColumnIndexOrThrow(ContactTypeColumns.NAME));
 			String contactEmail = etxContactEmail.getText().toString();
 			String contactPhone = etxContactPhone.getText().toString();
 			
