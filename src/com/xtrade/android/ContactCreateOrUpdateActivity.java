@@ -81,6 +81,7 @@ public class ContactCreateOrUpdateActivity extends BaseActivity implements Event
 			int extra = intent.getIntExtra("ACTION_TYPE", -1);
 
 			String contactName = etxContactName.getText().toString();
+			// TODO: Don't know how to get the value from the spinner
 			String contactType = "Manager";
 			String contactEmail = etxContactEmail.getText().toString();
 			String contactPhone = etxContactPhone.getText().toString();
