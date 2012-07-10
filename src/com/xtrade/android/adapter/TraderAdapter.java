@@ -39,7 +39,7 @@ public class TraderAdapter extends BaseAdapter implements EventConstant {
 		tvwTraderName.setText(trader.getName());
 
 		TextView tvwTraderWebsite = (TextView) convertView.findViewById(R.id.tvwTraderWebsite);
-		tvwTraderWebsite.setText(trader.getWebsite());
+		tvwTraderWebsite.setText(trader.getAddress());
 
 		return convertView;
 	}
