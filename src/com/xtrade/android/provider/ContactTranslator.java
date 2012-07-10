@@ -18,7 +18,8 @@ public class ContactTranslator {
 					_cursor.getString(_cursor.getColumnIndex(ContactColumns.NAME)),
 					_cursor.getString(_cursor.getColumnIndex(ContactColumns.TYPE)),
 					_cursor.getString(_cursor.getColumnIndex(ContactColumns.EMAIL)),
-					_cursor.getString(_cursor.getColumnIndex(ContactColumns.PHONE)));
+					_cursor.getString(_cursor.getColumnIndex(ContactColumns.PHONE)),
+					_cursor.getString(_cursor.getColumnIndex(ContactColumns.TRADER_ID)));
 			
 			contacts.add(contact);
 		}

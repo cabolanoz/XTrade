@@ -6,12 +6,14 @@ public class Contact {
 	private String type;
 	private String email;
 	private String phone;
+	private String traderId;
 	
-	public Contact(String _name, String _type, String _email, String _phone) {
+	public Contact(String _name, String _type, String _email, String _phone, String _traderId) {
 		this.name = _name;
 		this.type = _type;
 		this.email = _email;
 		this.phone = _phone;
+		this.traderId = _traderId;
 	}
 
 	public String getName() {
@@ -44,6 +46,14 @@ public class Contact {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public String getTraderId() {
+		return traderId;
+	}
+
+	public void setTraderId(String traderId) {
+		this.traderId = traderId;
 	}
 	
 }
