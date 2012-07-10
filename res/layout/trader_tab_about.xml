@@ -36,15 +36,6 @@
         android:layout_toRightOf="@+id/ivwTraderPhoto"
         android:text="Large Text" />
 
-    <TextView
-        android:id="@+id/tvwTraderWebsite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvwTraderName"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/tvwTraderName"
-        android:text="Medium Text" />
-
     <View
         android:id="@+id/line"
         android:layout_width="match_parent"
@@ -92,5 +83,15 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/textView1"
         android:text="Medium Text" />
+
+    <TextView
+        android:id="@+id/tvwTraderWebsite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvwTraderName"
+        android:layout_alignRight="@+id/tvwTraderName"
+        android:layout_below="@+id/tvwTraderName"
+        android:text="Small Text"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout>

@@ -47,11 +47,12 @@ public class ContactCreateOrUpdateActivity extends BaseActivity implements Event
 		
 		adapter = new SimpleCursorAdapter(this, android.R.layout.simple_spinner_item, cursor, new String[] {ContactTypeColumns.NAME}, new int[] {android.R.id.text1}, 0);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-		cursor.close();
 		
 		spnContactType = (Spinner) findViewById(R.id.spnContactType);
 		spnContactType.setAdapter(adapter);
+		
+		// TODO: Where should I close the cursor??? o.O
+//		cursor.close();
 		
 		etxContactName = (EditText) findViewById(R.id.etxContactName);
 		etxContactEmail = (EditText) findViewById(R.id.etxContactEmail);
