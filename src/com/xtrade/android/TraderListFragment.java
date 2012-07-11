@@ -38,6 +38,7 @@ public class TraderListFragment extends SherlockFragment implements EventConstan
 		adapter = new TraderAdapter(getActivity(), new TraderTranslator().translate(cursor));
 
 		ListView listView = (ListView) fragmentView.findViewById(R.id.lvwTrader);
+		listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 		listView.setAdapter(adapter);
 		
 		listView.setOnItemClickListener(new OnItemClickListener() {
@@ -80,9 +81,16 @@ public class TraderListFragment extends SherlockFragment implements EventConstan
 
 	    // Called when the user selects a contextual menu item
 	    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-	        if (item.getItemId() == R.id.mniFavorite)
-	        	item.setIcon(android.R.drawable.star_on);
-			return false;
+//	    	Debug.info(this, ((com.xtrade.android.object.Trader) listView.getSelectedItem()).getId());
+	    	
+	        if (item.getItemId() == R.id.mniFavorite) {
+	        	item.setChecked(!item.isChecked());
+	        	item.setIcon(item.isChecked() ? android.R.drawable.btn_star_big_on : android.R.drawable.btn_star);
+	        }
+	        
+	        mode.finish();
+	        
+			return true;
 	    }
 
 	    // Called when the user exits the action mode
