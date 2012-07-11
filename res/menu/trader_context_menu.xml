@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-     <item
+
+    <item
         android:id="@+id/mniEdit"
         android:icon="@drawable/ic_edit"
         android:showAsAction="always"
-        android:title="@string/edit"
-        />
- 
+        android:title="@string/edit"/>
+
+    <item
+        android:id="@+id/mniFavorite"
+        android:icon="@android:drawable/btn_star"
+        android:showAsAction="always"
+        android:title="@string/favorite" />
+
 </menu>

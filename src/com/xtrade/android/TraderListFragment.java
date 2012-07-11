@@ -21,7 +21,6 @@ import com.xtrade.android.adapter.TraderAdapter;
 import com.xtrade.android.provider.DatabaseContract.TraderColumns;
 import com.xtrade.android.provider.TraderTranslator;
 import com.xtrade.android.util.ActionConstant;
-import com.xtrade.android.util.Debug;
 import com.xtrade.android.util.EventConstant;
 
 public class TraderListFragment extends SherlockFragment implements EventConstant {
@@ -81,7 +80,8 @@ public class TraderListFragment extends SherlockFragment implements EventConstan
 
 	    // Called when the user selects a contextual menu item
 	    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-	        Debug.info(this, "Actionbar is being clicked");
+	        if (item.getItemId() == R.id.mniFavorite)
+	        	item.setIcon(android.R.drawable.star_on);
 			return false;
 	    }
 
