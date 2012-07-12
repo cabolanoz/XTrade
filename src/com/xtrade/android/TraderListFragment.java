@@ -39,6 +39,7 @@ public class TraderListFragment extends SherlockFragment implements EventConstan
 		adapter = new TraderAdapter(getActivity(), new TraderTranslator().translate(cursor));
 
 		ListView listView = (ListView) fragmentView.findViewById(R.id.lvwTrader);
+		listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 		listView.setAdapter(adapter);
 		
 		listView.setOnItemClickListener(new OnItemClickListener() {
@@ -65,7 +66,8 @@ public class TraderListFragment extends SherlockFragment implements EventConstan
 	}
 	
 	private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
-	    // Called when the action mode is created; startActionMode() was called
+	    
+		// Called when the action mode is created; startActionMode() was called
 	    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 	        // Inflate a menu resource providing context menu items
 	        MenuInflater inflater = mode.getMenuInflater();
@@ -81,8 +83,18 @@ public class TraderListFragment extends SherlockFragment implements EventConstan
 
 	    // Called when the user selects a contextual menu item
 	    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-	        Debug.info(this, "Actionbar is being clicked");
-			return false;
+	    	switch (item.getItemId()) {
+	    	case R.id.mniEditTrader:
+	    		Debug.info(this, "View " + getView());
+	    		mode.finish();
+	    		return true;
+	    	case R.id.mniFavorite:
+	    		item.setChecked(!item.isChecked());
+        		item.setIcon(item.isChecked() ? android.R.drawable.btn_star_big_on : android.R.drawable.btn_star);
+	    		return true;
+	    	default:
+	    		return false;
+	    	}
 	    }
 
 	    // Called when the user exits the action mode

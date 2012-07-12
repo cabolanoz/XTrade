@@ -20,6 +20,7 @@ import com.xtrade.android.provider.DatabaseContract;
 import com.xtrade.android.provider.DatabaseContract.Contact;
 import com.xtrade.android.provider.DatabaseContract.ContactColumns;
 import com.xtrade.android.provider.DatabaseContract.ContactTypeColumns;
+import com.xtrade.android.provider.DatabaseContract.TraderColumns;
 import com.xtrade.android.util.EventConstant;
 import com.xtrade.android.util.Settings;
 
@@ -46,9 +47,12 @@ public class ContactCreateOrUpdateActivity extends BaseActivity implements Event
 		
 		adapter = new SimpleCursorAdapter(this, android.R.layout.simple_spinner_item, cursor, new String[] {ContactTypeColumns.NAME}, new int[] {android.R.id.text1}, 0);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
+		
 		spnContactType = (Spinner) findViewById(R.id.spnContactType);
 		spnContactType.setAdapter(adapter);
+		
+		// TODO: Where should I close the cursor??? o.O
+//		cursor.close();
 		
 		etxContactName = (EditText) findViewById(R.id.etxContactName);
 		etxContactEmail = (EditText) findViewById(R.id.etxContactEmail);
@@ -88,13 +92,19 @@ public class ContactCreateOrUpdateActivity extends BaseActivity implements Event
 			String contactEmail = etxContactEmail.getText().toString();
 			String contactPhone = etxContactPhone.getText().toString();
 			
+			cursorWrapper.close();
+			
 			// Evaluating if the EditTexts' content is empty or not
 			if (!StringUtils.isEmpty(contactName) && !StringUtils.isEmpty(contactType) && !StringUtils.isEmpty(contactEmail) && !StringUtils.isEmpty(contactPhone)) {
+				// We get the trader id in which the contacts will belong
+				String traderId = intent.getStringExtra(TraderColumns.TRADER_ID);
+				
 				ContentValues contentValues = new ContentValues();
 				contentValues.put(ContactColumns.NAME, contactName);
 				contentValues.put(ContactColumns.TYPE, contactType);
 				contentValues.put(ContactColumns.EMAIL, contactEmail);
 				contentValues.put(ContactColumns.PHONE, contactPhone);
+				contentValues.put(ContactColumns.TRADER_ID, traderId);
 				
 				Uri contactUri = null;
 				

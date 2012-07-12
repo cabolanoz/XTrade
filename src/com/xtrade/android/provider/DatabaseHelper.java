@@ -45,7 +45,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				+ ContactColumns.NAME + " TEXT, "
 				+ ContactColumns.TYPE + " TEXT, "
 				+ ContactColumns.EMAIL + " TEXT, "
-				+ ContactColumns.PHONE + " TEXT)");
+				+ ContactColumns.PHONE + " TEXT, "
+				+ ContactColumns.TRADER_ID + " TEXT)");
+		
 		
 		// Contact type table
 		db.execSQL("CREATE TABLE " + Tables.CONTACT_TYPE + " (" + BaseColumns._ID

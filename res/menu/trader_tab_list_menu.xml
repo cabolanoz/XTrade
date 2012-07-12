@@ -5,22 +5,18 @@
         android:id="@+id/mniNewTrader"
         android:icon="@drawable/ic_new_trader"
         android:showAsAction="always"
-        android:title="@string/new_trader"
-        />
+        android:title="@string/new_trader"/>
     <item
         android:id="@+id/mniProfile"
         android:showAsAction="never"
-        android:title="@string/profile"
-        />
+        android:title="@string/profile"/>
     <item
         android:id="@+id/mniSettings"
         android:showAsAction="never"
-        android:title="@string/settings"
-        />
+        android:title="@string/settings"/>
     <item
         android:id="@+id/mniAbout"
         android:showAsAction="never"
-        android:title="@string/about"
-        />
+        android:title="@string/about"/>
 
 </menu>

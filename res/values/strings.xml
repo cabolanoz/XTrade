@@ -12,6 +12,7 @@
     <string name="password">Password</string>
     <string name="remember_me">Remember me</string>
     <string name="edit">Edit</string>
+    <string name="favorite">Favorite</string>
     <string name="new_trader">New</string>
     <string name="profile">Profile</string>
     <string name="settings">Settings</string>

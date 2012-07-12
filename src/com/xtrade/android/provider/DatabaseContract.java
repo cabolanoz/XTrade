@@ -21,6 +21,7 @@ public class DatabaseContract {
 		String TYPE = "Type";
 		String EMAIL = "Email";
 		String PHONE = "Phone";
+		String TRADER_ID = "TraderId";
 	}
 	
 	public interface ContactTypeColumns {

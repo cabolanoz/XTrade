@@ -1,5 +1,8 @@
 package com.xtrade.android;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.apache.commons.lang.StringUtils;
 
 import android.content.ContentValues;
@@ -7,6 +10,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
@@ -36,9 +40,9 @@ public class TraderCreateOrUpdateActivity extends BaseActivity implements EventC
 
 		// General client tab
 		Tab generalTab = actionBar.newTab();
-		generalTab.setTag("general");
-		generalTab.setText(R.string.general);
-		generalTab.setTabListener(new TraderTabListener<TraderGeneralFragment>(this, "General", TraderGeneralFragment.class));
+		generalTab.setTag("about");
+		generalTab.setText(R.string.about);
+		generalTab.setTabListener(new TraderTabListener<TraderGeneralFragment>(this, "About", TraderGeneralFragment.class));
 		actionBar.addTab(generalTab);
 
 		// Detail client tab
@@ -60,8 +64,6 @@ public class TraderCreateOrUpdateActivity extends BaseActivity implements EventC
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem menuItem) {
-		super.onOptionsItemSelected(menuItem);
-		
 		switch(menuItem.getItemId()) {
 		case R.id.mniSaveTrader:
 			// We get the ACTION_TYPE extra which tells us what operation we must perform (Save or Update)
@@ -72,9 +74,14 @@ public class TraderCreateOrUpdateActivity extends BaseActivity implements EventC
 			EditText txtTraderAddress = (EditText) findViewById(R.id.etxTraderAddress);
 			
 			String traderName = txtTraderName.getText().toString();
-			String traderWebsite = txtTraderWebsite.getText().toString();
+			String traderWebsite = parseUrl(txtTraderWebsite.getText().toString());
 			String traderAddress = txtTraderAddress.getText().toString();
 
+			if (!isValidUrl(traderWebsite)) {
+				Toast.makeText(getApplicationContext(), "", Toast.LENGTH_LONG);
+				break;
+			}
+			
 			// Evaluate if the EditText's content is empty or not
 			if (!StringUtils.isEmpty(traderName) && !StringUtils.isEmpty(traderWebsite) && !StringUtils.isEmpty(traderAddress)) {
 				ContentValues contentValues = new ContentValues();
@@ -101,9 +108,24 @@ public class TraderCreateOrUpdateActivity extends BaseActivity implements EventC
 				finish();
 			}
 			return true;
-		default:
-			return super.onOptionsItemSelected(menuItem);
 		}
+		
+		return super.onOptionsItemSelected(menuItem);
+	}
+	
+	private String parseUrl(String website) {
+		if (!website.startsWith("http://") && !website.startsWith("https://"))
+			return "http://" + website;
+		return website;
+	}
+	
+	private boolean isValidUrl(String website) {
+		String regex = "<\\b(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]>";
+		
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(website);
+		
+		return matcher.matches();
 	}
 
 }

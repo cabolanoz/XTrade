@@ -14,6 +14,7 @@ import com.xtrade.android.adapter.ContactAdapter;
 import com.xtrade.android.listener.TraderTabListener;
 import com.xtrade.android.provider.ContactTranslator;
 import com.xtrade.android.provider.DatabaseContract.Contact;
+import com.xtrade.android.provider.DatabaseContract.TraderColumns;
 import com.xtrade.android.util.ActionConstant;
 import com.xtrade.android.util.EventConstant;
 
@@ -73,10 +74,12 @@ public class TraderDetailActivity extends BaseActivity implements EventConstant 
 		case R.id.mniNewContact:
 			Intent intent = new Intent(ActionConstant.CONTACT_CREATE_UPDATE);
 			intent.putExtra("ACTION_TYPE", CONTACT_CREATE_REQUEST_CODE);
+			intent.putExtra(TraderColumns.TRADER_ID, getIntent().getStringExtra(TraderColumns.TRADER_ID));
 			startActivityForResult(intent, CONTACT_CREATE_REQUEST_CODE);
-			break;
+			return true;
+		default:
+			return super.onOptionsItemSelected(_menuItem);		
 		}
-		return super.onOptionsItemSelected(_menuItem);
 	}
 	
 }
