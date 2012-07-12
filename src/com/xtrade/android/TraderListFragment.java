@@ -21,6 +21,7 @@ import com.xtrade.android.adapter.TraderAdapter;
 import com.xtrade.android.provider.DatabaseContract.TraderColumns;
 import com.xtrade.android.provider.TraderTranslator;
 import com.xtrade.android.util.ActionConstant;
+import com.xtrade.android.util.Debug;
 import com.xtrade.android.util.EventConstant;
 
 public class TraderListFragment extends SherlockFragment implements EventConstant {
@@ -65,7 +66,8 @@ public class TraderListFragment extends SherlockFragment implements EventConstan
 	}
 	
 	private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
-	    // Called when the action mode is created; startActionMode() was called
+	    
+		// Called when the action mode is created; startActionMode() was called
 	    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 	        // Inflate a menu resource providing context menu items
 	        MenuInflater inflater = mode.getMenuInflater();
@@ -81,16 +83,18 @@ public class TraderListFragment extends SherlockFragment implements EventConstan
 
 	    // Called when the user selects a contextual menu item
 	    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-//	    	Debug.info(this, ((com.xtrade.android.object.Trader) listView.getSelectedItem()).getId());
-	    	
-	        if (item.getItemId() == R.id.mniFavorite) {
-	        	item.setChecked(!item.isChecked());
-	        	item.setIcon(item.isChecked() ? android.R.drawable.btn_star_big_on : android.R.drawable.btn_star);
-	        }
-	        
-	        mode.finish();
-	        
-			return true;
+	    	switch (item.getItemId()) {
+	    	case R.id.mniEditTrader:
+	    		Debug.info(this, "View " + getView());
+	    		mode.finish();
+	    		return true;
+	    	case R.id.mniFavorite:
+	    		item.setChecked(!item.isChecked());
+        		item.setIcon(item.isChecked() ? android.R.drawable.btn_star_big_on : android.R.drawable.btn_star);
+	    		return true;
+	    	default:
+	    		return false;
+	    	}
 	    }
 
 	    // Called when the user exits the action mode

@@ -70,12 +70,13 @@ public class TraderActivity extends BaseActivity implements EventConstant {
 			Intent intent = new Intent(ActionConstant.TRADER_CREATE_UPDATE);
 			intent.putExtra("ACTION_TYPE", TRADER_CREATE_REQUEST_CODE);
 			startActivityForResult(intent, TRADER_CREATE_REQUEST_CODE);
-			break;
+			return true;
 		case R.id.mniAbout:
 			startActivity(new Intent(ActionConstant.ABOUT));
-			break;
+			return true;
+		default:
+			return super.onOptionsItemSelected(menuItem);		
 		}
-		return super.onOptionsItemSelected(menuItem);
 	}
 	
 }

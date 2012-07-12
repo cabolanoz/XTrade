@@ -76,9 +76,10 @@ public class TraderDetailActivity extends BaseActivity implements EventConstant 
 			intent.putExtra("ACTION_TYPE", CONTACT_CREATE_REQUEST_CODE);
 			intent.putExtra(TraderColumns.TRADER_ID, getIntent().getStringExtra(TraderColumns.TRADER_ID));
 			startActivityForResult(intent, CONTACT_CREATE_REQUEST_CODE);
-			break;
+			return true;
+		default:
+			return super.onOptionsItemSelected(_menuItem);		
 		}
-		return super.onOptionsItemSelected(_menuItem);
 	}
 	
 }

@@ -108,8 +108,6 @@ public class TraderCreateOrUpdateActivity extends BaseActivity implements EventC
 				finish();
 			}
 			return true;
-		default:
-			return super.onOptionsItemSelected(menuItem);
 		}
 		
 		return super.onOptionsItemSelected(menuItem);
