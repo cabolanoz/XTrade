@@ -8,72 +8,103 @@
         android:minSdkVersion="7"
         android:targetSdkVersion="15" />
 
+    <permission
+        android:name="com.xtrade.android.RECEIVER_PERMISSION"
+        android:logo="@drawable/ic_launcher"
+        android:protectionLevel="normal" >
+    </permission>
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<uses-permission android:name="android.permission.READ_CONTACT" />
-	        
+    <uses-permission android:name="android.permission.READ_CONTACT" />
+    <uses-permission android:name="com.xtrade.android.RECEIVER_PERMISSION" />
+
     <uses-feature android:name="android.hardware.camera" />
 
     <application
         android:icon="@drawable/ic_launcher"
-        android:logo="@drawable/ic_logo_text"
         android:label="@string/app_name"
-        android:theme="@style/Theme.XTrade">
-        
+        android:logo="@drawable/ic_logo_text"
+        android:theme="@style/Theme.XTrade" >
+        <receiver
+            android:name=".widget.XTradeWidgetProvider"
+            android:permission="com.xtrade.android.RECEIVER_PERMISSION" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/xtrade_widget_provider" />
+        </receiver>
+
         <activity
             android:name=".LoginActivity"
-            android:screenOrientation="portrait"
             android:label="@string/app_name"
-            android:theme="@style/Theme.XTrade.NoActionbar">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.XTrade.NoActionbar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            
             <intent-filter>
                 <action android:name="com.xtrade.android.LOGIN_ACTION" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        
-        <activity android:name=".TraderActivity" android:screenOrientation="portrait">
+        <activity
+            android:name=".TraderActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="com.xtrade.android.MAIN_XTRADE" />
                 <action android:name="com.xtrade.android.TRADER_ACTION" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        
-        <activity android:name=".TraderCreateOrUpdateActivity" android:screenOrientation="portrait">
+        <activity
+            android:name=".TraderCreateOrUpdateActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="com.xtrade.android.TRADER_CREATE_UPDATE_ACTION" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        
-        <activity android:name=".TraderDetailActivity" android:screenOrientation="portrait">
+        <activity
+            android:name=".TraderDetailActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="com.xtrade.android.TRADER_DETAIL_ACTION" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        
-        <activity android:name=".ContactCreateOrUpdateActivity" android:screenOrientation="portrait">
+        <activity
+            android:name=".ContactCreateOrUpdateActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="com.xtrade.android.CONTACT_CREATE_UPDATE_ACTION" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        
-        <activity android:name=".AboutActivity" android:screenOrientation="portrait">
+        <activity
+            android:name=".AboutActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="com.xtrade.android.ABOUT" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        
-        <activity android:name=".ClientMapActivity" android:screenOrientation="portrait">
+        <activity
+            android:name=".ClientMapActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="com.xtrade.android.CLIENT_MAP_ACTION" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -81,14 +112,19 @@
         <!-- Services Declaration -->
 
         <service
-            android:name=".service.XTradeBaseService" android:screenOrientation="portrait" android:exported="false">
+            android:name=".service.XTradeBaseService"
+            android:exported="false"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="com.xtrade.android.LOGIN_ACTION" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>
 
-        <provider android:name=".provider.XTradeProvider" android:authorities="com.xtrade.android" >
+        <provider
+            android:name=".provider.XTradeProvider"
+            android:authorities="com.xtrade.android" >
         </provider>
     </application>
 

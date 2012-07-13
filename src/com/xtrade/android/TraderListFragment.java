@@ -1,5 +1,6 @@
 package com.xtrade.android;
 
+import com.xtrade.android.R;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;

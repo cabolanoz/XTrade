@@ -8,6 +8,8 @@
     <dimen name="list_header_size">20dp</dimen>
     <dimen name="list_item_size">14dp</dimen>
     <dimen name="default_margin">10dp</dimen>
+    <dimen name="widget_button_width">50dp</dimen>
+    <dimen name="widget_margin">10dp</dimen>
     <dimen name="round_corner">5dp</dimen>
     
 </resources>
