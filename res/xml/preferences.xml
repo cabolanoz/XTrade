@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="@string/preference_category_general" >
+        <ListPreference
+                android:key="list_preference"
+                android:title="@string/preference_language"
+                android:summary="@string/preference_language_description"
+                android:entries="@array/supported_languages"
+                android:entryValues="@array/supported_languages_entries"
+                android:dialogTitle="@string/preference_language" />
+    </PreferenceCategory>
+    
+    
+    <PreferenceCategory android:title="@string/preference_category_notification" >
+        <CheckBoxPreference
+            android:key="checkbox_preference"
+            android:summary="@string/summary_checkbox_preference"
+            android:title="@string/preferece_notification" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

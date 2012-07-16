@@ -11,6 +11,8 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.xtrade.android.adapter.TraderAdapter;
+import com.xtrade.android.fragment.TraderListFragment;
+import com.xtrade.android.fragment.TraderTodayFragment;
 import com.xtrade.android.listener.TraderTabListener;
 import com.xtrade.android.provider.TraderTranslator;
 import com.xtrade.android.util.ActionConstant;
@@ -70,13 +72,17 @@ public class TraderActivity extends BaseActivity implements EventConstant {
 			Intent intent = new Intent(ActionConstant.TRADER_CREATE_UPDATE);
 			intent.putExtra("ACTION_TYPE", TRADER_CREATE_REQUEST_CODE);
 			startActivityForResult(intent, TRADER_CREATE_REQUEST_CODE);
-			return true;
+			break;
+		case R.id.mniSettings:
+			startActivity(new Intent(ActionConstant.SETTINGS));
+			break;
 		case R.id.mniAbout:
 			startActivity(new Intent(ActionConstant.ABOUT));
-			return true;
-		default:
-			return super.onOptionsItemSelected(menuItem);		
+			break;
+					
 		}
+		
+		return super.onOptionsItemSelected(menuItem);
 	}
 	
 }

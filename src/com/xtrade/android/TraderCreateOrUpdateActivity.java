@@ -17,6 +17,8 @@ import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.xtrade.android.fragment.TraderDetailFragment;
+import com.xtrade.android.fragment.TraderGeneralFragment;
 import com.xtrade.android.listener.TraderTabListener;
 import com.xtrade.android.provider.DatabaseContract;
 import com.xtrade.android.provider.DatabaseContract.Trader;

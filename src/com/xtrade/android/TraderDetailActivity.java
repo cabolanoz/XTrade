@@ -11,6 +11,8 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.xtrade.android.adapter.ContactAdapter;
+import com.xtrade.android.fragment.TraderAboutFragment;
+import com.xtrade.android.fragment.TraderContactFragment;
 import com.xtrade.android.listener.TraderTabListener;
 import com.xtrade.android.provider.ContactTranslator;
 import com.xtrade.android.provider.DatabaseContract.Contact;

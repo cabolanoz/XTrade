@@ -108,6 +108,14 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".XTradePreferencesActivity"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="com.xtrade.android.SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <!-- Services Declaration -->
 
