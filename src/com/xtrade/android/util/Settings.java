@@ -8,5 +8,8 @@ public class Settings {
 	public static final String DEFAULT_PASSWORD = "xtrade";
 	public static final String SHARED_PREFERENCES = "XTrade_Prefs";
 	public static final String TEMPFILE_PATH = "/sdcard/tmp";
+	
+	public static final String MAP_KEY=null;//this our key for release mode
+	public static final String MAP_KEY_DEBUG="";//this is the key we should use for debugging
 
 }

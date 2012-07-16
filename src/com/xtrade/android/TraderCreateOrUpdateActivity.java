@@ -23,6 +23,7 @@ import com.xtrade.android.listener.TraderTabListener;
 import com.xtrade.android.provider.DatabaseContract;
 import com.xtrade.android.provider.DatabaseContract.Trader;
 import com.xtrade.android.provider.DatabaseContract.TraderColumns;
+import com.xtrade.android.util.Debug;
 import com.xtrade.android.util.EventConstant;
 
 public class TraderCreateOrUpdateActivity extends BaseActivity implements EventConstant {
@@ -79,15 +80,15 @@ public class TraderCreateOrUpdateActivity extends BaseActivity implements EventC
 			String traderWebsite = parseUrl(txtTraderWebsite.getText().toString());
 			String traderAddress = txtTraderAddress.getText().toString();
 
-			if (!isValidUrl(traderWebsite)) {
-				Toast.makeText(getApplicationContext(), "", Toast.LENGTH_LONG);
+			/*if (!isValidUrl(traderWebsite)) {
+				txtTraderWebsite.requestFocus();
 				break;
-			}
-			
+			}*/
+			Debug.info(this, "Getting outside here");
 			// Evaluate if the EditText's content is empty or not
 			if (!StringUtils.isEmpty(traderName) && !StringUtils.isEmpty(traderWebsite) && !StringUtils.isEmpty(traderAddress)) {
 				ContentValues contentValues = new ContentValues();
-
+				Debug.info(this, "Getting inside here");
 				contentValues.put(TraderColumns.NAME, traderName);
 				contentValues.put(TraderColumns.WEBSITE, traderWebsite);
 				contentValues.put(TraderColumns.ADDRESS, traderAddress);
