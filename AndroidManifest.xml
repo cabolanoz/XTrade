@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.xtrade.android"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0"
+    android:installLocation="auto" >
 
     <uses-sdk
         android:minSdkVersion="7"
@@ -17,6 +18,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_CONTACT" />
     <uses-permission android:name="com.xtrade.android.RECEIVER_PERMISSION" />
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
 
     <uses-feature android:name="android.hardware.camera" />
 
@@ -25,17 +27,8 @@
         android:label="@string/app_name"
         android:logo="@drawable/ic_logo_text"
         android:theme="@style/Theme.XTrade" >
-        <receiver
-            android:name=".widget.XTradeWidgetProvider"
-            android:permission="com.xtrade.android.RECEIVER_PERMISSION" >
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/xtrade_widget_provider" />
-        </receiver>
+        
+        
 
         <activity
             android:name=".LoginActivity"
@@ -134,6 +127,19 @@
             android:name=".provider.XTradeProvider"
             android:authorities="com.xtrade.android" >
         </provider>
+        
+        <receiver
+            android:name=".widget.XTradeWidgetProvider"
+            >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/xtrade_widget_provider" />
+        </receiver>
+        
     </application>
 
 </manifest>
