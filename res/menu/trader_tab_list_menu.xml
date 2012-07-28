@@ -4,7 +4,7 @@
     <item
         android:id="@+id/mniNewTrader"
         android:icon="@drawable/ic_new_trader"
-        android:showAsAction="always"
+        android:showAsAction="ifRoom"
         android:title="@string/new_trader"/>
     <item
         android:id="@+id/mniProfile"
