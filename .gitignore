@@ -1,8 +1,16 @@
 bin/
 /.buildpath
-*.class
-classes.dex
+proguard/
+lint/
 gen/
-/.project
 resources.ap_
-/.settings
+
+.DS_Store
+
+#No apk in this repo
+*.apk
+
+#No java compile class or dex (dalvik)
+*.dex
+*.class
+
