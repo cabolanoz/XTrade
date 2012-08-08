@@ -88,16 +88,6 @@ public class TraderListFragment extends SherlockFragment implements EventConstan
 	    // Called when the user selects a contextual menu item
 	    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 	    	switch (item.getItemId()) {
-	    	case R.id.mniEditTrader:
-	    		if (selectedPosition != -1) {
-	    			Intent intent = new Intent(ActionConstant.TRADER_CREATE_UPDATE);
-		    		intent.putExtra("ACTION_TYPE", TRADER_UPDATE_REQUEST_CODE);
-		    		intent.putExtra(TraderColumns.TRADER_ID, ((com.xtrade.android.object.Trader) adapter.getItem(selectedPosition)).getId());
-		    		startActivityForResult(intent, TRADER_UPDATE_REQUEST_CODE);
-	    		}
-	    		
-	    		mode.finish();
-	    		return true;
 	    	case R.id.mniFavorite:
 	    		item.setChecked(!item.isChecked());
         		item.setIcon(item.isChecked() ? android.R.drawable.btn_star_big_on : android.R.drawable.btn_star);
