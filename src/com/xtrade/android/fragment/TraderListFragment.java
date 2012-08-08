@@ -90,7 +90,6 @@ public class TraderListFragment extends SherlockFragment implements EventConstan
 	    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 	    	switch (item.getItemId()) {
 	    	case R.id.mniEditTrader:
-	    		Debug.info(this, "View " + getView());
 	    		mode.finish();
 	    		return true;
 	    	case R.id.mniFavorite:

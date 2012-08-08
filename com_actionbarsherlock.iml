@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="EclipseModuleManager" forced_jdk="true">
+    <libelement value="jar://$MODULE_DIR$/sherlock-bar/libs/android-support-v4.jar!/" />
+    <conelement value="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK" />
+    <conelement value="com.android.ide.eclipse.adt.LIBRARIES" />
+    <src_description expected_position="4">
+      <src_folder value="file://$MODULE_DIR$/sherlock-bar/src" expected_position="3" />
+      <src_folder value="file://$MODULE_DIR$/sherlock-bar/gen" expected_position="4" />
+    </src_description>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/sherlock-bar/bin/classes" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/sherlock-bar">
+      <sourceFolder url="file://$MODULE_DIR$/sherlock-bar/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/sherlock-bar/gen" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="library" name="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK" level="application" />
+    <orderEntry type="library" name="com.android.ide.eclipse.adt.LIBRARIES" level="application" />
+    <orderEntry type="module-library">
+      <library name="android-support-v4.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/sherlock-bar/libs/android-support-v4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
+
