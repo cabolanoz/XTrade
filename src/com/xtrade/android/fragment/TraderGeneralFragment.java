@@ -18,8 +18,6 @@ import android.widget.ImageButton;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.xtrade.android.PictureDialog;
 import com.xtrade.android.R;
-import com.xtrade.android.R.id;
-import com.xtrade.android.R.layout;
 import com.xtrade.android.provider.DatabaseContract;
 import com.xtrade.android.util.Debug;
 import com.xtrade.android.util.EventConstant;
@@ -64,7 +62,7 @@ public class TraderGeneralFragment extends SherlockFragment implements EventCons
 		// Setting default values while we're on developer mode
 		if (Settings.DEBUG && extra == TRADER_CREATE_REQUEST_CODE) {
 			txtTraderName.setText("Coca-Cola");
-			txtTraderWebsite.setText("www.coca-cola.com");
+			txtTraderWebsite.setText(parseUrl("www.coca-cola.com"));
 			txtTraderAddress.setText("Aenean lacinia bibendum nulla sed consectetur");
 		}
 
@@ -102,6 +100,12 @@ public class TraderGeneralFragment extends SherlockFragment implements EventCons
 				}
 			}
 		}
+	}
+	
+	private String parseUrl(String website) {
+		if (!website.startsWith("http://") && !website.startsWith("https://"))
+			return "http://" + website;
+		return website;
 	}
 	
 }

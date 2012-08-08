@@ -1,7 +1,5 @@
 package com.xtrade.android.fragment;
 
-import com.xtrade.android.BaseActivity;
-import com.xtrade.android.R;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -19,20 +17,19 @@ import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.xtrade.android.R.id;
-import com.xtrade.android.R.layout;
-import com.xtrade.android.R.menu;
+import com.xtrade.android.BaseActivity;
+import com.xtrade.android.R;
 import com.xtrade.android.adapter.TraderAdapter;
 import com.xtrade.android.provider.DatabaseContract.TraderColumns;
 import com.xtrade.android.provider.TraderTranslator;
 import com.xtrade.android.util.ActionConstant;
-import com.xtrade.android.util.Debug;
 import com.xtrade.android.util.EventConstant;
 
 public class TraderListFragment extends SherlockFragment implements EventConstant {
 
 	private BaseAdapter adapter;
 	private ActionMode mActionMode;
+	private int selectedPosition = -1;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -60,6 +57,8 @@ public class TraderListFragment extends SherlockFragment implements EventConstan
 				if (mActionMode != null)
 		            return false;
 
+				selectedPosition = position;
+				
 		        // Start the CAB using the ActionMode.Callback defined above
 				mActionMode =  ((BaseActivity) getActivity()).startActionMode(mActionModeCallback);
 		        view.setSelected(true);
@@ -90,6 +89,13 @@ public class TraderListFragment extends SherlockFragment implements EventConstan
 	    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 	    	switch (item.getItemId()) {
 	    	case R.id.mniEditTrader:
+	    		if (selectedPosition != -1) {
+	    			Intent intent = new Intent(ActionConstant.TRADER_CREATE_UPDATE);
+		    		intent.putExtra("ACTION_TYPE", TRADER_UPDATE_REQUEST_CODE);
+		    		intent.putExtra(TraderColumns.TRADER_ID, ((com.xtrade.android.object.Trader) adapter.getItem(selectedPosition)).getId());
+		    		startActivityForResult(intent, TRADER_UPDATE_REQUEST_CODE);
+	    		}
+	    		
 	    		mode.finish();
 	    		return true;
 	    	case R.id.mniFavorite:
