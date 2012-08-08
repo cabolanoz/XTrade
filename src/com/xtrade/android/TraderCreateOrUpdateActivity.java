@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
@@ -84,11 +83,10 @@ public class TraderCreateOrUpdateActivity extends BaseActivity implements EventC
 				txtTraderWebsite.requestFocus();
 				break;
 			}*/
-			Debug.info(this, "Getting outside here");
+			
 			// Evaluate if the EditText's content is empty or not
 			if (!StringUtils.isEmpty(traderName) && !StringUtils.isEmpty(traderWebsite) && !StringUtils.isEmpty(traderAddress)) {
 				ContentValues contentValues = new ContentValues();
-				Debug.info(this, "Getting inside here");
 				contentValues.put(TraderColumns.NAME, traderName);
 				contentValues.put(TraderColumns.WEBSITE, traderWebsite);
 				contentValues.put(TraderColumns.ADDRESS, traderAddress);
