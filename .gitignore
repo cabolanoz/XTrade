@@ -5,6 +5,7 @@ lint/
 gen/
 resources.ap_
 
+.classpath
 .DS_Store
 
 #No apk in this repo
