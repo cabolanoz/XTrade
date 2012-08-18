@@ -68,11 +68,11 @@ public class TraderActivity extends BaseActivity implements EventConstant {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem menuItem) {
 		switch (menuItem.getItemId()) {
-		case R.id.mniNewTrader:
-			Intent intent = new Intent(ActionConstant.TRADER_CREATE_UPDATE);
-			intent.putExtra("ACTION_TYPE", TRADER_CREATE_REQUEST_CODE);
-			startActivityForResult(intent, TRADER_CREATE_REQUEST_CODE);
-			break;
+//		case R.id.mniNewTrader:
+//			Intent intent = new Intent(ActionConstant.TRADER_CREATE_UPDATE);
+//			intent.putExtra("ACTION_TYPE", TRADER_CREATE_REQUEST_CODE);
+//			startActivityForResult(intent, TRADER_CREATE_REQUEST_CODE);
+//			break;
 		case R.id.mniSettings:
 			startActivity(new Intent(ActionConstant.SETTINGS));
 			break;
