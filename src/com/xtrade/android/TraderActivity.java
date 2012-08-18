@@ -79,7 +79,6 @@ public class TraderActivity extends BaseActivity implements EventConstant {
 		case R.id.mniAbout:
 			startActivity(new Intent(ActionConstant.ABOUT));
 			break;
-					
 		}
 		
 		return super.onOptionsItemSelected(menuItem);
