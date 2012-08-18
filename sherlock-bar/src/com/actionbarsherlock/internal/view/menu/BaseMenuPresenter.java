@@ -75,7 +75,6 @@ public abstract class BaseMenuPresenter implements MenuPresenter {
         }
 
         return mMenuView;
-
     }
 
     /**

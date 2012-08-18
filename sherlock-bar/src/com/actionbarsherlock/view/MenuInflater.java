@@ -175,9 +175,9 @@ public class MenuInflater {
                                 menuState.addItem();
                             }
                         }
-                    } 
-                        reachedEndOfMenu = tagName.equals(XML_MENU);
-                    
+                    } else if (tagName.equals(XML_MENU)) {
+                        reachedEndOfMenu = true;
+                    }
                     break;
 
                 case XmlPullParser.END_DOCUMENT:
