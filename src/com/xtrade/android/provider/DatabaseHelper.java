@@ -37,7 +37,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				+ TraderColumns.WEBSITE + " TEXT, "
 				+ TraderColumns.ADDRESS + " TEXT, "
 				+ TraderColumns.POSX + " TEXT, "
-				+ TraderColumns.POSY + " TEXT)");
+				+ TraderColumns.POSY + " TEXT, "
+				+ TraderColumns.ISFAVORITE + " TEXT)");
 		
 		// Contact table
 		db.execSQL("CREATE TABLE " + Tables.CONTACT + " (" + BaseColumns._ID

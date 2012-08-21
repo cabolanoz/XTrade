@@ -5,7 +5,7 @@
     android:background="@drawable/list_bg"
     android:descendantFocusability="blocksDescendants"
     android:padding="@dimen/list_default_padding" >
-
+
     <TextView
         android:id="@+id/tvwTraderName"
         style="@style/ListHeader"
@@ -25,7 +25,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/tvwTraderName"
         android:src="@drawable/ic_launcher" />
-
+
     <TextView
         android:id="@+id/tvwTraderWebsite"
         android:layout_width="wrap_content"
@@ -34,8 +34,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/ivwTraderPhoto"
         android:layout_marginLeft="18dp"
-        android:gravity="center_vertical"
         android:layout_toRightOf="@+id/ivwTraderPhoto"
+        android:gravity="center_vertical"
         android:text="Nullam quis risus eget urna mollis ornare vel eu leo. Integer posuere erat a ante venenatis dapibus posuere velit aliquet."
         android:textColor="@color/black" />
 
@@ -45,8 +45,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/ivwTraderPhoto"
         android:layout_toRightOf="@+id/ivwTraderPhoto"
-        android:paddingRight="@dimen/list_default_padding"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:paddingRight="@dimen/list_default_padding" >
 
         <ImageButton
             android:id="@+id/btnEvent"
@@ -56,24 +56,24 @@
             android:background="@android:color/transparent"
             android:focusable="false"
             android:src="@drawable/ic_event" />
-
+
         <TextView
             android:id="@+id/textView2"
+            style="@style/ItemList"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            style="@style/ItemList"
             android:text="5 Contacts" />
-
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ivwTraderPhoto"
         android:layout_toRightOf="@+id/linearLayout1"
-        android:paddingLeft="@dimen/list_default_padding"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/list_default_padding" >
 
         <ImageButton
             android:id="@+id/btnContact"
@@ -83,15 +83,23 @@
             android:background="@android:color/transparent"
             android:focusable="false"
             android:src="@drawable/ic_contact" />
-
+
         <TextView
             android:id="@+id/textView1"
+            style="@style/ItemList"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            style="@style/ItemList"
             android:text="3 Events" />
-
     </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/chbFavorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/linearLayout2"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/linearLayout2"
+        android:layout_toRightOf="@+id/linearLayout2" />
 
 </RelativeLayout>

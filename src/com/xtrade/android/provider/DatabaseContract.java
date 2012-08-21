@@ -13,6 +13,7 @@ public class DatabaseContract {
 		String ADDRESS = "Address";
 		String POSX = "PosX";
 		String POSY = "PosY";
+		String ISFAVORITE = "IsFavorite";
 	}
 	
 	public interface ContactColumns {
