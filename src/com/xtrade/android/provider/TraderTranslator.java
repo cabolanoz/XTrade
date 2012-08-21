@@ -20,7 +20,8 @@ public class TraderTranslator {
 					cursor.getString(cursor.getColumnIndex(Trader.WEBSITE)),
 					cursor.getString(cursor.getColumnIndex(Trader.ADDRESS)),
 					cursor.getString(cursor.getColumnIndex(Trader.POSX)),
-					cursor.getString(cursor.getColumnIndex(Trader.POSY)));
+					cursor.getString(cursor.getColumnIndex(Trader.POSY)),
+					cursor.getString(cursor.getColumnIndex(Trader.ISFAVORITE)));
 
 			traders.add(trader);
 		}
