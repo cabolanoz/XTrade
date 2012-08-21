@@ -13,7 +13,6 @@ import android.widget.ListView;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.xtrade.android.adapter.TraderAdapter;
 import com.xtrade.android.fragment.TraderListFragment;
@@ -118,8 +117,8 @@ public class TraderActivity extends BaseActivity implements ActionBar.TabListene
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getSupportMenuInflater();
-		inflater.inflate(R.menu.trader_tab_list_menu, menu);
+//		MenuInflater inflater = getSupportMenuInflater();
+//		inflater.inflate(R.menu.trader_tab_list_menu, menu);
 		return true;
 	}
 	

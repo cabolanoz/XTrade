@@ -22,7 +22,6 @@ import com.xtrade.android.listener.TraderTabListener;
 import com.xtrade.android.provider.DatabaseContract;
 import com.xtrade.android.provider.DatabaseContract.Trader;
 import com.xtrade.android.provider.DatabaseContract.TraderColumns;
-import com.xtrade.android.util.Debug;
 import com.xtrade.android.util.EventConstant;
 
 public class TraderCreateOrUpdateActivity extends BaseActivity implements EventConstant {
