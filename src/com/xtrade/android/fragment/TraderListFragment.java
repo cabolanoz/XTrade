@@ -86,7 +86,7 @@ public class TraderListFragment extends SherlockFragment implements EventConstan
 	        Cursor cursor = cursorLoader.loadInBackground();
 	        if (cursor != null) {
 	        	if (cursor.moveToNext()) {
-	        		MenuItem mniFavorite = menu.getItem(1);
+	        		MenuItem mniFavorite = menu.findItem(R.id.mniFavorite);
 	        		String isFavorite = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.TraderColumns.ISFAVORITE));
 	        		if (isFavorite != null && !"".equals(isFavorite) && "1".equals(isFavorite)) {
 	        			mniFavorite.setChecked(true);
