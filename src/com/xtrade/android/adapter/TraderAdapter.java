@@ -28,13 +28,19 @@ public class TraderAdapter extends BaseAdapter implements EventConstant {
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
 			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			convertView = inflater.inflate(R.layout.trader_tab_list_item, null);
+			
+				convertView = inflater.inflate(R.layout.trader_tab_list_item, null);
 		}
-
-		final Trader trader = getTraderList().get(position);
 		
 		if (position % 2 == 0)
 			convertView.setBackgroundResource(R.drawable.list_bg_odd);
+		else
+			convertView.setBackgroundResource(R.drawable.list_bg);
+
+		final Trader trader = getTraderList().get(position);
+		
+		
+		
 		
 		TextView tvwTraderName = (TextView) convertView.findViewById(R.id.tvwTraderName);
 		tvwTraderName.setText(trader.getName());
