@@ -12,6 +12,7 @@ public class AboutActivity extends BaseActivity{
 		setContentView(R.layout.about);
 		
 		WebView webView = (WebView) findViewById(R.id.wvwAbout);
+		webView.setHorizontalScrollBarEnabled(false);
 		webView.loadUrl("file:///android_asset/about.html");
 	}
 	
