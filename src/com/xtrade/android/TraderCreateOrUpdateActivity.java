@@ -33,7 +33,7 @@ public class TraderCreateOrUpdateActivity extends BaseActivity implements EventC
 	@Override
 	public void onCreate(Bundle savedIntanceState) {
 		super.onCreate(savedIntanceState);
-
+		
 		// Getting the intent which call this activity
 		intent = getIntent();
 		

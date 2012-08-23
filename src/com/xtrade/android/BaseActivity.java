@@ -6,11 +6,14 @@ import android.os.Bundle;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.MenuItem;
 import com.xtrade.android.service.ServiceHelper;
 import com.xtrade.android.util.Settings;
 
 public class BaseActivity extends SherlockFragmentActivity {
 
+	protected boolean upLevel=true;
+	protected ActionBar actionBar;
 	protected ServiceHelper serviceHelper;
 
 	@Override
@@ -18,14 +21,32 @@ public class BaseActivity extends SherlockFragmentActivity {
 		super.onCreate(savedIntanceState);
 		
 		// Getting the action bar
-		ActionBar actionBar = getSupportActionBar();
+		actionBar = getSupportActionBar();
 		if (actionBar != null) {
 			actionBar.setDisplayShowTitleEnabled(false);
 			actionBar.setDisplayUseLogoEnabled(true);
+			actionBar.setDisplayHomeAsUpEnabled(upLevel);
 			actionBar.setIcon(getResources().getDrawable(R.drawable.ic_logo_text));
 		}
 		
 		serviceHelper = ServiceHelper.getInstance(this);
+	}
+	
+	
+	
+		
+	
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			if(upLevel)
+				finish();
+			break;
+		}
+
+		return super.onOptionsItemSelected(item);
 	}
 
 	/**

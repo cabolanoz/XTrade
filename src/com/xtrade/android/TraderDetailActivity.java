@@ -26,6 +26,7 @@ public class TraderDetailActivity extends BaseActivity implements EventConstant 
 	
 	@Override
 	public void onCreate(Bundle savedIntanceState) {
+		
 		super.onCreate(savedIntanceState);
 		
 		// Getting the current action bar
