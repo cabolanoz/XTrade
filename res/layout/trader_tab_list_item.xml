@@ -92,14 +92,13 @@
             android:gravity="center_vertical"
             android:text="3 Events" />
     </LinearLayout>
-
-    <CheckBox
+
+    <ImageView
         android:id="@+id/chbFavorite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/linearLayout2"
         android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/linearLayout2"
-        android:layout_toRightOf="@+id/linearLayout2" />
+        android:src="@android:drawable/btn_star"
+        android:layout_alignParentTop="true" />
 
 </RelativeLayout>

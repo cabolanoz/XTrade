@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.xtrade.android.R;
@@ -42,12 +42,12 @@ public class TraderAdapter extends BaseAdapter implements EventConstant {
 		TextView tvwTraderWebsite = (TextView) convertView.findViewById(R.id.tvwTraderWebsite);
 		tvwTraderWebsite.setText(trader.getAddress());
 
-		CheckBox chbFavorite = (CheckBox) convertView.findViewById(R.id.chbFavorite);
-		String isFavorite = trader.getIsFavorite();
-		if (isFavorite != null && !"".equals(isFavorite) && "1".equals(isFavorite))
-			chbFavorite.setButtonDrawable(android.R.drawable.btn_star_big_on);
+		ImageView chbFavorite = (ImageView) convertView.findViewById(R.id.chbFavorite);
+		
+		if (trader.favorite)
+			chbFavorite.setImageResource(android.R.drawable.btn_star_big_on);
 		else
-			chbFavorite.setButtonDrawable(android.R.drawable.btn_star);
+			chbFavorite.setImageResource(android.R.drawable.btn_star);
 		
 		return convertView;
 	}

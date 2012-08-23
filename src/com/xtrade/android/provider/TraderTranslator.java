@@ -21,7 +21,7 @@ public class TraderTranslator {
 					cursor.getString(cursor.getColumnIndex(Trader.ADDRESS)),
 					cursor.getString(cursor.getColumnIndex(Trader.POSX)),
 					cursor.getString(cursor.getColumnIndex(Trader.POSY)),
-					cursor.getString(cursor.getColumnIndex(Trader.ISFAVORITE)));
+					cursor.getInt(cursor.getColumnIndex(Trader.ISFAVORITE))==1);
 
 			traders.add(trader);
 		}
