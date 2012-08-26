@@ -9,6 +9,7 @@ import android.database.CursorWrapper;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.BaseColumns;
+import android.support.v4.content.CursorLoader;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -70,6 +71,21 @@ public class ContactCreateOrUpdateActivity extends BaseActivity implements Event
 			etxContactEmail.setText("joserayerdis@gmail.com");
 			etxContactPhone.setText("86727076");
 		}
+		
+		if (extra == CONTACT_UPDATE_REQUEST_CODE) {
+			String contactId = intent.getStringExtra(ContactColumns.CONTACT_ID);
+			if (contactId != null && !contactId.equals("")) {
+				CursorLoader _cursorLoader = new CursorLoader(getBaseContext(), Contact.buildUri(contactId), null, null, null, null);
+				Cursor _cursor = _cursorLoader.loadInBackground();
+				if (_cursor != null) {
+					etxContactName.setText(_cursor.getString(_cursor.getColumnIndexOrThrow(ContactColumns.NAME)));
+					// TODO: How should load the contact type previously save?
+					etxContactEmail.setText(_cursor.getString(_cursor.getColumnIndexOrThrow(ContactColumns.EMAIL)));
+					etxContactPhone.setText(_cursor.getString(_cursor.getColumnIndexOrThrow(ContactColumns.PHONE)));
+				}
+				_cursor.close();
+			}
+		}
 	}
 
 	@Override
@@ -114,6 +130,10 @@ public class ContactCreateOrUpdateActivity extends BaseActivity implements Event
 				if (extra == CONTACT_CREATE_REQUEST_CODE) {
 					contactUri = getContentResolver().insert(Contact.CONTENT_URI, contentValues);
 					result = contactUri == null ? RESULT_CANCELED : RESULT_OK;
+				} else if (extra == CONTACT_UPDATE_REQUEST_CODE) {
+					String contactId = intent.getStringExtra(ContactColumns.CONTACT_ID);
+					contactUri = Contact.buildUri(contactId);
+					result = getContentResolver().update(contactUri, contentValues, null, null) == 0 ? RESULT_CANCELED : RESULT_OK;
 				}
 				
 				setResult(result);

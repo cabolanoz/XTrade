@@ -47,8 +47,7 @@ public class TraderDetailActivity extends BaseActivity implements ActionBar.TabL
 		viewPager = (ViewPager) findViewById(R.id.pager);
 		viewPager.setAdapter(sectionsPagerAdapter);
 
-		viewPager
-				.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+		viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 					@Override
 					public void onPageSelected(int position) {
 						actionBar.setSelectedNavigationItem(position);
@@ -75,15 +74,11 @@ public class TraderDetailActivity extends BaseActivity implements ActionBar.TabL
 		if (resultCode == RESULT_CANCELED)
 			return;
 
-		if (resultCode == RESULT_OK
-				&& requestCode == CONTACT_CREATE_REQUEST_CODE) {
+		if (resultCode == RESULT_OK && (requestCode == CONTACT_CREATE_REQUEST_CODE || requestCode == CONTACT_UPDATE_REQUEST_CODE)) {
 			ListView lvwContact = (ListView) findViewById(R.id.lvwContact);
 			if (lvwContact != null) {
-				Cursor cursor = getContentResolver().query(Contact.CONTENT_URI,
-						null, null, null, null);
-				((ContactAdapter) lvwContact.getAdapter())
-						.setContactList(new ContactTranslator()
-								.translate(cursor));
+				Cursor cursor = getContentResolver().query(Contact.CONTENT_URI, null, null, null, null);
+				((ContactAdapter) lvwContact.getAdapter()).setContactList(new ContactTranslator().translate(cursor));
 			}
 		}
 	}
@@ -101,8 +96,7 @@ public class TraderDetailActivity extends BaseActivity implements ActionBar.TabL
 		case R.id.mniNewContact:
 			Intent intent = new Intent(ActionConstant.CONTACT_CREATE_UPDATE);
 			intent.putExtra("ACTION_TYPE", CONTACT_CREATE_REQUEST_CODE);
-			intent.putExtra(TraderColumns.TRADER_ID, getIntent()
-					.getStringExtra(TraderColumns.TRADER_ID));
+			intent.putExtra(TraderColumns.TRADER_ID, getIntent().getStringExtra(TraderColumns.TRADER_ID));
 			startActivityForResult(intent, CONTACT_CREATE_REQUEST_CODE);
 			return true;
 		default:

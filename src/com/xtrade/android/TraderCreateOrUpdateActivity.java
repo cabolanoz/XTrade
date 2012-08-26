@@ -99,8 +99,8 @@ public class TraderCreateOrUpdateActivity extends BaseActivity implements EventC
 					clientUri = getContentResolver().insert(DatabaseContract.Trader.CONTENT_URI, contentValues);
 					result = clientUri == null ? RESULT_CANCELED : RESULT_OK;
 				} else if (extra == TRADER_UPDATE_REQUEST_CODE) {
-					String clientId = intent.getStringExtra(DatabaseContract.TraderColumns.TRADER_ID);
-					clientUri = Trader.buildUri(clientId);
+					String traderId = intent.getStringExtra(DatabaseContract.TraderColumns.TRADER_ID);
+					clientUri = Trader.buildUri(traderId);
 					result = getContentResolver().update(clientUri, contentValues, null, null) == 0 ? RESULT_CANCELED : RESULT_OK;
 				}
 

@@ -13,8 +13,9 @@ public class ContactTranslator {
 	public List<Contact> translate(Cursor _cursor) {
 		List<Contact> contacts = new ArrayList<Contact>();
 		
-		while(_cursor.moveToNext()) {			
+		while(_cursor.moveToNext()) {
 			Contact contact = new Contact(
+					_cursor.getString(_cursor.getColumnIndex(ContactColumns.CONTACT_ID)),
 					_cursor.getString(_cursor.getColumnIndex(ContactColumns.NAME)),
 					_cursor.getString(_cursor.getColumnIndex(ContactColumns.TYPE)),
 					_cursor.getString(_cursor.getColumnIndex(ContactColumns.EMAIL)),

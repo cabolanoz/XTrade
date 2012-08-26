@@ -2,18 +2,28 @@ package com.xtrade.android.object;
 
 public class Contact {
 
+	private String contactId;
 	private String name;
 	private String type;
 	private String email;
 	private String phone;
 	private String traderId;
 	
-	public Contact(String _name, String _type, String _email, String _phone, String _traderId) {
+	public Contact(String _contactId, String _name, String _type, String _email, String _phone, String _traderId) {
+		this.contactId = _contactId;
 		this.name = _name;
 		this.type = _type;
 		this.email = _email;
 		this.phone = _phone;
 		this.traderId = _traderId;
+	}
+	
+	public String getContactId() {
+		return contactId;
+	}
+
+	public void setContactId(String contactId) {
+		this.contactId = contactId;
 	}
 
 	public String getName() {
