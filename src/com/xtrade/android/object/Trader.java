@@ -8,9 +8,9 @@ public class Trader {
 	private String address;
 	private String posX;
 	private String posY;
-	private String isFavorite;
+	public boolean isFavorite;
 
-	public Trader(String _id, String _name, String _website, String _address, String _posX, String _posY, String _isFavorite) {
+	public Trader(String _id, String _name, String _website, String _address, String _posX, String _posY, boolean _isFavorite) {
 		this.id = _id;
 		this.name = _name;
 		this.website = _website;
@@ -68,11 +68,11 @@ public class Trader {
 		this.posY = posY;
 	}
 
-	public String getIsFavorite() {
+	public boolean isFavorite() {
 		return isFavorite;
 	}
 
-	public void setIsFavorite(String isFavorite) {
+	public void setFavorite(boolean isFavorite) {
 		this.isFavorite = isFavorite;
 	}
 

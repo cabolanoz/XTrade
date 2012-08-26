@@ -15,28 +15,24 @@ public class XTradePreferencesActivity extends SherlockPreferenceActivity {
 
 		// Getting the action bar
 		ActionBar actionBar = getSupportActionBar();
-		if (actionBar != null) {
-			actionBar.setDisplayShowTitleEnabled(false);
-			actionBar.setDisplayUseLogoEnabled(true);
-			actionBar.setDisplayHomeAsUpEnabled(true);
-			actionBar.setIcon(getResources().getDrawable(R.drawable.ic_logo_text));
-		}
+
+		actionBar.setDisplayShowTitleEnabled(false);
+		actionBar.setDisplayUseLogoEnabled(true);
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		actionBar.setIcon(getResources().getDrawable(R.drawable.ic_logo_text));
 
 		addPreferencesFromResource(R.xml.preferences);
 	}
-	
+
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item){
-		switch(item.getItemId()){
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
 		case android.R.id.home:
 			finish();
 			break;
-		
 		}
-		
+
 		return super.onOptionsItemSelected(item);
 	}
-	
-	
 
 }
