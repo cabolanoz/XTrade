@@ -125,7 +125,7 @@ public class TraderActivity extends BaseActivity implements ActionBar.TabListene
 
 	@Override
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-		// TODO Auto-generated method stub
+
 		
 	}
 

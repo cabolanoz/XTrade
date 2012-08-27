@@ -33,7 +33,7 @@ public class TraderContactFragment extends SherlockFragment implements EventCons
 
 	private CursorAdapter adapter;
 	private ActionMode mActionMode;
-	private int selectedPosition = -1;
+	private long contactId = -1;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,7 +54,7 @@ public class TraderContactFragment extends SherlockFragment implements EventCons
 						if (mActionMode != null)
 							return false;
 
-						selectedPosition = position;
+						contactId=id;
 
 						mActionMode = ((BaseActivity) getActivity()).startActionMode(mActionModeCallback);
 						
@@ -71,7 +71,7 @@ public class TraderContactFragment extends SherlockFragment implements EventCons
 
 	public void onResume() {
 		super.onResume();
-		getLoaderManager().restartLoader(0, null, this);
+		getActivity().getSupportLoaderManager().restartLoader(0, null, this);
 	}
 	
 	private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
@@ -100,13 +100,14 @@ public class TraderContactFragment extends SherlockFragment implements EventCons
 			case R.id.mniEditContact:
 				Intent intent = new Intent(ActionConstant.CONTACT_CREATE_UPDATE);
 				intent.putExtra("ACTION_TYPE", CONTACT_UPDATE_REQUEST_CODE);
-				intent.putExtra(ContactColumns.CONTACT_ID, ((com.xtrade.android.object.Contact) adapter.getItem(selectedPosition)).getContactId());
+				intent.putExtra(ContactColumns.CONTACT_ID, contactId);
 				intent.putExtra(TraderColumns.TRADER_ID, getActivity().getIntent().getStringExtra(TraderColumns.TRADER_ID));
 				startActivityForResult(intent, CONTACT_UPDATE_REQUEST_CODE);
 				return true;
-			default:
-				return false;
+			
 			}
+			
+			return false;
 		}
 	};
 
