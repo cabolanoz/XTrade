@@ -40,8 +40,8 @@ public class TraderContactFragment extends SherlockFragment implements
 		// Getting the activity intent
 		Intent intent = getActivity().getIntent();
 		if (intent != null) {
-			String traderId = intent.getStringExtra(TraderColumns.TRADER_ID);
-			if (traderId != null && !"".equals(traderId)) {
+			long traderId = intent.getLongExtra(TraderColumns.TRADER_ID,-1);
+			if (traderId !=-1 ) {
 				Cursor cursor = getActivity().getContentResolver().query(Contact.CONTENT_URI, null, ContactColumns.TRADER_ID + " = '" + traderId + "'", null, null);
 
 				adapter = new ContactAdapter(getActivity(), new ContactTranslator().translate(cursor));
