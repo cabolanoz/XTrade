@@ -1,7 +1,6 @@
 package com.xtrade.android;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
@@ -12,12 +11,11 @@ import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.xtrade.android.adapter.ContactAdapter;
 import com.xtrade.android.fragment.SectionsPagerAdapter;
 import com.xtrade.android.fragment.TraderAboutFragment;
 import com.xtrade.android.fragment.TraderContactFragment;
-import com.xtrade.android.provider.ContactTranslator;
 import com.xtrade.android.provider.DatabaseContract.Contact;
+import com.xtrade.android.provider.DatabaseContract.ContactColumns;
 import com.xtrade.android.provider.DatabaseContract.TraderColumns;
 import com.xtrade.android.util.ActionConstant;
 import com.xtrade.android.util.EventConstant;
@@ -48,11 +46,11 @@ public class TraderDetailActivity extends BaseActivity implements ActionBar.TabL
 		viewPager.setAdapter(sectionsPagerAdapter);
 
 		viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-					@Override
-					public void onPageSelected(int position) {
-						actionBar.setSelectedNavigationItem(position);
-					}
-				});
+			@Override
+			public void onPageSelected(int position) {
+				actionBar.setSelectedNavigationItem(position);
+			}
+		});
 
 		for (int i = 0; i < sectionsPagerAdapter.getCount(); i++) {
 			// Create a tab with text corresponding to the page title defined by
@@ -76,10 +74,8 @@ public class TraderDetailActivity extends BaseActivity implements ActionBar.TabL
 
 		if (resultCode == RESULT_OK && (requestCode == CONTACT_CREATE_REQUEST_CODE || requestCode == CONTACT_UPDATE_REQUEST_CODE)) {
 			ListView lvwContact = (ListView) findViewById(R.id.lvwContact);
-			if (lvwContact != null) {
-				Cursor cursor = getContentResolver().query(Contact.CONTENT_URI, null, null, null, null);
-				((ContactAdapter) lvwContact.getAdapter()).setContactList(new ContactTranslator().translate(cursor));
-			}
+			if (lvwContact != null)
+				getContentResolver().query(Contact.CONTENT_URI, null, ContactColumns.TRADER_ID + " = '" + getIntent().getStringExtra(TraderColumns.TRADER_ID) + "'", null, null);
 		}
 	}
 

@@ -1,15 +1,20 @@
 package com.xtrade.android.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
+import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.ActionMode;
@@ -18,18 +23,15 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.xtrade.android.BaseActivity;
 import com.xtrade.android.R;
-import com.xtrade.android.adapter.ContactAdapter;
-import com.xtrade.android.provider.ContactTranslator;
 import com.xtrade.android.provider.DatabaseContract.Contact;
 import com.xtrade.android.provider.DatabaseContract.ContactColumns;
 import com.xtrade.android.provider.DatabaseContract.TraderColumns;
 import com.xtrade.android.util.ActionConstant;
 import com.xtrade.android.util.EventConstant;
 
-public class TraderContactFragment extends SherlockFragment implements
-		EventConstant {
+public class TraderContactFragment extends SherlockFragment implements EventConstant, LoaderManager.LoaderCallbacks<Cursor> {
 
-	private BaseAdapter adapter;
+	private CursorAdapter adapter;
 	private ActionMode mActionMode;
 	private int selectedPosition = -1;
 
@@ -40,11 +42,9 @@ public class TraderContactFragment extends SherlockFragment implements
 		// Getting the activity intent
 		Intent intent = getActivity().getIntent();
 		if (intent != null) {
-			String traderId = intent.getStringExtra(TraderColumns.TRADER_ID);
-			if (traderId != null && !"".equals(traderId)) {
-				Cursor cursor = getActivity().getContentResolver().query(Contact.CONTENT_URI, null, ContactColumns.TRADER_ID + " = '" + traderId + "'", null, null);
-
-				adapter = new ContactAdapter(getActivity(), new ContactTranslator().translate(cursor));
+			long traderId = intent.getLongExtra(TraderColumns.TRADER_ID, -1);
+			if (traderId !=-1 ) {
+				adapter = new ContactAdapter(getActivity());
 
 				ListView listView = (ListView) fragmentView.findViewById(R.id.lvwContact);
 				listView.setAdapter(adapter);
@@ -69,6 +69,11 @@ public class TraderContactFragment extends SherlockFragment implements
 		return fragmentView;
 	}
 
+	public void onResume() {
+		super.onResume();
+		getLoaderManager().restartLoader(0, null, this);
+	}
+	
 	private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
 
 		@Override
@@ -105,4 +110,65 @@ public class TraderContactFragment extends SherlockFragment implements
 		}
 	};
 
+	@Override
+	public Loader<Cursor> onCreateLoader(int id, Bundle data) {
+		long traderId = getActivity().getIntent().getLongExtra(TraderColumns.TRADER_ID, -1);
+		Loader<Cursor> loader = new CursorLoader(getActivity(), Contact.CONTENT_URI, null, ContactColumns.TRADER_ID + " = '" + traderId + "'", null, Contact.DEFAULT_SORT);
+		return loader;
+	}
+
+	@Override
+	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+		if (getActivity() == null)
+			return;
+		
+		adapter.changeCursor(cursor);
+	}
+
+	@Override
+	public void onLoaderReset(Loader<Cursor> loader) { }
+
+	public class ContactAdapter extends CursorAdapter implements EventConstant {
+
+		public ContactAdapter(Context context) {
+			super(context, null, false);
+		}
+
+		@Override
+		public View newView(Context context, Cursor cursor, ViewGroup parent) {
+			View view = getActivity().getLayoutInflater().inflate(R.layout.trader_tab_list_contact_item, parent, false);
+			return view;
+		}
+		
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			convertView = super.getView(position, convertView, parent);
+			if (position % 2 == 0)
+				convertView.setBackgroundResource(R.drawable.list_bg_odd);
+			else
+				convertView.setBackgroundResource(R.drawable.list_bg);
+			return convertView;
+		}
+		
+		@Override
+		public void bindView(View view, Context context, Cursor cursor) {
+			String contactId = cursor.getString(cursor.getColumnIndexOrThrow(Contact._ID));
+			if (contactId == null)
+				return;
+			
+			TextView tvwContactName = (TextView) view.findViewById(R.id.tvwContactName);
+			tvwContactName.setText(cursor.getString(cursor.getColumnIndexOrThrow(ContactColumns.NAME)));
+			
+			TextView tvwContactType = (TextView) view.findViewById(R.id.tvwContactType);
+			tvwContactType.setText(cursor.getString(cursor.getColumnIndexOrThrow(ContactColumns.TYPE)));
+			
+			TextView tvwContactEmail = (TextView) view.findViewById(R.id.tvwContactEmail);
+			tvwContactEmail.setText(cursor.getString(cursor.getColumnIndexOrThrow(ContactColumns.EMAIL)));
+			
+			TextView tvwContactPhone = (TextView) view.findViewById(R.id.tvwContactPhone);
+			tvwContactPhone.setText(cursor.getString(cursor.getColumnIndexOrThrow(ContactColumns.PHONE)));
+		}
+		
+	}
+	
 }

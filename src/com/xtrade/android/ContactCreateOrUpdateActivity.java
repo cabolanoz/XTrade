@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.BaseColumns;
 import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -26,7 +27,7 @@ import com.xtrade.android.util.Debug;
 import com.xtrade.android.util.EventConstant;
 import com.xtrade.android.util.Settings;
 
-public class ContactCreateOrUpdateActivity extends BaseActivity implements EventConstant {
+public class ContactCreateOrUpdateActivity extends BaseActivity implements EventConstant{
 
 	private Intent intent;
 	
@@ -75,17 +76,16 @@ public class ContactCreateOrUpdateActivity extends BaseActivity implements Event
 		
 		if (extra == CONTACT_UPDATE_REQUEST_CODE) {
 			String contactId = intent.getStringExtra(ContactColumns.CONTACT_ID);
+			
 			if (contactId != null && !contactId.equals("")) {
-				CursorLoader _cursorLoader = new CursorLoader(getBaseContext(), Contact.buildUri(contactId), null, null, null, null);
-				Cursor _cursor = _cursorLoader.loadInBackground();
-				if (_cursor != null) {
-					Debug.info(this, _cursor.getString(_cursor.getColumnIndexOrThrow(ContactColumns.NAME)));
-					etxContactName.setText(_cursor.getString(_cursor.getColumnIndexOrThrow(ContactColumns.NAME)));
-					spnContactType.setSelection(getCursorAdapterPosition(_cursor.getString(_cursor.getColumnIndexOrThrow(ContactColumns.TYPE))));
-					etxContactEmail.setText(_cursor.getString(_cursor.getColumnIndexOrThrow(ContactColumns.EMAIL)));
-					etxContactPhone.setText(_cursor.getString(_cursor.getColumnIndexOrThrow(ContactColumns.PHONE)));
+				CursorLoader cursorLoader = new CursorLoader(getBaseContext(), Contact.buildUri(contactId), null, null, null, null);
+				Cursor cursor = cursorLoader.loadInBackground();
+				if (cursor != null && cursor.moveToNext()) {
+					etxContactName.setText(cursor.getString(cursor.getColumnIndexOrThrow(ContactColumns.NAME)));
+					spnContactType.setSelection(getCursorAdapterPosition(cursor.getString(cursor.getColumnIndexOrThrow(ContactColumns.TYPE))));
+					etxContactEmail.setText(cursor.getString(cursor.getColumnIndexOrThrow(ContactColumns.EMAIL)));
+					etxContactPhone.setText(cursor.getString(cursor.getColumnIndexOrThrow(ContactColumns.PHONE)));
 				}
-				_cursor.close();
 			}
 		}
 	}

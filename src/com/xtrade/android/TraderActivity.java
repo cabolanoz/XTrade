@@ -15,11 +15,9 @@ import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.xtrade.android.adapter.TraderAdapter;
 import com.xtrade.android.fragment.SectionsPagerAdapter;
 import com.xtrade.android.fragment.TraderListFragment;
 import com.xtrade.android.fragment.TraderTodayFragment;
-import com.xtrade.android.provider.TraderTranslator;
 import com.xtrade.android.util.ActionConstant;
 import com.xtrade.android.util.EventConstant;
 
@@ -76,10 +74,8 @@ public class TraderActivity extends BaseActivity implements ActionBar.TabListene
 		
 		if (resultCode == RESULT_OK && (requestCode == TRADER_CREATE_REQUEST_CODE || requestCode == TRADER_UPDATE_REQUEST_CODE)) {
 			ListView listView = (ListView) findViewById(R.id.lvwTrader);
-			if (listView != null) {
-				Cursor cursor = this.getContentResolver().query(com.xtrade.android.provider.DatabaseContract.Trader.CONTENT_URI, null, null, null, null);
-				((TraderAdapter) listView.getAdapter()).setTraderList(new TraderTranslator().translate(cursor));
-			}
+			if (listView != null)
+				this.getContentResolver().query(com.xtrade.android.provider.DatabaseContract.Trader.CONTENT_URI, null, null, null, null);
 		}
 	}
 	

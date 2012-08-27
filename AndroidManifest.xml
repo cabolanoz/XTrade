@@ -119,9 +119,7 @@
             android:authorities="com.xtrade.android" >
         </provider>
         
-        <receiver
-            android:name=".widget.XTradeWidgetProvider"
-            >
+        <receiver android:name=".widget.XTradeWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
