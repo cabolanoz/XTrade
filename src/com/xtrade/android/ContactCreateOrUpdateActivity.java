@@ -67,7 +67,7 @@ public class ContactCreateOrUpdateActivity extends BaseActivity implements Event
 		
 		// Setting default values while we're on developer mode
 		if (Settings.DEBUG && extra == CONTACT_CREATE_REQUEST_CODE) {
-			etxContactName.setText("José Luis Ayerdis Espinoza");
+			etxContactName.setText("Jose Luis Ayerdis Espinoza");
 			etxContactEmail.setText("joserayerdis@gmail.com");
 			etxContactPhone.setText("86727076");
 		}
