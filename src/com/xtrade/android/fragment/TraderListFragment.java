@@ -1,6 +1,5 @@
 package com.xtrade.android.fragment;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -14,23 +13,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.ActionMode;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
-import com.xtrade.android.BaseActivity;
 import com.xtrade.android.R;
-import com.xtrade.android.provider.DatabaseContract;
 import com.xtrade.android.provider.DatabaseContract.Trader;
 import com.xtrade.android.provider.DatabaseContract.TraderColumns;
 import com.xtrade.android.util.ActionConstant;
-import com.xtrade.android.util.Debug;
 import com.xtrade.android.util.EventConstant;
 
 public class TraderListFragment extends SherlockFragment implements EventConstant, LoaderManager.LoaderCallbacks<Cursor>{

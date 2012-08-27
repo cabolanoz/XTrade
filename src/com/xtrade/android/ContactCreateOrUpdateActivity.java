@@ -23,6 +23,7 @@ import com.xtrade.android.provider.DatabaseContract.Contact;
 import com.xtrade.android.provider.DatabaseContract.ContactColumns;
 import com.xtrade.android.provider.DatabaseContract.ContactTypeColumns;
 import com.xtrade.android.provider.DatabaseContract.TraderColumns;
+import com.xtrade.android.util.Debug;
 import com.xtrade.android.util.EventConstant;
 import com.xtrade.android.util.Settings;
 
@@ -75,10 +76,14 @@ public class ContactCreateOrUpdateActivity extends BaseActivity implements Event
 		
 		if (extra == CONTACT_UPDATE_REQUEST_CODE) {
 			String contactId = intent.getStringExtra(ContactColumns.CONTACT_ID);
+			
 			if (contactId != null && !contactId.equals("")) {
+				
 				CursorLoader cursorLoader = new CursorLoader(getBaseContext(), Contact.buildUri(contactId), null, null, null, null);
 				Cursor cursor = cursorLoader.loadInBackground();
-				if (cursor != null) {
+				
+				if (cursor != null && cursor.moveToNext()) {
+						
 					etxContactName.setText(cursor.getString(cursor.getColumnIndexOrThrow(ContactColumns.NAME)));
 					spnContactType.setSelection(getCursorAdapterPosition(cursor.getString(cursor.getColumnIndexOrThrow(ContactColumns.TYPE))));
 					etxContactEmail.setText(cursor.getString(cursor.getColumnIndexOrThrow(ContactColumns.EMAIL)));
