@@ -3,8 +3,6 @@ package com.xtrade.android;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
@@ -77,6 +75,13 @@ public class TraderActivity extends BaseActivity implements ActionBar.TabListene
 			if (listView != null)
 				this.getContentResolver().query(com.xtrade.android.provider.DatabaseContract.Trader.CONTENT_URI, null, null, null, null);
 		}
+	}
+	
+	@Override
+	public void onStart() {
+		super.onStart();
+		Intent requestData = new Intent(ActionConstant.REQUEST_DATA);
+		serviceHelper.invokeService(requestData);
 	}
 	
 	@Override

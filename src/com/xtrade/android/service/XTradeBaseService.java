@@ -1,14 +1,7 @@
 package com.xtrade.android.service;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.app.IntentService;
 import android.content.Intent;
@@ -16,7 +9,6 @@ import android.content.Intent;
 import com.xtrade.android.http.HttpCaller;
 import com.xtrade.android.http.HttpCallerFactory;
 import com.xtrade.android.util.ActionConstant;
-import com.xtrade.android.util.Debug;
 import com.xtrade.android.util.LoginParameter;
 import com.xtrade.android.util.Settings;
 
@@ -51,12 +43,10 @@ public class XTradeBaseService extends IntentService {
 			intent.putExtra(LoginParameter.SUCCESS, success);
 
 			sendBroadcast(intent);
-		} else if (intent.getAction().equals(ActionConstant.TRADER)) {
-			Debug.info(this, "Llega aquí");
+		} else if (intent.getAction().equals(ActionConstant.REQUEST_DATA)) {
 			HttpCaller httpCaller = HttpCallerFactory.getInstance().createCaller();
 			try {
-				httpCaller.call(new URL("http://nomadas.com"));
-				Debug.info(this, httpCaller.getResult());
+				httpCaller.call(new URL(Settings.getServerURL() + "traders/"));
 			} catch (MalformedURLException murle) {
 				murle.printStackTrace();
 			}
