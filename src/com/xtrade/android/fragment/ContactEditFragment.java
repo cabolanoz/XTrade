@@ -40,7 +40,7 @@ public class ContactEditFragment extends SherlockFragment implements EventConsta
 	
 	private SimpleCursorAdapter adapter;
 	private Cursor cursor;
-	
+	private long contactId;
 	private EditText etxContactName;
 	private Spinner spnContactType;
 	private EditText etxContactEmail;
@@ -63,8 +63,6 @@ public class ContactEditFragment extends SherlockFragment implements EventConsta
 		spnContactType = (Spinner) view.findViewById(R.id.spnContactType);
 		spnContactType.setAdapter(adapter);
 		
-//		cursor.close();
-		
 		etxContactName = (EditText) view.findViewById(R.id.etxContactName);
 		etxContactEmail = (EditText) view.findViewById(R.id.etxContactEmail);
 		etxContactPhone = (EditText) view.findViewById(R.id.etxContactPhone);
@@ -82,25 +80,20 @@ public class ContactEditFragment extends SherlockFragment implements EventConsta
 			etxContactPhone.setText("86727076");
 		}
 		
-		if (extra == CONTACT_UPDATE_REQUEST_CODE) {
-			long contactId = intent.getLongExtra(ContactColumns.CONTACT_ID,-1);
-			Debug.info(this,"contact id "+contactId);
-			if (contactId !=  -1) {
-				CursorLoader cursorLoader = new CursorLoader(getActivity(), Contact.buildUri(contactId), null, null, null, null);
-				Cursor cursor = cursorLoader.loadInBackground();
-				if (cursor != null && cursor.moveToNext()) {
-					etxContactName.setText(cursor.getString(cursor.getColumnIndexOrThrow(ContactColumns.NAME)));
-					spnContactType.setSelection(getCursorAdapterPosition(cursor.getString(cursor.getColumnIndexOrThrow(ContactColumns.TYPE))));
-					etxContactEmail.setText(cursor.getString(cursor.getColumnIndexOrThrow(ContactColumns.EMAIL)));
-					etxContactPhone.setText(cursor.getString(cursor.getColumnIndexOrThrow(ContactColumns.PHONE)));
-				}
-			}
-		}
+		if (extra == CONTACT_UPDATE_REQUEST_CODE) 
+			contactId = intent.getLongExtra(ContactColumns.CONTACT_ID,-1);
+		
 		
 		//this view should handle its menus
 		setHasOptionsMenu(true);
 		return view;
 	}
+	
+	public void onResume() {
+		super.onResume();
+		getActivity().getSupportLoaderManager().restartLoader(0, null, this);
+	}
+
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
@@ -175,14 +168,19 @@ public class ContactEditFragment extends SherlockFragment implements EventConsta
 
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-		// TODO Auto-generated method stub
-		return null;
+		long traderId = getActivity().getIntent().getLongExtra(TraderColumns.TRADER_ID, -1);
+		Loader<Cursor> loader = new CursorLoader(getActivity(), Contact.buildUri(contactId), null, null, null, Contact.DEFAULT_SORT);
+		return loader;
 	}
 
 	@Override
 	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-		// TODO Auto-generated method stub
-		
+		if (cursor.moveToNext()) {
+			etxContactName.setText(cursor.getString(cursor.getColumnIndexOrThrow(ContactColumns.NAME)));
+			spnContactType.setSelection(getCursorAdapterPosition(cursor.getString(cursor.getColumnIndexOrThrow(ContactColumns.TYPE))));
+			etxContactEmail.setText(cursor.getString(cursor.getColumnIndexOrThrow(ContactColumns.EMAIL)));
+			etxContactPhone.setText(cursor.getString(cursor.getColumnIndexOrThrow(ContactColumns.PHONE)));
+		}
 	}
 
 	@Override

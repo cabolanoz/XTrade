@@ -77,6 +77,9 @@ public class DatabaseContract {
 		public static Uri buildUri(String contactId) {
 			return CONTENT_URI.buildUpon().appendPath(contactId).build();
 		}
+		public static Uri buildUri(long contactId) {
+			return CONTENT_URI.buildUpon().appendPath(String.valueOf(contactId)).build();
+		}
 	}
 	
 	public static class ContactType extends BaseTable implements ContactTypeColumns {
