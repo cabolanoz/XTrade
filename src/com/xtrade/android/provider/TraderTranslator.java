@@ -12,7 +12,7 @@ public class TraderTranslator {
 
 	public List<com.xtrade.android.object.Trader> translate(Cursor cursor) {
 		List<com.xtrade.android.object.Trader> traders = new ArrayList<com.xtrade.android.object.Trader>();
-		
+
 		while (cursor.moveToNext()) {
 			com.xtrade.android.object.Trader trader = new com.xtrade.android.object.Trader(
 					cursor.getString(cursor.getColumnIndex(BaseColumns._ID)),
@@ -21,14 +21,14 @@ public class TraderTranslator {
 					cursor.getString(cursor.getColumnIndex(Trader.ADDRESS)),
 					cursor.getString(cursor.getColumnIndex(Trader.POSX)),
 					cursor.getString(cursor.getColumnIndex(Trader.POSY)),
-					cursor.getString(cursor.getColumnIndex(Trader.ISFAVORITE)));
+					cursor.getInt(cursor.getColumnIndex(Trader.ISFAVORITE)) == 1);
 
 			traders.add(trader);
 		}
 
 		// So this guy will not cause trouble
 		cursor.close();
-		
+
 		return traders;
 	}
 
