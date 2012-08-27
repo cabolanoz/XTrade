@@ -14,8 +14,6 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.xtrade.android.R;
-import com.xtrade.android.R.id;
-import com.xtrade.android.R.layout;
 import com.xtrade.android.provider.DatabaseContract;
 import com.xtrade.android.provider.DatabaseContract.TraderColumns;
 import com.xtrade.android.util.EventConstant;

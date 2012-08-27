@@ -30,6 +30,7 @@ public class ContactCreateOrUpdateActivity extends BaseActivity implements Event
 	private Intent intent;
 	
 	private SimpleCursorAdapter adapter;
+	private Cursor cursor;
 	
 	private EditText etxContactName;
 	private Spinner spnContactType;
@@ -40,7 +41,7 @@ public class ContactCreateOrUpdateActivity extends BaseActivity implements Event
 		super.onCreate(savedIntanceState);
 		setContentView(R.layout.contact);
 		
-		Cursor cursor = getContentResolver().query(DatabaseContract.ContactType.CONTENT_URI, 
+		cursor = getContentResolver().query(DatabaseContract.ContactType.CONTENT_URI, 
 				new String[] {BaseColumns._ID, ContactTypeColumns.CONTACT_TYPE_ID, ContactTypeColumns.NAME},
 				null, 
 				null,
@@ -52,7 +53,6 @@ public class ContactCreateOrUpdateActivity extends BaseActivity implements Event
 		spnContactType = (Spinner) findViewById(R.id.spnContactType);
 		spnContactType.setAdapter(adapter);
 		
-		// TODO: Where should I close the cursor??? o.O
 //		cursor.close();
 		
 		etxContactName = (EditText) findViewById(R.id.etxContactName);
@@ -79,7 +79,7 @@ public class ContactCreateOrUpdateActivity extends BaseActivity implements Event
 				Cursor _cursor = _cursorLoader.loadInBackground();
 				if (_cursor != null) {
 					etxContactName.setText(_cursor.getString(_cursor.getColumnIndexOrThrow(ContactColumns.NAME)));
-					// TODO: How should load the contact type previously save?
+					spnContactType.setSelection(getCursorAdapterPosition(_cursor.getString(_cursor.getColumnIndexOrThrow(ContactColumns.TYPE))));
 					etxContactEmail.setText(_cursor.getString(_cursor.getColumnIndexOrThrow(ContactColumns.EMAIL)));
 					etxContactPhone.setText(_cursor.getString(_cursor.getColumnIndexOrThrow(ContactColumns.PHONE)));
 				}
@@ -144,6 +144,21 @@ public class ContactCreateOrUpdateActivity extends BaseActivity implements Event
 		default:
 			return super.onOptionsItemSelected(_menuItem);
 		}
+	}
+	
+	private int getCursorAdapterPosition(String _contactType) {
+		cursor.moveToFirst();
+		
+		for (int i = 0; i < cursor.getCount() - 1; i++) {
+			cursor.moveToNext();
+			String contactType = cursor.getString(cursor.getColumnIndexOrThrow(ContactColumns.TYPE));
+			if (contactType.equals(_contactType))
+				return i + 1;
+			else
+				return 0;
+		}
+		
+		return -1;
 	}
 	
 }
