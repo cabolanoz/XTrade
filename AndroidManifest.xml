@@ -70,7 +70,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ContactCreateOrUpdateActivity"
+            android:name=".ContactEditActivity"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="com.xtrade.android.CONTACT_CREATE_UPDATE_ACTION" />

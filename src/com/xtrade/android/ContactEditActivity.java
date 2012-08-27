@@ -9,6 +9,7 @@ import android.database.CursorWrapper;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.BaseColumns;
+import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SimpleCursorAdapter;
@@ -23,11 +24,10 @@ import com.xtrade.android.provider.DatabaseContract.Contact;
 import com.xtrade.android.provider.DatabaseContract.ContactColumns;
 import com.xtrade.android.provider.DatabaseContract.ContactTypeColumns;
 import com.xtrade.android.provider.DatabaseContract.TraderColumns;
-import com.xtrade.android.util.Debug;
 import com.xtrade.android.util.EventConstant;
 import com.xtrade.android.util.Settings;
 
-public class ContactCreateOrUpdateActivity extends BaseActivity implements EventConstant{
+public class ContactEditActivity extends BaseActivity implements EventConstant, LoaderManager.LoaderCallbacks<Cursor>{
 
 	private Intent intent;
 	
@@ -161,6 +161,24 @@ public class ContactCreateOrUpdateActivity extends BaseActivity implements Event
 		}
 		
 		return -1;
+	}
+
+	@Override
+	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onLoaderReset(Loader<Cursor> loader) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
