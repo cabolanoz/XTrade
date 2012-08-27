@@ -22,6 +22,7 @@ import com.xtrade.android.provider.DatabaseContract.Contact;
 import com.xtrade.android.provider.DatabaseContract.ContactColumns;
 import com.xtrade.android.provider.DatabaseContract.ContactTypeColumns;
 import com.xtrade.android.provider.DatabaseContract.TraderColumns;
+import com.xtrade.android.util.Debug;
 import com.xtrade.android.util.EventConstant;
 import com.xtrade.android.util.Settings;
 
@@ -67,7 +68,7 @@ public class ContactCreateOrUpdateActivity extends BaseActivity implements Event
 		
 		// Setting default values while we're on developer mode
 		if (Settings.DEBUG && extra == CONTACT_CREATE_REQUEST_CODE) {
-			etxContactName.setText("José Luis Ayerdis Espinoza");
+			etxContactName.setText("Jos\u00E9 Luis Ayerdis Espinoza");
 			etxContactEmail.setText("joserayerdis@gmail.com");
 			etxContactPhone.setText("86727076");
 		}
@@ -78,6 +79,7 @@ public class ContactCreateOrUpdateActivity extends BaseActivity implements Event
 				CursorLoader _cursorLoader = new CursorLoader(getBaseContext(), Contact.buildUri(contactId), null, null, null, null);
 				Cursor _cursor = _cursorLoader.loadInBackground();
 				if (_cursor != null) {
+					Debug.info(this, _cursor.getString(_cursor.getColumnIndexOrThrow(ContactColumns.NAME)));
 					etxContactName.setText(_cursor.getString(_cursor.getColumnIndexOrThrow(ContactColumns.NAME)));
 					spnContactType.setSelection(getCursorAdapterPosition(_cursor.getString(_cursor.getColumnIndexOrThrow(ContactColumns.TYPE))));
 					etxContactEmail.setText(_cursor.getString(_cursor.getColumnIndexOrThrow(ContactColumns.EMAIL)));

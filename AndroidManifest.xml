@@ -21,7 +21,6 @@
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
 
     <uses-feature android:name="android.hardware.camera" />
-    
 
     <application
         android:icon="@drawable/ic_launcher"
@@ -38,12 +37,10 @@
             android:theme="@style/Theme.XTrade.NoActionbar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
                 <action android:name="com.xtrade.android.LOGIN_ACTION" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -53,7 +50,6 @@
             <intent-filter>
                 <action android:name="com.xtrade.android.MAIN_XTRADE" />
                 <action android:name="com.xtrade.android.TRADER_ACTION" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -62,7 +58,6 @@
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="com.xtrade.android.TRADER_CREATE_UPDATE_ACTION" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -71,7 +66,6 @@
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="com.xtrade.android.TRADER_DETAIL_ACTION" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -80,7 +74,6 @@
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="com.xtrade.android.CONTACT_CREATE_UPDATE_ACTION" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -89,7 +82,6 @@
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="com.xtrade.android.ABOUT" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -98,7 +90,6 @@
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="com.xtrade.android.CLIENT_MAP_ACTION" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -119,7 +110,6 @@
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="com.xtrade.android.LOGIN_ACTION" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>

@@ -32,11 +32,6 @@ public class BaseActivity extends SherlockFragmentActivity {
 		serviceHelper = ServiceHelper.getInstance(this);
 	}
 	
-	
-	
-		
-	
-	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {

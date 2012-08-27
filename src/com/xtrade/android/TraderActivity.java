@@ -1,6 +1,9 @@
 package com.xtrade.android;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -22,7 +25,7 @@ import com.xtrade.android.util.EventConstant;
 
 public class TraderActivity extends BaseActivity implements ActionBar.TabListener, EventConstant {
 
-	
+	private TraderBroadcastReceiver receiver;
 	private ViewPager viewPager;
 	private SectionsPagerAdapter sectionsPagerAdapter;
 	
@@ -30,6 +33,10 @@ public class TraderActivity extends BaseActivity implements ActionBar.TabListene
 		upLevel=false;
 		super.onCreate(savedIntanceState);
 		setContentView(R.layout.trader);
+		
+//		receiver = new TraderBroadcastReceiver();
+//		serviceHelper.invokeService(new Intent(ActionConstant.TRADER));
+		
 		// Getting the current action bar
 		final ActionBar actionBar = getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -102,6 +109,18 @@ public class TraderActivity extends BaseActivity implements ActionBar.TabListene
 		return super.onOptionsItemSelected(menuItem);
 	}
 
+//	public void onResume() {
+//		IntentFilter filter = new IntentFilter();
+//		filter.addAction(ActionConstant.TRADER);
+//		registerReceiver(receiver, filter);
+//		super.onResume();
+//	}
+//	
+//	public void onPause() {
+//		unregisterReceiver(receiver);
+//		super.onPause();
+//	}
+	
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
 		viewPager.setCurrentItem(tab.getPosition());
@@ -117,6 +136,15 @@ public class TraderActivity extends BaseActivity implements ActionBar.TabListene
 	@Override
 	public void onTabReselected(Tab tab, FragmentTransaction ft) {
 		// TODO Auto-generated method stub
+		
+	}
+	
+	public class TraderBroadcastReceiver extends BroadcastReceiver {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			
+		}
 		
 	}
 	
