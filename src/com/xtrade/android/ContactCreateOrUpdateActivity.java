@@ -128,11 +128,11 @@ public class ContactCreateOrUpdateActivity extends BaseActivity implements Event
 				int result = RESULT_CANCELED;
 				
 				if (extra == CONTACT_CREATE_REQUEST_CODE) {
-					contactUri = getContentResolver().insert(Contact.CONTENT_URI, contentValues);
+					contactUri = getContentResolver().insert(DatabaseContract.Contact.CONTENT_URI, contentValues);
 					result = contactUri == null ? RESULT_CANCELED : RESULT_OK;
 				} else if (extra == CONTACT_UPDATE_REQUEST_CODE) {
 					String contactId = intent.getStringExtra(ContactColumns.CONTACT_ID);
-					contactUri = Contact.buildUri(contactId);
+					contactUri = DatabaseContract.Contact.buildUri(contactId);
 					result = getContentResolver().update(contactUri, contentValues, null, null) == 0 ? RESULT_CANCELED : RESULT_OK;
 				}
 				

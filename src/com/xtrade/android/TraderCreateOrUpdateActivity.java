@@ -20,7 +20,6 @@ import com.xtrade.android.fragment.TraderDetailFragment;
 import com.xtrade.android.fragment.TraderGeneralFragment;
 import com.xtrade.android.listener.TraderTabListener;
 import com.xtrade.android.provider.DatabaseContract;
-import com.xtrade.android.provider.DatabaseContract.Trader;
 import com.xtrade.android.provider.DatabaseContract.TraderColumns;
 import com.xtrade.android.util.EventConstant;
 
@@ -100,7 +99,7 @@ public class TraderCreateOrUpdateActivity extends BaseActivity implements EventC
 					result = clientUri == null ? RESULT_CANCELED : RESULT_OK;
 				} else if (extra == TRADER_UPDATE_REQUEST_CODE) {
 					String traderId = intent.getStringExtra(DatabaseContract.TraderColumns.TRADER_ID);
-					clientUri = Trader.buildUri(traderId);
+					clientUri = DatabaseContract.Trader.buildUri(traderId);
 					result = getContentResolver().update(clientUri, contentValues, null, null) == 0 ? RESULT_CANCELED : RESULT_OK;
 				}
 
