@@ -25,12 +25,9 @@ public class HttpCallerFactory {
 	}
 	
 	public HttpCaller createCaller(){
-		
-
-		if(Settings.MOCK_APPLICATION)
-			return new HttpCallerMockImpl();
-		else if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.HONEYCOMB)
-			return new HttpCallerUrlImpl();
+				
+//		else if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.HONEYCOMB)
+//			return new HttpCallerUrlImpl();
 		
 		return new HttpCallerApacheImpl();
 	

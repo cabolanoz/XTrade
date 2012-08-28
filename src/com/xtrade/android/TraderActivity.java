@@ -1,7 +1,8 @@
 package com.xtrade.android;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
@@ -12,17 +13,15 @@ import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.xtrade.android.adapter.TraderAdapter;
 import com.xtrade.android.fragment.SectionsPagerAdapter;
 import com.xtrade.android.fragment.TraderListFragment;
 import com.xtrade.android.fragment.TraderTodayFragment;
-import com.xtrade.android.provider.TraderTranslator;
 import com.xtrade.android.util.ActionConstant;
 import com.xtrade.android.util.EventConstant;
 
 public class TraderActivity extends BaseActivity implements ActionBar.TabListener, EventConstant {
 
-	
+	private TraderBroadcastReceiver receiver;
 	private ViewPager viewPager;
 	private SectionsPagerAdapter sectionsPagerAdapter;
 	
@@ -30,6 +29,10 @@ public class TraderActivity extends BaseActivity implements ActionBar.TabListene
 		upLevel=false;
 		super.onCreate(savedIntanceState);
 		setContentView(R.layout.trader);
+		
+//		receiver = new TraderBroadcastReceiver();
+//		serviceHelper.invokeService(new Intent(ActionConstant.TRADER));
+		
 		// Getting the current action bar
 		final ActionBar actionBar = getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -69,14 +72,24 @@ public class TraderActivity extends BaseActivity implements ActionBar.TabListene
 		
 		if (resultCode == RESULT_OK && (requestCode == TRADER_CREATE_REQUEST_CODE || requestCode == TRADER_UPDATE_REQUEST_CODE)) {
 			ListView listView = (ListView) findViewById(R.id.lvwTrader);
-			if (listView != null) {
-				Cursor cursor = this.getContentResolver().query(com.xtrade.android.provider.DatabaseContract.Trader.CONTENT_URI, null, null, null, null);
-				((TraderAdapter) listView.getAdapter()).setTraderList(new TraderTranslator().translate(cursor));
-			}
+			if (listView != null)
+				this.getContentResolver().query(com.xtrade.android.provider.DatabaseContract.Trader.CONTENT_URI, null, null, null, null);
 		}
 	}
 	
-		
+	@Override
+	public void onStart() {
+		super.onStart();
+		Intent requestData = new Intent(ActionConstant.REQUEST_DATA);
+		serviceHelper.invokeService(requestData);
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getSupportMenuInflater();
+		inflater.inflate(R.menu.trader_tab_list_menu, menu);
+		return true;
+	}
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem menuItem) {
@@ -97,6 +110,18 @@ public class TraderActivity extends BaseActivity implements ActionBar.TabListene
 		return super.onOptionsItemSelected(menuItem);
 	}
 
+//	public void onResume() {
+//		IntentFilter filter = new IntentFilter();
+//		filter.addAction(ActionConstant.TRADER);
+//		registerReceiver(receiver, filter);
+//		super.onResume();
+//	}
+//	
+//	public void onPause() {
+//		unregisterReceiver(receiver);
+//		super.onPause();
+//	}
+	
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
 		viewPager.setCurrentItem(tab.getPosition());
@@ -105,13 +130,22 @@ public class TraderActivity extends BaseActivity implements ActionBar.TabListene
 
 	@Override
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-		// TODO Auto-generated method stub
+
 		
 	}
 
 	@Override
 	public void onTabReselected(Tab tab, FragmentTransaction ft) {
 		// TODO Auto-generated method stub
+		
+	}
+	
+	public class TraderBroadcastReceiver extends BroadcastReceiver {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			
+		}
 		
 	}
 	

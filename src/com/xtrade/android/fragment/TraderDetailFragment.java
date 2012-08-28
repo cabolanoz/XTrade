@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.xtrade.android.R;
-import com.xtrade.android.R.layout;
 import com.xtrade.android.util.EventConstant;
 
 public class TraderDetailFragment extends SherlockFragment implements EventConstant {
