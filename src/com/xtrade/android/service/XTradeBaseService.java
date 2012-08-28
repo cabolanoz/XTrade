@@ -9,6 +9,7 @@ import android.content.Intent;
 import com.xtrade.android.http.HttpCaller;
 import com.xtrade.android.http.HttpCallerFactory;
 import com.xtrade.android.util.ActionConstant;
+import com.xtrade.android.util.Debug;
 import com.xtrade.android.util.LoginParameter;
 import com.xtrade.android.util.Settings;
 
@@ -44,6 +45,7 @@ public class XTradeBaseService extends IntentService {
 
 			sendBroadcast(intent);
 		} else if (intent.getAction().equals(ActionConstant.REQUEST_DATA)) {
+			
 			HttpCaller httpCaller = HttpCallerFactory.getInstance().createCaller();
 			try {
 				httpCaller.call(new URL(Settings.getServerURL() + "traders/"));
