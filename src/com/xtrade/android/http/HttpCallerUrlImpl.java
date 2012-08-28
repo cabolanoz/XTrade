@@ -13,7 +13,8 @@ import java.net.URL;
 public class HttpCallerUrlImpl extends AbstractHttpCaller{
 
 	@Override
-	public boolean call(URL urlResource) {
+	public boolean call(URL urlResource,RestMethod methodType) {
+		
 		return false;
 	}
 

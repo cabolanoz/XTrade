@@ -11,29 +11,37 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import com.xtrade.android.util.Debug;
-
 public class HttpCallerApacheImpl extends AbstractHttpCaller{
 
-	public boolean call(URL urlResource) {
+	
+	
+	public boolean call(URL urlResource,RestMethod methodType) {
 		HttpClient httpClient = new DefaultHttpClient();
-		HttpGet httpGet;
 		
-		try {
-			httpGet = new HttpGet(urlResource.toURI());
+		switch(methodType){
+		case GET:
+
+			HttpGet httpGet;
 			
-			ResponseHandler<String> responseHandler=new BasicResponseHandler();
-	        String responseBody = httpClient.execute(httpGet, responseHandler);
-	       
-			Debug.info(this, "Response body: " + responseBody);
-		} catch (URISyntaxException urise) {
-			urise.printStackTrace();
-		} catch (ClientProtocolException cpe) {
-			cpe.printStackTrace();
-		} catch (IOException ioe) {
-			ioe.printStackTrace();
-		}
+			try {
+				httpGet = new HttpGet(urlResource.toURI());
+				
+				ResponseHandler<String> responseHandler=new BasicResponseHandler();
+		        String responseBody = httpClient.execute(httpGet, responseHandler);
+		       
+				this.result=responseBody;
+				return true;
+			} catch (URISyntaxException urise) {
+				urise.printStackTrace();
+			} catch (ClientProtocolException cpe) {
+				cpe.printStackTrace();
+			} catch (IOException ioe) {
+				ioe.printStackTrace();
+			}
+
+			break;
 		
+		}		
 		return false;
 	}
 

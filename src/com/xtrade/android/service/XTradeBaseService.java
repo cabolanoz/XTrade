@@ -48,7 +48,10 @@ public class XTradeBaseService extends IntentService {
 			
 			HttpCaller httpCaller = HttpCallerFactory.getInstance().createCaller();
 			try {
-				httpCaller.call(new URL(Settings.getServerURL() + "traders/"));
+				boolean result= httpCaller.call(new URL(Settings.getServerURL() + "traders/"));
+				if(result){
+					Debug.info(this, httpCaller.getResult());
+				}
 			} catch (MalformedURLException murle) {
 				murle.printStackTrace();
 			}
