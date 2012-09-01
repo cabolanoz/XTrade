@@ -40,6 +40,13 @@ public class HttpCallerApacheImpl extends AbstractHttpCaller{
 			}
 
 			break;
+		case PUT:
+			break;
+		case POST:
+			break;
+		case DELETE:
+			break;
+		
 		
 		}		
 		return false;
