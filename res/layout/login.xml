@@ -5,10 +5,10 @@
     android:layout_height="fill_parent"
     tools:ignore="ContentDescription" >
 
-    <ImageView
+     <ImageView
         android:id="@+id/ivwXTrade"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:background="@drawable/ic_login"
         android:paddingRight="5dp" />
 
@@ -24,7 +24,7 @@
             style="@style/Widget.XTrade.EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dip"
+            android:layout_margin="10dip"
             android:hint="@string/username" />
 
         <EditText
@@ -32,7 +32,7 @@
             style="@style/Widget.XTrade.EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dip"
+            android:layout_margin="10dip"
             android:hint="@string/password"
             android:imeOptions="actionDone"
             android:inputType="textPassword" />

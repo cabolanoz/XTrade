@@ -3,6 +3,10 @@
 
     <string name="hello">Hello World, XTradeActivity!</string>
     <string name="app_name">XTrade</string>
+    <string name="username_or_email_hint">Username or Email</string>
+    <string name="username_hint">Username</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
 
     <color name="white">#FFFFFF</color>
     <color name="grey">#999999</color>
@@ -19,7 +23,6 @@
     <string name="profile">Profile</string>
     <string name="settings">Settings</string>
     <string name="about">About</string>
-    
     <string name="preferece_notification">Receive Notifications</string>
     <string name="summary_checkbox_preference">Allow XTrade to notify you whenever an important event ocurred.</string>
     <string name="preference_category_general">General</string>
@@ -65,5 +68,7 @@
         <item>en</item>
         <item>es</item>
     </string-array>
+
+    <string name="rest_password">Reset Password</string>
 
 </resources>
