@@ -30,7 +30,6 @@ import com.xtrade.android.provider.DatabaseContract.Contact;
 import com.xtrade.android.provider.DatabaseContract.ContactColumns;
 import com.xtrade.android.provider.DatabaseContract.ContactTypeColumns;
 import com.xtrade.android.provider.DatabaseContract.TraderColumns;
-import com.xtrade.android.util.Debug;
 import com.xtrade.android.util.EventConstant;
 import com.xtrade.android.util.Settings;
 
@@ -49,7 +48,7 @@ public class ContactEditFragment extends SherlockFragment implements EventConsta
 	@Override
 	public View onCreateView(LayoutInflater layoutInflater,ViewGroup container, Bundle savedInstanceState) {
 		super.onCreateView(layoutInflater, container, savedInstanceState);
-		View view= layoutInflater.inflate(R.layout.contact_edit_fragment,container,false);
+		View view = layoutInflater.inflate(R.layout.contact_edit_fragment, container, false);
 		
 		cursor = getActivity().getContentResolver().query(DatabaseContract.ContactType.CONTENT_URI, 
 				new String[] {BaseColumns._ID, ContactTypeColumns.CONTACT_TYPE_ID, ContactTypeColumns.NAME},
@@ -81,8 +80,7 @@ public class ContactEditFragment extends SherlockFragment implements EventConsta
 		}
 		
 		if (extra == CONTACT_UPDATE_REQUEST_CODE) 
-			contactId = intent.getLongExtra(ContactColumns.CONTACT_ID,-1);
-		
+			contactId = intent.getLongExtra(ContactColumns.CONTACT_ID, -1);
 		
 		//this view should handle its menus
 		setHasOptionsMenu(true);
@@ -118,7 +116,7 @@ public class ContactEditFragment extends SherlockFragment implements EventConsta
 			// Evaluating if the EditTexts' content is empty or not
 			if (!StringUtils.isEmpty(contactName) && !StringUtils.isEmpty(contactType) && !StringUtils.isEmpty(contactEmail) && !StringUtils.isEmpty(contactPhone)) {
 				// We get the trader id in which the contacts will belong
-				String traderId = intent.getStringExtra(TraderColumns.TRADER_ID);
+				long traderId = intent.getLongExtra(TraderColumns.TRADER_ID, -1);
 				
 				ContentValues contentValues = new ContentValues();
 				contentValues.put(ContactColumns.NAME, contactName);
@@ -136,7 +134,6 @@ public class ContactEditFragment extends SherlockFragment implements EventConsta
 					contactUri = getActivity().getContentResolver().insert(DatabaseContract.Contact.CONTENT_URI, contentValues);
 					result = contactUri == null ? Activity.RESULT_CANCELED : Activity.RESULT_OK;
 				} else if (extra == CONTACT_UPDATE_REQUEST_CODE) {
-					String contactId = intent.getStringExtra(ContactColumns.CONTACT_ID);
 					contactUri = DatabaseContract.Contact.buildUri(contactId);
 					result = getActivity().getContentResolver().update(contactUri, contentValues, null, null) == 0 ? Activity.RESULT_CANCELED : Activity.RESULT_OK;
 				}
