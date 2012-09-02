@@ -1,79 +1,45 @@
 package com.xtrade.android.object;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Trader {
 
-	private String id;
-	private String name;
-	private String website;
-	private String address;
-	private String posX;
-	private String posY;
+	public String id;
+	public String name;
+	public String website;
+	public String address;
+	public String logo;
+	//TODO: this might come handy to be a collection of locations
+	//TODO: ignore this until resolve serialization problems
+	//public Location location;
+	
+	@SerializedName("favorite")
 	public boolean isFavorite;
 
-	public Trader(String _id, String _name, String _website, String _address, String _posX, String _posY, boolean _isFavorite) {
-		this.id = _id;
-		this.name = _name;
-		this.website = _website;
-		this.address = _address;
-		this.posX = _posX;
-		this.posY = _posY;
-		this.isFavorite = _isFavorite;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
+	public Trader(String id, String name, String website, String address, boolean isFavorite) {
 		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getWebsite() {
-		return website;
-	}
-
-	public void setWebsite(String website) {
 		this.website = website;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
 		this.address = address;
-	}
-
-	public String getPosX() {
-		return posX;
-	}
-
-	public void setPosX(String posX) {
-		this.posX = posX;
-	}
-
-	public String getPosY() {
-		return posY;
-	}
-
-	public void setPosY(String posY) {
-		this.posY = posY;
-	}
-
-	public boolean isFavorite() {
-		return isFavorite;
-	}
-
-	public void setFavorite(boolean isFavorite) {
+		
 		this.isFavorite = isFavorite;
 	}
 
+	@Override
+	public String toString() {
+		return "Trader [id=" + id + ", name=" + name + ", website=" + website
+				+ ", address=" + address + ", location: " //+ location.toString()
+				+ ", isFavorite=" + isFavorite + "]";
+	}
+
+	
+	public static class Location {
+		public double lat;
+		public double lon;
+		
+		public String toString(){
+			return "lat: "+lat+" lon: "+lon;
+		}
+	}
+	
 }
