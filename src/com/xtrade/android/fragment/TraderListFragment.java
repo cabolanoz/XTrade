@@ -57,7 +57,7 @@ public class TraderListFragment extends SherlockFragment implements
 	public void onResume() {
 		super.onResume();
 		// Force start background query to load sessions
-		getLoaderManager().restartLoader(0, null, this);
+		getActivity().getSupportLoaderManager().restartLoader(0, null, this);
 	}
 
 	// LoaderCallbacks interface
@@ -116,7 +116,7 @@ public class TraderListFragment extends SherlockFragment implements
 			TextView tvwTraderWebsite = (TextView) view.findViewById(R.id.tvwTraderWebsite);
 			tvwTraderWebsite.setText(cursor.getString(cursor.getColumnIndex(TraderEntity.ADDRESS)));
 
-			ImageButton chbFavorite = (ImageButton) view.findViewById(R.id.chbFavorite);
+			final ImageButton chbFavorite = (ImageButton) view.findViewById(R.id.chbFavorite);
 			chbFavorite.setClickable(true);
 			chbFavorite.setFocusable(true);
 
@@ -131,9 +131,8 @@ public class TraderListFragment extends SherlockFragment implements
 				public void onClick(View v) {
 					ContentValues contentValues = new ContentValues();
 					contentValues.put(TraderColumns.ISFAVORITE, isFavorite ? 0 : 1);
-					
-					if (getActivity().getContentResolver().update(TraderEntity.buildUri(traderId), contentValues, null, null) > 0)
-						((ImageButton) v).setImageResource(isFavorite ? android.R.drawable.btn_star : android.R.drawable.btn_star_big_on);
+					boolean updated=getActivity().getContentResolver().update(TraderEntity.buildUri(traderId), contentValues, null, null) > 0;
+					getActivity().getSupportLoaderManager().restartLoader(0, null, TraderListFragment.this);
 				}
 			});
 		}
