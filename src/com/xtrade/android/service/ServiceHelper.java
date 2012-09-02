@@ -31,7 +31,7 @@ public class ServiceHelper {
 	}
 	
 	public void invokeService(Intent serviceIntent) {
-		Debug.info(this, "Service is being invoke!");
+		Debug.info(this, "Service is being invoke! "+serviceIntent.getAction());
 		context.startService(serviceIntent);
 	}
 	
