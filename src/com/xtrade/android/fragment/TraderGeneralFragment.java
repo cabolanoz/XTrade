@@ -71,7 +71,7 @@ public class TraderGeneralFragment extends SherlockFragment implements EventCons
 			if (extra != -1 && intent.getStringExtra(DatabaseContract.TraderColumns.TRADER_ID) != null && !"".equals(intent.getStringExtra(DatabaseContract.TraderColumns.TRADER_ID))) {
 				String traderId = intent.getStringExtra(DatabaseContract.TraderColumns.TRADER_ID);
 
-				CursorLoader cursorLoader = new CursorLoader(getActivity().getBaseContext(), DatabaseContract.Trader.buildUri(traderId), null, null, null, null);
+				CursorLoader cursorLoader = new CursorLoader(getActivity().getBaseContext(), DatabaseContract.TraderEntity.buildUri(traderId), null, null, null, null);
 				Cursor cursor = cursorLoader.loadInBackground();
 				if (cursor != null) {
 					if (cursor.moveToNext()) {
