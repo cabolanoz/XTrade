@@ -35,6 +35,7 @@ public class TraderContactFragment extends SherlockFragment implements EventCons
 	private CursorAdapter adapter;
 	private ActionMode mActionMode;
 	private long contactId = -1;
+	private View selectedView = null;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,6 +57,7 @@ public class TraderContactFragment extends SherlockFragment implements EventCons
 							return false;
 
 						contactId = id;
+						selectedView = view;
 
 						mActionMode = ((BaseActivity) getActivity()).startActionMode(mActionModeCallback);
 						
@@ -89,6 +91,8 @@ public class TraderContactFragment extends SherlockFragment implements EventCons
 
 		@Override
 		public void onDestroyActionMode(ActionMode mode) {
+			if (selectedView != null)
+				selectedView.setSelected(false);
 			mActionMode = null;
 		}
 
