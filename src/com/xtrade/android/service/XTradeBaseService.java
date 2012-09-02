@@ -8,8 +8,8 @@ import android.content.Intent;
 
 import com.xtrade.android.http.HttpCaller;
 import com.xtrade.android.http.HttpCallerFactory;
+import com.xtrade.android.http.RestMethod;
 import com.xtrade.android.util.ActionConstant;
-import com.xtrade.android.util.Debug;
 import com.xtrade.android.util.LoginParameter;
 import com.xtrade.android.util.Settings;
 
@@ -29,28 +29,22 @@ public class XTradeBaseService extends IntentService {
 			String password = intent.getStringExtra(LoginParameter.PASSWORD);
 
 			boolean success = false;
-			if (username.equals(Settings.DEFAULT_USERNAME) && password.equals(Settings.DEFAULT_PASSWORD)) {
-				// we resend the login intent with extra parameters
-				success = true;
-			} else if (intent.getAction().equals(ActionConstant.TRADER)) {
-				HttpCaller caller = HttpCallerFactory.getInstance().createCaller();
-				try {
-					caller.call(new URL("file:///android_asset/client.mock"));
-				} catch (MalformedURLException murle) {
-					murle.printStackTrace();
-				}
-			}
-
+			if (username.equals(Settings.DEFAULT_USERNAME) && password.equals(Settings.DEFAULT_PASSWORD)) 
+			// we resend the login intent with extra parameters
+			success = true;
 			intent.putExtra(LoginParameter.SUCCESS, success);
 
 			sendBroadcast(intent);
 		} else if (intent.getAction().equals(ActionConstant.REQUEST_DATA)) {
-			
+
 			HttpCaller httpCaller = HttpCallerFactory.getInstance().createCaller();
 			try {
-				boolean result= httpCaller.call(new URL(Settings.getServerURL() + "traders/"));
+				
+				boolean result= httpCaller.call(new URL(Settings.getServerURL() + "traders/"),RestMethod.GET);
+				
 				if(result){
-					Debug.info(this, httpCaller.getResult());
+					ProcessorBase processor=ProcessorFactory.getProcessor(intent.getAction(),this);
+					processor.process(httpCaller.getResult());
 				}
 			} catch (MalformedURLException murle) {
 				murle.printStackTrace();
