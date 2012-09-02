@@ -52,6 +52,15 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dip"
             android:text="@string/login" />
+        
+          <Button
+            android:id="@+id/buttonLoginGmail"
+            style="@style/TradeButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:text="@string/login_google" />
+        
 
         <LinearLayout
             android:layout_width="match_parent"

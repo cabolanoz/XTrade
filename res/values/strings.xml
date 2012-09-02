@@ -12,6 +12,7 @@
     <color name="grey">#999999</color>
 
     <string name="login">Sign In</string>
+    <string name="login_google">Sign In Google Account</string>
     <string name="sign_up"><u>Sign Up</u></string>
     <string name="forgot_password"><u>Forgot your password?</u></string>
     <string name="username">Username</string>
