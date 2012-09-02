@@ -133,7 +133,6 @@ public class TraderListFragment extends SherlockFragment implements
 					contentValues.put(TraderColumns.ISFAVORITE, isFavorite ? 0 : 1);
 					boolean updated=getActivity().getContentResolver().update(TraderEntity.buildUri(traderId), contentValues, null, null) > 0;
 					getActivity().getSupportLoaderManager().restartLoader(0, null, TraderListFragment.this);
-
 				}
 			});
 		}
