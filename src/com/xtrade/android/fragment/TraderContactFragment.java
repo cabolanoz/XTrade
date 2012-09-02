@@ -27,6 +27,7 @@ import com.xtrade.android.provider.DatabaseContract.Contact;
 import com.xtrade.android.provider.DatabaseContract.ContactColumns;
 import com.xtrade.android.provider.DatabaseContract.TraderColumns;
 import com.xtrade.android.util.ActionConstant;
+import com.xtrade.android.util.Debug;
 import com.xtrade.android.util.EventConstant;
 
 public class TraderContactFragment extends SherlockFragment implements EventConstant, LoaderManager.LoaderCallbacks<Cursor> {
@@ -74,6 +75,11 @@ public class TraderContactFragment extends SherlockFragment implements EventCons
 		getActivity().getSupportLoaderManager().restartLoader(0, null, this);
 	}
 	
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (mActionMode.isUiFocusable())
+			mActionMode.finish();
+	}
+	
 	private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
 
 		@Override
@@ -90,7 +96,6 @@ public class TraderContactFragment extends SherlockFragment implements EventCons
 		public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 			MenuInflater inflater = mode.getMenuInflater();
 			inflater.inflate(R.menu.contact_context_menu, menu);
-			
 			return true;
 		}
 

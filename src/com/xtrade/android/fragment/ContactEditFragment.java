@@ -165,7 +165,6 @@ public class ContactEditFragment extends SherlockFragment implements EventConsta
 
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-		long traderId = getActivity().getIntent().getLongExtra(TraderColumns.TRADER_ID, -1);
 		Loader<Cursor> loader = new CursorLoader(getActivity(), Contact.buildUri(contactId), null, null, null, Contact.DEFAULT_SORT);
 		return loader;
 	}
@@ -181,9 +180,6 @@ public class ContactEditFragment extends SherlockFragment implements EventConsta
 	}
 
 	@Override
-	public void onLoaderReset(Loader<Cursor> loader) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onLoaderReset(Loader<Cursor> loader) { }
 	
 }
