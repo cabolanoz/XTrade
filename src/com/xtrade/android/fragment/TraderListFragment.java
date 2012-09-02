@@ -9,7 +9,9 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -19,9 +21,10 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.xtrade.android.R;
-import com.xtrade.android.provider.DatabaseContract.TraderEntity;
 import com.xtrade.android.provider.DatabaseContract.TraderColumns;
+import com.xtrade.android.provider.DatabaseContract.TraderEntity;
 import com.xtrade.android.util.ActionConstant;
+import com.xtrade.android.util.Debug;
 import com.xtrade.android.util.EventConstant;
 
 public class TraderListFragment extends SherlockFragment implements
@@ -41,6 +44,10 @@ public class TraderListFragment extends SherlockFragment implements
 
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+				ImageView chbFavorite = (ImageView) view.findViewById(R.id.chbFavorite);
+				if (chbFavorite != null && chbFavorite.isPressed())
+					return;
+				
 				Intent intent = new Intent(ActionConstant.TRADER_DETAIL);
 				intent.putExtra(TraderColumns.TRADER_ID, id);
 				startActivity(intent);
@@ -113,13 +120,23 @@ public class TraderListFragment extends SherlockFragment implements
 			TextView tvwTraderWebsite = (TextView) view.findViewById(R.id.tvwTraderWebsite);
 			tvwTraderWebsite.setText(cursor.getString(cursor.getColumnIndex(TraderEntity.ADDRESS)));
 
-			boolean isFavorite = cursor.getInt(cursor.getColumnIndex(TraderEntity.ISFAVORITE)) == 1;
 			ImageView chbFavorite = (ImageView) view.findViewById(R.id.chbFavorite);
 
+			boolean isFavorite = cursor.getInt(cursor.getColumnIndex(TraderEntity.ISFAVORITE)) == 1;
 			if (isFavorite)
 				chbFavorite.setImageResource(android.R.drawable.btn_star_big_on);
 			else
 				chbFavorite.setImageResource(android.R.drawable.btn_star);
+			
+			chbFavorite.setOnTouchListener(new OnTouchListener() {
+
+				@Override
+				public boolean onTouch(View v, MotionEvent event) {
+					Debug.info(this, "Event here");
+					return false;
+				}
+				
+			});
 		}
 	}
 
