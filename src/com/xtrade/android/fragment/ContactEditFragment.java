@@ -26,7 +26,7 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.xtrade.android.R;
 import com.xtrade.android.provider.DatabaseContract;
-import com.xtrade.android.provider.DatabaseContract.Contact;
+import com.xtrade.android.provider.DatabaseContract.ContactEntity;
 import com.xtrade.android.provider.DatabaseContract.ContactColumns;
 import com.xtrade.android.provider.DatabaseContract.ContactTypeColumns;
 import com.xtrade.android.provider.DatabaseContract.TraderColumns;
@@ -50,7 +50,7 @@ public class ContactEditFragment extends SherlockFragment implements EventConsta
 		super.onCreateView(layoutInflater, container, savedInstanceState);
 		View view = layoutInflater.inflate(R.layout.contact_edit_fragment, container, false);
 		
-		cursor = getActivity().getContentResolver().query(DatabaseContract.ContactType.CONTENT_URI, 
+		cursor = getActivity().getContentResolver().query(DatabaseContract.ContactTypeEntity.CONTENT_URI, 
 				new String[] {BaseColumns._ID, ContactTypeColumns.CONTACT_TYPE_ID, ContactTypeColumns.NAME},
 				null, 
 				null,
@@ -131,10 +131,10 @@ public class ContactEditFragment extends SherlockFragment implements EventConsta
 				int result = Activity.RESULT_CANCELED;
 				
 				if (extra == CONTACT_CREATE_REQUEST_CODE) {
-					contactUri = getActivity().getContentResolver().insert(DatabaseContract.Contact.CONTENT_URI, contentValues);
+					contactUri = getActivity().getContentResolver().insert(DatabaseContract.ContactEntity.CONTENT_URI, contentValues);
 					result = contactUri == null ? Activity.RESULT_CANCELED : Activity.RESULT_OK;
 				} else if (extra == CONTACT_UPDATE_REQUEST_CODE) {
-					contactUri = DatabaseContract.Contact.buildUri(contactId);
+					contactUri = DatabaseContract.ContactEntity.buildUri(contactId);
 					result = getActivity().getContentResolver().update(contactUri, contentValues, null, null) == 0 ? Activity.RESULT_CANCELED : Activity.RESULT_OK;
 				}
 				
@@ -165,7 +165,7 @@ public class ContactEditFragment extends SherlockFragment implements EventConsta
 
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-		Loader<Cursor> loader = new CursorLoader(getActivity(), Contact.buildUri(contactId), null, null, null, Contact.DEFAULT_SORT);
+		Loader<Cursor> loader = new CursorLoader(getActivity(), ContactEntity.buildUri(contactId), null, null, null, ContactEntity.DEFAULT_SORT);
 		return loader;
 	}
 

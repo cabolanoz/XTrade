@@ -1,5 +1,6 @@
 package com.xtrade.android.fragment;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -9,13 +10,12 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -24,7 +24,6 @@ import com.xtrade.android.R;
 import com.xtrade.android.provider.DatabaseContract.TraderColumns;
 import com.xtrade.android.provider.DatabaseContract.TraderEntity;
 import com.xtrade.android.util.ActionConstant;
-import com.xtrade.android.util.Debug;
 import com.xtrade.android.util.EventConstant;
 
 public class TraderListFragment extends SherlockFragment implements
@@ -41,13 +40,10 @@ public class TraderListFragment extends SherlockFragment implements
 		ListView listView = (ListView) fragmentView.findViewById(R.id.lvwTrader);
 		listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 		listView.setAdapter(adapter);
+		listView.setItemsCanFocus(true);
 
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-				ImageView chbFavorite = (ImageView) view.findViewById(R.id.chbFavorite);
-				if (chbFavorite != null && chbFavorite.isPressed())
-					return;
-				
 				Intent intent = new Intent(ActionConstant.TRADER_DETAIL);
 				intent.putExtra(TraderColumns.TRADER_ID, id);
 				startActivity(intent);
@@ -109,7 +105,7 @@ public class TraderListFragment extends SherlockFragment implements
 
 		@Override
 		public void bindView(View view, Context context, Cursor cursor) {
-			String traderId = cursor.getString(cursor.getColumnIndex(TraderEntity._ID));
+			final String traderId = cursor.getString(cursor.getColumnIndex(TraderEntity._ID));
 			if (traderId == null) {
 				return;
 			}
@@ -120,22 +116,25 @@ public class TraderListFragment extends SherlockFragment implements
 			TextView tvwTraderWebsite = (TextView) view.findViewById(R.id.tvwTraderWebsite);
 			tvwTraderWebsite.setText(cursor.getString(cursor.getColumnIndex(TraderEntity.ADDRESS)));
 
-			ImageView chbFavorite = (ImageView) view.findViewById(R.id.chbFavorite);
+			ImageButton chbFavorite = (ImageButton) view.findViewById(R.id.chbFavorite);
+			chbFavorite.setClickable(true);
+			chbFavorite.setFocusable(true);
 
-			boolean isFavorite = cursor.getInt(cursor.getColumnIndex(TraderEntity.ISFAVORITE)) == 1;
+			final boolean isFavorite = cursor.getInt(cursor.getColumnIndex(TraderEntity.ISFAVORITE)) == 1;
 			if (isFavorite)
 				chbFavorite.setImageResource(android.R.drawable.btn_star_big_on);
 			else
 				chbFavorite.setImageResource(android.R.drawable.btn_star);
 			
-			chbFavorite.setOnTouchListener(new OnTouchListener() {
-
+			chbFavorite.setOnClickListener(new OnClickListener() {
 				@Override
-				public boolean onTouch(View v, MotionEvent event) {
-					Debug.info(this, "Event here");
-					return false;
+				public void onClick(View v) {
+					ContentValues contentValues = new ContentValues();
+					contentValues.put(TraderColumns.ISFAVORITE, isFavorite ? 0 : 1);
+					
+					if (getActivity().getContentResolver().update(TraderEntity.buildUri(traderId), contentValues, null, null) > 0)
+						((ImageButton) v).setImageResource(isFavorite ? android.R.drawable.btn_star : android.R.drawable.btn_star_big_on);
 				}
-				
 			});
 		}
 	}
