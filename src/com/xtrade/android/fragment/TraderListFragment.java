@@ -115,8 +115,8 @@ public class TraderListFragment extends SherlockFragment implements
 
 			TextView tvwTraderWebsite = (TextView) view.findViewById(R.id.tvwTraderWebsite);
 			tvwTraderWebsite.setText(cursor.getString(cursor.getColumnIndex(TraderEntity.ADDRESS)));
-
 			final ImageButton chbFavorite = (ImageButton) view.findViewById(R.id.chbFavorite);
+
 			chbFavorite.setClickable(true);
 			chbFavorite.setFocusable(true);
 
@@ -131,8 +131,10 @@ public class TraderListFragment extends SherlockFragment implements
 				public void onClick(View v) {
 					ContentValues contentValues = new ContentValues();
 					contentValues.put(TraderColumns.ISFAVORITE, isFavorite ? 0 : 1);
+
 					boolean updated=getActivity().getContentResolver().update(TraderEntity.buildUri(traderId), contentValues, null, null) > 0;
 					getActivity().getSupportLoaderManager().restartLoader(0, null, TraderListFragment.this);
+
 				}
 			});
 		}
