@@ -54,7 +54,7 @@ public class TraderContactFragment extends SherlockFragment implements EventCons
 						if (mActionMode != null)
 							return false;
 
-						contactId=id;
+						contactId = id;
 
 						mActionMode = ((BaseActivity) getActivity()).startActionMode(mActionModeCallback);
 						
@@ -101,7 +101,7 @@ public class TraderContactFragment extends SherlockFragment implements EventCons
 				Intent intent = new Intent(ActionConstant.CONTACT_CREATE_UPDATE);
 				intent.putExtra("ACTION_TYPE", CONTACT_UPDATE_REQUEST_CODE);
 				intent.putExtra(ContactColumns.CONTACT_ID, contactId);
-				intent.putExtra(TraderColumns.TRADER_ID, getActivity().getIntent().getStringExtra(TraderColumns.TRADER_ID));
+				intent.putExtra(TraderColumns.TRADER_ID, getActivity().getIntent().getLongExtra(TraderColumns.TRADER_ID, -1));
 				startActivityForResult(intent, CONTACT_UPDATE_REQUEST_CODE);
 				return true;
 			

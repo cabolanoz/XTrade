@@ -27,7 +27,6 @@ public class TraderDetailActivity extends BaseActivity implements ActionBar.TabL
 
 	@Override
 	public void onCreate(Bundle savedIntanceState) {
-
 		super.onCreate(savedIntanceState);
 		setContentView(R.layout.trader);
 		// Getting the current action bar
@@ -75,7 +74,7 @@ public class TraderDetailActivity extends BaseActivity implements ActionBar.TabL
 		if (resultCode == RESULT_OK && (requestCode == CONTACT_CREATE_REQUEST_CODE || requestCode == CONTACT_UPDATE_REQUEST_CODE)) {
 			ListView lvwContact = (ListView) findViewById(R.id.lvwContact);
 			if (lvwContact != null)
-				getContentResolver().query(Contact.CONTENT_URI, null, ContactColumns.TRADER_ID + " = '" + getIntent().getStringExtra(TraderColumns.TRADER_ID) + "'", null, null);
+				getContentResolver().query(Contact.CONTENT_URI, null, ContactColumns.TRADER_ID + " = '" + getIntent().getLongExtra(TraderColumns.TRADER_ID, -1) + "'", null, null);
 		}
 	}
 
@@ -92,7 +91,7 @@ public class TraderDetailActivity extends BaseActivity implements ActionBar.TabL
 		case R.id.mniNewContact:
 			Intent intent = new Intent(ActionConstant.CONTACT_CREATE_UPDATE);
 			intent.putExtra("ACTION_TYPE", CONTACT_CREATE_REQUEST_CODE);
-			intent.putExtra(TraderColumns.TRADER_ID, getIntent().getStringExtra(TraderColumns.TRADER_ID));
+			intent.putExtra(TraderColumns.TRADER_ID, getIntent().getLongExtra(TraderColumns.TRADER_ID, -1));
 			startActivityForResult(intent, CONTACT_CREATE_REQUEST_CODE);
 			return true;
 		default:

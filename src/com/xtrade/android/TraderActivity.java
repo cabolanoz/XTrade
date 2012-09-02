@@ -26,12 +26,11 @@ public class TraderActivity extends BaseActivity implements ActionBar.TabListene
 	private SectionsPagerAdapter sectionsPagerAdapter;
 	
 	public void onCreate(Bundle savedIntanceState) {
-		upLevel=false;
+		upLevel = false;
 		super.onCreate(savedIntanceState);
 		setContentView(R.layout.trader);
 		
 		receiver = new TraderBroadcastReceiver();
-		
 		
 		// Getting the current action bar
 		final ActionBar actionBar = getSupportActionBar();
