@@ -31,14 +31,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// Client table
-		db.execSQL("CREATE TABLE " + Tables.TRADER + " (" + BaseColumns._ID
-				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + TraderColumns.TRADER_ID + " TEXT, "
+		db.execSQL("CREATE TABLE " + Tables.TRADER + 
+				" (" + BaseColumns._ID
+				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + 
+				TraderColumns.TRADER_ID + " TEXT, "
 				+ TraderColumns.NAME + " TEXT, "
 				+ TraderColumns.WEBSITE + " TEXT, "
 				+ TraderColumns.ADDRESS + " TEXT, "
-				+ TraderColumns.POSX + " TEXT, "
-				+ TraderColumns.POSY + " TEXT, "
-				+ TraderColumns.ISFAVORITE + " TEXT)");
+				+ TraderColumns.LATITUDE + " NUMBER, "
+				+ TraderColumns.LONGITUDE + " NUMBER, "
+				+ TraderColumns.ISFAVORITE + " TEXT, "
+				+ TraderColumns.FLAG_STATE + " BOOLEAN DEFAULT TRUE, "+
+				"UNIQUE (" + TraderColumns.TRADER_ID + ") ON CONFLICT REPLACE )"
+				);
 		
 		// Contact table
 		db.execSQL("CREATE TABLE " + Tables.CONTACT + " (" + BaseColumns._ID

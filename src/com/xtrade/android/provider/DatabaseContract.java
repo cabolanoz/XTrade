@@ -1,22 +1,28 @@
 package com.xtrade.android.provider;
 
 import android.net.Uri;
+import android.provider.BaseColumns;
 
 public class DatabaseContract {
 
 	public static final String REFRESH_PARAM = "refresh";
 
-	public interface TraderColumns {
+	
+	public interface XTradeBaseColumns extends BaseColumns{
+		//useful when a record have been updated and need to be synced
+		public static final String FLAG_STATE="dirty";
+	}
+	public interface TraderColumns extends XTradeBaseColumns{
 		String TRADER_ID = "TraderId";
 		String NAME = "Name";
 		String WEBSITE = "Website";
 		String ADDRESS = "Address";
-		String POSX = "PosX";
-		String POSY = "PosY";
+		String LONGITUDE = "longitude";
+		String LATITUDE = "latitude";
 		String ISFAVORITE = "IsFavorite";
 	}
 	
-	public interface ContactColumns {
+	public interface ContactColumns extends XTradeBaseColumns{
 		String CONTACT_ID = "ContactId";
 		String NAME = "Name";
 		String TYPE = "Type";
@@ -25,7 +31,7 @@ public class DatabaseContract {
 		String TRADER_ID = "TraderId";
 	}
 	
-	public interface ContactTypeColumns {
+	public interface ContactTypeColumns extends XTradeBaseColumns{
 		String CONTACT_TYPE_ID = "ContactTypeId";
 		String NAME = "Name";
 	}
@@ -37,7 +43,7 @@ public class DatabaseContract {
 	public static final String PATH_CONTACT = "contact";
 	public static final String PATH_CONTACT_TYPE = "contact_type";
 
-	public static class Trader extends BaseTable implements TraderColumns {
+	public static class TraderEntity extends BaseTable implements TraderColumns {
 		public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH_TRADER).build();
 		
 		/**
