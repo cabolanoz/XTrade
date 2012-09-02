@@ -14,7 +14,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.xtrade.android.fragment.SectionsPagerAdapter;
 import com.xtrade.android.fragment.TraderAboutFragment;
 import com.xtrade.android.fragment.TraderContactFragment;
-import com.xtrade.android.provider.DatabaseContract.Contact;
+import com.xtrade.android.provider.DatabaseContract.ContactEntity;
 import com.xtrade.android.provider.DatabaseContract.ContactColumns;
 import com.xtrade.android.provider.DatabaseContract.TraderColumns;
 import com.xtrade.android.util.ActionConstant;
@@ -74,7 +74,7 @@ public class TraderDetailActivity extends BaseActivity implements ActionBar.TabL
 		if (resultCode == RESULT_OK && (requestCode == CONTACT_CREATE_REQUEST_CODE || requestCode == CONTACT_UPDATE_REQUEST_CODE)) {
 			ListView lvwContact = (ListView) findViewById(R.id.lvwContact);
 			if (lvwContact != null)
-				getContentResolver().query(Contact.CONTENT_URI, null, ContactColumns.TRADER_ID + " = '" + getIntent().getLongExtra(TraderColumns.TRADER_ID, -1) + "'", null, null);
+				getContentResolver().query(ContactEntity.CONTENT_URI, null, ContactColumns.TRADER_ID + " = '" + getIntent().getLongExtra(TraderColumns.TRADER_ID, -1) + "'", null, null);
 		}
 	}
 

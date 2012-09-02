@@ -9,8 +9,8 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-import com.xtrade.android.provider.DatabaseContract.Contact;
-import com.xtrade.android.provider.DatabaseContract.ContactType;
+import com.xtrade.android.provider.DatabaseContract.ContactEntity;
+import com.xtrade.android.provider.DatabaseContract.ContactTypeEntity;
 import com.xtrade.android.provider.DatabaseContract.TraderEntity;
 
 public class XTradeProvider extends ContentProvider {
@@ -62,7 +62,7 @@ public class XTradeProvider extends ContentProvider {
 			break;
 		case CONTACT_ID:
 			table = DatabaseHelper.Tables.CONTACT;
-			finalWhere = BaseColumns._ID + " = " + Contact.getId(uri);
+			finalWhere = BaseColumns._ID + " = " + ContactEntity.getId(uri);
 			if (selection != null)
 				finalWhere = finalWhere + " AND " + selection;
 			break;
@@ -87,13 +87,13 @@ public class XTradeProvider extends ContentProvider {
 		case TRADER_ID:
 			return TraderEntity.CONTENT_ITEM_TYPE;
 		case CONTACT:
-			return Contact.CONTENT_TYPE;
+			return ContactEntity.CONTENT_TYPE;
 		case CONTACT_ID:
-			return Contact.CONTENT_ITEM_TYPE;
+			return ContactEntity.CONTENT_ITEM_TYPE;
 		case CONTACT_TYPE:
-			return ContactType.CONTENT_TYPE;
+			return ContactTypeEntity.CONTENT_TYPE;
 		case CONTACT_TYPE_ID:
-			return ContactType.CONTENT_ITEM_TYPE;
+			return ContactTypeEntity.CONTENT_ITEM_TYPE;
 		default:
 			throw new UnsupportedOperationException("Unknown uri: " + uri);
 		}
@@ -111,11 +111,11 @@ public class XTradeProvider extends ContentProvider {
 		case CONTACT:
 			db.insertOrThrow(DatabaseHelper.Tables.CONTACT, null, values);
 			getContext().getContentResolver().notifyChange(uri, null);
-			return Contact.buildUri(values.getAsString(BaseColumns._ID));
+			return ContactEntity.buildUri(values.getAsString(BaseColumns._ID));
 		case CONTACT_TYPE:
 			db.insertOrThrow(DatabaseHelper.Tables.CONTACT_TYPE, null, values);
 			getContext().getContentResolver().notifyChange(uri, null);
-			return ContactType.buildUri(values.getAsString(BaseColumns._ID));
+			return ContactTypeEntity.buildUri(values.getAsString(BaseColumns._ID));
 		default:
 			throw new UnsupportedOperationException("Unknown uri: " + uri);
 		}
@@ -146,9 +146,9 @@ public class XTradeProvider extends ContentProvider {
 			if (match == TRADER || match == TRADER_ID)
 				sortOrder = TraderEntity.DEFAULT_SORT;
 			if (match == CONTACT || match == CONTACT_ID)
-				sortOrder = Contact.DEFAULT_SORT;
+				sortOrder = ContactEntity.DEFAULT_SORT;
 			if (match == CONTACT_TYPE || match == CONTACT_TYPE_ID)
-				sortOrder = ContactType.DEFAULT_SORT;
+				sortOrder = ContactTypeEntity.DEFAULT_SORT;
 		}
 
 		return sortOrder;
@@ -171,7 +171,7 @@ public class XTradeProvider extends ContentProvider {
 			builder.setTables(DatabaseHelper.Tables.CONTACT);
 			break;
 		case CONTACT_ID:
-			id = Contact.getId(uri);
+			id = ContactEntity.getId(uri);
 			builder.setTables(DatabaseHelper.Tables.CONTACT);
 			builder.appendWhere(BaseColumns._ID + " = " + id);
 			break;
@@ -179,7 +179,7 @@ public class XTradeProvider extends ContentProvider {
 			builder.setTables(DatabaseHelper.Tables.CONTACT_TYPE);
 			break;
 		case CONTACT_TYPE_ID:
-			id = ContactType.getId(uri);
+			id = ContactTypeEntity.getId(uri);
 			builder.setTables(DatabaseHelper.Tables.CONTACT_TYPE);
 			builder.appendWhere(BaseColumns._ID + " = " + id);
 			break;
@@ -217,7 +217,7 @@ public class XTradeProvider extends ContentProvider {
 			count = db.update(DatabaseHelper.Tables.CONTACT, values, selection, selectionArgs);
 			break;
 		case CONTACT_ID:
-			id = Contact.getId(uri);
+			id = ContactEntity.getId(uri);
 			finalWhere = BaseColumns._ID + " = " + id;
 			if (selection != null)
 				finalWhere = finalWhere + " AND " + selection;
@@ -228,7 +228,7 @@ public class XTradeProvider extends ContentProvider {
 			count = db.update(DatabaseHelper.Tables.CONTACT_TYPE, values, selection, selectionArgs);
 			break;
 		case CONTACT_TYPE_ID:
-			id = ContactType.getId(uri);
+			id = ContactTypeEntity.getId(uri);
 			finalWhere = BaseColumns._ID + " = " + id;
 			if (selection != null)
 				finalWhere = finalWhere + " AND " + selection;

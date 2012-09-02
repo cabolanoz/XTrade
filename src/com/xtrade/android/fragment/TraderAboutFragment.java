@@ -31,7 +31,7 @@ public class TraderAboutFragment extends SherlockFragment implements EventConsta
 		// Getting the activity intent
 		Intent intent = getActivity().getIntent();
 		if (intent != null) {
-			long traderId = intent.getLongExtra(TraderColumns.TRADER_ID,-1);
+			long traderId = intent.getLongExtra(TraderColumns.TRADER_ID, -1);
 			if (traderId != -1) {
 				CursorLoader cursorLoader = new CursorLoader(getActivity().getBaseContext(), DatabaseContract.TraderEntity.buildUri(String.valueOf(traderId)), null, null, null, null);
 				Cursor cursor = cursorLoader.loadInBackground();
@@ -52,7 +52,6 @@ public class TraderAboutFragment extends SherlockFragment implements EventConsta
 								Intent newintent = new Intent(Intent.ACTION_VIEW, Uri.parse(tvwTraderWebsite.getText().toString()));
 								startActivity(newintent);
 							}
-							
 						});
 					}
 					cursor.close();

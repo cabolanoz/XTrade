@@ -66,7 +66,7 @@ public class DatabaseContract {
 		}
 	}
 	
-	public static class Contact extends BaseTable implements ContactColumns {
+	public static class ContactEntity extends BaseTable implements ContactColumns {
 		public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH_CONTACT).build();
 		
 		/**
@@ -88,7 +88,7 @@ public class DatabaseContract {
 		}
 	}
 	
-	public static class ContactType extends BaseTable implements ContactTypeColumns {
+	public static class ContactTypeEntity extends BaseTable implements ContactTypeColumns {
 		public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH_CONTACT_TYPE).build();
 
 		/**

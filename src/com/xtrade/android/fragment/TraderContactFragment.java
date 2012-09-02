@@ -23,7 +23,7 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.xtrade.android.BaseActivity;
 import com.xtrade.android.R;
-import com.xtrade.android.provider.DatabaseContract.Contact;
+import com.xtrade.android.provider.DatabaseContract.ContactEntity;
 import com.xtrade.android.provider.DatabaseContract.ContactColumns;
 import com.xtrade.android.provider.DatabaseContract.TraderColumns;
 import com.xtrade.android.util.ActionConstant;
@@ -123,7 +123,7 @@ public class TraderContactFragment extends SherlockFragment implements EventCons
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle data) {
 		long traderId = getActivity().getIntent().getLongExtra(TraderColumns.TRADER_ID, -1);
-		Loader<Cursor> loader = new CursorLoader(getActivity(), Contact.CONTENT_URI, null, ContactColumns.TRADER_ID + " = '" + traderId + "'", null, Contact.DEFAULT_SORT);
+		Loader<Cursor> loader = new CursorLoader(getActivity(), ContactEntity.CONTENT_URI, null, ContactColumns.TRADER_ID + " = '" + traderId + "'", null, ContactEntity.DEFAULT_SORT);
 		return loader;
 	}
 
@@ -162,7 +162,7 @@ public class TraderContactFragment extends SherlockFragment implements EventCons
 		
 		@Override
 		public void bindView(View view, Context context, Cursor cursor) {
-			String contactId = cursor.getString(cursor.getColumnIndexOrThrow(Contact._ID));
+			String contactId = cursor.getString(cursor.getColumnIndexOrThrow(ContactEntity._ID));
 			if (contactId == null)
 				return;
 			

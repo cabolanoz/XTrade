@@ -93,12 +93,14 @@
             android:text="3 Events" />
     </LinearLayout>
 
-    <ImageView
+    <ImageButton
         android:id="@+id/chbFavorite"
+        android:background="@android:color/transparent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:src="@android:drawable/btn_star"
-        android:layout_alignParentTop="true" />
-
+        android:layout_alignParentTop="true"
+        style="?android:attr/buttonStyleSmall" />
+    
 </RelativeLayout>
