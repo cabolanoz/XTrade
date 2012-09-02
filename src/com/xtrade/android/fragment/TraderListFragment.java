@@ -131,7 +131,6 @@ public class TraderListFragment extends SherlockFragment implements
 				public void onClick(View v) {
 					ContentValues contentValues = new ContentValues();
 					contentValues.put(TraderColumns.ISFAVORITE, isFavorite ? 0 : 1);
-
 					boolean updated=getActivity().getContentResolver().update(TraderEntity.buildUri(traderId), contentValues, null, null) > 0;
 					getActivity().getSupportLoaderManager().restartLoader(0, null, TraderListFragment.this);
 
