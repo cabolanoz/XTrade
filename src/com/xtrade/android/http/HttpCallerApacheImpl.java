@@ -11,11 +11,15 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.xtrade.android.util.Debug;
+
 public class HttpCallerApacheImpl extends AbstractHttpCaller{
 
 	
 	
 	public boolean call(URL urlResource,RestMethod methodType) {
+		
+		
 		HttpClient httpClient = new DefaultHttpClient();
 		
 		switch(methodType){
@@ -28,7 +32,7 @@ public class HttpCallerApacheImpl extends AbstractHttpCaller{
 				
 				ResponseHandler<String> responseHandler=new BasicResponseHandler();
 		        String responseBody = httpClient.execute(httpGet, responseHandler);
-		       
+				
 				this.result=responseBody;
 				return true;
 			} catch (URISyntaxException urise) {
@@ -40,6 +44,13 @@ public class HttpCallerApacheImpl extends AbstractHttpCaller{
 			}
 
 			break;
+		case PUT:
+			break;
+		case POST:
+			break;
+		case DELETE:
+			break;
+		
 		
 		}		
 		return false;

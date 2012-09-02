@@ -10,4 +10,10 @@ public class Debug {
 		}
 	}
 	
+	public static void info(String message){
+		if(Settings.DEBUG){
+			Log.i("Debug",message);
+		}
+	}
+	
 }

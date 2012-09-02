@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+     <TextView
+        android:id="@+id/textView1"
+        style="@style/TextAppearance.XTrade.HeaderTraderDetail"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_up" />
+
+    <EditText
+        android:id="@+id/editEmail"
+        android:layout_margin="10dp"
+        android:inputType="textEmailAddress"
+        android:hint="@string/email_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <requestFocus />
+    </EditText>
+    
+    
+    <EditText
+        android:id="@+id/editUsername"
+        android:layout_margin="10dp"
+        android:hint="@string/username_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >        
+    </EditText>
+    
+    
+    
+    <EditText
+        android:id="@+id/editPassword"
+        android:hint="@string/password_hint"
+        android:inputType="textPassword"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >        
+    </EditText>
+
+    <Button
+        android:id="@+id/buttonResetPassword"
+        style="@style/TradeButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/sign_up" />
+    
+</LinearLayout>

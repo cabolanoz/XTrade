@@ -34,6 +34,24 @@ public class LoginActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
 		receiver = new LoginBroadcastReceiver();
+		
+		findViewById(R.id.textForgotPassword).setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(LoginActivity.this,ForgotPasswordActivity.class));
+			}
+			
+		});
+		
+		findViewById(R.id.textSignIn).setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(LoginActivity.this,SignUpActivity.class));
+			}
+			
+		});
 
 		textUsername = ((EditText) findViewById(R.id.textUsername));
 		textPassword = ((EditText) findViewById(R.id.textPassword));

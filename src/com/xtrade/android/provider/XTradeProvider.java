@@ -11,7 +11,7 @@ import android.provider.BaseColumns;
 
 import com.xtrade.android.provider.DatabaseContract.Contact;
 import com.xtrade.android.provider.DatabaseContract.ContactType;
-import com.xtrade.android.provider.DatabaseContract.Trader;
+import com.xtrade.android.provider.DatabaseContract.TraderEntity;
 
 public class XTradeProvider extends ContentProvider {
 
@@ -53,7 +53,7 @@ public class XTradeProvider extends ContentProvider {
 			break;
 		case TRADER_ID:
 			table = DatabaseHelper.Tables.TRADER;
-			finalWhere = BaseColumns._ID + " = " + Trader.getId(uri);
+			finalWhere = BaseColumns._ID + " = " + TraderEntity.getId(uri);
 			if (selection != null)
 				finalWhere = finalWhere + " AND " + selection;
 			break;
@@ -83,9 +83,9 @@ public class XTradeProvider extends ContentProvider {
 
 		switch (match) {
 		case TRADER:
-			return Trader.CONTENT_TYPE;
+			return TraderEntity.CONTENT_TYPE;
 		case TRADER_ID:
-			return Trader.CONTENT_ITEM_TYPE;
+			return TraderEntity.CONTENT_ITEM_TYPE;
 		case CONTACT:
 			return Contact.CONTENT_TYPE;
 		case CONTACT_ID:
@@ -107,7 +107,7 @@ public class XTradeProvider extends ContentProvider {
 		case TRADER:
 			db.insertOrThrow(DatabaseHelper.Tables.TRADER, null, values);
 			getContext().getContentResolver().notifyChange(uri, null);
-			return Trader.buildUri(values.getAsString(BaseColumns._ID));
+			return TraderEntity.buildUri(values.getAsString(BaseColumns._ID));
 		case CONTACT:
 			db.insertOrThrow(DatabaseHelper.Tables.CONTACT, null, values);
 			getContext().getContentResolver().notifyChange(uri, null);
@@ -144,7 +144,7 @@ public class XTradeProvider extends ContentProvider {
 	private String buildSortOrder(int match, String sortOrder) {
 		if (sortOrder == null) {
 			if (match == TRADER || match == TRADER_ID)
-				sortOrder = Trader.DEFAULT_SORT;
+				sortOrder = TraderEntity.DEFAULT_SORT;
 			if (match == CONTACT || match == CONTACT_ID)
 				sortOrder = Contact.DEFAULT_SORT;
 			if (match == CONTACT_TYPE || match == CONTACT_TYPE_ID)
@@ -163,7 +163,7 @@ public class XTradeProvider extends ContentProvider {
 			builder.setTables(DatabaseHelper.Tables.TRADER);
 			break;
 		case TRADER_ID:
-			id = Trader.getId(uri);
+			id = TraderEntity.getId(uri);
 			builder.setTables(DatabaseHelper.Tables.TRADER);
 			builder.appendWhere(BaseColumns._ID + " = " + id);
 			break;
@@ -206,7 +206,7 @@ public class XTradeProvider extends ContentProvider {
 			count = db.update(DatabaseHelper.Tables.TRADER, values, selection, selectionArgs);
 			break;
 		case TRADER_ID:
-			id = Trader.getId(uri);
+			id = TraderEntity.getId(uri);
 			finalWhere = BaseColumns._ID + " = " + id;
 			if (selection != null)
 				finalWhere = finalWhere + " AND " + selection;

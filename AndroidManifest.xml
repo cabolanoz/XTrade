@@ -103,6 +103,18 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        
+         <activity
+            android:name=".SignUpActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+         <activity
+            android:name=".ForgotPasswordActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        
+         
+         
 
         <!-- Services Declaration -->
 

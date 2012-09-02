@@ -25,9 +25,6 @@ public class HttpCallerFactory {
 	}
 	
 	public HttpCaller createCaller(){
-				
-//		else if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.HONEYCOMB)
-//			return new HttpCallerUrlImpl();
 		
 		return new HttpCallerApacheImpl();
 	

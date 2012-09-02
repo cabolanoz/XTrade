@@ -30,8 +30,8 @@ public class TraderActivity extends BaseActivity implements ActionBar.TabListene
 		super.onCreate(savedIntanceState);
 		setContentView(R.layout.trader);
 		
-//		receiver = new TraderBroadcastReceiver();
-//		serviceHelper.invokeService(new Intent(ActionConstant.TRADER));
+		receiver = new TraderBroadcastReceiver();
+		
 		
 		// Getting the current action bar
 		final ActionBar actionBar = getSupportActionBar();
@@ -73,7 +73,7 @@ public class TraderActivity extends BaseActivity implements ActionBar.TabListene
 		if (resultCode == RESULT_OK && (requestCode == TRADER_CREATE_REQUEST_CODE || requestCode == TRADER_UPDATE_REQUEST_CODE)) {
 			ListView listView = (ListView) findViewById(R.id.lvwTrader);
 			if (listView != null)
-				this.getContentResolver().query(com.xtrade.android.provider.DatabaseContract.Trader.CONTENT_URI, null, null, null, null);
+				this.getContentResolver().query(com.xtrade.android.provider.DatabaseContract.TraderEntity.CONTENT_URI, null, null, null, null);
 		}
 	}
 	

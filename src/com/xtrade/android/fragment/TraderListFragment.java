@@ -19,7 +19,7 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.xtrade.android.R;
-import com.xtrade.android.provider.DatabaseContract.Trader;
+import com.xtrade.android.provider.DatabaseContract.TraderEntity;
 import com.xtrade.android.provider.DatabaseContract.TraderColumns;
 import com.xtrade.android.util.ActionConstant;
 import com.xtrade.android.util.EventConstant;
@@ -60,7 +60,7 @@ public class TraderListFragment extends SherlockFragment implements
 	// LoaderCallbacks interface
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle data) {
-		Loader<Cursor> loader = new CursorLoader(getActivity(), Trader.CONTENT_URI, null, null, null, Trader.DEFAULT_SORT);
+		Loader<Cursor> loader = new CursorLoader(getActivity(), TraderEntity.CONTENT_URI, null, null, null, TraderEntity.DEFAULT_SORT);
 		return loader;
 	}
 
@@ -102,18 +102,18 @@ public class TraderListFragment extends SherlockFragment implements
 
 		@Override
 		public void bindView(View view, Context context, Cursor cursor) {
-			String traderId = cursor.getString(cursor.getColumnIndex(Trader._ID));
+			String traderId = cursor.getString(cursor.getColumnIndex(TraderEntity._ID));
 			if (traderId == null) {
 				return;
 			}
 
 			TextView textViewTraderName = (TextView) view.findViewById(R.id.tvwTraderName);
-			textViewTraderName.setText(cursor.getString(cursor.getColumnIndex(Trader.NAME)));
+			textViewTraderName.setText(cursor.getString(cursor.getColumnIndex(TraderEntity.NAME)));
 
 			TextView tvwTraderWebsite = (TextView) view.findViewById(R.id.tvwTraderWebsite);
-			tvwTraderWebsite.setText(cursor.getString(cursor.getColumnIndex(Trader.ADDRESS)));
+			tvwTraderWebsite.setText(cursor.getString(cursor.getColumnIndex(TraderEntity.ADDRESS)));
 
-			boolean isFavorite = cursor.getInt(cursor.getColumnIndex(Trader.ISFAVORITE)) == 1;
+			boolean isFavorite = cursor.getInt(cursor.getColumnIndex(TraderEntity.ISFAVORITE)) == 1;
 			ImageView chbFavorite = (ImageView) view.findViewById(R.id.chbFavorite);
 
 			if (isFavorite)
