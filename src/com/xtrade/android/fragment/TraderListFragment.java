@@ -26,8 +26,7 @@ import com.xtrade.android.provider.DatabaseContract.TraderEntity;
 import com.xtrade.android.util.ActionConstant;
 import com.xtrade.android.util.EventConstant;
 
-public class TraderListFragment extends SherlockFragment implements
-		EventConstant, LoaderManager.LoaderCallbacks<Cursor> {
+public class TraderListFragment extends SherlockFragment implements EventConstant, LoaderManager.LoaderCallbacks<Cursor> {
 
 	private CursorAdapter adapter;
 

@@ -83,15 +83,14 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/textView1"
         android:text="Medium Text" />
-
-    <TextView
+
+    <ImageView
         android:id="@+id/tvwTraderWebsite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvwTraderName"
-        android:layout_alignRight="@+id/tvwTraderName"
-        android:layout_below="@+id/tvwTraderName"
-        android:text="Small Text"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:layout_alignParentRight="true"
+        android:paddingRight="10dp"
+        android:layout_alignTop="@+id/tvwTraderName"
+        android:src="@drawable/website" />
 
 </RelativeLayout>
