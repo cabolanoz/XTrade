@@ -2,7 +2,6 @@ package com.xtrade.android.fragment;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.CursorLoader;
@@ -22,14 +21,13 @@ import com.xtrade.android.util.EventConstant;
 public class TraderAboutFragment extends SherlockFragment implements EventConstant {
 
 	private TextView tvwTraderName;
-	
+	private ImageView imageViewTraderWebSite;
 	private TextView tvwTraderAddress;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View fragmentView = inflater.inflate(R.layout.trader_tab_about, container, false);
-
-		ImageView imageViewTraderWebSite=null;
+		
 		// Getting the activity intent
 		Intent intent = getActivity().getIntent();
 		if (intent != null) {
@@ -44,9 +42,8 @@ public class TraderAboutFragment extends SherlockFragment implements EventConsta
 						tvwTraderAddress = (TextView) fragmentView.findViewById(R.id.tvwTraderAddress);
 						
 						tvwTraderName.setText(cursor.getString(cursor.getColumnIndexOrThrow(TraderColumns.NAME)));
-						final String website=cursor.getString(cursor.getColumnIndex(TraderColumns.WEBSITE));
+						final String website = cursor.getString(cursor.getColumnIndex(TraderColumns.WEBSITE));
 						tvwTraderAddress.setText(cursor.getString(cursor.getColumnIndexOrThrow(TraderColumns.ADDRESS)));
-						
 						
 						imageViewTraderWebSite.setOnClickListener(new OnClickListener() {
 							@Override
