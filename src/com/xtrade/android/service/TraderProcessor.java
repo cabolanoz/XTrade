@@ -8,6 +8,7 @@ import android.content.ContentValues;
 import android.content.Context;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.xtrade.android.object.Trader;
 import com.xtrade.android.provider.DatabaseContract.TraderEntity;
@@ -15,13 +16,19 @@ import com.xtrade.android.util.Debug;
 
 public class TraderProcessor extends ProcessorBase{
 	
+	private GsonBuilder gson=new GsonBuilder();
+	
+	
+	
 	public TraderProcessor(Context context) {
 		super(context);
 	}
 
 	public void process(String jsonTrader){
 		Debug.info(jsonTrader);
+		
 		Gson gson=new Gson();
+		
 		Type collectionType = new TypeToken<Collection<Trader>>(){}.getType();
 		Collection<Trader> traders=(Collection<Trader>)gson.fromJson(jsonTrader, collectionType);
 		
@@ -32,8 +39,8 @@ public class TraderProcessor extends ProcessorBase{
 			ContentValues values =new ContentValues();
 			values.put(TraderEntity.ADDRESS, trader.address);
 			values.put(TraderEntity.NAME, trader.name);
-			//values.put(TraderEntity.LATITUDE, trader.location.lat);
-			//values.put(TraderEntity.LONGITUDE, trader.location.lon);
+			values.put(TraderEntity.LATITUDE, trader.location.lat);
+			values.put(TraderEntity.LONGITUDE, trader.location.lon);
 			values.put(TraderEntity.TRADER_ID, trader.id);
 			values.put(TraderEntity.WEBSITE, trader.website);
 			values.put(TraderEntity.ISFAVORITE, trader.isFavorite);

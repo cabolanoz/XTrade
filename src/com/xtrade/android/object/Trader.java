@@ -10,8 +10,7 @@ public class Trader {
 	public String address;
 	public String logo;
 	//TODO: this might come handy to be a collection of locations
-	//TODO: ignore this until resolve serialization problems
-	//public Location location;
+	public Location location;
 	
 	@SerializedName("favorite")
 	public boolean isFavorite;
@@ -28,7 +27,7 @@ public class Trader {
 	@Override
 	public String toString() {
 		return "Trader [id=" + id + ", name=" + name + ", website=" + website
-				+ ", address=" + address + ", location: " //+ location.toString()
+				+ ", address=" + address + ", location: " + location.toString()
 				+ ", isFavorite=" + isFavorite + "]";
 	}
 
