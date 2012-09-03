@@ -1,5 +1,6 @@
 package com.xtrade.android;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ public class BaseActivity extends SherlockFragmentActivity {
 	protected boolean upLevel=true;
 	protected ActionBar actionBar;
 	protected ServiceHelper serviceHelper;
+	protected ProgressDialog progressDialog;
 
 	@Override
 	public void onCreate(Bundle savedIntanceState) {
@@ -59,6 +61,20 @@ public class BaseActivity extends SherlockFragmentActivity {
 	protected SharedPreferences getAppSharedPreference() {
 		SharedPreferences xTradeSettings = getSharedPreferences(Settings.SHARED_PREFERENCES, MODE_PRIVATE);
 		return xTradeSettings;
+	}
+	
+	protected void startProgressDialog(String message) {
+		if (progressDialog == null)
+			progressDialog = ProgressDialog.show(this, "", message);
+		else if (progressDialog != null && !progressDialog.isShowing())
+			progressDialog = ProgressDialog.show(this, "", message);
+	}
+	
+	protected void stopProgressDialog() {
+		if (progressDialog != null && progressDialog.isShowing()) {
+			progressDialog.dismiss();
+			progressDialog = null;
+		}
 	}
 
 }
