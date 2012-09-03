@@ -114,9 +114,6 @@
             android:name=".ForgotPasswordActivity"
             android:screenOrientation="portrait" >
         </activity>
-        
-         
-         
 
         <!-- Services Declaration -->
 

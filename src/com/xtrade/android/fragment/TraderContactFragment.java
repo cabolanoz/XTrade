@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -23,11 +24,11 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.xtrade.android.BaseActivity;
 import com.xtrade.android.R;
-import com.xtrade.android.provider.DatabaseContract.ContactEntity;
+import com.xtrade.android.TraderDetailActivity;
 import com.xtrade.android.provider.DatabaseContract.ContactColumns;
+import com.xtrade.android.provider.DatabaseContract.ContactEntity;
 import com.xtrade.android.provider.DatabaseContract.TraderColumns;
 import com.xtrade.android.util.ActionConstant;
-import com.xtrade.android.util.Debug;
 import com.xtrade.android.util.EventConstant;
 
 public class TraderContactFragment extends SherlockFragment implements EventConstant, LoaderManager.LoaderCallbacks<Cursor> {
@@ -78,8 +79,16 @@ public class TraderContactFragment extends SherlockFragment implements EventCons
 	}
 	
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (mActionMode.isUiFocusable())
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		if (resultCode == FragmentActivity.RESULT_CANCELED)
+			return;
+		
+		if (requestCode == CONTACT_UPDATE_REQUEST_CODE && mActionMode.isUiFocusable())
 			mActionMode.finish();
+		
+		if (resultCode == FragmentActivity.RESULT_OK && (requestCode == CONTACT_CREATE_REQUEST_CODE || requestCode == CONTACT_UPDATE_REQUEST_CODE))
+			getActivity().getSupportLoaderManager().restartLoader(0, null, TraderContactFragment.this);
 	}
 	
 	private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
@@ -113,7 +122,6 @@ public class TraderContactFragment extends SherlockFragment implements EventCons
 				intent.putExtra(TraderColumns.TRADER_ID, getActivity().getIntent().getLongExtra(TraderColumns.TRADER_ID, -1));
 				startActivityForResult(intent, CONTACT_UPDATE_REQUEST_CODE);
 				return true;
-			
 			}
 			
 			return false;
