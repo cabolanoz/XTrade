@@ -13,6 +13,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.xtrade.android.fragment.TraderGeneralFragment;
 import com.xtrade.android.util.EventConstant;
 import com.xtrade.android.util.Settings;
 
@@ -45,7 +46,7 @@ public class PictureDialog extends DialogFragment implements EventConstant {
 			public void onClick(View view) {
 				Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 				intent.setType("image/*");
-				fragment.startActivityForResult(intent, TRADER_PHOTO_GALLERY_REQUEST);
+				fragment.startActivityForResult(intent, (fragment instanceof TraderGeneralFragment) ? TRADER_PHOTO_GALLERY_REQUEST : CONTACT_PHOTO_GALLERY_REQUEST);
 
 				// Disposing the current dialog
 				dismiss();
@@ -58,7 +59,7 @@ public class PictureDialog extends DialogFragment implements EventConstant {
 				//TODO: solve bug http://code.google.com/p/android/issues/detail?id=1480 high resolution image in some devices failes
 				Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 				intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Settings.TEMPFILE_PATH)));
-				startActivityForResult(intent, TRADER_PHOTO_CAMERA_REQUEST);
+				startActivityForResult(intent, (fragment instanceof TraderGeneralFragment) ? TRADER_PHOTO_CAMERA_REQUEST : CONTACT_PHOTO_CAMERA_REQUEST);
 
 				// Disposing the current dialog
 				dismiss();

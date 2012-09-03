@@ -7,27 +7,35 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.CursorWrapper;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.BaseColumns;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.xtrade.android.PictureDialog;
 import com.xtrade.android.R;
 import com.xtrade.android.provider.DatabaseContract;
-import com.xtrade.android.provider.DatabaseContract.ContactEntity;
 import com.xtrade.android.provider.DatabaseContract.ContactColumns;
+import com.xtrade.android.provider.DatabaseContract.ContactEntity;
 import com.xtrade.android.provider.DatabaseContract.ContactTypeColumns;
 import com.xtrade.android.provider.DatabaseContract.TraderColumns;
 import com.xtrade.android.util.EventConstant;
@@ -40,6 +48,7 @@ public class ContactEditFragment extends SherlockFragment implements EventConsta
 	private SimpleCursorAdapter adapter;
 	private Cursor cursor;
 	private long contactId;
+	private ImageButton ibtContactPhoto;
 	private EditText etxContactName;
 	private Spinner spnContactType;
 	private EditText etxContactEmail;
@@ -61,6 +70,23 @@ public class ContactEditFragment extends SherlockFragment implements EventConsta
 		
 		spnContactType = (Spinner) view.findViewById(R.id.spnContactType);
 		spnContactType.setAdapter(adapter);
+		
+		ibtContactPhoto = (ImageButton) view.findViewById(R.id.ibtContactPhoto);
+		ibtContactPhoto.setClickable(true);
+		ibtContactPhoto.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				FragmentTransaction ft = getFragmentManager().beginTransaction();
+				Fragment f = getFragmentManager().findFragmentByTag("picture_dialog");
+				if (f != null)
+					ft.remove(f);
+				ft.addToBackStack(null);
+				
+				DialogFragment dialogFragment = PictureDialog.newInstance(ContactEditFragment.this);
+				dialogFragment.show(ft, "picture_dialog");
+			}
+		});
 		
 		etxContactName = (EditText) view.findViewById(R.id.etxContactName);
 		etxContactEmail = (EditText) view.findViewById(R.id.etxContactEmail);
@@ -85,6 +111,15 @@ public class ContactEditFragment extends SherlockFragment implements EventConsta
 		//this view should handle its menus
 		setHasOptionsMenu(true);
 		return view;
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == FragmentActivity.RESULT_OK)
+			if (requestCode == CONTACT_PHOTO_GALLERY_REQUEST)
+				ibtContactPhoto.setImageURI(data.getData());
+			else if (requestCode == CONTACT_PHOTO_CAMERA_REQUEST)
+				ibtContactPhoto.setImageBitmap((Bitmap) data.getExtras().get("data"));
 	}
 	
 	public void onResume() {
