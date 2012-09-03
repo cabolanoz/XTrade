@@ -27,11 +27,14 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.xtrade.android.BaseActivity;
 import com.xtrade.android.R;
+<<<<<<< HEAD
+=======
+import com.xtrade.android.TraderDetailActivity;
+>>>>>>> Contact registration done
 import com.xtrade.android.provider.DatabaseContract.ContactColumns;
 import com.xtrade.android.provider.DatabaseContract.ContactEntity;
 import com.xtrade.android.provider.DatabaseContract.TraderColumns;
 import com.xtrade.android.util.ActionConstant;
-import com.xtrade.android.util.Debug;
 import com.xtrade.android.util.EventConstant;
 
 public class TraderContactFragment extends SherlockFragment implements EventConstant, LoaderManager.LoaderCallbacks<Cursor> {

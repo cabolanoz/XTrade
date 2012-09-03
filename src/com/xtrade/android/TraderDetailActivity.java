@@ -74,6 +74,8 @@ public class TraderDetailActivity extends BaseActivity implements ActionBar.TabL
 			if (lvwContact != null)
 				getContentResolver().query(ContactEntity.CONTENT_URI, null, ContactColumns.TRADER_ID + " = '" + getIntent().getLongExtra(TraderColumns.TRADER_ID, -1) + "'", null, null);
 		}
+
+
 	}
 
 	@Override
