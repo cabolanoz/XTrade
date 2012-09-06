@@ -1,8 +1,10 @@
 package com.xtrade.android.fragment;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.LoaderManager;
@@ -11,6 +13,7 @@ import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -24,11 +27,11 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.xtrade.android.BaseActivity;
 import com.xtrade.android.R;
-import com.xtrade.android.TraderDetailActivity;
 import com.xtrade.android.provider.DatabaseContract.ContactColumns;
 import com.xtrade.android.provider.DatabaseContract.ContactEntity;
 import com.xtrade.android.provider.DatabaseContract.TraderColumns;
 import com.xtrade.android.util.ActionConstant;
+import com.xtrade.android.util.Debug;
 import com.xtrade.android.util.EventConstant;
 
 public class TraderContactFragment extends SherlockFragment implements EventConstant, LoaderManager.LoaderCallbacks<Cursor> {
@@ -182,9 +185,44 @@ public class TraderContactFragment extends SherlockFragment implements EventCons
 			
 			TextView tvwContactEmail = (TextView) view.findViewById(R.id.tvwContactEmail);
 			tvwContactEmail.setText(cursor.getString(cursor.getColumnIndexOrThrow(ContactColumns.EMAIL)));
+			tvwContactEmail.setClickable(true);
+			tvwContactEmail.setFocusable(true);
+			
+			tvwContactEmail.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					String[] recipient = new String[] {((TextView) v).getText().toString()};
+					
+					Intent intent = new Intent(Intent.ACTION_SEND);
+					
+					intent.putExtra(Intent.EXTRA_EMAIL, recipient);
+					intent.putExtra(Intent.EXTRA_SUBJECT, "subject");
+					intent.putExtra(Intent.EXTRA_TEXT, "");
+
+					intent.setType("text/plain");
+					
+					try {
+						startActivity(Intent.createChooser(intent, "Send mail"));
+					} catch (ActivityNotFoundException anfe) { }
+				}
+			});
 			
 			TextView tvwContactPhone = (TextView) view.findViewById(R.id.tvwContactPhone);
 			tvwContactPhone.setText(cursor.getString(cursor.getColumnIndexOrThrow(ContactColumns.PHONE)));
+			tvwContactPhone.setClickable(true);
+			tvwContactPhone.setFocusable(true);
+			
+			tvwContactPhone.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					String phone = ((TextView) v).getText().toString();
+					
+					Intent intent = new Intent(Intent.ACTION_CALL);
+					intent.setData(Uri.parse("tel:" + phone));
+					
+					startActivity(intent);
+				}
+			});
 		}
 		
 	}
