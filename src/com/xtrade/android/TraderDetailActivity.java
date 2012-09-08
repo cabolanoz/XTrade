@@ -69,15 +69,14 @@ public class TraderDetailActivity extends BaseActivity implements ActionBar.TabL
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 
-//		if (resultCode == RESULT_CANCELED)
-//			return;
+		if (resultCode == RESULT_CANCELED)
+			return;
 
-//		if (resultCode == RESULT_OK && (requestCode == CONTACT_CREATE_REQUEST_CODE || requestCode == CONTACT_UPDATE_REQUEST_CODE)) {
-//			ListView lvwContact = (ListView) findViewById(R.id.lvwContact);
-//			if (lvwContact != null)
-//				getContentResolver().query(ContactEntity.CONTENT_URI, null, ContactColumns.TRADER_ID + " = '" + getIntent().getLongExtra(TraderColumns.TRADER_ID, -1) + "'", null, null);
-//			getLoaderManager().restartLoader(0, null, TraderDetailActivity.this);
-//		}
+		if (resultCode == RESULT_OK && (requestCode == CONTACT_CREATE_REQUEST_CODE || requestCode == CONTACT_UPDATE_REQUEST_CODE)) {
+			ListView lvwContact = (ListView) findViewById(R.id.lvwContact);
+			if (lvwContact != null)
+				getContentResolver().query(ContactEntity.CONTENT_URI, null, ContactColumns.TRADER_ID + " = '" + getIntent().getLongExtra(TraderColumns.TRADER_ID, -1) + "'", null, null);
+		}
 	}
 
 	@Override
