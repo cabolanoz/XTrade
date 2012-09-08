@@ -122,9 +122,9 @@ public class TraderListFragment extends SherlockFragment implements
 
 			final boolean isFavorite = cursor.getInt(cursor.getColumnIndex(TraderEntity.ISFAVORITE)) == 1;
 			if (isFavorite)
-				chbFavorite.setImageResource(android.R.drawable.btn_star_big_on);
+				chbFavorite.setImageResource(R.drawable.ic_star_on);
 			else
-				chbFavorite.setImageResource(android.R.drawable.btn_star);
+				chbFavorite.setImageResource(R.drawable.ic_star_off);
 			
 			chbFavorite.setOnClickListener(new OnClickListener() {
 				@Override
