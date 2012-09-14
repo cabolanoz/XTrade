@@ -167,6 +167,10 @@ public class TraderContactFragment extends SherlockFragment implements EventCons
 				convertView.setBackgroundResource(R.drawable.list_bg_odd);
 			else
 				convertView.setBackgroundResource(R.drawable.list_bg);
+			
+			convertView.setClickable(true);
+			convertView.setFocusable(true);
+			
 			return convertView;
 		}
 		
