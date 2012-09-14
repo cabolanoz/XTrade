@@ -12,6 +12,7 @@ import android.provider.BaseColumns;
 import com.xtrade.android.provider.DatabaseContract.ContactEntity;
 import com.xtrade.android.provider.DatabaseContract.ContactTypeEntity;
 import com.xtrade.android.provider.DatabaseContract.TraderEntity;
+import com.xtrade.android.util.Debug;
 
 public class XTradeProvider extends ContentProvider {
 
@@ -103,19 +104,21 @@ public class XTradeProvider extends ContentProvider {
 	public Uri insert(Uri uri, ContentValues values) {
 		final SQLiteDatabase db = databaseHelper.getWritableDatabase();
 		final int match = uriMatcher.match(uri);
+		long id=-1;
 		switch (match) {
 		case TRADER:
-			db.insertOrThrow(DatabaseHelper.Tables.TRADER, null, values);
+			id=db.insertOrThrow(DatabaseHelper.Tables.TRADER, null, values);
 			getContext().getContentResolver().notifyChange(uri, null);
-			return TraderEntity.buildUri(values.getAsString(BaseColumns._ID));
+			return TraderEntity.buildUri(id);
 		case CONTACT:
-			db.insertOrThrow(DatabaseHelper.Tables.CONTACT, null, values);
+			id=db.insertOrThrow(DatabaseHelper.Tables.CONTACT, null, values);
 			getContext().getContentResolver().notifyChange(uri, null);
-			return ContactEntity.buildUri(values.getAsString(BaseColumns._ID));
+			
+			return ContactEntity.buildUri(id);
 		case CONTACT_TYPE:
-			db.insertOrThrow(DatabaseHelper.Tables.CONTACT_TYPE, null, values);
+			id=db.insertOrThrow(DatabaseHelper.Tables.CONTACT_TYPE, null, values);
 			getContext().getContentResolver().notifyChange(uri, null);
-			return ContactTypeEntity.buildUri(values.getAsString(BaseColumns._ID));
+			return ContactTypeEntity.buildUri(String.valueOf(id));
 		default:
 			throw new UnsupportedOperationException("Unknown uri: " + uri);
 		}

@@ -1,5 +1,7 @@
 package com.xtrade.android.object;
 
+import java.util.List;
+
 import com.google.gson.annotations.SerializedName;
 
 public class Trader {
@@ -11,6 +13,7 @@ public class Trader {
 	public String logo;
 	//TODO: this might come handy to be a collection of locations
 	public Location location;
+	public List<Contact> contacts;
 	
 	@SerializedName("favorite")
 	public boolean isFavorite;
@@ -28,7 +31,7 @@ public class Trader {
 	public String toString() {
 		return "Trader [id=" + id + ", name=" + name + ", website=" + website
 				+ ", address=" + address + ", location: " + location.toString()
-				+ ", isFavorite=" + isFavorite + "]";
+				+ ", isFavorite=" + isFavorite + " contacts: "+contacts+"]";
 	}
 
 	

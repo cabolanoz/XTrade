@@ -24,7 +24,8 @@ public class DatabaseContract {
 	
 	public interface ContactColumns extends XTradeBaseColumns{
 		String CONTACT_ID = "ContactId";
-		String NAME = "Name";
+		String FIRST_NAME = "FirstName";
+		String LAST_NAME = "LastName";
 		String TYPE = "Type";
 		String EMAIL = "Email";
 		String PHONE = "Phone";
