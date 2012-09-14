@@ -6,11 +6,15 @@ import java.util.Collection;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.net.Uri;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.xtrade.android.object.Contact;
 import com.xtrade.android.object.Trader;
+import com.xtrade.android.provider.DatabaseContract.ContactColumns;
+import com.xtrade.android.provider.DatabaseContract.ContactEntity;
 import com.xtrade.android.provider.DatabaseContract.TraderEntity;
 import com.xtrade.android.util.Debug;
 
@@ -44,11 +48,23 @@ public class TraderProcessor extends ProcessorBase{
 			values.put(TraderEntity.TRADER_ID, trader.id);
 			values.put(TraderEntity.WEBSITE, trader.website);
 			values.put(TraderEntity.ISFAVORITE, trader.isFavorite);
-			values.put(TraderEntity.ISFAVORITE, trader.isFavorite);
 			
-			contentResolver.insert(TraderEntity.CONTENT_URI, values);
 			
-			Debug.info(trader.toString());
+			Uri traderUri=contentResolver.insert(TraderEntity.CONTENT_URI, values);
+			
+			for(Contact contact:trader.contacts){
+				ContentValues contentValues= new ContentValues();
+				contentValues.put(ContactColumns.FIRST_NAME, contact.firstName);
+				contentValues.put(ContactColumns.LAST_NAME, contact.lastName);
+				contentValues.put(ContactColumns.EMAIL, contact.email);
+				contentValues.put(ContactColumns.PHONE, contact.phone);
+				contentValues.put(ContactColumns.TRADER_ID, TraderEntity.getId(traderUri));
+				Uri contactUri = contentResolver.insert(ContactEntity.CONTENT_URI, contentValues);
+				Debug.info("Contacts "+contactUri);
+			}
+			
+			
+			
 		}
 	}
 	

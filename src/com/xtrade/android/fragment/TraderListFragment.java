@@ -24,11 +24,13 @@ import com.xtrade.android.R;
 import com.xtrade.android.provider.DatabaseContract.TraderColumns;
 import com.xtrade.android.provider.DatabaseContract.TraderEntity;
 import com.xtrade.android.util.ActionConstant;
+import com.xtrade.android.util.Debug;
 import com.xtrade.android.util.EventConstant;
 
 public class TraderListFragment extends SherlockFragment implements EventConstant, LoaderManager.LoaderCallbacks<Cursor> {
 
 	private CursorAdapter adapter;
+	private long[] ids;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,7 +46,9 @@ public class TraderListFragment extends SherlockFragment implements EventConstan
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 				Intent intent = new Intent(ActionConstant.TRADER_DETAIL);
-				intent.putExtra(TraderColumns.TRADER_ID, id);
+				
+				intent.putExtra(TraderColumns.TRADER_ID, ids);
+				intent.putExtra("position", position);
 				startActivity(intent);
 			}
 		});
@@ -70,6 +74,14 @@ public class TraderListFragment extends SherlockFragment implements EventConstan
 	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
 		if (getActivity() == null)
 			return;
+		
+		//load all the ids to array for use the PageAdapter in detail
+		ids=new long[cursor.getCount()];
+		int index=0;
+		while(cursor.moveToNext()){
+			ids[index++]=cursor.getLong(cursor.getColumnIndex(TraderEntity._ID));
+			
+		}
 
 		adapter.changeCursor(cursor);
 	}

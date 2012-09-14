@@ -48,7 +48,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		// Contact table
 		db.execSQL("CREATE TABLE " + Tables.CONTACT + " (" + BaseColumns._ID
 				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + ContactColumns.CONTACT_ID + " TEXT, "
-				+ ContactColumns.NAME + " TEXT, "
+				+ ContactColumns.FIRST_NAME + " TEXT, "
+				+ ContactColumns.LAST_NAME + " TEXT, "
 				+ ContactColumns.TYPE + " TEXT, "
 				+ ContactColumns.EMAIL + " TEXT, "
 				+ ContactColumns.PHONE + " TEXT, "
