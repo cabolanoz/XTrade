@@ -1,66 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
 
     <ImageButton
         android:id="@+id/ibtContactPhoto"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
         android:src="@drawable/main_client" />
 
-
     <EditText
-        android:id="@+id/etxContactName"
-        android:layout_width="wrap_content"
+        android:id="@+id/etxFirstContactName"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/ivwContactPhoto"
-        android:layout_marginTop="19dp"
+        android:layout_margin="5dp"
         android:ems="10"
-        android:hint="@string/contactname"
+        android:hint="@string/contactfirstname"
         android:inputType="textPersonName" >
-
         <requestFocus />
     </EditText>
-
-
+    
+	<EditText
+        android:id="@+id/etxLastContactName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:ems="10"
+        android:hint="@string/contactlastname"
+        android:inputType="textPersonName" >        
+    </EditText>
     <Spinner
         android:id="@+id/spnContactType"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/etxContactName"
         android:layout_marginTop="19dp" />
-
-
+
     <EditText
         android:id="@+id/etxContactEmail"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/spnContactType"
-        android:layout_marginTop="22dp"
+        android:layout_margin="5dp"
         android:ems="10"
         android:hint="@string/contactemail"
         android:inputType="textEmailAddress" />
-
-
+
     <EditText
         android:id="@+id/etxContactPhone"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/etxContactEmail"
-        android:layout_marginTop="20dp"
+        android:layout_margin="5dp"
         android:ems="10"
         android:hint="@string/contactphone"
         android:inputType="phone" />
 
-</RelativeLayout>
+</LinearLayout>

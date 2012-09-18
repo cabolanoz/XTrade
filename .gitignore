@@ -4,6 +4,10 @@ proguard/
 lint/
 gen/
 resources.ap_
+.idea/
+.settings/
+lint.xml
+XTrade.iml
 
 .classpath
 .DS_Store
