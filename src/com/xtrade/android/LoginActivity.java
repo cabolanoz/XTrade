@@ -64,7 +64,7 @@ public class LoginActivity extends BaseActivity {
 
 		textUsername = ((EditText) findViewById(R.id.textUsername));
 		textPassword = ((EditText) findViewById(R.id.textPassword));
-		checkRememberMe = ((CheckBox) findViewById(R.id.checkRememberMe));
+		//checkRememberMe = ((CheckBox) findViewById(R.id.checkRememberMe));
 
 		// Checking internet access
 		if (thereIsInternetAccess()) {
@@ -81,7 +81,7 @@ public class LoginActivity extends BaseActivity {
 					Intent loginIntent = new Intent(ActionConstant.LOGIN);
 					loginIntent.putExtra(LoginParameter.USERNAME, username);
 					loginIntent.putExtra(LoginParameter.PASSWORD, password);
-					loginIntent.putExtra(LoginParameter.REMEMBER_ME, rememberMe);
+					//loginIntent.putExtra(LoginParameter.REMEMBER_ME, rememberMe);
 					
 					serviceHelper.invokeService(loginIntent);
 				} else {
