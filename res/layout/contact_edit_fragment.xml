@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
+
     <ImageButton
         android:id="@+id/ibtContactPhoto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/main_client" />
-
+		
     <EditText
         android:id="@+id/etxFirstContactName"
         android:layout_width="match_parent"
@@ -18,7 +18,6 @@
         android:ems="10"
         android:hint="@string/contactfirstname"
         android:inputType="textPersonName" >
-
         <requestFocus />
     </EditText>
     

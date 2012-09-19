@@ -45,7 +45,7 @@ public class TraderListFragment extends SherlockFragment implements EventConstan
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 				Intent intent = new Intent(ActionConstant.TRADER_DETAIL);
-				
+
 				intent.putExtra(TraderColumns.TRADER_ID, ids);
 				intent.putExtra("position", position);
 				startActivity(intent);
@@ -73,13 +73,12 @@ public class TraderListFragment extends SherlockFragment implements EventConstan
 	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
 		if (getActivity() == null)
 			return;
-		
+
 		//load all the ids to array for use the PageAdapter in detail
 		ids=new long[cursor.getCount()];
 		int index=0;
 		while(cursor.moveToNext()){
-			ids[index++]=cursor.getLong(cursor.getColumnIndex(TraderEntity._ID));
-			
+			ids[index++] = cursor.getLong(cursor.getColumnIndex(TraderEntity._ID));
 		}
 
 		adapter.changeCursor(cursor);
@@ -125,8 +124,8 @@ public class TraderListFragment extends SherlockFragment implements EventConstan
 
 			TextView tvwTraderWebsite = (TextView) view.findViewById(R.id.tvwTraderWebsite);
 			tvwTraderWebsite.setText(cursor.getString(cursor.getColumnIndex(TraderEntity.ADDRESS)));
+			final ImageButton chbFavorite = (ImageButton) view.findViewById(R.id.chbFavorite);
 
-			ImageButton chbFavorite = (ImageButton) view.findViewById(R.id.chbFavorite);
 			chbFavorite.setClickable(true);
 			chbFavorite.setFocusable(true);
 
@@ -135,13 +134,12 @@ public class TraderListFragment extends SherlockFragment implements EventConstan
 				chbFavorite.setImageResource(R.drawable.ic_star_on);
 			else
 				chbFavorite.setImageResource(R.drawable.ic_star_off);
-			
+
 			chbFavorite.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					ContentValues contentValues = new ContentValues();
 					contentValues.put(TraderColumns.ISFAVORITE, isFavorite ? 0 : 1);
-
 					boolean updated = getActivity().getContentResolver().update(TraderEntity.buildUri(traderId), contentValues, null, null) > 0;
 					if (updated)
 						getActivity().getSupportLoaderManager().restartLoader(0, null, TraderListFragment.this);

@@ -35,13 +35,12 @@ import com.xtrade.android.util.ActionConstant;
 import com.xtrade.android.util.Debug;
 import com.xtrade.android.util.EventConstant;
 
-public class TraderAboutFragment extends SherlockFragment implements EventConstant,
-		LoaderManager.LoaderCallbacks<Cursor> {
+public class TraderAboutFragment extends SherlockFragment implements EventConstant, LoaderManager.LoaderCallbacks<Cursor> {
 
 	private static final int CONTACT_REQUEST = 100;
 	private static final int TRADER_DETAIL_REQUEST = 200;
 	private TextView tvwTraderName;
-	private ImageView imageViewTraderWebSite = null;
+	private ImageView imageViewTraderWebSite=null;
 	private TextView tvwTraderAddress;
 
 	private CursorAdapter adapter;
@@ -49,7 +48,7 @@ public class TraderAboutFragment extends SherlockFragment implements EventConsta
 	private long traderId = -1;
 	private long contactId = -1;
 	private View selectedView = null;
-	
+
 	public static TraderAboutFragment newInstance(long traderId) {
 		TraderAboutFragment f = new TraderAboutFragment();
 
@@ -67,13 +66,12 @@ public class TraderAboutFragment extends SherlockFragment implements EventConsta
 		View fragmentView = inflater.inflate(R.layout.trader_tab_about, container, false);
 
 		Debug.info(this,"TraderAboutFragment#onCreateView");
-		if(getArguments() == null )
-			getActivity().finish();
-		
+		if(getArguments() == null ) getActivity().finish();
+
 		traderId = getArguments().getLong("trader_id");
-		
+
 		tvwTraderName = (TextView) fragmentView.findViewById(R.id.tvwTraderName);
-		tvwTraderName.setText("Something " + traderId);
+		tvwTraderName.setText("Something "+traderId);
 		imageViewTraderWebSite = (ImageView) fragmentView.findViewById(R.id.tvwTraderWebsite);
 		tvwTraderAddress = (TextView) fragmentView.findViewById(R.id.tvwTraderAddress);
 
@@ -97,7 +95,7 @@ public class TraderAboutFragment extends SherlockFragment implements EventConsta
 				return true;
 			}
 		});
-		
+
 		return fragmentView;
 	}
 
@@ -155,24 +153,21 @@ public class TraderAboutFragment extends SherlockFragment implements EventConsta
 	public Loader<Cursor> onCreateLoader(int id, Bundle data) {
 		Loader<Cursor> loader = null;
 		if (id == CONTACT_REQUEST)
-			loader = new CursorLoader(getActivity(), ContactEntity.CONTENT_URI, null, ContactColumns.TRADER_ID + " = '"
-					+ traderId + "'", null, ContactEntity.DEFAULT_SORT);
+			loader = new CursorLoader(getActivity(), ContactEntity.CONTENT_URI, null, ContactColumns.TRADER_ID + " = '" + traderId + "'", null, ContactEntity.DEFAULT_SORT);
 		else if (id == TRADER_DETAIL_REQUEST)
-			loader = new CursorLoader(getActivity().getBaseContext(), DatabaseContract.TraderEntity.buildUri(String
-					.valueOf(traderId)), null, null, null, null);
+			loader = new CursorLoader(getActivity().getBaseContext(), DatabaseContract.TraderEntity.buildUri(String.valueOf(traderId)), null, null, null, null);
 
 		return loader;
 	}
 
 	@Override
 	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-		
 		if (loader.getId() == CONTACT_REQUEST)
 			adapter.changeCursor(cursor);
 		else if (loader.getId() == TRADER_DETAIL_REQUEST) {
 			if (!cursor.moveToNext())
 				return;
-			
+
 			tvwTraderName.setText(cursor.getString(cursor.getColumnIndexOrThrow(TraderColumns.NAME)));
 			final String website = cursor.getString(cursor.getColumnIndex(TraderColumns.WEBSITE));
 			tvwTraderAddress.setText(cursor.getString(cursor.getColumnIndexOrThrow(TraderColumns.ADDRESS)));
@@ -184,6 +179,7 @@ public class TraderAboutFragment extends SherlockFragment implements EventConsta
 					startActivity(newintent);
 				}
 			});
+
 		}
 	}
 
@@ -247,7 +243,8 @@ public class TraderAboutFragment extends SherlockFragment implements EventConsta
 
 					try {
 						startActivity(Intent.createChooser(intent, "Send mail"));
-					} catch (ActivityNotFoundException anfe) { }
+					} catch (ActivityNotFoundException anfe) {
+					}
 				}
 			});
 
@@ -266,6 +263,7 @@ public class TraderAboutFragment extends SherlockFragment implements EventConsta
 				}
 			});
 		}
+
 	}
 
 }

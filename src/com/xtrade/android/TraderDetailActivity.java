@@ -42,10 +42,10 @@ public class TraderDetailActivity extends BaseActivity implements EventConstant 
 		mViewPager.setAdapter(mtraderPagerAdapter);
 		mViewPager.setCurrentItem(currentIndex);
 		mViewPager.setOnPageChangeListener(new PageListener());
-
 	}
 
 	public static class TraderPagerAdapter extends FragmentStatePagerAdapter {
+
 		private TraderAboutFragment[] fragments;
 
 		public TraderPagerAdapter(FragmentManager fm) {
@@ -64,6 +64,7 @@ public class TraderDetailActivity extends BaseActivity implements EventConstant 
 		@Override
 		public int getCount() {
 			return tradersId.length;
+
 		}
 	}
 
@@ -92,9 +93,6 @@ public class TraderDetailActivity extends BaseActivity implements EventConstant 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-
-		if (resultCode == RESULT_CANCELED)
-			return;
 
 		if (resultCode == RESULT_OK && (requestCode == CONTACT_CREATE_REQUEST_CODE || requestCode == CONTACT_UPDATE_REQUEST_CODE)) {
 			ListView lvwContact = (ListView) findViewById(R.id.lvwContact);
