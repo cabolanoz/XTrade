@@ -142,8 +142,7 @@ public class TraderAboutFragment extends SherlockFragment implements EventConsta
 				Intent intent = new Intent(ActionConstant.CONTACT_CREATE_UPDATE);
 				intent.putExtra("ACTION_TYPE", CONTACT_UPDATE_REQUEST_CODE);
 				intent.putExtra(ContactColumns.CONTACT_ID, contactId);
-				intent.putExtra(TraderColumns.TRADER_ID,
-						getActivity().getIntent().getLongExtra(TraderColumns.TRADER_ID, -1));
+				intent.putExtra(TraderColumns.TRADER_ID, getActivity().getIntent().getLongExtra(TraderColumns.TRADER_ID, -1));
 				startActivityForResult(intent, CONTACT_UPDATE_REQUEST_CODE);
 				return true;
 			}
@@ -248,8 +247,7 @@ public class TraderAboutFragment extends SherlockFragment implements EventConsta
 
 					try {
 						startActivity(Intent.createChooser(intent, "Send mail"));
-					} catch (ActivityNotFoundException anfe) {
-					}
+					} catch (ActivityNotFoundException anfe) { }
 				}
 			});
 
@@ -268,7 +266,6 @@ public class TraderAboutFragment extends SherlockFragment implements EventConsta
 				}
 			});
 		}
-
 	}
 
 }
