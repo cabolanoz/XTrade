@@ -36,7 +36,6 @@ public class XTradeBaseService extends IntentService {
 
 			sendBroadcast(intent);
 		} else if (intent.getAction().equals(ActionConstant.REQUEST_DATA)) {
-
 			HttpCaller httpCaller = HttpCallerFactory.getInstance().createCaller();
 			try {
 				

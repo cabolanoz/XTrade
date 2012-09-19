@@ -9,8 +9,6 @@ public class ForgotPasswordActivity extends FragmentActivity {
 	public void onCreate(Bundle onSavedInstanceState){
 		super.onCreate(onSavedInstanceState);
 		setContentView(R.layout.forgot_password);
-		
-		
 	}
 	
 }
