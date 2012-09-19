@@ -23,7 +23,6 @@ public class Trader {
 		this.name = name;
 		this.website = website;
 		this.address = address;
-		
 		this.isFavorite = isFavorite;
 	}
 
@@ -40,7 +39,7 @@ public class Trader {
 		public double lon;
 		
 		public String toString(){
-			return "lat: "+lat+" lon: "+lon;
+			return "lat: " + lat + " lon: "+lon;
 		}
 	}
 	

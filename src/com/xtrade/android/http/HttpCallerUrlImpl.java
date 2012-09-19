@@ -2,6 +2,8 @@ package com.xtrade.android.http;
 
 import java.net.URL;
 
+import org.apache.http.entity.StringEntity;
+
 
 /**
  * This is a default iplementation for HttpCaller 
@@ -13,8 +15,7 @@ import java.net.URL;
 public class HttpCallerUrlImpl extends AbstractHttpCaller{
 
 	@Override
-	public boolean call(URL urlResource,RestMethod methodType) {
-		
+	public boolean call(URL urlResource, RestMethod methodType, StringEntity stringEntity) {
 		return false;
 	}
 

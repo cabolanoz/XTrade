@@ -9,7 +9,6 @@ import android.content.Context;
 import android.net.Uri;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.xtrade.android.object.Contact;
 import com.xtrade.android.object.Trader;
@@ -18,11 +17,9 @@ import com.xtrade.android.provider.DatabaseContract.ContactEntity;
 import com.xtrade.android.provider.DatabaseContract.TraderEntity;
 import com.xtrade.android.util.Debug;
 
-public class TraderProcessor extends ProcessorBase{
+public class TraderProcessor extends ProcessorBase {
 	
-	private GsonBuilder gson=new GsonBuilder();
-	
-	
+//	private GsonBuilder gson=new GsonBuilder();
 	
 	public TraderProcessor(Context context) {
 		super(context);
@@ -31,16 +28,15 @@ public class TraderProcessor extends ProcessorBase{
 	public void process(String jsonTrader){
 		Debug.info(jsonTrader);
 		
-		Gson gson=new Gson();
+		Gson gson = new Gson();
 		
 		Type collectionType = new TypeToken<Collection<Trader>>(){}.getType();
-		Collection<Trader> traders=(Collection<Trader>)gson.fromJson(jsonTrader, collectionType);
+		Collection<Trader> traders = (Collection<Trader>) gson.fromJson(jsonTrader, collectionType);
 		
-		
-		ContentResolver contentResolver=context.getContentResolver();
-		for(Trader trader: traders){
-			//TODO: bulk this in a transactoin
-			ContentValues values =new ContentValues();
+		ContentResolver contentResolver = context.getContentResolver();
+		for (Trader trader: traders) {
+			//TODO: bulk this in a transaction
+			ContentValues values = new ContentValues();
 			values.put(TraderEntity.ADDRESS, trader.address);
 			values.put(TraderEntity.NAME, trader.name);
 			values.put(TraderEntity.LATITUDE, trader.location.lat);
@@ -49,10 +45,9 @@ public class TraderProcessor extends ProcessorBase{
 			values.put(TraderEntity.WEBSITE, trader.website);
 			values.put(TraderEntity.ISFAVORITE, trader.isFavorite);
 			
+			Uri traderUri = contentResolver.insert(TraderEntity.CONTENT_URI, values);
 			
-			Uri traderUri=contentResolver.insert(TraderEntity.CONTENT_URI, values);
-			
-			for(Contact contact:trader.contacts){
+			for (Contact contact : trader.contacts){
 				ContentValues contentValues= new ContentValues();
 				contentValues.put(ContactColumns.FIRST_NAME, contact.firstName);
 				contentValues.put(ContactColumns.LAST_NAME, contact.lastName);
@@ -62,9 +57,6 @@ public class TraderProcessor extends ProcessorBase{
 				Uri contactUri = contentResolver.insert(ContactEntity.CONTENT_URI, contentValues);
 				Debug.info("Contacts "+contactUri);
 			}
-			
-			
-			
 		}
 	}
 	

@@ -8,32 +8,26 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import com.xtrade.android.util.Debug;
+public class HttpCallerApacheImpl extends AbstractHttpCaller {
 
-public class HttpCallerApacheImpl extends AbstractHttpCaller{
-
-	
-	
-	public boolean call(URL urlResource,RestMethod methodType) {
-		
-		
+	public boolean call(URL urlResource, RestMethod methodType, StringEntity stringEntity) {
 		HttpClient httpClient = new DefaultHttpClient();
 		
-		switch(methodType){
+		switch (methodType) {
 		case GET:
-
 			HttpGet httpGet;
-			
 			try {
 				httpGet = new HttpGet(urlResource.toURI());
 				
-				ResponseHandler<String> responseHandler=new BasicResponseHandler();
+				ResponseHandler<String> responseHandler = new BasicResponseHandler();
 		        String responseBody = httpClient.execute(httpGet, responseHandler);
 				
-				this.result=responseBody;
+				this.result = responseBody;
 				return true;
 			} catch (URISyntaxException urise) {
 				urise.printStackTrace();
@@ -42,16 +36,31 @@ public class HttpCallerApacheImpl extends AbstractHttpCaller{
 			} catch (IOException ioe) {
 				ioe.printStackTrace();
 			}
-
 			break;
 		case PUT:
 			break;
 		case POST:
+			HttpPost httpPost = null;
+			try {
+				httpPost = new HttpPost(urlResource.toURI());
+				if (stringEntity != null)
+					httpPost.setEntity(stringEntity);
+				
+				ResponseHandler<String> responseHandler = new BasicResponseHandler();
+				String response = httpClient.execute(httpPost, responseHandler);
+				
+				this.result = response;
+				return true;
+			} catch (URISyntaxException urise) {
+				urise.printStackTrace();
+			} catch (ClientProtocolException cpe) {
+				cpe.printStackTrace();
+			} catch (IOException ioe) {
+				ioe.printStackTrace();
+			}
 			break;
 		case DELETE:
 			break;
-		
-		
 		}		
 		return false;
 	}

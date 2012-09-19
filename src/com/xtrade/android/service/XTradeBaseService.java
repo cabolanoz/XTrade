@@ -1,7 +1,12 @@
 package com.xtrade.android.service;
 
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import org.apache.http.entity.StringEntity;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.IntentService;
 import android.content.Intent;
@@ -25,24 +30,50 @@ public class XTradeBaseService extends IntentService {
 		// depending on the action we execute an action currently
 		// there will be few action so we can handle it here
 		if (intent.getAction().equals(ActionConstant.LOGIN)) {
+			boolean success = false;
+			
 			String username = intent.getStringExtra(LoginParameter.USERNAME);
 			String password = intent.getStringExtra(LoginParameter.PASSWORD);
 
-			boolean success = false;
-			if (username.equals(Settings.DEFAULT_USERNAME) && password.equals(Settings.DEFAULT_PASSWORD)) 
-			// we resend the login intent with extra parameters
-			success = true;
+			JSONObject jsonObject = new JSONObject();
+			try {
+				jsonObject.put("username", username);
+				jsonObject.put("password", password);
+			} catch (JSONException jsone) {
+				jsone.printStackTrace();
+			}
+			
+			StringEntity entity = null; 
+			try {
+				entity = new StringEntity(jsonObject.toString());
+				entity.setContentType("application/json");
+			} catch (UnsupportedEncodingException uee) {
+				uee.printStackTrace();
+			}
+			
+			HttpCaller httpCaller = HttpCallerFactory.getInstance().createCaller();
+			try {
+				boolean result = httpCaller.call(new URL(Settings.getServerURL() + "login/"), RestMethod.POST, entity);
+				if (result) {
+					try {
+						JSONObject json = new JSONObject(httpCaller.getResult());
+						success = json.getBoolean("success");
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}
+			} catch (MalformedURLException murle) {
+				murle.printStackTrace();
+			}
+			
 			intent.putExtra(LoginParameter.SUCCESS, success);
-
 			sendBroadcast(intent);
 		} else if (intent.getAction().equals(ActionConstant.REQUEST_DATA)) {
 			HttpCaller httpCaller = HttpCallerFactory.getInstance().createCaller();
 			try {
-				
-				boolean result= httpCaller.call(new URL(Settings.getServerURL() + "traders/"),RestMethod.GET);
-				
-				if(result){
-					ProcessorBase processor=ProcessorFactory.getProcessor(intent.getAction(),this);
+				boolean result = httpCaller.call(new URL(Settings.getServerURL() + "traders/"), RestMethod.GET, null);
+				if (result) {
+					ProcessorBase processor = ProcessorFactory.getProcessor(intent.getAction(), this);
 					processor.process(httpCaller.getResult());
 				}
 			} catch (MalformedURLException murle) {
