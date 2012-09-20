@@ -1,12 +1,13 @@
 package com.xtrade.android.http;
 
 import java.net.URL;
+import java.util.Map;
 
-import org.apache.http.entity.StringEntity;
+
 
 public interface HttpCaller {
 
-	boolean call(URL urlResource, RestMethod restMethodType, StringEntity stringEntity);
+	boolean call(URL urlResource, RestOption.Method restMethodType, Map<RestOption.Parameter,String> parameters);
 	boolean call(URL urlResource, Object... params);
 	String getResult();
 	

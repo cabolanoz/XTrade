@@ -1,8 +1,12 @@
 package com.xtrade.android.http;
 
 import java.net.URL;
+import java.util.Map;
 
-import org.apache.http.entity.StringEntity;
+import android.content.Context;
+
+import com.xtrade.android.http.RestOption.Method;
+import com.xtrade.android.http.RestOption.Parameter;
 
 
 /**
@@ -14,13 +18,19 @@ import org.apache.http.entity.StringEntity;
  * */
 public class HttpCallerUrlImpl extends AbstractHttpCaller{
 
-	@Override
-	public boolean call(URL urlResource, RestMethod methodType, StringEntity stringEntity) {
-		return false;
+
+	public HttpCallerUrlImpl(Context context) {
+		super(context);
 	}
 
 	@Override
 	public boolean call(URL urlResource, Object... params) {
+		return false;
+	}
+
+	@Override
+	public boolean call(URL urlResource, Method restMethodType, Map<Parameter, String> parameters) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 

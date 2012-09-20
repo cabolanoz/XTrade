@@ -1,5 +1,7 @@
 package com.xtrade.android.http;
 
+import android.content.Context;
+
 /**
  * Factory to create HttpCallers depending on the version it can return 
  * diferent implementation for the HttpCaller
@@ -19,8 +21,8 @@ public class HttpCallerFactory {
 		return instance;
 	}
 	
-	public HttpCaller createCaller() {
-		return new HttpCallerApacheImpl();
+	public HttpCaller createCaller(Context context) {
+		return new HttpCallerApacheImpl(context);
 	}
 	
 }
