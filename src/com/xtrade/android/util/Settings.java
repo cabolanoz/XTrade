@@ -7,6 +7,8 @@ public class Settings {
 	public static final String DEFAULT_USERNAME = "xtrade";
 	public static final String DEFAULT_PASSWORD = "xtrade";
 	public static final String SHARED_PREFERENCES = "XTrade_Prefs";
+	public static final String LOGGED_PREF= "Logged";
+	public static final String COOKIE_PREF= "Cookie";
 	public static final String TEMPFILE_PATH = "/sdcard/tmp";
 
 	public static final String MAP_KEY = null;// this our key for release mode
@@ -20,5 +22,7 @@ public class Settings {
 			return REMOTE_SERVER_DEBUG;
 		return REMOTE_SERVER;
 	}
+	
+	
 	
 }
