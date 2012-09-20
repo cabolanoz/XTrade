@@ -27,7 +27,7 @@ public class LoginActivity extends BaseActivity {
 	private LoginBroadcastReceiver receiver;
 	private EditText textUsername;
 	private EditText textPassword;
-	private CheckBox checkRememberMe;
+	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -76,7 +76,7 @@ public class LoginActivity extends BaseActivity {
 			public void onClick(View view) {
 				String username = textUsername.getText().toString();
 				String password = textPassword.getText().toString();
-				boolean rememberMe = checkRememberMe.isChecked();
+				
 				if (!StringUtils.isEmpty(username) && !StringUtils.isEmpty(password)) {
 					Intent loginIntent = new Intent(ActionConstant.LOGIN);
 					loginIntent.putExtra(LoginParameter.USERNAME, username);
@@ -107,7 +107,7 @@ public class LoginActivity extends BaseActivity {
 	private void loadSavedValues() {
 		textUsername.setText(getAppSharedPreference().getString(LoginParameter.USERNAME, null));
 		textPassword.setText(getAppSharedPreference().getString(LoginParameter.PASSWORD, null));
-		checkRememberMe.setChecked(true);
+		
 	}
 
 	@Override
