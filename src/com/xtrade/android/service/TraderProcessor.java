@@ -44,6 +44,7 @@ public class TraderProcessor extends ProcessorBase {
 			values.put(TraderEntity.TRADER_ID, trader.id);
 			values.put(TraderEntity.WEBSITE, trader.website);
 			values.put(TraderEntity.ISFAVORITE, trader.isFavorite);
+			values.put(TraderEntity.FLAG_STATE, false);
 			
 			Uri traderUri = contentResolver.insert(TraderEntity.CONTENT_URI, values);
 			
@@ -53,6 +54,7 @@ public class TraderProcessor extends ProcessorBase {
 				contentValues.put(ContactColumns.LAST_NAME, contact.lastName);
 				contentValues.put(ContactColumns.EMAIL, contact.email);
 				contentValues.put(ContactColumns.PHONE, contact.phone);
+				contentValues.put(ContactColumns.FLAG_STATE, false);
 				contentValues.put(ContactColumns.TRADER_ID, TraderEntity.getId(traderUri));
 				Uri contactUri = contentResolver.insert(ContactEntity.CONTENT_URI, contentValues);
 				Debug.info("Contacts "+contactUri);

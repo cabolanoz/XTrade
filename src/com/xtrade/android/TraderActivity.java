@@ -17,6 +17,7 @@ import com.xtrade.android.fragment.SectionsPagerAdapter;
 import com.xtrade.android.fragment.TraderListFragment;
 import com.xtrade.android.fragment.TraderTodayFragment;
 import com.xtrade.android.util.ActionConstant;
+import com.xtrade.android.util.Debug;
 import com.xtrade.android.util.EventConstant;
 
 public class TraderActivity extends BaseActivity implements ActionBar.TabListener, EventConstant {
@@ -30,6 +31,8 @@ public class TraderActivity extends BaseActivity implements ActionBar.TabListene
 		super.onCreate(savedIntanceState);
 		setContentView(R.layout.trader);
 		
+		Intent requestData = new Intent(ActionConstant.REQUEST_DATA);
+		serviceHelper.invokeService(requestData);
 		receiver = new TraderBroadcastReceiver();
 		
 		// Getting the current action bar
@@ -79,8 +82,6 @@ public class TraderActivity extends BaseActivity implements ActionBar.TabListene
 	@Override
 	public void onStart() {
 		super.onStart();
-		Intent requestData = new Intent(ActionConstant.REQUEST_DATA);
-		serviceHelper.invokeService(requestData);
 	}
 	
 	@Override
@@ -143,7 +144,7 @@ public class TraderActivity extends BaseActivity implements ActionBar.TabListene
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			
+			Debug.info("Getting the message broadcasted");
 		}
 		
 	}
