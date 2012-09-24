@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.xtrade.android.util.ActionConstant;
 import com.xtrade.android.util.Debug;
@@ -73,6 +74,7 @@ public class LoginActivity extends BaseActivity {
 		Button btnLogin = (Button) findViewById(R.id.buttonLogin);
 		btnLogin.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
+				startProgressDialog(getString(R.string.signing_in));
 				String username = textUsername.getText().toString();
 				String password = textPassword.getText().toString();
 				
@@ -129,21 +131,19 @@ public class LoginActivity extends BaseActivity {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			if (intent.getBooleanExtra(Parameter.SUCCESS, false)) {
-				if (intent.getBooleanExtra(LoginParameter.REMEMBER_ME, false)) {
-					// Saving the preferences values
-					Editor editor = getAppSharedPreference().edit();
-					editor.putBoolean(LoginParameter.REMEMBER_ME, true);
-					editor.putString(LoginParameter.USERNAME, intent.getStringExtra(LoginParameter.USERNAME));
-					editor.putString(LoginParameter.PASSWORD, intent.getStringExtra(LoginParameter.PASSWORD));
-					editor.commit();
-				}
-
+				// Saving the preferences values
+				Editor editor = getAppSharedPreference().edit();
+				editor.putString(LoginParameter.USERNAME, intent.getStringExtra(LoginParameter.USERNAME));
+				editor.putString(LoginParameter.PASSWORD, intent.getStringExtra(LoginParameter.PASSWORD));
+				editor.commit();
+				
 				startActivity(ActionConstant.MAIN_XTRADE);
 
 			} else {
 				Debug.info(this, "Authentication failed!!!");
-				// TODO: handle the authentication failed and why?
+				Toast.makeText(context, getString(R.string.authentication_failed), Toast.LENGTH_LONG).show();
 			}
+			stopProgressDialog();
 		}
 
 	}

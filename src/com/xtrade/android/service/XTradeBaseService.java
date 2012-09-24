@@ -19,6 +19,7 @@ import com.xtrade.android.http.RestOption.Method;
 import com.xtrade.android.http.RestOption.Parameter;
 import com.xtrade.android.object.User;
 import com.xtrade.android.util.ActionConstant;
+import com.xtrade.android.util.Debug;
 import com.xtrade.android.util.LoginParameter;
 import com.xtrade.android.util.Settings;
 
@@ -66,9 +67,9 @@ public class XTradeBaseService extends IntentService {
 			}
 
 			
-			sendBroadcast(intent);
-		} else if (intent.getAction().equals(ActionConstant.REQUEST_DATA)) {
 			
+		} else if (intent.getAction().equals(ActionConstant.REQUEST_DATA)) {
+			Debug.info("Requesting Data in XTrdeBaseService#onHandleIntent");
 			try {
 				boolean result = httpCaller.call(new URL(Settings.getServerURL() + "traders/"), Method.GET);
 				if (result) {
@@ -80,6 +81,7 @@ public class XTradeBaseService extends IntentService {
 				murle.printStackTrace();
 			}
 		}
+		sendBroadcast(intent);
 	}
 
 }

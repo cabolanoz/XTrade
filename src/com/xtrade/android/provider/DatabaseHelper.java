@@ -53,6 +53,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				+ ContactColumns.TYPE + " TEXT, "
 				+ ContactColumns.EMAIL + " TEXT, "
 				+ ContactColumns.PHONE + " TEXT, "
+				+ ContactColumns.FLAG_STATE + " BOOL DEFAULT 1, "//by default the record is dirty
 				+ ContactColumns.TRADER_ID + " TEXT)");
 		
 		
