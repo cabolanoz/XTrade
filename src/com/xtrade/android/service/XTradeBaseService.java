@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.json.JSONException;
 
 import android.app.IntentService;
 import android.content.Intent;
@@ -54,8 +53,7 @@ public class XTradeBaseService extends IntentService {
 				if (result) {
 
 					if (!StringUtils.isEmpty(httpCaller.getResult())) {
-						SharedPreferences xTradeSettings = getSharedPreferences(Settings.SHARED_PREFERENCES,
-								MODE_PRIVATE);
+						SharedPreferences xTradeSettings = getSharedPreferences(Settings.SHARED_PREFERENCES, MODE_PRIVATE);
 						Editor editor = xTradeSettings.edit();
 						editor.putBoolean(Settings.LOGGED_PREF, true);
 						editor.putString(Settings.COOKIE_PREF, httpCaller.getResult());
