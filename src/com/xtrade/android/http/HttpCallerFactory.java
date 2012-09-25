@@ -10,7 +10,7 @@ import android.content.Context;
 public class HttpCallerFactory {
 
 	private static HttpCallerFactory instance;
-	
+	private HttpCaller caller;
 	//access modifier protected ensure that the getInstance method gets called
 	protected HttpCallerFactory() { }
 	
@@ -22,7 +22,9 @@ public class HttpCallerFactory {
 	}
 	
 	public HttpCaller createCaller(Context context) {
-		return new HttpCallerApacheImpl(context);
+		if(caller==null)
+			caller=new HttpCallerApacheImpl(context);
+		return caller;
 	}
 	
 }

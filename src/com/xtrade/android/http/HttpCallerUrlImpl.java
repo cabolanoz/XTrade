@@ -24,11 +24,6 @@ public class HttpCallerUrlImpl extends AbstractHttpCaller{
 	}
 
 	@Override
-	public boolean call(URL urlResource, Object... params) {
-		return false;
-	}
-
-	@Override
 	public boolean call(URL urlResource, Method restMethodType, Map<Parameter, String> parameters) {
 		// TODO Auto-generated method stub
 		return false;

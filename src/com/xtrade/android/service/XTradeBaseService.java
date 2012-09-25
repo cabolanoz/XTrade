@@ -59,6 +59,7 @@ public class XTradeBaseService extends IntentService {
 						editor.putBoolean(Settings.LOGGED_PREF, true);
 						editor.putString(Settings.COOKIE_PREF, httpCaller.getResult());
 						intent.putExtra(LoginParameter.SUCCESS, true);
+						editor.commit();
 					}
 
 				}
@@ -71,10 +72,11 @@ public class XTradeBaseService extends IntentService {
 		} else if (intent.getAction().equals(ActionConstant.REQUEST_DATA)) {
 			Debug.info("Requesting Data in XTrdeBaseService#onHandleIntent");
 			try {
-				boolean result = httpCaller.call(new URL(Settings.getServerURL() + "traders/"), Method.GET);
+				boolean result = httpCaller.call(new URL(Settings.getServerURL() + "traders/"), Method.GET,null);
 				if (result) {
 					
 					ProcessorBase processor = ProcessorFactory.getProcessor(intent.getAction(), this);
+					
 					processor.process(httpCaller.getResult());
 				}
 			} catch (MalformedURLException murle) {
