@@ -13,6 +13,8 @@ import org.apache.http.client.CookieStore;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.params.ClientPNames;
+import org.apache.http.client.params.CookiePolicy;
 import org.apache.http.client.protocol.ClientContext;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.entity.StringEntity;
@@ -30,12 +32,16 @@ import com.xtrade.android.util.Settings;
 
 public class HttpCallerApacheImpl extends AbstractHttpCaller {
 
+	
+	
 	public HttpCallerApacheImpl(Context context) {
 		super(context);
-	}
+	} 
 
 	public boolean call(URL urlResource, RestOption.Method methodType, Map<RestOption.Parameter, String> parameters) {
+		
 		DefaultHttpClient httpClient = new DefaultHttpClient();
+		
 
 		Debug.info("Request url " + urlResource.toString());
 		switch (methodType) {
@@ -46,11 +52,13 @@ public class HttpCallerApacheImpl extends AbstractHttpCaller {
 
 				ResponseHandler<String> responseHandler = new BasicResponseHandler();
 				
+				httpGet.setHeader("User-Agent", "Android-app");
+				httpGet.setHeader("Content-Type", "application/json; charset=utf-8");
 				SharedPreferences xTradeSettings = context.getSharedPreferences(Settings.SHARED_PREFERENCES,Context.MODE_PRIVATE);
+				
 				if(xTradeSettings.getBoolean(Settings.LOGGED_PREF, false)){
-					httpGet.addHeader("Cookie",xTradeSettings.getString(Settings.COOKIE_PREF,null));
-					Debug.info(this,xTradeSettings.getString(Settings.COOKIE_PREF,null));
-					
+					httpGet.setHeader("Cookie",xTradeSettings.getString(Settings.COOKIE_PREF,null));
+					Debug.info("Message "+xTradeSettings.getString(Settings.COOKIE_PREF,null));
 				}
 				
 				String responseBody = httpClient.execute(httpGet, responseHandler);
@@ -82,27 +90,22 @@ public class HttpCallerApacheImpl extends AbstractHttpCaller {
 				BasicHttpContext httpContext = new BasicHttpContext();
 				CookieStore cookieStore = new BasicCookieStore();
 				httpContext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
+				
 
 				HttpResponse response = httpClient.execute(httpPost, httpContext);
 
-				if (response.getStatusLine().getStatusCode() != 200) {// Status
-																		// not
-																		// ok
+				if (response.getStatusLine().getStatusCode() != 200) {
 					throw new RuntimeException("Failed : HTTP error code : " + response.getStatusLine().getStatusCode());
 				}
 
+				/*
 				BufferedReader br = new BufferedReader(new InputStreamReader((response.getEntity().getContent())));
-
-				String output;
+				String output="";
 				while ((output = br.readLine()) != null);//maybe we'll use it later
-				
+				*/
 				Cookie cookie=cookieStore.getCookies().get(0);
-				this.result =cookie.getName()+"="+cookie.getValue();
+				this.result =cookie.getName()+"=\""+cookie.getValue()+"\"";
 				
-				httpClient.getConnectionManager().shutdown();
-
-				
-
 				return true;
 			} catch (URISyntaxException urise) {
 				urise.printStackTrace();
@@ -115,11 +118,12 @@ public class HttpCallerApacheImpl extends AbstractHttpCaller {
 		case DELETE:
 			break;
 		}
+		
+		httpClient.getConnectionManager().shutdown();
+		
 		return false;
+		
 	}
-
-	public boolean call(URL urlResource, Object... params) {
-		return false;
-	}
+	
 
 }
