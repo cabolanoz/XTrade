@@ -104,10 +104,10 @@ public class TraderListFragment extends SherlockFragment implements EventConstan
 		public View getView(int position, View convertView, ViewGroup parent) {
 			convertView = super.getView(position, convertView, parent);
 
-			if (position % 2 == 0)
-				convertView.setBackgroundResource(R.drawable.list_bg_odd);
-			else
-				convertView.setBackgroundResource(R.drawable.list_bg);
+//			if (position % 2 == 0)
+//				convertView.setBackgroundResource(R.drawable.list_bg_odd);
+//			else
+//				convertView.setBackgroundResource(R.drawable.list_bg);
 
 			return convertView;
 		}
@@ -122,10 +122,10 @@ public class TraderListFragment extends SherlockFragment implements EventConstan
 			TextView textViewTraderName = (TextView) view.findViewById(R.id.tvwTraderName);
 			textViewTraderName.setText(cursor.getString(cursor.getColumnIndex(TraderEntity.NAME)));
 
-			TextView tvwTraderWebsite = (TextView) view.findViewById(R.id.tvwTraderWebsite);
-			tvwTraderWebsite.setText(cursor.getString(cursor.getColumnIndex(TraderEntity.ADDRESS)));
+			TextView tvwTraderAddress = (TextView) view.findViewById(R.id.tvwTraderAddress);
+			tvwTraderAddress.setText(cursor.getString(cursor.getColumnIndex(TraderEntity.ADDRESS)));
+			
 			final ImageButton chbFavorite = (ImageButton) view.findViewById(R.id.chbFavorite);
-
 			chbFavorite.setClickable(true);
 			chbFavorite.setFocusable(true);
 
